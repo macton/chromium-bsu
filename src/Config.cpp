@@ -29,12 +29,6 @@
 
 #include "GroundMetal.h"
 
-#if defined(AUDIO_OPENAL)
-#include "AudioOpenAL.h"
-#elif defined(AUDIO_SDLMIXER)
-#include "AudioSDLMixer.h"
-#endif
-
 Config	*Config::instance = 0;
 
 /**
@@ -74,6 +68,8 @@ Config::Config()
 	volSound		=  0.9;
 	volMusic		=  0.5;
 
+	audioType	= AudioOpenAL;
+	
 	readFile();
 }
 
@@ -171,6 +167,7 @@ bool Config::readFile()
 			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n", &tmp);   use_cdrom   = (bool)tmp;  }
 			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n", &maxLevel);  }
 			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n", &viewGamma); }
+			if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n", &tmp); audioType = (AudioType)tmp; }
 		}
 	}
 	else
@@ -219,6 +216,7 @@ bool Config::saveFile()
 		fprintf(file, "volSound %g\n",		volSound);
 		fprintf(file, "volMusic %g\n",		volMusic);
 		fprintf(file, "viewGamma %g\n",		viewGamma);
+		fprintf(file, "audioType %d\n",		(int)audioType);
 
 		fclose(file);
 		fprintf(stderr, "wrote config file (%s)\n", configFilename);

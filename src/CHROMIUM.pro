@@ -7,6 +7,8 @@
 #	CHECK_ERRORS   = check for GL, AL and SDL errors every frame
 #	AUDIO_OPENAL   = use OpenAL for audio (preferred)
 #	AUDIO_SDLMIXER = use SDL_mixer for audio
+#       if AUDIO_OPENAL and AUDIO_SDLMIXER are defined, both must be linked, and 
+#       the config determines which API to use.
 #	WITH_JOYSTICK  = enable joystick (joystick control sucks - don't bother)
 #	USE_SDL        = use SDL as window toolkit
 #	NO_PARACHUTE   = disable SDL's parachute
@@ -40,7 +42,7 @@ LIBS		= $$LIBDIRS $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
 CONFIG		= warn_on debug
 DEFINES 	= _REENTRANT AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
 #DEFINES 	= _REENTRANT AUDIO_SDLMIXER CHECK_ERRORS NO_PARACHUTE
-#DEFINES 	= _REENTRANT CHECK_ERRORS NO_PARACHUTE
+#DEFINES 	= _REENTRANT AUDIO_SDLMIXER AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
 ##-- Release --
 #CONFIG		= warn_off release
 #DEFINES 	= _REENTRANT AUDIO_OPENAL

@@ -23,12 +23,14 @@
 
 #include "extern.h"
 #include "define.h"
+#include "Config.h"
 #include "Global.h"
 
 //====================================================================
 AudioSDLMixer::AudioSDLMixer()
 	: Audio()
 {    
+	Config	*config = Config::getInstance();
 	//UNCLEAN - if initSound fails, config->getAudioEnabled() will be set to false
 	if(config->getAudioEnabled() == true)
 		initSound();
@@ -36,6 +38,7 @@ AudioSDLMixer::AudioSDLMixer()
 
 AudioSDLMixer::~AudioSDLMixer()
 {
+	Config	*config = Config::getInstance();
 	if(config->getAudioEnabled()) 
 	{
     	for (int i = 0; i < NumSoundTypes; i++)
@@ -51,10 +54,11 @@ AudioSDLMixer::~AudioSDLMixer()
 //----------------------------------------------------------
 void	AudioSDLMixer::initSound()
 {
+	Config	*config = Config::getInstance();
     if ( Mix_OpenAudio (22050, AUDIO_S16, 2, 512) < 0 )
 	{
 		fprintf(stderr, "ERROR initializing audio - AudioSDLMixer::initSound()\n");
-        config->getAudioEnabled() = false;
+        config->setAudioEnabled(false);
 	}
 	else
 	{
@@ -73,6 +77,7 @@ void	AudioSDLMixer::initSound()
 //----------------------------------------------------------
 void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 {
+	Config	*config = Config::getInstance();
 	if (config->getAudioEnabled()) 
 	{
 		Mix_PlayChannel (-1, sounds[type], 0);
@@ -85,6 +90,7 @@ void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 //----------------------------------------------------------
 void AudioSDLMixer::pauseGameMusic(bool status)
 {
+	Config	*config = Config::getInstance();
 	if (config->getAudioEnabled()) 
 	{
 		if(cdrom)
@@ -107,6 +113,7 @@ void AudioSDLMixer::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	AudioSDLMixer::stopMusic()
 {
+	Config	*config = Config::getInstance();
     if (config->getAudioEnabled()) 
 	{
 		Audio::stopMusic();
@@ -117,6 +124,7 @@ void	AudioSDLMixer::stopMusic()
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicMode(SoundType mode)
 {
+	Config	*config = Config::getInstance();
     if (config->getAudioEnabled())
 	{
 		Audio::setMusicMode(mode);
@@ -142,6 +150,7 @@ void	AudioSDLMixer::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicVolume(float value)
 {
+	Config	*config = Config::getInstance();
     if (config->getAudioEnabled())
 	{
 		Mix_Volume (0, (int)(MIX_MAX_VOLUME*value) );
@@ -154,6 +163,7 @@ void	AudioSDLMixer::setMusicVolume(float value)
 //----------------------------------------------------------
 void	AudioSDLMixer::setSoundVolume(float value)
 {
+	Config	*config = Config::getInstance();
     if (config->getAudioEnabled())
 	{
 		for (int i = 1; i < MIX_CHANNELS; i++)

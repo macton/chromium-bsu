@@ -72,7 +72,8 @@ int Global::tipSuperShield	= 0;
 
 #if defined(AUDIO_OPENAL)
 #include "AudioOpenAL.h"
-#elif defined(AUDIO_SDLMIXER)
+#endif
+#if defined(AUDIO_SDLMIXER)
 #include "AudioSDLMixer.h"
 #endif
 
@@ -206,8 +207,14 @@ void Global::createGame()
 	ground		= new GroundMetal();
 	menu		= new MenuGL();
 	itemAdd		= new ScreenItemAdd();
-	
-#if defined(AUDIO_OPENAL)
+
+#if defined(AUDIO_OPENAL) && defined(AUDIO_SDLMIXER) 
+	Config *config = Config::getInstance();
+	if(config->getAudioType() == Config::AudioOpenAL)
+		audio = new AudioOpenAL();
+	else
+		audio = new AudioSDLMixer();
+#elif defined(AUDIO_OPENAL)
 	audio		= new AudioOpenAL();
 #elif defined(AUDIO_SDLMIXER)
 	audio		= new AudioSDLMixer();

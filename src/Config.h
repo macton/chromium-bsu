@@ -8,6 +8,8 @@
 #ifndef Config_h
 #define Config_h
 
+#include "compatibility.h"
+
 /**
  * contains data obtained from config file. Singleton.
  */
@@ -23,6 +25,7 @@ public:
 	
 	bool	readFile();
 	bool	saveFile();
+	
 	
 	void	setScreenSize(int m);
 
@@ -74,6 +77,9 @@ public:
 	
 	int		getIntSkill()	{ return (int)((gameSkillBase+0.05)*10.0); }
 
+	enum AudioType { AudioOpenAL, AudioSDL_Mixer, NumAudioTypes };
+	AudioType	getAudioType()	{ return audioType; };
+	
 private:
 	int 	 screenW;
 	int 	 screenH;
@@ -103,6 +109,8 @@ private:
 	float	 viewGamma;
 	float	 volSound;
 	float	 volMusic;
+	
+	AudioType	audioType;
 
 private:
 	static Config	*instance;
