@@ -24,6 +24,7 @@
 //----------------------------------------------------------
 bool MainSDL::process(SDL_Event *event)
 {
+	Global	*game = Global::getInstance();
 #if 0
 	static int cnt = 0;
 	cnt++;
@@ -79,6 +80,7 @@ bool MainSDL::process(SDL_Event *event)
 //----------------------------------------------------------
 void MainSDL::saveEvent(SDL_Event *event)
 {
+	Global	*game = Global::getInstance();
 	if(game->eventFile && game->gameMode == game->Game)
 	{
 		SDL_ActiveEvent 		*evA = 0;
@@ -144,6 +146,7 @@ void MainSDL::saveEvent(SDL_Event *event)
 //----------------------------------------------------------
 SDL_Event *MainSDL::getEvent(FILE *infile)
 {
+	Global	*game = Global::getInstance();
 	static int count = 0;
 	static	SDL_Event ev;
 	static	char buffer[256] = { "-1 :K: 2 0 0 0 0 0"};
@@ -243,6 +246,7 @@ void MainSDL::keyUp(SDL_Event *)
 //----------------------------------------------------------
 void MainSDL::keyDown(SDL_Event *event)
 {
+	Global	*game = Global::getInstance();
 	switch(event->key.keysym.sym)
 	{
 	    case SDL_QUIT:
@@ -301,6 +305,7 @@ void MainSDL::keyDown(SDL_Event *event)
 //----------------------------------------------------------
 void MainSDL::keyDownGame(SDL_Event *event)
 {
+	Global	*game = Global::getInstance();
 	switch(event->key.keysym.sym)
 	{
 //	    case SDLK_RETURN:
@@ -338,6 +343,7 @@ void MainSDL::keyDownGame(SDL_Event *event)
 //----------------------------------------------------------
 void MainSDL::mouseMotion(SDL_Event *event)
 {
+	Global	*game = Global::getInstance();
 	int xNow;
 	int yNow;
 	int xDiff;
@@ -368,6 +374,7 @@ void MainSDL::mouseMotion(SDL_Event *event)
 //----------------------------------------------------------
 void MainSDL::mouseButtonDown(SDL_Event *ev)
 {
+	Global	*game = Global::getInstance();
 	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
 	switch(mEv->button)
 	{
@@ -388,6 +395,7 @@ void MainSDL::mouseButtonDown(SDL_Event *ev)
 //----------------------------------------------------------
 void MainSDL::mouseButtonUp(SDL_Event *ev)
 {
+	Global	*game = Global::getInstance();
 	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
 	switch(mEv->button)
 	{
@@ -456,12 +464,14 @@ void MainSDL::joystickMotion(SDL_Event *)
 //----------------------------------------------------------
 void MainSDL::joystickButtonDown(SDL_Event *)
 {
+	Global	*game = Global::getInstance();
 	game->hero->fireGun(++fire);
 }
 
 //----------------------------------------------------------
 void MainSDL::joystickButtonUp(SDL_Event *)
 {
+	Global	*game = Global::getInstance();
 	game->hero->fireGun(--fire);
 }
 
@@ -469,6 +479,7 @@ void MainSDL::joystickButtonUp(SDL_Event *)
 void MainSDL::joystickMove()
 {
 #ifdef WITH_JOYSTICK
+	Global	*game = Global::getInstance();
 	static int div = 32768/16;
 	if(joystick)
 	{

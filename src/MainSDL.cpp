@@ -18,6 +18,7 @@
 #include <GL/glu.h>
 
 #include "Config.h"
+#include "Global.h"
 
 #include "extern.h"
 #include "Global.h"
@@ -30,6 +31,7 @@
 MainSDL::MainSDL(int argc, char **argv)
 	: MainToolkit(argc, argv)
 {	
+	Global	*game = Global::getInstance();
 	Config	*config = Config::getInstance();
 	mouseToggle = game->mouseActive;
 	fire = 0;
@@ -98,6 +100,7 @@ MainSDL::~MainSDL()
 //----------------------------------------------------------
 bool MainSDL::run()
 {
+	Global	*game = Global::getInstance();
 	Config	*config = Config::getInstance();
 	float targetAdj		= 1.0;
 	Uint32 start_time	= 0; 
@@ -253,7 +256,8 @@ bool MainSDL::checkErrors()
 //----------------------------------------------------------
 void MainSDL::setVideoMode() 
 {
-	Config *config = Config::getInstance();
+	Global	*game = Global::getInstance();
+	Config	*config = Config::getInstance();
 	int w;
 	int h;
 	Uint32 video_flags;

@@ -255,6 +255,7 @@ void	Audio::setSoundVolume(float)
 //----------------------------------------------------------
 void	Audio::setMusicIndex(int index)
 {
+#ifdef USE_SDL
 	Config	*config = Config::getInstance();
 	if(config->getAudioEnabled() == true)
 	{
@@ -283,6 +284,7 @@ void	Audio::setMusicIndex(int index)
 			}
 		}
 	}
+#endif
 }
 
 /**

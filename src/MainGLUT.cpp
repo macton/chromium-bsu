@@ -14,6 +14,8 @@
 
 #include <GL/glut.h>
 
+#include "Config.h"
+#include "HiScore.h"
 #include "Global.h"
 #include "Audio.h"
 #include "MenuGL.h"
@@ -33,6 +35,8 @@ int		MainGLUT::now_time = 0;
 MainGLUT::MainGLUT(int argc, char **argv)
 	: MainToolkit(argc, argv)
 {
+	Global	*game = Global::getInstance();
+	Config	*config = Config::getInstance();
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(config->getScreenW(), config->getScreenH());
@@ -83,6 +87,7 @@ bool MainGLUT::checkErrors()
 //----------------------------------------------------------
 void MainGLUT::grabMouse(bool status)
 {
+	Config	*config = Config::getInstance();
 	mouseToggle = status;
 	if(status)
 	{
@@ -106,7 +111,8 @@ void MainGLUT::grabMouse(bool status)
 //----------------------------------------------------------
 void MainGLUT::setVideoMode()
 {
-	game->setScreenSize(config->getScreenSize()); //  set screenW & screenH for new screenSize
+	Config	*config = Config::getInstance();
+	config->setScreenSize(config->getScreenSize()); //  set screenW & screenH for new screenSize
 	glutReshapeWindow(config->getScreenW(), config->getScreenH());
 	config->setFullScreen(false);
 }
@@ -114,12 +120,14 @@ void MainGLUT::setVideoMode()
 //----------------------------------------------------------
 void MainGLUT::reshape(int w, int h)
 {
+	Global	*game = Global::getInstance();
 	game->mainGL->reshapeGL(w, h);
 }
 
 //----------------------------------------------------------
 void MainGLUT::nullFunc()
 {
+	Global	*game = Global::getInstance();
 	game->mainGL->drawGL();
 	glutSwapBuffers();
 	
@@ -139,6 +147,7 @@ void MainGLUT::nullFunc()
 //----------------------------------------------------------
 void MainGLUT::drawGame(int)
 {
+	Global	*game = Global::getInstance();
 	glutTimerFunc(33, MainGLUT::drawGame, 0);
 
 	game->mainGL->drawGL();
@@ -152,11 +161,15 @@ void MainGLUT::drawGame(int)
 //----------------------------------------------------------
 void MainGLUT::keyboardASCII(unsigned char key, int, int)
 {
+	Global	*game = Global::getInstance();
+	Config	*config = Config::getInstance();
+	HiScore	*hiScore = HiScore::getInstance();
 	switch(key)
 	{
 		case 'q':
 		case 'Q':
-			game->saveConfigFile();
+			config->saveFile();
+			hiScore->saveFile();
 			game->deleteGame();
 			exit(0);
 			break;
@@ -206,6 +219,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 //----------------------------------------------------------
 void MainGLUT::keyboardSpecial(int special, int, int)
 {
+	Global	*game = Global::getInstance();
 	if(game->gameMode == game->Menu)
 	{
 		MainToolkit::Key tkkey;
@@ -224,6 +238,7 @@ void MainGLUT::keyboardSpecial(int special, int, int)
 //----------------------------------------------------------
 void MainGLUT::mouseEvent(int button, int state, int x, int y)
 {
+	Global	*game = Global::getInstance();
 	if(state == GLUT_DOWN)
 	{
 		switch(button)
@@ -260,6 +275,7 @@ void MainGLUT::mouseEvent(int button, int state, int x, int y)
 //----------------------------------------------------------
 void MainGLUT::mouseMotion(int x, int y)
 {
+	Global	*game = Global::getInstance();
 	int xNow;
 	int yNow;
 	int xDiff;

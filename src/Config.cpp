@@ -273,5 +273,6 @@ void Config::setScreenSize(int m)
 			screenH = 480;
 			break;
 	}
+	screenA = (float)screenW/(float)screenH;
 }
 
