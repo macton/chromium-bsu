@@ -192,10 +192,11 @@ void HeroAircraft::loseLife()
 	float	p[3] = { 10.2, 0.0, 25.0 };
 	//-- this has to be in sync w/ StatusDisplay positions...
 	lives--;
-		p[1] = 7.4-lives*game->hero->size[1];
-		game->audio->playSound(Audio::LoseLife, p);
+	p[1] = 7.4-lives*game->hero->size[1];
+	
 	if(lives > -2)
 	{
+		game->audio->playSound(Audio::LoseLife, p);
 		game->explosions->addExplo(Explosions::LoseLife, p,   0, 1.5);
 		game->explosions->addExplo(Explosions::LoseLife, p, -10, 1.5);
 		game->explosions->addExplo(Explosions::LoseLife, p, -13, 1.5);

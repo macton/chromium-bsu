@@ -284,7 +284,8 @@ void MainSDL::setVideoMode()
 	{
 		//-- 16 bit color
 		bpp = 16;
-		rs = gs = bs = 5;
+		rs = bs = 5;
+		gs = 6;
 		ds = 16;
 	}
 	
