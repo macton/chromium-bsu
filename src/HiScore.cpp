@@ -140,6 +140,8 @@ time_t HiScore::getDate(int skill, int index)
 }
 
 /**
+ * If CHROMIUM_SCORE environment variable is set, that
+ * filename will be used. Otherwise, ~/.chromium-score.
  * @returns name of score file
  */
 //----------------------------------------------------------
@@ -163,8 +165,7 @@ const char *HiScore::getFileName()
 }
 
 /**
- * Save high score file. If CHROMIUM_SCORE environment variable is set, that
- * filename will be used. Otherwise, ~/.chromium-score.
+ * Save high score file. 
  * @returns success
  */
 //----------------------------------------------------------
@@ -191,8 +192,7 @@ bool HiScore::saveFile()
 
 
 /**
- * Read high score file. If CHROMIUM_SCORE environment variable is set, that
- * filename will be used. Otherwise, ~/.chromium-score.
+ * Read high score file.
  * @returns success
  */
 //----------------------------------------------------------
