@@ -4,6 +4,7 @@ Chromium 0.9.11
    site-wide scores (file must be read/writable for all users, of course).
  - score was not resetting to 0 on new game. oops.
  - if mixed data/music CD tracks, data tracks are now skipped
+ - Some code cleanup/rearrangement.
 
 Chromium 0.9.10
  - fixed supershields remaining after suicide 'game over'

@@ -5,6 +5,16 @@ Please read the INSTALL file.
 Chromium B.S.U. is distributed under terms of the Artistic License. See
 the LICENSE file for details.
 
+Environment Variables:
+
+* CHROMIUM_SCORE - By default,  high scores are kept in the 
+                   ~/.chromium-score file. If the CHROMIUM_SCORE env
+                   var is set, Chromium will use that filename instead.
+                   (for example, if you want to compete w/ friends for
+                   high scores)
+* CHROMIUM_DATA  - directory name where data files are kept. By default, 
+                   Chromium will look for ../data.
+
 --------------------------------------------------
 Chromium B.S.U. command line options
 --------------------------------------------------
