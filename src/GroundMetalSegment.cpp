@@ -58,9 +58,6 @@ void GroundMetalSegment::drawGL()
 	c1_clr[1] = 0.45+clr_sin;
 	c1_clr[2] = 0.34+clr_sin;
 	
-//	glPushMatrix();
-//	glTranslatef(pos[0], pos[1], pos[2]);
-	
 	switch(parent->variation)
 	{
 		default:
@@ -84,7 +81,15 @@ void GroundMetalSegment::drawGL()
 			blipMirrorT = true;
 			break;
 	}
-	
+
+#ifdef EXPERIMENTAL
+	drawMultiTex(rep, S, tilt, blipMirrorT,
+					c0_clr,
+					c1_clr,
+					r0_clr,
+					r1_clr,
+					r2_clr);
+#else // EXPERIMENTAL
 	if(config->getGfxLevel() > 1)
 	{
 		drawBlip(rep, S, tilt, blipMirrorT);
@@ -97,8 +102,8 @@ void GroundMetalSegment::drawGL()
 					r1_clr,
 					r2_clr);
 	}
+#endif // EXPERIMENTAL
 	
-//	glPopMatrix();	
 }
 
 //----------------------------------------------------------
@@ -108,15 +113,22 @@ void GroundMetalSegment::drawBlip(float rep, float S, float tilt, bool blipMirro
 	float repB = rep;
 	glColor4f(1.0, 1.0, 1.0, 1.0);
 	glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Blip]);
-	glBegin(GL_QUADS);
+//	glBegin(GL_QUADS);
+	glBegin(GL_TRIANGLES);
 		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(         pos[0],	       pos[1], pos[2]);
 		glTexCoord2f( 0.0,  repA+S);      glVertex3f(-size[0]+pos[0],	       pos[1], pos[2]);
 		glTexCoord2f( 0.0,  repB+S);      glVertex3f(-size[0]+pos[0], -size[1]+pos[1], pos[2]);
-		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);
 
+		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(         pos[0],	       pos[1], pos[2]);
+		glTexCoord2f( 0.0,  repB+S);      glVertex3f(-size[0]+pos[0], -size[1]+pos[1], pos[2]);
+		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);
+		//--
 		glTexCoord2f( 0.0,  repA+S);      glVertex3f( size[0]+pos[0],	       pos[1], pos[2]);
 		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(         pos[0],	       pos[1], pos[2]);
-		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);		
+		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);	
+			
+		glTexCoord2f( 0.0,  repA+S);      glVertex3f( size[0]+pos[0],	       pos[1], pos[2]);
+		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);	
 		glTexCoord2f( 0.0,  repB+S);      glVertex3f( size[0]+pos[0], -size[1]+pos[1], pos[2]);
 
 		if(blipMirrorT) { repA = rep; repB = 0.0; }
@@ -124,10 +136,16 @@ void GroundMetalSegment::drawBlip(float rep, float S, float tilt, bool blipMirro
 		glTexCoord2f( 0.0,  repA+S);      glVertex3f( size[0]+pos[0],  size[1]+pos[1], pos[2]);
 		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(	      pos[0],  size[1]+pos[1], pos[2]);
 		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(	      pos[0],	       pos[1], pos[2]);
-		glTexCoord2f( 0.0,  repB+S);      glVertex3f( size[0]+pos[0],	       pos[1], pos[2]);
 
+		glTexCoord2f( 0.0,  repA+S);      glVertex3f( size[0]+pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(	      pos[0],	       pos[1], pos[2]);
+		glTexCoord2f( 0.0,  repB+S);      glVertex3f( size[0]+pos[0],	       pos[1], pos[2]);
+		//--
 		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(	      pos[0],  size[1]+pos[1], pos[2]);
 		glTexCoord2f( 0.0,  repA+S);      glVertex3f(-size[0]+pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f( 0.0,  repB+S);      glVertex3f(-size[0]+pos[0],	       pos[1], pos[2]);
+		
+		glTexCoord2f( rep,  repA+S+tilt); glVertex3f(	      pos[0],  size[1]+pos[1], pos[2]);
 		glTexCoord2f( 0.0,  repB+S);      glVertex3f(-size[0]+pos[0],	       pos[1], pos[2]);
 		glTexCoord2f( rep,  repB+S+tilt); glVertex3f(         pos[0],	       pos[1], pos[2]);
 	glEnd();
@@ -214,3 +232,76 @@ void GroundMetalSegment::drawSurface(float *c0_clr, float *c1_clr,
 	glEnd();
 }
 
+#ifdef EXPERIMENTAL
+
+#define glTexCoord2f_M0(a, b) glMultiTexCoord2fARB(GL_TEXTURE0_ARB, a, b)
+#define glTexCoord2f_M1(a, b) glMultiTexCoord2fARB(GL_TEXTURE1_ARB, a, b)
+
+//--------------------------------------------------------------------
+void GroundMetalSegment::drawMultiTex(float rep, float S, float tilt, bool blipMirrorT,
+						float *c0_clr,
+						float *c1_clr,
+						float *r0_clr,
+						float *r1_clr,
+						float *r2_clr)
+{
+	float repA = 0.0;
+	float repB = rep;
+	
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Blip]);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	
+	
+	glActiveTextureARB(GL_TEXTURE1_ARB);
+	glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Base]);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glEnable(GL_TEXTURE_2D);
+
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	
+	glBegin(GL_TRIANGLES); //-- use triangles to prevent color popping on Utah
+
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r2_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f(-size[0]+pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f(-size[0]+pos[0], -size[1]+pos[1], pos[2]);
+
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f(-size[0]+pos[0], -size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0], -size[1]+pos[1], pos[2]);
+
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f( size[0]+pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0], -size[1]+pos[1], pos[2]);
+	
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f( size[0]+pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0], -size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r1_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f( size[0]+pos[0], -size[1]+pos[1], pos[2]);
+
+		if(blipMirrorT) { repA = rep; repB = 0.0; }
+
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r1_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f( size[0]+pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r1_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f( size[0]+pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f( size[0]+pos[0],		   pos[1], pos[2]);
+		//--
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repA+S);      glColor4fv(r0_clr); glTexCoord2f_M1( 0.0,  1.0); glVertex3f(-size[0]+pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r2_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f(-size[0]+pos[0],		   pos[1], pos[2]);
+	
+		glTexCoord2f_M0( rep,  repA+S+tilt); glColor4fv(c0_clr); glTexCoord2f_M1( 1.0,  1.0); glVertex3f(		  pos[0],  size[1]+pos[1], pos[2]);
+		glTexCoord2f_M0( 0.0,  repB+S);      glColor4fv(r2_clr); glTexCoord2f_M1( 0.0,  0.0); glVertex3f(-size[0]+pos[0],		   pos[1], pos[2]);
+		glTexCoord2f_M0( rep,  repB+S+tilt); glColor4fv(c1_clr); glTexCoord2f_M1( 1.0,  0.0); glVertex3f(		  pos[0],		   pos[1], pos[2]);
+		
+	glEnd();
+
+	glDisable(GL_TEXTURE_2D);
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+}
+
+#endif // EXPERIMENTAL

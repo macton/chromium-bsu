@@ -102,7 +102,8 @@ void GroundMetal::drawGL()
 	
 	//-- Set background color for low and med gfx
 	float	pulse = sin(game->gameFrame*0.03);
-	if(pulse < 0.0) pulse = 0.0;
+	if(pulse < 0.0) 
+		pulse = 0.0;
 	glClearColor( 0.2+pulse, 0.2, 0.25, 1.0 );
 	
 	//-- draw ground segments

@@ -13,6 +13,8 @@
 class Ground;
 class GroundMetal;
 
+//#define EXPERIMENTAL
+
 //====================================================================
 class GroundMetalSegment : public GroundSegment
 {
@@ -28,6 +30,15 @@ public:
 						float *r0_clr,
 						float *r1_clr,
 						float *r2_clr);
+
+#ifdef EXPERIMENTAL
+	void	drawMultiTex(float rep, float S, float tilt, bool blipMirrorT,
+						float *c0_clr,
+						float *c1_clr,
+						float *r0_clr,
+						float *r1_clr,
+						float *r2_clr);
+#endif // EXPERIMENTAL
 
 friend class Ground;
 friend class GroundMetal;
