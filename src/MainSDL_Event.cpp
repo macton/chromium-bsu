@@ -381,7 +381,8 @@ void MainSDL::mouseButtonDown(SDL_Event *ev)
 		switch(mEv->button)
 		{
 			case SDL_BUTTON_LEFT:
-				game->hero->fireGun(++fire);
+//				game->hero->fireGun(++fire);
+				game->hero->fireGun(true);
 				break;
 			case SDL_BUTTON_MIDDLE:
 				game->hero->nextItem();
@@ -401,18 +402,7 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 {
 	Global	*game = Global::getInstance();
 	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
-	if(game->gameMode == Global::Game)
-	{
-		switch(mEv->button)
-		{
-			case  SDL_BUTTON_LEFT:
-				game->hero->fireGun(--fire);
-				break;
-			default:
-				break;
-		}
-	}
-	else if(game->gameMode == Global::Menu)
+	if(game->gameMode == Global::Menu)
 	{
 		switch(mEv->button)
 		{
@@ -424,6 +414,19 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 				break;
 			case SDL_BUTTON_RIGHT:
 				game->menu->mousePress(MainToolkit::Right, mEv->x, mEv->y);
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch(mEv->button)
+		{
+			case  SDL_BUTTON_LEFT:
+//				game->hero->fireGun(--fire);
+//				game->hero->fireGun(SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1));
+				game->hero->fireGun(false);
 				break;
 			default:
 				break;

@@ -931,42 +931,43 @@ void MenuGL::decItem()
 //----------------------------------------------------------
 void MenuGL::mousePress(MainToolkit::Button but, int xi, int yi)
 {
-	float x,y;
-	Global *game = Global::getInstance();
-	Config *config = Config::getInstance();
-	x = -2.0*(0.5-(((float)xi)/config->getScreenW()))* 16.60;
-	y =  2.0*(0.5-(((float)yi)/config->getScreenH()))* 12.45;
-	
-	float	p = -y+(1.0+txtHeight*1.5);
-	float	s = txtHeight*2.5;
-	int		cSel = (int)curSel;
-	int		mSel = -1;
-	if(p > 0.0)
+	if(but == MainToolkit::Left)
 	{
-		// reset electric 
-		elecOffX = 0.0;
-		
-		p = p/s;
-		mSel = (int)floor(p);
-		if( mSel >= 0 && mSel < (int)NumSelections)
+		float x,y;
+		Config *config = Config::getInstance();
+		x = -2.0*(0.5-(((float)xi)/config->getScreenW()))* 16.60;
+		y =  2.0*(0.5-(((float)yi)/config->getScreenH()))* 12.45;
+
+		float	p = -y+(1.0+txtHeight*1.5);
+		float	s = txtHeight*2.5;
+		int		mSel = -1;
+		if(p > 0.0)
 		{
-			if(mSel != (int)curSel)
+			// reset electric 
+			elecOffX = 0.0;
+
+			p = p/s;
+			mSel = (int)floor(p);
+			if( mSel >= 0 && mSel < (int)NumSelections)
 			{
-				curSel = (MenuSelection)mSel;
-				elecOffX = 0.0;
-				mSel = -1;
+				if(mSel != (int)curSel)
+				{
+					curSel = (MenuSelection)mSel;
+					elecOffX = 0.0;
+					mSel = -1;
+				}
 			}
 		}
-	}
-	float l = -8.0 + -2.5;
-	if(mSel >= 0)
-	{
-		if(x > l && x < l+txtHeight )
-			decItem();
-		else if (x > l+txtHeight && x < l+txtHeight*2.0)
-			incItem();
-		else
-			activateItem();
+		float l = -8.0 + -2.5;
+		if(mSel >= 0)
+		{
+			if(x > l && x < l+txtHeight )
+				decItem();
+			else if (x > l+txtHeight && x < l+txtHeight*2.0)
+				incItem();
+			else
+				activateItem();
+		}
 	}
 }
 

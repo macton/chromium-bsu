@@ -33,7 +33,8 @@ EnemyFleet::EnemyFleet()
 	
 	currentShip = 0;
 	float pos[3] = { 0.0, 0.0, 0.0 };
-	squadRoot = new EnemyAircraft(EnemyStraight, pos);
+//	squadRoot = new EnemyAircraft(EnemyStraight, pos);
+	squadRoot = EnemyAircraft::makeNewEnemy(EnemyStraight, pos);
 }
 
 EnemyFleet::~EnemyFleet()
@@ -100,8 +101,10 @@ void	EnemyFleet::drawGL()
 	glColor4f(1.0, 1.0, 1.0, 1.0);
 	
 	thisEnemy = squadRoot->next;
+//	int num = 0;
 	while(thisEnemy)
 	{
+//		num++;
 		p = thisEnemy->pos;
 		szx = thisEnemy->size[0];
 		szy = thisEnemy->size[1];
@@ -141,12 +144,14 @@ void	EnemyFleet::drawGL()
 				}
 				break;
 			case EnemyOmni:
+				glColor4f(1.0, 0.0, 0.0, 1.0);
 				glBindTexture(GL_TEXTURE_2D, extraTex[EnemyOmni]);
 				glPushMatrix();
 				glTranslatef(p[0], p[1], p[2]);
 				glRotatef(-(thisEnemy->age*8), 0.0, 0.0, 1.0);
 				drawQuad(szx,szy);
 				glPopMatrix();
+				glColor4f(1.0, 1.0, 1.0, 1.0);
 				break;
 			case EnemyTank:
 				if(thisEnemy->preFire)
@@ -223,6 +228,8 @@ void	EnemyFleet::drawGL()
 		}
 		thisEnemy = thisEnemy->next;
 	}
+//	if(num)
+//		fprintf(stderr, "num enemies on screen = %d\n", num);
 }
 
 //----------------------------------------------------------

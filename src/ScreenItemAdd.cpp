@@ -25,7 +25,8 @@ ScreenItemAdd::ScreenItemAdd()
 	float p[3] = { 0.0, 0.0, 0.0 };
 	for(int i = 0; i < NumEnemyTypes; i++)
 	{
-		deadPool[i] = new EnemyAircraft((EnemyType)i, p);
+//		deadPool[i] = new EnemyAircraft((EnemyType)i, p);
+		deadPool[i] = EnemyAircraft::makeNewEnemy((EnemyType)i, p);
 		deadPool[i]->next = 0;
 	}
 }
@@ -185,23 +186,27 @@ void ScreenItemAdd::addWave(EnemyWave &ew)
 			{
 				case EnemyWave::None:
 					p[0] = ew.pos[0] + ew.xJitter*SRAND;
-					addItem(i, new EnemyAircraft(ew.type, p) );	
+//					addItem(i, new EnemyAircraft(ew.type, p) );	
+					addItem(i, EnemyAircraft::makeNewEnemy(ew.type, p) );	
 					interval = period + (int)(SRAND*jitter);
 					break;
 				case EnemyWave::Arrow:
 					p[0] = ew.pos[0] + ew.xJitter*iteration;
-					addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+//					addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+					addItem(i, EnemyAircraft::makeNewEnemy(ew.type, p, 0.0) );
 					if(iteration > 0)
 					{
 						p[0] = ew.pos[0] - ew.xJitter*iteration;
-						addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+//						addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+						addItem(i, EnemyAircraft::makeNewEnemy(ew.type, p, 0.0) );
 					}
 					interval = (int)period + (int)(SRAND*jitter);
 					iteration++;
 					break;
 				default:
 					p[0] = 0.0;
-					addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+//					addItem(i, new EnemyAircraft(ew.type, p, 0.0) );
+					addItem(i, EnemyAircraft::makeNewEnemy(ew.type, p, 0.0) );
 					interval = 25;
 					break;
 			}
@@ -222,7 +227,8 @@ EnemyAircraft *ScreenItemAdd::dynamicEnemyAdd(EnemyType et, float *pos, int relT
 	}
 	else
 	{
-		addEnemy = new EnemyAircraft(et, pos);
+//		addEnemy = new EnemyAircraft(et, pos);
+		addEnemy = EnemyAircraft::makeNewEnemy(et, pos);
 	}
 	
 	addItem(relTime, addEnemy);
@@ -234,10 +240,11 @@ EnemyAircraft *ScreenItemAdd::dynamicEnemyAdd(EnemyType et, float *pos, int relT
 void ScreenItemAdd::loadLevelXXX()
 {
 	int i;
-	int	numIterations = 12000;
+	int	numIterations = 1200;
 //	int	numIterations = (int)(11100 * game->gameSkill);
 //	int	numIterations = (int)(1100 * game->gameSkill);
 	
+	clearDeadPool();
 	//-- Enemies
 	float	r;
 	float	d;
@@ -338,6 +345,7 @@ void ScreenItemAdd::loadLevel2()
 	int	numIterations = 14000;
 //	int	numIterations = 1400;
 	
+	clearDeadPool();
 	//-- Enemies
 	int		waves = 0;
 	float	r;
@@ -404,6 +412,7 @@ void ScreenItemAdd::loadLevel3()
 	int	numIterations = 14000;
 //	int	numIterations = 1400;
 	
+	clearDeadPool();
 	//-- Enemies
 	int		waves = 0;
 	float	r;

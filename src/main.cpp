@@ -29,6 +29,8 @@
 #include "Global.h"
 #include "HiScore.h"
 
+#include "EnemyAircraft.h"
+
 static char dataDir[256] = "../data";
 
 //----------------------------------------------------------
@@ -37,6 +39,8 @@ int main(int argc, char **argv)
 	int i;
 	int	tmp;
 	int	vm = 2;
+
+//	atexit(EnemyAircraft::printNumAllocated);
 
 #ifdef __linux__
 	// by default, disable SDL's use of DGA mouse. If SDL_VIDEO_X11_DGAMOUSE is

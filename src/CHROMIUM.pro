@@ -38,14 +38,14 @@ LIBDIRS		= -L../support/glpng/lib -L../support/openal/lib -L/usr/lib -L/usr/X11R
 LIBS		= $$LIBDIRS $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
 #LIBS		= $$LIBDIRS $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lSDL_mixer
 
-##-- Debug --
-#CONFIG		= warn_on debug
-#DEFINES 	= _REENTRANT AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
-##DEFINES 	= _REENTRANT AUDIO_SDLMIXER CHECK_ERRORS NO_PARACHUTE
-##DEFINES 	= _REENTRANT AUDIO_SDLMIXER AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
+#-- Debug --
+CONFIG		= warn_on debug
+DEFINES 	= _REENTRANT AUDIO_OPENAL OLD_OPENAL CHECK_ERRORS NO_PARACHUTE
+#DEFINES 	= _REENTRANT AUDIO_SDLMIXER CHECK_ERRORS NO_PARACHUTE
+#DEFINES 	= _REENTRANT AUDIO_SDLMIXER AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
 #-- Release --
-CONFIG		= warn_off release
-DEFINES 	= OLD_OPENAL AUDIO_OPENAL _REENTRANT 
+#CONFIG		= warn_off release
+#DEFINES 	= OLD_OPENAL AUDIO_OPENAL _REENTRANT 
 
 ##############################
 ## IRIX
@@ -87,6 +87,13 @@ HEADERS		= \
 			Ammo.h \
 			Config.h \
 			EnemyAircraft.h \
+			EnemyAircraft_Straight.h \
+			EnemyAircraft_Omni.h \
+			EnemyAircraft_RayGun.h \
+			EnemyAircraft_Tank.h \
+			EnemyAircraft_Gnat.h \
+			EnemyAircraft_Boss00.h \
+			EnemyAircraft_Boss01.h \
 			EnemyAmmo.h \
 			EnemyFleet.h \
 			Explosions.h \
@@ -124,6 +131,13 @@ SOURCES		= \
 			Ammo.cpp \
 			Config.cpp \
 			EnemyAircraft.cpp \
+			EnemyAircraft_Straight.cpp \
+			EnemyAircraft_Omni.cpp \
+			EnemyAircraft_RayGun.cpp \
+			EnemyAircraft_Tank.cpp \
+			EnemyAircraft_Gnat.cpp \
+			EnemyAircraft_Boss00.cpp \
+			EnemyAircraft_Boss01.cpp \
 			EnemyAmmo.cpp \
 			EnemyFleet.cpp \
 			Explosions.cpp \

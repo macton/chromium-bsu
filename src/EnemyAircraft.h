@@ -12,26 +12,32 @@
 
 class ActiveAmmo;
 class Global;
+class EnemyAircraft_Boss01;
 
-enum EnemyType{	EnemyStraight, EnemyOmni, 
-				EnemyRayGun, EnemyTank,
-				EnemyGnat, 
-				EnemyBoss00,
-				EnemyBoss01,
-				NumEnemyTypes};
+enum EnemyType{	
+	EnemyStraight, 
+	EnemyOmni, 
+	EnemyRayGun, 
+	EnemyTank,
+	EnemyGnat, 
+	EnemyBoss00,
+	EnemyBoss01,
+	NumEnemyTypes
+};
+
 
 //====================================================================
 class EnemyAircraft : public ScreenItem
 {
 public:
 	EnemyAircraft(EnemyType et, float p[3], float randFact = 1.0);
-	~EnemyAircraft();
+	virtual ~EnemyAircraft();
+	
+	virtual void	update() = 0;
+	virtual void	init();
+	virtual void	init(float *p, float randFact = 1.0);
 	
 	bool	checkHit(ActiveAmmo *ammo);
-	void	update();
-	void	init();
-	void	init(float *p, float randFact = 1.0);
-	
 	void	setTarget(ScreenItem *t) { target = t; }
 
 	EnemyType	type;
@@ -42,13 +48,15 @@ public:
 	float		secondaryMove[2];
 	float		preFire;
 
-friend class EnemyFleet;
-friend class ScreenItemAdd;
+	static EnemyAircraft *makeNewEnemy(EnemyType et, float p[3], float randFact = 1.0);
 
+protected:
+	virtual void	calcShootInterval();
+	virtual void	move() = 0;
+	
 protected:
 	EnemyAircraft	*next;
 	EnemyAircraft	*back;
-	
 	EnemyAircraft	*over;
 	
 	float	shootVec[3];
@@ -56,10 +64,6 @@ protected:
 	int		shootInterval;
 	int		shootSwap;
 
-private:
-	void	calcShootInterval();
-	void	move();
-	
 	float	randMoveX;
 	float	lastMoveX;
 	float	lastMoveY;
@@ -68,8 +72,17 @@ private:
 	
 	ScreenItem	*target;
 
-private:
+protected:
 	Global	*game;
+
+private:
+	static int	allocated;
+public:
+	static void	printNumAllocated(void);
+
+friend class EnemyFleet;
+friend class ScreenItemAdd;
+friend class EnemyAircraft_Boss01;
 };
 
 #endif //EnemyAircraft_h
