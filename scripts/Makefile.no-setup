@@ -35,7 +35,6 @@ clean:
 	-rm -f *.bck
 
 distclean: clean
-	-cp -f ./data/.chromium-score-blank ./data/.chromium-score
 	@echo ""
 	-rm -f scripts/*.bck
 	@echo -e "\n ** freshen up the doc files **\n--------------------------------"
