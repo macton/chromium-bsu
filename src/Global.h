@@ -91,6 +91,8 @@ public:
 	static MainGL		*mainGL;
 	static StatusDisplay *statusDisplay;
 	
+	static float	cursorPos[3];
+	
 	static int		randI[256];
 	static float	randF[256];
 	static float	randS[256];

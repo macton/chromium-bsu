@@ -369,6 +369,13 @@ void MainSDL::mouseMotion(SDL_Event *event)
 			xLast = xNow;
 			yLast = yNow;
 	}
+	else
+	{
+		Config *config = Config::getInstance();
+		Global::cursorPos[0] = -2.0*(0.5-(((float)event->motion.x)/config->getScreenW()));
+		Global::cursorPos[1] =  2.0*(0.5-(((float)event->motion.y)/config->getScreenH()));
+		fprintf(stderr, "%f %f\n", Global::cursorPos[0], Global::cursorPos[1]);
+	}
 }
 
 //----------------------------------------------------------
@@ -425,7 +432,7 @@ void MainSDL::grabMouse(bool status)
 	}
 	else
 	{
-		SDL_ShowCursor(1);
+//		SDL_ShowCursor(1);
 	}
 }
 

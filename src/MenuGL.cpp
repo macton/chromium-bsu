@@ -88,6 +88,7 @@ void MenuGL::loadTextures()
 	pngInfo tmpInfo;
 	elecTex   = pngBind(dataLoc("png/electric.png"),  PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	backTex   = pngBind(dataLoc("png/menu_back.png"), PNG_NOMIPMAPS, PNG_SOLID, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+	curTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	//-- Environment map
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
@@ -156,7 +157,9 @@ void MenuGL::startMenu()
 	textAngle	= 90.0;
 	textCount	= 500;
 	createLists( (thickText = true) );
-
+	Global::cursorPos[0] = 0.0;
+	Global::cursorPos[1] = 0.0;
+	
 }
 
 //----------------------------------------------------------
@@ -228,9 +231,6 @@ void MenuGL::drawGL()
 	//-- Update audio
 	game->audio->update();
 	
-	//-- move menu down for title
-	glTranslatef(0.0, -3.0, 0.0);
-	
 	float	szx		=   9.0;
 	float	szy		=   4.5;
 	float	top		=   4.0;
@@ -239,6 +239,9 @@ void MenuGL::drawGL()
 	
 	//----- Draw credits texture --------------------------------
 	glPushMatrix();
+		//-- move menu down for title
+		glTranslatef(0.0, -3.0, 0.0);
+
 		// NOTE: corners of back tex is white, alpha 1 and
 		// we are in modulate blend...
 		glBindTexture(GL_TEXTURE_2D, backTex);
@@ -408,6 +411,20 @@ void MenuGL::drawGL()
 	glDepthMask(GL_TRUE);	//XXX Hack to make Voodoo3 XF4 work
 	drawTitle();
 	glPopMatrix();
+	
+	{
+		float x = Global::cursorPos[0]*11.25;
+		float y = Global::cursorPos[1]* 8.45;
+		float z = Global::cursorPos[2];
+		float sz = 0.4;
+		glBindTexture(GL_TEXTURE_2D, curTex);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0, 1.0); glVertex3f( x+sz, y+sz, z);
+		glTexCoord2f(0.0, 1.0); glVertex3f( x-sz, y+sz, z);
+		glTexCoord2f(0.0, 0.0); glVertex3f( x-sz, y-sz, z);
+		glTexCoord2f(1.0, 0.0); glVertex3f( x+sz, y-sz, z);
+		glEnd();
+	}
 	
 	if(thickText && game->fps < 30)
 	{

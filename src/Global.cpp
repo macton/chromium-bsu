@@ -45,6 +45,8 @@ MenuGL			*Global::menu		= 0;
 MainGL			*Global::mainGL		= 0;
 StatusDisplay	*Global::statusDisplay = 0;
 
+float	Global::cursorPos[3] = { 0.0, 0.0, HERO_Z };
+
 FILE	*Global::eventFile = 0;
 
 int Global::tipShipPast		= 0;

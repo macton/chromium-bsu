@@ -55,6 +55,7 @@ private:
 	GLuint	listBSU;
 	
 	GLuint	envTex;
+	GLuint	curTex;
 	GLuint	backTex;
 	GLuint	elecTex;
 	
