@@ -25,9 +25,10 @@
 
 
 //====================================================================
-MainSDL::MainSDL(int, char **)
-{
-	mouseToggle = Global::mouseActive;
+MainSDL::MainSDL(int argc, char **argv)
+	: MainToolkit(argc, argv)
+{	
+	mouseToggle = game->mouseActive;
 	fire = 0;
 	xjoy = yjoy = xjNow = yjNow = 0;
 	adjCount = 0;
@@ -42,7 +43,7 @@ MainSDL::MainSDL(int, char **)
 #ifdef NO_PARACHUTE
 	initOpts = initOpts|SDL_INIT_NOPARACHUTE;
 #endif
-	if(Global::use_cdrom)
+	if(game->use_cdrom)
 		initOpts = initOpts|SDL_INIT_CDROM;
 		
 	if( SDL_Init( initOpts ) < 0 ) 
@@ -84,7 +85,7 @@ MainSDL::MainSDL(int, char **)
 	SDL_WM_SetCaption( "chromium B.S.U.", "chromium B.S.U." );
 
 	//-- Create game
-	Global::createGame();
+	game->createGame();
 }
 
 MainSDL::~MainSDL()
@@ -109,7 +110,7 @@ bool MainSDL::run()
 		SDL_Event event;
 		
 		//-- Draw our scene...
-		Global::mainGL->drawGL();
+		game->mainGL->drawGL();
 		
 		SDL_GL_SwapBuffers( );
 		
@@ -118,7 +119,7 @@ bool MainSDL::run()
 		#endif// CHECK_ERRORS
 
 		//-- Delay
-		SDL_Delay( 32-(int)(24.0*Global::gameSpeed) );
+		SDL_Delay( 32-(int)(24.0*game->gameSpeed) );
 //		SDL_Delay( 8 );
 //		SDL_Delay( 16 );
 //		SDL_Delay( 32 );
@@ -127,9 +128,9 @@ bool MainSDL::run()
 //		//-- cheezy, partially functional record mechanism
 //		bool write = false;
 //		SDL_Event *fileEvent;
-//		if( !write && Global::gameMode == Global::Game)
+//		if( !write && game->gameMode == game->Game)
 //		{
-//			while( (fileEvent = getEvent(Global::eventFile)) ) 
+//			while( (fileEvent = getEvent(game->eventFile)) ) 
 //				done = this->process(fileEvent);
 //		}
 		
@@ -143,53 +144,53 @@ bool MainSDL::run()
 		this->joystickMove();
 		++frames;
 		
-		Global::frame++;
-		if( !(Global::gameFrame%10) )
+		game->frame++;
+		if( !(game->gameFrame%10) )
 		{
 			now_time = SDL_GetTicks();
 			if(last_time)
 			{
-				Global::fps = (10.0/(now_time-last_time))*1000.0;
+				game->fps = (10.0/(now_time-last_time))*1000.0;
 			}
 			last_time = now_time;
 			
-			if(Global::gameMode != Global::Menu)
+			if(game->gameMode != game->Menu)
 			{
-				if(Global::gameFrame < 400)
+				if(game->gameFrame < 400)
 				{
-					if(Global::fps < 48.0 && Global::gameSpeed < 1.0)
+					if(game->fps < 48.0 && game->gameSpeed < 1.0)
 					{
-						Global::gameSpeed += 0.02;
-						fprintf(stdout, "init----> %3.2ffps gameSpeed = %g\n", Global::fps, Global::gameSpeed);
+						game->gameSpeed += 0.02;
+						fprintf(stdout, "init----> %3.2ffps gameSpeed = %g\n", game->fps, game->gameSpeed);
 					}
-					else if(Global::gameFrame > 20)
+					else if(game->gameFrame > 20)
 					{
-						float tmp = 50.0/Global::fps;
+						float tmp = 50.0/game->fps;
 						tmp = 0.8*targetAdj + 0.2*tmp;
 						targetAdj = floor(100.0*(tmp+0.005))/100.0;
-						fprintf(stdout, "init----> %3.2ffps targetAdj = %g, tmp = %g\n", Global::fps, targetAdj, tmp);
+						fprintf(stdout, "init----> %3.2ffps targetAdj = %g, tmp = %g\n", game->fps, targetAdj, tmp);
 					}
 				}
-				else if( Global::auto_speed && (Global::fps > 30.0 && Global::fps < 100.0))  // discount any wacky fps from pausing
+				else if( game->auto_speed && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
 				{
-					//Global::speedAdj = targetAdj;
+					//game->speedAdj = targetAdj;
 					// Everything was originally based on 50fps - attempt to adjust
 					// if we're outside a reasonable range
-					float tmp = 50.0/Global::fps;
+					float tmp = 50.0/game->fps;
 					if( fabs(targetAdj-tmp) > 0.1)
 					{
 						adjCount++;
-						Global::speedAdj = tmp;
-						fprintf(stdout, "adjust--> %3.2f targetAdj = %g -- Global::speedAdj = %g\n", Global::fps, targetAdj, Global::speedAdj);
+						game->speedAdj = tmp;
+						fprintf(stdout, "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n", game->fps, targetAdj, game->speedAdj);
 					}
 					else
-						Global::speedAdj = targetAdj;
+						game->speedAdj = targetAdj;
 				}
 				else
-					Global::speedAdj = targetAdj;
+					game->speedAdj = targetAdj;
 					
 //				if( !(frames%500) )
-//					fprintf(stdout, "fps = %g speedAdj = %g\n", Global::fps, Global::speedAdj);
+//					fprintf(stdout, "fps = %g speedAdj = %g\n", game->fps, game->speedAdj);
 			}
 			
 		}
@@ -197,7 +198,7 @@ bool MainSDL::run()
 	fflush(stdout);
 	
 	//-- Delete game objects
-	Global::deleteGame();
+	game->deleteGame();
 	
 	if(adjCount > 20)
 	{
@@ -255,40 +256,40 @@ void MainSDL::setVideoMode()
 	
 	//-- Set the flags we want to use for setting the video mode
 	video_flags = SDL_OPENGL;
-	if(Global::full_screen)
+	if(game->full_screen)
 		video_flags |= SDL_FULLSCREEN;
 	
-	switch(Global::screenSize)
+	switch(game->screenSize)
 	{
 		case 0:
-			w = Global::screenW = 512;
-			h = Global::screenH = 384;
+			w = game->screenW = 512;
+			h = game->screenH = 384;
 			break;
 		case 1:
-			w = Global::screenW = 640;
-			h = Global::screenH = 480;
+			w = game->screenW = 640;
+			h = game->screenH = 480;
 			break;
 		case 2:
-			w = Global::screenW = 800;
-			h = Global::screenH = 600;
+			w = game->screenW = 800;
+			h = game->screenH = 600;
 			break;
 		case 3:
-			w = Global::screenW = 1024;
-			h = Global::screenH = 768;
+			w = game->screenW = 1024;
+			h = game->screenH = 768;
 			break;
 		case 4:
-			w = Global::screenW = 1280;
-			h = Global::screenH = 960;
+			w = game->screenW = 1280;
+			h = game->screenH = 960;
 			break;
 		default:
-			w = Global::screenW = 640;
-			h = Global::screenH = 480;
+			w = game->screenW = 640;
+			h = game->screenH = 480;
 			break;
 	}
 	
 	int rs, gs, bs, ds;
 	int bpp;
-	if(Global::true_color)
+	if(game->true_color)
 	{
 		//-- 24 bit color
 		bpp = 24;
@@ -327,8 +328,8 @@ void MainSDL::setVideoMode()
 	SDL_GL_GetAttribute( SDL_GL_DEPTH_SIZE,	&ds);
 	fprintf(stderr, "(bpp=%d RGB=%d%d%d depth=%d)\n", glSurface->format->BitsPerPixel, rs, gs, bs, ds);
 
-	if(Global::mainGL)
-		Global::mainGL->initGL();
+	if(game->mainGL)
+		game->mainGL->initGL();
 }
 
 #endif // USE_SDL

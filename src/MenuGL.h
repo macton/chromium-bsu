@@ -13,6 +13,8 @@
 #include "TexFont.h"
 #include "MainToolkit.h"
 
+class Global;
+
 //====================================================================
 class MenuGL
 {
@@ -73,6 +75,9 @@ private:
 	int		mssgIndex;
 	int		mssgCount;
 	bool	mssgHelpOverride;
+
+private:
+	Global	*game;
 };
 
 #endif //MenuGL_h

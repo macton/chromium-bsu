@@ -11,6 +11,7 @@
 #include "compatibility.h"
 #include <GL/gl.h>
 
+class Global;
 class GroundSegment;
 
 //====================================================================
@@ -38,5 +39,8 @@ protected:
 	GLuint	tex[NumGndTex];
 
 	GroundSegment *rootSeg;
+
+protected:
+	Global	*game;
 };
 #endif // Ground_h

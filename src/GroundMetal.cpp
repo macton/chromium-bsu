@@ -16,6 +16,7 @@
 
 //==============================================================================
 GroundMetal::GroundMetal()
+	: Ground()
 {
 	pos[0] =  0.0;
 	pos[1] =  0.0;
@@ -100,17 +101,17 @@ void GroundMetal::drawGL()
 	float	s2 = size * 2.0;
 	
 	//-- Set background color for low and med gfx
-	float	pulse = sin(Global::gameFrame*0.03);
+	float	pulse = sin(game->gameFrame*0.03);
 	if(pulse < 0.0) pulse = 0.0;
 	glClearColor( 0.2+pulse, 0.2, 0.25, 1.0 );
 	
 	//-- draw ground segments
-	if( !Global::game_pause || Global::gameMode == Global::Menu)
+	if( !game->game_pause || game->gameMode == game->Menu)
 	{
 		seg = rootSeg->next;
 		while(seg)
 		{
-			seg->pos[1] += Global::scrollSpeed*Global::speedAdj;
+			seg->pos[1] += game->scrollSpeed*game->speedAdj;
 			seg = seg->next;
 		}
 	}

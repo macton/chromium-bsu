@@ -23,6 +23,7 @@
 //====================================================================
 HeroAmmo::HeroAmmo()
 {
+	game = Global::getInstance();
 	int i;
 	
 	//-- initialize everything to sane values...
@@ -142,9 +143,9 @@ void HeroAmmo::addAmmo(int type, float pos[3])
 	
 	switch(type)
 	{
-		case 0:	vel[1] = 0.5*Global::speedAdj;	break;
-		case 1:	vel[1] = 0.2*Global::speedAdj;	break;
-		case 2:	vel[1] = 0.3*Global::speedAdj;	break;
+		case 0:	vel[1] = 0.5*game->speedAdj;	break;
+		case 1:	vel[1] = 0.2*game->speedAdj;	break;
+		case 2:	vel[1] = 0.3*game->speedAdj;	break;
 		default:	break;
 	}
 	if(type >= 0 && type < NUM_HERO_AMMO_TYPES)
@@ -190,7 +191,7 @@ void HeroAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(thisAmmo->pos[1] > Global::screenBound[1]) // remove ammo
+			if(thisAmmo->pos[1] > game->screenBound[1]) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;
@@ -250,12 +251,12 @@ void HeroAmmo::checkForHits(EnemyFleet *fleet)
 				{
 					//do damage
 					if(i == 1)
-						enemy->damage += ammoDamage[i]*Global::speedAdj;
+						enemy->damage += ammoDamage[i]*game->speedAdj;
 					else
 						enemy->damage += ammoDamage[i];
 					
 					//add explosion
-					Global::explosions->addExplo((Explosions::ExploType)(Explosions::HeroAmmo00+i), thisAmmo->pos);					
+					game->explosions->addExplo((Explosions::ExploType)(Explosions::HeroAmmo00+i), thisAmmo->pos);					
 
 					if(i != 1) // ammo type 1 doesn't get killed
 					{

@@ -29,14 +29,14 @@
 AudioSDLMixer::AudioSDLMixer()
 	: Audio()
 {    
-	//UNCLEAN - if initSound fails, Global::audio_enabled will be set to false
-	if(Global::audio_enabled == true)
+	//UNCLEAN - if initSound fails, game->audio_enabled will be set to false
+	if(game->audio_enabled == true)
 		initSound();
 }
 
 AudioSDLMixer::~AudioSDLMixer()
 {
-	if(Global::audio_enabled) 
+	if(game->audio_enabled) 
 	{
     	for (int i = 0; i < NumSoundTypes; i++)
         	Mix_FreeChunk (sounds[i]);
@@ -54,7 +54,7 @@ void	AudioSDLMixer::initSound()
     if ( Mix_OpenAudio (22050, AUDIO_S16, 2, 512) < 0 )
 	{
 		fprintf(stderr, "ERROR initializing audio - AudioSDLMixer::initSound()\n");
-        Global::audio_enabled = false;
+        game->audio_enabled = false;
 	}
 	else
 	{
@@ -73,7 +73,7 @@ void	AudioSDLMixer::initSound()
 //----------------------------------------------------------
 void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 {
-	if (Global::audio_enabled) 
+	if (game->audio_enabled) 
 	{
 		Mix_PlayChannel (-1, sounds[type], 0);
     }
@@ -85,7 +85,7 @@ void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 //----------------------------------------------------------
 void AudioSDLMixer::pauseGameMusic(bool status)
 {
-	if (Global::audio_enabled) 
+	if (game->audio_enabled) 
 	{
 		if(cdrom)
 		{
@@ -107,7 +107,7 @@ void AudioSDLMixer::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	AudioSDLMixer::stopMusic()
 {
-    if (Global::audio_enabled) 
+    if (game->audio_enabled) 
 	{
 		Audio::stopMusic();
 		Mix_HaltChannel (0);
@@ -117,7 +117,7 @@ void	AudioSDLMixer::stopMusic()
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicMode(SoundType mode)
 {
-    if (Global::audio_enabled)
+    if (game->audio_enabled)
 	{
 		Audio::setMusicMode(mode);
 		switch(mode)
@@ -142,7 +142,7 @@ void	AudioSDLMixer::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicVolume(float value)
 {
-    if (Global::audio_enabled)
+    if (game->audio_enabled)
 	{
 		Mix_Volume (0, (int)(MIX_MAX_VOLUME*value) );
 	}
@@ -154,7 +154,7 @@ void	AudioSDLMixer::setMusicVolume(float value)
 //----------------------------------------------------------
 void	AudioSDLMixer::setSoundVolume(float value)
 {
-    if (Global::audio_enabled)
+    if (game->audio_enabled)
 	{
 		for (int i = 1; i < MIX_CHANNELS; i++)
 			Mix_Volume (i, (int)(MIX_MAX_VOLUME*value) );

@@ -37,6 +37,7 @@
 //====================================================================
 MainGL::MainGL()
 {
+	game = Global::getInstance();
 	initGL();
 	loadTextures();
 }
@@ -50,7 +51,7 @@ MainGL::~MainGL()
 int MainGL::initGL()
 {
 //	fprintf(stderr, "initGL()\n");
-	reshapeGL(Global::screenW, Global::screenH);
+	reshapeGL(game->screenW, game->screenH);
 
 	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -61,7 +62,7 @@ int MainGL::initGL()
 //	glDisable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
-	if(Global::blend_enable)
+	if(game->blend_enable)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -84,7 +85,7 @@ int MainGL::initGL()
 	glLineWidth(1.0);
 	glClearColor( 0.0, 0.0, 0.0, 1.0 );
 	
-	pngSetViewingGamma(Global::viewGamma);
+	pngSetViewingGamma(game->viewGamma);
 	
 	return 0;
 }
@@ -93,40 +94,40 @@ int MainGL::initGL()
 void MainGL::loadTextures()
 {
 	GLuint	texobj;
-	Global::texFont = txfLoadFont( dataLoc("fonts/space.txf") );
-	if(!Global::texFont)
+	game->texFont = txfLoadFont( dataLoc("fonts/space.txf") );
+	if(!game->texFont)
 	{
 		fprintf(stderr, "\nERROR loading texture font. Check data path and try again.\n\n");
 		exit(1);
 	}
 	glGenTextures(1, &texobj);
-	txfEstablishTexture(Global::texFont, texobj, GL_FALSE);
+	txfEstablishTexture(game->texFont, texobj, GL_FALSE);
 }
 
 //----------------------------------------------------------
 void MainGL::deleteTextures()
 {
-	glDeleteTextures(1, &Global::texFont->texobj);
-	txfUnloadFont(Global::texFont);
-	Global::texFont = 0;
+	glDeleteTextures(1, &game->texFont->texobj);
+	txfUnloadFont(game->texFont);
+	game->texFont = 0;
 }
 
 //----------------------------------------------------------
 void MainGL::drawGL()
 {
-	switch(Global::gameMode)
+	switch(game->gameMode)
 	{
-		case Global::Game:
+		case game->Game:
 			drawGameGL();
 			break;
-		case Global::HeroDead:
+		case game->HeroDead:
 			drawDeadGL();
 			break;
-		case Global::LevelOver:
+		case game->LevelOver:
 			drawSuccessGL();
 			break;
-		case Global::Menu:
-			Global::menu->drawGL();
+		case game->Menu:
+			game->menu->drawGL();
 			break;
 		default:
 			fprintf(stderr, "!!MainGL::drawGL() HUH?\n");
@@ -143,148 +144,148 @@ void MainGL::drawGameGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, Global::zTrans);
+	glTranslatef(0.0, 0.0, game->zTrans);
 //	glTranslatef(0.0, 5.0, -12.0);
 	
-	if(!Global::game_pause)
+	if(!game->game_pause)
 	{
 		//-- Add items to scene
-		Global::itemAdd->putScreenItems();
+		game->itemAdd->putScreenItems();
 		//addItems();
 	
 		//-- Update scene
-		Global::enemyFleet->update();
-		Global::powerUps->update();
-		Global::heroAmmo->updateAmmo();
-		Global::enemyAmmo->updateAmmo();
-		Global::heroAmmo->checkForHits(Global::enemyFleet);
-		if(Global::gameMode == Global::Game)
+		game->enemyFleet->update();
+		game->powerUps->update();
+		game->heroAmmo->updateAmmo();
+		game->enemyAmmo->updateAmmo();
+		game->heroAmmo->checkForHits(game->enemyFleet);
+		if(game->gameMode == game->Game)
 		{
-			Global::enemyAmmo->checkForHits(Global::hero);
-			Global::hero->checkForCollisions(Global::enemyFleet);
-			Global::hero->checkForPowerUps(Global::powerUps);
+			game->enemyAmmo->checkForHits(game->hero);
+			game->hero->checkForCollisions(game->enemyFleet);
+			game->hero->checkForPowerUps(game->powerUps);
 		}
-		Global::explosions->update();
-		Global::audio->update();
+		game->explosions->update();
+		game->audio->update();
 		
-		Global::hero->update();
-		Global::gameFrame++;
+		game->hero->update();
+		game->gameFrame++;
 	}
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	//-- Draw background
-	Global::ground->drawGL();
+	game->ground->drawGL();
 	
 	//-- Draw actors
-	Global::enemyFleet->drawGL();
-	Global::hero->drawGL();
+	game->enemyFleet->drawGL();
+	game->hero->drawGL();
 	
-	if(Global::gfxLevel > 0)
-		Global::statusDisplay->darkenGL();
+	if(game->gfxLevel > 0)
+		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	
-	Global::powerUps->drawGL();
+	game->powerUps->drawGL();
 	
 	//-- Draw ammo
-	Global::heroAmmo->drawGL();
-	Global::enemyAmmo->drawGL();
+	game->heroAmmo->drawGL();
+	game->enemyAmmo->drawGL();
 	
 	//-- Draw explosions
-	Global::explosions->drawGL();
+	game->explosions->drawGL();
 	
 	//-- Draw stats
-	Global::statusDisplay->drawGL(Global::hero);
+	game->statusDisplay->drawGL(game->hero);
 	
 }
 
 //----------------------------------------------------------
 void MainGL::drawDeadGL()
 {
-	Global::heroDeath--;
+	game->heroDeath--;
 	
 	//-- Clear buffers
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//-- Place camera
 	glLoadIdentity();
-	if(Global::heroDeath > 0)
+	if(game->heroDeath > 0)
 	{
-		float z = 1.0*Global::heroDeath/DEATH_TIME;
-		glTranslatef(0.0, 0.0, Global::zTrans-z*z);
+		float z = 1.0*game->heroDeath/DEATH_TIME;
+		glTranslatef(0.0, 0.0, game->zTrans-z*z);
 	}
 	else
-		glTranslatef(0.0, 0.0, Global::zTrans);
+		glTranslatef(0.0, 0.0, game->zTrans);
 	
 	//-- Add items to scene
-	Global::itemAdd->putScreenItems();
+	game->itemAdd->putScreenItems();
 	//-- Update scene
-	Global::explosions->update();
-	Global::powerUps->update();
-	Global::enemyFleet->update();
-	Global::heroAmmo->updateAmmo();
-	Global::enemyAmmo->updateAmmo();
-	Global::heroAmmo->checkForHits(Global::enemyFleet);
-	Global::audio->update();
-	Global::hero->update();
-	Global::gameFrame++;
+	game->explosions->update();
+	game->powerUps->update();
+	game->enemyFleet->update();
+	game->heroAmmo->updateAmmo();
+	game->enemyAmmo->updateAmmo();
+	game->heroAmmo->checkForHits(game->enemyFleet);
+	game->audio->update();
+	game->hero->update();
+	game->gameFrame++;
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-- Draw background
-	Global::ground->drawGL();
+	game->ground->drawGL();
 	//-- Draw actors
-	Global::enemyFleet->drawGL();
+	game->enemyFleet->drawGL();
 	
-	if(Global::gfxLevel > 0)
-		Global::statusDisplay->darkenGL();
+	if(game->gfxLevel > 0)
+		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	Global::powerUps->drawGL();
+	game->powerUps->drawGL();
 	//-- Draw ammo
-	Global::heroAmmo->drawGL();
-	Global::enemyAmmo->drawGL();
+	game->heroAmmo->drawGL();
+	game->enemyAmmo->drawGL();
 	//-- Draw explosions
-	Global::explosions->drawGL();
+	game->explosions->drawGL();
 	//-- Draw stats
-	Global::statusDisplay->drawGL(Global::hero);
+	game->statusDisplay->drawGL(game->hero);
 	
 	char buffer[128];
-	if(Global::checkHiScore() == 1)
+	if(game->checkHiScore() == 1)
 	{
-		sprintf(buffer, "new high score!\n\n%d", (int)Global::hero->getScore());
-		drawTextGL(buffer, Global::heroDeath, 0.15);
+		sprintf(buffer, "new high score!\n\n%d", (int)game->hero->getScore());
+		drawTextGL(buffer, game->heroDeath, 0.15);
 	}
-	else if(Global::checkHiScore() > 1)
+	else if(game->checkHiScore() > 1)
 	{
-		sprintf(buffer, "n o t   b a d !\nrank : %d\n\n%d", Global::checkHiScore(), (int)Global::hero->getScore());
-		drawTextGL(buffer, Global::heroDeath, 0.15);	
+		sprintf(buffer, "n o t   b a d !\nrank : %d\n\n%d", game->checkHiScore(), (int)game->hero->getScore());
+		drawTextGL(buffer, game->heroDeath, 0.15);	
 	}
 	else
 	{
-		drawTextGL("l o s e r", Global::heroDeath, 0.25);
+		drawTextGL("l o s e r", game->heroDeath, 0.25);
 	}
 }
 
 //----------------------------------------------------------
 void MainGL::drawSuccessGL()
 {
-	Global::heroSuccess--;
+	game->heroSuccess--;
 	
-	if(Global::heroSuccess < -500)
+	if(game->heroSuccess < -500)
 	{
-		Global::gotoNextLevel();
-		Global::gameMode = Global::Game;
-		Global::audio->setMusicMode(Audio::MusicGame);
-		Global::audio->setMusicVolume(Global::volMusic);
+		game->gotoNextLevel();
+		game->gameMode = game->Game;
+		game->audio->setMusicMode(Audio::MusicGame);
+		game->audio->setMusicVolume(game->volMusic);
 		return;
 	}
 	
-	float f	= -Global::heroSuccess/450.0;
-	if(Global::heroSuccess < 0)
+	float f	= -game->heroSuccess/450.0;
+	if(game->heroSuccess < 0)
 	{
-		float vol = Global::volMusic - (Global::volMusic*f);
-		Global::audio->setMusicVolume(vol);
+		float vol = game->volMusic - (game->volMusic*f);
+		game->audio->setMusicVolume(vol);
 	}
 	
 	//-- Clear buffers
@@ -292,44 +293,44 @@ void MainGL::drawSuccessGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, Global::zTrans);
+	glTranslatef(0.0, 0.0, game->zTrans);
 	
 	//-- Update scene
-	Global::enemyFleet->update();
-	Global::explosions->update();
-	Global::heroAmmo->updateAmmo();
-	Global::hero->update();
-	Global::audio->update();
+	game->enemyFleet->update();
+	game->explosions->update();
+	game->heroAmmo->updateAmmo();
+	game->hero->update();
+	game->audio->update();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//-- Draw background
-	Global::ground->drawGL();
+	game->ground->drawGL();
 	//-- Draw actors
-	Global::hero->drawGL();
+	game->hero->drawGL();
 	
-	if(Global::gfxLevel > 0)
-		Global::statusDisplay->darkenGL();
+	if(game->gfxLevel > 0)
+		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	//-- Draw ammo
-	Global::heroAmmo->drawGL();
+	game->heroAmmo->drawGL();
 	//-- Draw explosions
-	Global::explosions->drawGL();
+	game->explosions->drawGL();
 	//-- Draw stats
-	Global::statusDisplay->drawGL(Global::hero);
+	game->statusDisplay->drawGL(game->hero);
 		
 	char	buffer[256];
-	sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", Global::gameLevel);
-//	if(Global::hero->getScore() > Global::hiScore[INT_GAME_SKILL_BASE][0])
+	sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
+//	if(game->hero->getScore() > game->hiScore[INT_GAME_SKILL_BASE][0])
 //	{
-//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", Global::gameLevel);
+//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
 //	}
 //	else
 //	{
-//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \nn e w   h i g h   s c o r e : \n %g \n", Global::gameLevel, Global::hero->getScore());
+//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \nn e w   h i g h   s c o r e : \n %g \n", game->gameLevel, game->hero->getScore());
 //	}
 	
-	drawTextGL(buffer, Global::heroSuccess, 0.15);
+	drawTextGL(buffer, game->heroSuccess, 0.15);
 }
 
 //----------------------------------------------------------
@@ -351,7 +352,7 @@ void MainGL::drawTextGL(char *string, float pulse, float scale)
 		aa *= (-pulse/50.0);
 	ca = 1.0-tmp;
 
-	height = 1.5*txfStringHeight(Global::texFont);
+	height = 1.5*txfStringHeight(game->texFont);
 	
 	strncpy(buffer, string, 128);
 	index[0] = buffer;
@@ -375,15 +376,15 @@ void MainGL::drawTextGL(char *string, float pulse, float scale)
 				clr = ((float)i)/5.0;
 				clr = clr;
 				glColor4f(1.0, ca*ca*0.3, ca*0.3, aa*aa);
-				x_sin = 1.75*sin(i+Global::frame*0.06);
-				y_sin = 0.75*sin(i+Global::frame*0.09);
+				x_sin = 1.75*sin(i+game->frame*0.06);
+				y_sin = 0.75*sin(i+game->frame*0.09);
 
 				glPushMatrix();
 				glScalef(scale, scale*0.75, 1.0);
-				width = txfStringLength(Global::texFont, index[l], strlen(index[l]));
+				width = txfStringLength(game->texFont, index[l], strlen(index[l]));
 				glTranslatef(-(width/2.0)-x_sin, y+y_sin, 0.0);
-				txfBindFontTexture(Global::texFont);
-				txfRenderString(Global::texFont, index[l], strlen(index[l]));
+				txfBindFontTexture(game->texFont);
+				txfRenderString(game->texFont, index[l], strlen(index[l]));
 				glPopMatrix();
 
 			}
@@ -394,14 +395,16 @@ void MainGL::drawTextGL(char *string, float pulse, float scale)
 //----------------------------------------------------------
 void MainGL::reshapeGL(int w, int h)
 {
-//	fprintf(stderr, "reshape %d x %d\n", w, h);
-	Global::screenW = w;
-	Global::screenH = h;
-	Global::screenA = (float)w/(float)h;
+	game->screenW = w;
+	game->screenH = h;
+	game->screenA = (float)w/(float)h;
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective( Global::screenFOV, Global::screenA, Global::screenNear, Global::screenFar);
+	gluPerspective( game->screenFOV, 
+					game->screenA, 
+					game->screenNear, 
+					game->screenFar);
 	glMatrixMode(GL_MODELVIEW);
-	glViewport(0, 0, Global::screenW, Global::screenH);
+	glViewport(0, 0, game->screenW, game->screenH);
 }

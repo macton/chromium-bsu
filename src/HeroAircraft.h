@@ -15,6 +15,7 @@
 
 #include "define.h"
 
+class Global;
 class EnemyFleet;
 class PowerUps;
 
@@ -125,6 +126,9 @@ private:
 	//-- tip variables
 	int tipShipPast;
 	int tipSuperShield;
+
+private:
+	Global *game;
 };
 
 #endif // HeroAircraft_h

@@ -7,9 +7,12 @@
  */
 #include "Ground.h"
 
+#include "Global.h"
+
 //==============================================================================
 Ground::Ground()
 {
+	game = Global::getInstance();
 }
 
 Ground::~Ground()

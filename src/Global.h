@@ -15,6 +15,8 @@
 #include "TexFont.h"
 #include "MainToolkit.h"
 
+#include "GlobalStuff.h"
+
 class HeroAircraft;
 class HeroAmmo;
 class EnemyFleet;
@@ -34,43 +36,52 @@ class Global
 public:
 	enum GameMode { Game, Menu, LevelOver, HeroDead };
 	
-	static bool		readConfigFile();
-	static bool		saveConfigFile();
-	static bool		readHiScoreFile();
-	static bool		saveHiScoreFile();
+	~Global();
 	
-	static void		newGame();
-	static void		gotoNextLevel();
+	static Global	*init();
+	static Global	*getInstance();
+	static void		destroy();
 	
-	static void		setScreenSize(int m);
+	bool		readConfigFile();
+	bool		saveConfigFile();
+	bool		readHiScoreFile();
+	bool		saveHiScoreFile();
+	
+	void		newGame();
+	void		gotoNextLevel();
+	
+	void		setScreenSize(int m);
 
-	static void		generateRandom(bool r = true);
+	static void	generateRandom(bool r = true);
 	
-	static void		createGame();
-	static void		deleteGame();
+	void		createGame();
+	void		deleteGame();
 	
-	static void		deleteTextures();
-	static void		loadTextures();
+	void		deleteTextures();
+	void		loadTextures();
 	
-	static int		setHiScore();
-	static int		checkHiScore();
-	static void		printHiScore();
+	int			setHiScore();
+	int			checkHiScore();
+	void		printHiScore();
 
-	static char		configFileName[128];
+	static char	configFileName[128];
 	
 	static MainToolkit *toolkit;
 	
-	static int		screenW;
-	static int		screenH;
-	static float	screenA;
-	static float	screenFOV;
-	static float	screenNear;
-	static float	screenFar;
-	static bool		full_screen;
-	static int		screenSize;
-	static float	screenBound[2];
-	static float	zTrans;
-	static bool		blend_enable;
+	int 	 screenW;
+	int 	 screenH;
+	float	 screenA;
+	float	 screenFOV;
+	float	 screenNear;
+	float	 screenFar;
+	bool	 full_screen;
+	int 	 screenSize;
+	float	 screenBound[2];
+	float	 zTrans;
+	bool	 blend_enable;
+	
+	static float 	mouseSpeed;
+	static bool 	mouseActive;
 	
 	static TexFont	*texFont;
 
@@ -88,20 +99,16 @@ public:
 	
 	static float	scrollSpeed;
 	
-	static float 	mouseSpeed;
-	static bool 	mouseActive;
+	bool	 audio_enabled;
+	bool	 swap_stereo;
+	bool	 auto_speed;
+	bool	 show_fps;
+	bool	 true_color;
+	bool	 use_playList;
+	bool	 use_cdrom;
 	
-	static bool		has_multitex;
-	static bool		audio_enabled;
-	static bool		swap_stereo;
-	static bool		auto_speed;
-	static bool		show_fps;
-	static bool		true_color;
-	static bool		use_playList;
-	static bool		use_cdrom;
-	
-	static bool		game_pause;
-	static bool		game_quit;
+	bool	 game_pause;
+	bool	 game_quit;
 	
 	static float	volSound;
 	static float	volMusic;
@@ -140,6 +147,11 @@ public:
 	
 	static int tipShipPast;
 	static int tipSuperShield;
+
+private:
+	static Global	*instance;
+	
+	Global();
 };
 
 #endif // Global_h

@@ -13,6 +13,8 @@
 
 #include "MainToolkit.h"
 
+class Global;
+
 //====================================================================
 class MainSDL : public MainToolkit
 {

@@ -11,6 +11,7 @@
 #include "ScreenItem.h"
 
 class ActiveAmmo;
+class Global;
 
 enum EnemyType{	EnemyStraight, EnemyOmni, 
 				EnemyRayGun, EnemyTank,
@@ -66,6 +67,9 @@ private:
 	float	speedAdj;
 	
 	ScreenItem	*target;
+
+private:
+	Global	*game;
 };
 
 #endif //EnemyAircraft_h

@@ -37,6 +37,8 @@ static char mssgHelpText[NumMssg][128] = {
 //====================================================================
 MenuGL::MenuGL()
 {
+	game = Global::getInstance();
+	
 	curSel = NewGame;
 
 	elecStretch = 10.0;
@@ -189,6 +191,7 @@ void MenuGL::keyHit(MainToolkit::Key key)
 //----------------------------------------------------------
 void MenuGL::drawGL()
 {
+	Global	*game = game->getInstance();
 	int		i;
 		
 	if(--textCount < 0)
@@ -207,17 +210,17 @@ void MenuGL::drawGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, Global::zTrans);
+	glTranslatef(0.0, 0.0, game->zTrans);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	glColor4f(1.0, 1.0, 1.0, 1.0);
 	
 	//-- Draw background
-	Global::ground->drawGL();
+	game->ground->drawGL();
 	
 	//-- Update audio
-	Global::audio->update();
+	game->audio->update();
 	
 	//-- move menu down for title
 	glTranslatef(0.0, -3.0, 0.0);
@@ -271,7 +274,7 @@ void MenuGL::drawGL()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		drawElectric();
 		glPopMatrix();
-		txfBindFontTexture(Global::texFont);
+		txfBindFontTexture(game->texFont);
 		glColor4f(1.0, 1.0, 1.0, 0.9);
 		float sc = 0.035;
 		for(i = 0; i < NumSelections; i++)
@@ -280,19 +283,19 @@ void MenuGL::drawGL()
 			glTranslatef(left, top+(inc*i), 10.0);
 			glRotatef(textAngle, 1.0, 0.0, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			txfRenderString(Global::texFont, menuText[i], strlen(menuText[i]));
+			txfRenderString(game->texFont, menuText[i], strlen(menuText[i]));
 			glPopMatrix();
 		}
 		
 		{
-			float f = (float)-Global::frame;
+			float f = (float)-game->frame;
 			float r = cos(f*0.02);
 			glPushMatrix();
 //			glColor4f(1.0+r, r, r, 0.6+0.2*r);
 			glColor4f(1.0, 1.0, 1.0, 0.6+0.2*r);
 			glTranslatef(-18.75, -5.5, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			txfRenderString(Global::texFont, "high scores", 11);
+			txfRenderString(game->texFont, "high scores", 11);
 			glTranslatef(-100.0, -30.0, 0.0);
 			char buf[16];
 			int i,len;
@@ -303,11 +306,11 @@ void MenuGL::drawGL()
 			time_t mostRecent = 0;
 			for(i = 0; i < HI_SCORE_HIST; i++)
 			{
-				if(	Global::hiScoreDate[l][i] > nowTime-1000 &&
-					Global::hiScoreDate[l][i] >	mostRecent )
+				if(	game->hiScoreDate[l][i] > nowTime-1000 &&
+					game->hiScoreDate[l][i] >	mostRecent )
 				{
 					recentHiScore = i;
-					mostRecent = Global::hiScoreDate[l][i];
+					mostRecent = game->hiScoreDate[l][i];
 				}
 			}
 			for(i = 0; i < HI_SCORE_HIST; i++)
@@ -319,11 +322,11 @@ void MenuGL::drawGL()
 				else
 					glColor4f(1.0, 1.0, 1.0, 0.2+0.2*r);
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
-				sprintf(buf, "%d", (int)Global::hiScore[INT_GAME_SKILL_BASE][i]);
+				sprintf(buf, "%d", (int)game->hiScore[INT_GAME_SKILL_BASE][i]);
 				len = strlen(buf);
-				trans = txfStringLength(Global::texFont, buf, len);
+				trans = txfStringLength(game->texFont, buf, len);
 				glTranslatef( 80-trans, 0.0, 0.0);
-				txfRenderString(Global::texFont, buf, len);
+				txfRenderString(game->texFont, buf, len);
 				glTranslatef(-80, -30.0, 0.0);
 			}
 			glPopMatrix();
@@ -350,19 +353,19 @@ void MenuGL::drawGL()
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
 			else		n = 3;
-			txfRenderString(Global::texFont, "the", n);
-			glTranslatef(c-txfStringLength(Global::texFont, "the", n), -38+c, 0.0);
+			txfRenderString(game->texFont, "the", n);
+			glTranslatef(c-txfStringLength(game->texFont, "the", n), -38+c, 0.0);
 			if(c < 10)	n = (int)(c-3);
 			else		n = 7;
-			txfRenderString(Global::texFont, "reptile", n);
-			glTranslatef(c-txfStringLength(Global::texFont, "reptile", n), -38+c, 0.0);
+			txfRenderString(game->texFont, "reptile", n);
+			glTranslatef(c-txfStringLength(game->texFont, "reptile", n), -38+c, 0.0);
 			if(c < 16)	n = (int)c-10;
 			else		n = 6;
-			txfRenderString(Global::texFont, "labour", n);
-			glTranslatef(c-txfStringLength(Global::texFont, "labour", n), -38+c, 0.0);
+			txfRenderString(game->texFont, "labour", n);
+			glTranslatef(c-txfStringLength(game->texFont, "labour", n), -38+c, 0.0);
 			if(c < 23)	n = (int)(c-16);
 			else		n = 7;
-			txfRenderString(Global::texFont, "project", n);
+			txfRenderString(game->texFont, "project", n);
 			// font height is 23
 			glPopMatrix();
 		}
@@ -380,7 +383,7 @@ void MenuGL::drawGL()
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
 			if(ti > strlen(mssgText))
 				ti = strlen(mssgText);
-			txfRenderString(Global::texFont, mssgText, ti);
+			txfRenderString(game->texFont, mssgText, ti);
 			mssgAlpha -= 0.004;
 			glColor4f(1.0, 1.0, 1.0, 1.0);
 		}
@@ -400,12 +403,12 @@ void MenuGL::drawGL()
 	drawTitle();
 	glPopMatrix();
 	
-	if(thickText && Global::fps < 30)
+	if(thickText && game->fps < 30)
 	{
 		//fprintf(stderr, "ATTENTION: Using 'thin' text to improve framerate...\n");
 		createLists( (thickText = false) );	
 	}
-	if(!thickText && Global::fps > 40)
+	if(!thickText && game->fps > 40)
 	{
 		//fprintf(stderr, "ATTENTION: Reverting to 'thick' text...\n");
 		createLists( (thickText = true) );	
@@ -435,6 +438,7 @@ void MenuGL::drawGL()
 //----------------------------------------------------------
 void MenuGL::drawIndicator()
 {
+	Global	*game = game->getInstance();
 	char	buf[32];
 	float	szx = 10.0;
 	float	szy = txtHeight;
@@ -444,17 +448,17 @@ void MenuGL::drawIndicator()
 	switch(curSel)
 	{
 		case GameLevel: 
-			level = Global::gameLevel/9.0;
-			sprintf(buf, "%d", Global::gameLevel);	 
+			level = game->gameLevel/9.0;
+			sprintf(buf, "%d", game->gameLevel);	 
 			break;
 		case SkillLevel: 
-			level = Global::gameSkillBase;
+			level = game->gameSkillBase;
 			tmp = (int)((level+0.05)*10.0);
 			sprintf(buf, skillString(tmp));
 			break;
 		case Graphics: 
-			level = Global::gfxLevel/2.0;
-			switch(Global::gfxLevel)
+			level = game->gfxLevel/2.0;
+			switch(game->gfxLevel)
 			{
 				case 0: sprintf(buf, "low"); break;
 				case 1: sprintf(buf, "med"); break;
@@ -462,8 +466,8 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case ScreenSize: 
-			level = (float)Global::screenSize/(float)MAX_SCREEN_SIZE; 
-			switch(Global::screenSize)
+			level = (float)game->screenSize/(float)MAX_SCREEN_SIZE; 
+			switch(game->screenSize)
 			{
 				case 0: sprintf(buf, "512x384"); break;
 				case 1: sprintf(buf, "640x480"); break;
@@ -473,20 +477,20 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case FullScreen: 
-			level = (float)Global::full_screen; 
-			if(Global::full_screen) sprintf(buf, "true");
+			level = (float)game->full_screen; 
+			if(game->full_screen) sprintf(buf, "true");
 			else sprintf(buf, "false");
 			break;
 		case Sound: 
-			level = Global::volSound; 
+			level = game->volSound; 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case Music: 
-			level = Global::volMusic; 
+			level = game->volMusic; 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case MouseSpeed: 
-			level = Global::mouseSpeed*10.0; 
+			level = game->mouseSpeed*10.0; 
 			sprintf(buf, "%d", (int)((level+0.005)*100.0));	 
 			break;
 		default: 
@@ -517,8 +521,8 @@ void MenuGL::drawIndicator()
 			glColor4f(1.0, 1.0, 1.0, 0.5);
 			glTranslatef(11.0, 0.0, 0.0);
 			glScalef(sc, sc, 1.0);
-			txfBindFontTexture(Global::texFont);
-			txfRenderString(Global::texFont, buf, strlen(buf));
+			txfBindFontTexture(game->texFont);
+			txfRenderString(game->texFont, buf, strlen(buf));
 		}
 	glPopMatrix();
 	
@@ -705,13 +709,14 @@ void MenuGL::drawTitle()
 //----------------------------------------------------------
 void MenuGL::activateItem()
 {
+	Global *game = game->getInstance();
 	switch(curSel)
 	{
 		case NewGame:
-			Global::gameMode = Global::Game;
-			Global::newGame();
-			Global::toolkit->grabMouse(true);
-			Global::audio->setMusicMode(Audio::MusicGame);
+			game->gameMode = game->Game;
+			game->newGame();
+			game->toolkit->grabMouse(true);
+			game->audio->setMusicMode(Audio::MusicGame);
 			break;
 		case SkillLevel:
 			break;
@@ -722,22 +727,22 @@ void MenuGL::activateItem()
 		case ScreenSize:
 			break;
 		case FullScreen:
-			Global::full_screen = !Global::full_screen;
-			Global::deleteTextures();
-			Global::toolkit->setVideoMode();
-			Global::loadTextures();
+			game->full_screen = !game->full_screen;
+			game->deleteTextures();
+			game->toolkit->setVideoMode();
+			game->loadTextures();
 			break;
 		case Sound:
 			break;
 		case Music:
 			break;
 		case MouseSpeed:
-			Global::gameMode = Global::Game;
-			Global::toolkit->grabMouse(true);
-			Global::audio->setMusicMode(Audio::MusicGame);
+			game->gameMode = game->Game;
+			game->toolkit->grabMouse(true);
+			game->audio->setMusicMode(Audio::MusicGame);
 			break;
 		case Quit:
-			Global::game_quit = true;
+			game->game_quit = true;
 			break;
 		case NumSelections:
 			break;
@@ -753,63 +758,63 @@ void MenuGL::incItem()
 		case NewGame:
 			break;
 		case SkillLevel:
-			Global::gameSkillBase += 0.1;
-			if(Global::gameSkillBase > 0.9) 
-				Global::gameSkillBase = 0.9;
-			Global::printHiScore();
-			Global::newGame();
+			game->gameSkillBase += 0.1;
+			if(game->gameSkillBase > 0.9) 
+				game->gameSkillBase = 0.9;
+			game->printHiScore();
+			game->newGame();
 			break;
 		case GameLevel:
-			Global::gameLevel++;
-			if(Global::gameLevel > Global::maxLevel) 
+			game->gameLevel++;
+			if(game->gameLevel > game->maxLevel) 
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
-				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", Global::maxLevel, Global::gameLevel);
-				Global::gameLevel = Global::maxLevel;
+				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", game->maxLevel, game->gameLevel);
+				game->gameLevel = game->maxLevel;
 			}
 			else
-				Global::newGame();
+				game->newGame();
 			break;
 		case Graphics:
-			Global::gfxLevel++;
-				if(Global::gfxLevel > 2)
-					Global::gfxLevel = 2;
+			game->gfxLevel++;
+				if(game->gfxLevel > 2)
+					game->gfxLevel = 2;
 			break;
 		case ScreenSize:
-			Global::screenSize++;
-			if(Global::screenSize > MAX_SCREEN_SIZE)
-				Global::screenSize = MAX_SCREEN_SIZE;
+			game->screenSize++;
+			if(game->screenSize > MAX_SCREEN_SIZE)
+				game->screenSize = MAX_SCREEN_SIZE;
 			else
 			{
-				Global::deleteTextures();
-				Global::toolkit->setVideoMode();
-				Global::loadTextures();
+				game->deleteTextures();
+				game->toolkit->setVideoMode();
+				game->loadTextures();
 			}
 			break;
 		case FullScreen:
-			Global::full_screen = true;
-			Global::deleteTextures();
-			Global::toolkit->setVideoMode();
-			Global::loadTextures();
+			game->full_screen = true;
+			game->deleteTextures();
+			game->toolkit->setVideoMode();
+			game->loadTextures();
 			break;
 		case Sound:
-			Global::volSound += 0.05;
-			if(Global::volSound > 1.0)
-				Global::volSound = 1.0;
-			Global::audio->setSoundVolume(Global::volSound);
-			Global::audio->playSound(Audio::Explosion, pos);
+			game->volSound += 0.05;
+			if(game->volSound > 1.0)
+				game->volSound = 1.0;
+			game->audio->setSoundVolume(game->volSound);
+			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			Global::volMusic += 0.05;
-			if(Global::volMusic > 1.0)
-				Global::volMusic = 1.0;
-			Global::audio->setMusicVolume(Global::volMusic);
+			game->volMusic += 0.05;
+			if(game->volMusic > 1.0)
+				game->volMusic = 1.0;
+			game->audio->setMusicVolume(game->volMusic);
 			break;
 		case MouseSpeed:
-			Global::mouseSpeed += 0.005;
-			if(Global::mouseSpeed >= 0.1)
-				Global::mouseSpeed = 0.1;
+			game->mouseSpeed += 0.005;
+			if(game->mouseSpeed >= 0.1)
+				game->mouseSpeed = 0.1;
 			break;
 		case Quit:
 			break;
@@ -827,57 +832,57 @@ void MenuGL::decItem()
 		case NewGame:
 			break;
 		case SkillLevel:
-			Global::gameSkillBase -= 0.1;
-			if(Global::gameSkillBase < 0.2) 
-				Global::gameSkillBase = 0.2;
-			Global::printHiScore();
-			Global::newGame();
+			game->gameSkillBase -= 0.1;
+			if(game->gameSkillBase < 0.2) 
+				game->gameSkillBase = 0.2;
+			game->printHiScore();
+			game->newGame();
 			break;
 		case GameLevel:
-			Global::gameLevel -= 1;
-			if(Global::gameLevel < 1) 
-				Global::gameLevel = 1;
-			Global::newGame();
+			game->gameLevel -= 1;
+			if(game->gameLevel < 1) 
+				game->gameLevel = 1;
+			game->newGame();
 			break;
 		case Graphics:
-			Global::gfxLevel--;
-			if(Global::gfxLevel < 0)
-				Global::gfxLevel = 0;
+			game->gfxLevel--;
+			if(game->gfxLevel < 0)
+				game->gfxLevel = 0;
 			break;
 		case ScreenSize:
-			Global::screenSize--;
-			if(Global::screenSize < 0)
-				Global::screenSize = 0;
+			game->screenSize--;
+			if(game->screenSize < 0)
+				game->screenSize = 0;
 			else
 			{
-				Global::deleteTextures();
-				Global::toolkit->setVideoMode();
-				Global::loadTextures();
+				game->deleteTextures();
+				game->toolkit->setVideoMode();
+				game->loadTextures();
 			}
 			break;
 		case FullScreen:
-			Global::full_screen = false;
-			Global::deleteTextures();
-			Global::toolkit->setVideoMode();
-			Global::loadTextures();
+			game->full_screen = false;
+			game->deleteTextures();
+			game->toolkit->setVideoMode();
+			game->loadTextures();
 			break;
 		case Sound:
-			Global::volSound -= 0.05;
-			if(Global::volSound < 0.0)
-				Global::volSound = 0.0;
-			Global::audio->setSoundVolume(Global::volSound);
-			Global::audio->playSound(Audio::Explosion, pos);
+			game->volSound -= 0.05;
+			if(game->volSound < 0.0)
+				game->volSound = 0.0;
+			game->audio->setSoundVolume(game->volSound);
+			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			Global::volMusic -= 0.05;
-			if(Global::volMusic < 0.0)
-				Global::volMusic = 0.0;
-			Global::audio->setMusicVolume(Global::volMusic);
+			game->volMusic -= 0.05;
+			if(game->volMusic < 0.0)
+				game->volMusic = 0.0;
+			game->audio->setMusicVolume(game->volMusic);
 			break;
 		case MouseSpeed:
-			Global::mouseSpeed -= 0.005;
-			if(Global::mouseSpeed <= 0.01)
-				Global::mouseSpeed = 0.01;
+			game->mouseSpeed -= 0.005;
+			if(game->mouseSpeed <= 0.01)
+				game->mouseSpeed = 0.01;
 			break;
 		case Quit:
 			break;

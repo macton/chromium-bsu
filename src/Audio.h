@@ -14,6 +14,7 @@
 #define MAX_MUSIC 32
 
 class SoundInfo;
+class Global;
 
 #ifdef USE_SDL
 #include <SDL.h> // for CDROM
@@ -30,6 +31,7 @@ class SoundInfo;
 	void	SDL_CDStop(void*);
 	int		SDL_CDStatus(void*);
 #endif //USE_SDL
+
 
 /**
  * Base class upon which all audio calls are made. If USE_SDL is defined, 
@@ -75,6 +77,9 @@ protected:
 	char	musicFile[MAX_MUSIC][256];	/**< array of filenames for playlist */
 	int		musicMax;					/**< max number of user-defined songs (CD or playlist) */
 	int		musicIndex; 				/**< current track ( 0 < musicIndex < musicMax ) */
+
+protected:
+	Global	*game;
 };
 
 /**

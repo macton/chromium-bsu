@@ -11,6 +11,7 @@
 #include "ScreenItem.h"
 #include "EnemyAircraft.h"
 
+class Global;
 class ItemThing;
 class EnemyWave;
 
@@ -51,6 +52,9 @@ private:
 	ItemThing *root;
 	
 	EnemyAircraft	*deadPool[NumEnemyTypes];
+
+private:
+	Global *game;
 };
 
 //------------------

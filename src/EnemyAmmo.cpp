@@ -26,6 +26,7 @@
 //====================================================================
 EnemyAmmo::EnemyAmmo()
 {
+	game = Global::getInstance();
 	int i;
 	
 	//-- initialize everything to sane values...
@@ -162,9 +163,9 @@ void EnemyAmmo::addAmmo(int type, float pos[3], float vel[3])
 	if(type >= 0 && type < NUM_ENEMY_AMMO_TYPES)
 	{
 		float v[3] = { 
-			vel[0]*Global::speedAdj,
-			vel[1]*Global::speedAdj,
-			vel[2]*Global::speedAdj, };
+			vel[0]*game->speedAdj,
+			vel[1]*game->speedAdj,
+			vel[2]*game->speedAdj, };
 		newAmmo = getNewAmmo();
 		newAmmo->init(pos, v, ammoDamage[type]);
 		newAmmo->back = ammoRoot[type];
@@ -183,6 +184,7 @@ void EnemyAmmo::updateAmmo()
 {
 	int i;
 	ActiveAmmo *thisAmmo;
+	Global	*game = game->getInstance();
 	
 	for(i = 0; i < NUM_ENEMY_AMMO_TYPES; i++)
 	{
@@ -190,10 +192,10 @@ void EnemyAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(	thisAmmo->pos[0] >  Global::screenBound[0] ||
-				thisAmmo->pos[0] < -Global::screenBound[0] ||
-				thisAmmo->pos[1] >  Global::screenBound[1] ||
-				thisAmmo->pos[1] < -Global::screenBound[1] ) // remove ammo
+			if(	thisAmmo->pos[0] >  game->screenBound[0] ||
+				thisAmmo->pos[0] < -game->screenBound[0] ||
+				thisAmmo->pos[1] >  game->screenBound[1] ||
+				thisAmmo->pos[1] < -game->screenBound[1] ) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;
@@ -242,9 +244,9 @@ void EnemyAmmo::checkForHits(HeroAircraft *hero)
 //				hero->doDamage(ammoDamage[i]);
 				hero->ammoDamage(ammoDamage[i], thisAmmo->vel);
 				//add explosion
-				explo = Global::explosions->addExplo((Explosions::ExploType)(Explosions::EnemyAmmo00+i), thisAmmo->pos);
+				explo = game->explosions->addExplo((Explosions::ExploType)(Explosions::EnemyAmmo00+i), thisAmmo->pos);
 				if(i > 1)	// add second explosion for the bug guns...		
-					explo = Global::explosions->addExplo((Explosions::ExploType)(Explosions::EnemyAmmo00+i), thisAmmo->pos, -5);
+					explo = game->explosions->addExplo((Explosions::ExploType)(Explosions::EnemyAmmo00+i), thisAmmo->pos, -5);
 				else
 					if(explo) 
 						explo->vel[1] = -0.1;

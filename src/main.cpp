@@ -41,19 +41,18 @@ int main(int argc, char **argv)
 	// set however, use default value.
 	setenv("SDL_VIDEO_X11_DGAMOUSE", "0", false);
 #endif
-
-	Global::readConfigFile();
-	Global::readHiScoreFile();
+	
+	Global *game = Global::init();
 
 	for ( i=1; i < argc; i++ )
 	{
 		if ( strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--fullscreen") == 0 )
 		{
-			Global::full_screen = true;
+			game->full_screen = true;
 		}
 		else if ( strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--window") == 0 )
 		{
-			Global::full_screen = false;
+			game->full_screen = false;
 		}
 		else if ( strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "--vidmode") == 0 )
 		{
@@ -66,15 +65,15 @@ int main(int argc, char **argv)
 					i++;
 				}
 			}
-			Global::screenSize = vm;
+			game->screenSize = vm;
 		}
 		else if( strcmp(argv[i], "-na") == 0 || strcmp(argv[i], "--noaudio") == 0)
 		{
-			Global::audio_enabled = false;
+			game->audio_enabled = false;
 		}
 		else if( strcmp(argv[i], "-nb") == 0 || strcmp(argv[i], "--noblend") == 0)
 		{
-			Global::blend_enable = false;
+			game->blend_enable = false;
 		}
 		else
 		{
@@ -122,21 +121,21 @@ int main(int argc, char **argv)
 
 	srand(time(NULL));
 	
-	Global::generateRandom();
+	game->generateRandom();
 	
 #ifdef USE_SDL
-	Global::toolkit = new MainSDL(argc, argv);
+	game->toolkit = new MainSDL(argc, argv);
 #elif USE_GLUT
-	Global::toolkit = new MainGLUT(argc, argv);
+	game->toolkit = new MainGLUT(argc, argv);
 #else
 #error "USE_SDL or USE_GLUT must be defined"
 #endif
 		
-	Global::printHiScore();
-	Global::toolkit->run();
+	game->printHiScore();
+	game->toolkit->run();
 
-	Global::saveConfigFile();
-	Global::saveHiScoreFile();
+	game->saveConfigFile();
+	game->saveHiScoreFile();
 
 	fprintf(stderr, "done.\n");
 	fprintf(stderr, " \n");

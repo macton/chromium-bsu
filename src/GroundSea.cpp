@@ -66,7 +66,7 @@ void GroundSea::drawGL()
 	seg = rootSeg->next;
 	while(seg)
 	{
-		seg->pos[1] += Global::scrollSpeed;
+		seg->pos[1] += game->scrollSpeed;
 		seg = seg->next;
 	}
 
@@ -76,7 +76,7 @@ void GroundSea::drawGL()
 	{
 		seg->drawGL();
 		
-		seg->pos[1] += Global::scrollSpeed;
+		seg->pos[1] += game->scrollSpeed;
 		if(seg->pos[1] < -s2)
 		{
 			seg->back->next = 0;

@@ -30,6 +30,8 @@
 HeroAircraft::HeroAircraft()
 	: ScreenItem(ItemHero)
 {
+	game = Global::getInstance();
+	
 	size[0] = 0.7;
 	size[1] = 0.85;
 	
@@ -131,17 +133,17 @@ void HeroAircraft::fullHealth()
 	float v0[3] = { 0.0, 0.08, 0.0 };
 	float clr[4] = { 1.0, 1.0, 1.0, 1.0 };
 	p0[0] = -10.4;
-	Global::explosions->addElectric(p0, v0, clr,  0);
-	Global::explosions->addElectric(p0, v0, clr,  0);
-	Global::explosions->addElectric(p0, v0, clr, -1);
-	Global::explosions->addElectric(p0, v0, clr, -3);
-	Global::explosions->addElectric(p0, v0, clr, -4);
+	game->explosions->addElectric(p0, v0, clr,  0);
+	game->explosions->addElectric(p0, v0, clr,  0);
+	game->explosions->addElectric(p0, v0, clr, -1);
+	game->explosions->addElectric(p0, v0, clr, -3);
+	game->explosions->addElectric(p0, v0, clr, -4);
 	p0[0] = 10.4;
-	Global::explosions->addElectric(p0, v0, clr,  0);
-	Global::explosions->addElectric(p0, v0, clr,  0);
-	Global::explosions->addElectric(p0, v0, clr, -1);
-	Global::explosions->addElectric(p0, v0, clr, -3);
-	Global::explosions->addElectric(p0, v0, clr, -4);
+	game->explosions->addElectric(p0, v0, clr,  0);
+	game->explosions->addElectric(p0, v0, clr,  0);
+	game->explosions->addElectric(p0, v0, clr, -1);
+	game->explosions->addElectric(p0, v0, clr, -3);
+	game->explosions->addElectric(p0, v0, clr, -4);
 	
 	secondaryMove[0] = secondaryMove[1] = 0.0;
 	
@@ -152,7 +154,7 @@ void HeroAircraft::fullHealth()
 //----------------------------------------------------------
 void HeroAircraft::addScore(float in)
 {
-	if(Global::gameMode != Global::HeroDead)
+	if(game->gameMode != game->HeroDead)
 		score += in;
 }
 
@@ -160,21 +162,21 @@ void HeroAircraft::addScore(float in)
 void HeroAircraft::addLife(bool score)
 {
 	float	p[3] = { 10.2, 0.0, 25.0 };
-	p[1] = 7.4-lives*Global::hero->size[1];
-	Global::audio->playSound(Audio::AddLife, p);
-	Global::explosions->addExplo(Explosions::AddLife, p);
-	Global::explosions->addExplo(Explosions::AddLife, p, -10);
-	Global::explosions->addExplo(Explosions::AddLife, p, -13);
+	p[1] = 7.4-lives*game->hero->size[1];
+	game->audio->playSound(Audio::AddLife, p);
+	game->explosions->addExplo(Explosions::AddLife, p);
+	game->explosions->addExplo(Explosions::AddLife, p, -10);
+	game->explosions->addExplo(Explosions::AddLife, p, -13);
 	if(score)
 	{
 		p[0] = -7.9;
 		p[1] = -8.0;
-		Global::audio->playSound(Audio::AddLife, p);
-		Global::explosions->addExplo(Explosions::PowerBurst, p);
-		Global::explosions->addExplo(Explosions::ScoreLife, p,  0);
-		Global::explosions->addExplo(Explosions::ScoreLife, p, -3);
-		Global::explosions->addExplo(Explosions::ScoreLife, p, -9);
-		Global::explosions->addExplo(Explosions::ScoreLife, p, -15);
+		game->audio->playSound(Audio::AddLife, p);
+		game->explosions->addExplo(Explosions::PowerBurst, p);
+		game->explosions->addExplo(Explosions::ScoreLife, p,  0);
+		game->explosions->addExplo(Explosions::ScoreLife, p, -3);
+		game->explosions->addExplo(Explosions::ScoreLife, p, -9);
+		game->explosions->addExplo(Explosions::ScoreLife, p, -15);
 	}
 	if(lives < 9)
 		lives++;
@@ -188,16 +190,16 @@ void HeroAircraft::loseLife()
 	float	p[3] = { 10.2, 0.0, 25.0 };
 	//-- this has to be in sync w/ StatusDisplay positions...
 	lives--;
-		p[1] = 7.4-lives*Global::hero->size[1];
-		Global::audio->playSound(Audio::LoseLife, p);
+		p[1] = 7.4-lives*game->hero->size[1];
+		game->audio->playSound(Audio::LoseLife, p);
 	if(lives > -2)
 	{
-		Global::explosions->addExplo(Explosions::LoseLife, p,   0, 1.5);
-		Global::explosions->addExplo(Explosions::LoseLife, p, -10, 1.5);
-		Global::explosions->addExplo(Explosions::LoseLife, p, -13, 1.5);
-		Global::explosions->addExplo(Explosions::PowerBurst, p);
+		game->explosions->addExplo(Explosions::LoseLife, p,   0, 1.5);
+		game->explosions->addExplo(Explosions::LoseLife, p, -10, 1.5);
+		game->explosions->addExplo(Explosions::LoseLife, p, -13, 1.5);
+		game->explosions->addExplo(Explosions::PowerBurst, p);
 	}
-	if(lives < 0 && Global::gameMode != Global::HeroDead)
+	if(lives < 0 && game->gameMode != game->HeroDead)
 	{
 		damage = 0;
 		shields = 0;
@@ -234,7 +236,7 @@ void HeroAircraft::useItem(int index)
 //----------------------------------------------------------
 void HeroAircraft::useItem()
 {
-	if(Global::gameMode == Global::Game && !superBomb && !Global::game_pause)
+	if(game->gameMode == game->Game && !superBomb && !game->game_pause)
 	{
 		if(!useItemArmed)
 		{
@@ -251,14 +253,14 @@ void HeroAircraft::useItem()
 				case 0: // self destruct
 					for(i = 0; i < NUM_HERO_AMMO_TYPES; i++)
 					{
-						//eject all ammo - return remaining ammo to Global::powerUps
+						//eject all ammo - return remaining ammo to game->powerUps
 						if(ammoStock[i] > 1.0)
 						{
 							v[0] = SRAND*0.15;
 							v[1] = 0.1+FRAND*0.1;
 							pwrUp = new PowerUp( (PowerUps::Type)(i+(int)PowerUps::HeroAmmo00), 
 								pos, (ammoStock[i]/AMMO_REFILL), v);
-							Global::powerUps->addPowerUp(pwrUp);
+							game->powerUps->addPowerUp(pwrUp);
 						}
 					}
 					damage = 0.0;
@@ -278,10 +280,11 @@ void HeroAircraft::useItem()
 //----------------------------------------------------------
 void HeroAircraft::moveEvent(int x, int y)
 {
-	if(Global::gameMode != Global::HeroDead && !Global::game_pause)
+	if(game->gameMode != game->HeroDead && !game->game_pause)
 	{
-		pos[0] +=  x*Global::mouseSpeed;
-		pos[1] += -y*Global::mouseSpeed;
+		Global *game = game->getInstance();
+		pos[0] +=  x*game->mouseSpeed;
+		pos[1] += -y*game->mouseSpeed;
 		if		(pos[0] < bound[0][0])	pos[0] = bound[0][0];
 		else if	(pos[0] > bound[0][1])	pos[0] = bound[0][1];
 		if		(pos[1] < bound[1][0])	pos[1] = bound[1][0];
@@ -314,8 +317,8 @@ void HeroAircraft::doDamage(float d)
 	if(shields > HERO_SHIELDS)
 	{
 		shields	-= d*0.25;
-		Global::explosions->addExplo(Explosions::HeroShields, pos);
-		Global::statusDisplay->setShieldAlpha(1.0);
+		game->explosions->addExplo(Explosions::HeroShields, pos);
+		game->statusDisplay->setShieldAlpha(1.0);
 	}
 	else if(shields > 0.0)
 	{
@@ -323,14 +326,14 @@ void HeroAircraft::doDamage(float d)
 		damage	+= d*0.2;
 		if(shields < 0.0)
 			shields = 0.0;
-		Global::explosions->addExplo(Explosions::HeroShields, pos);
-		Global::statusDisplay->setShieldAlpha(1.0);
-		Global::statusDisplay->setDamageAlpha(1.0);
+		game->explosions->addExplo(Explosions::HeroShields, pos);
+		game->statusDisplay->setShieldAlpha(1.0);
+		game->statusDisplay->setDamageAlpha(1.0);
 	}
 	else
 	{
 		damage += d;
-		Global::statusDisplay->setDamageAlpha(1.0);
+		game->statusDisplay->setDamageAlpha(1.0);
 	}
 
 	if(damage > 0.0)
@@ -346,7 +349,7 @@ void HeroAircraft::fireGun(bool status)
 {
 	if(dontShow)
 		return;
-	if(status && Global::gameMode != Global::HeroDead)
+	if(status && game->gameMode != game->HeroDead)
 	{
 		gunTrigger = true;
 		gunPause[0] = 0;
@@ -375,16 +378,16 @@ void HeroAircraft::shootGun()
 		
 		p[0] = pos[0]+0.3;
 		p[1] = pos[1]+0.8;
-		Global::heroAmmo->addAmmo(0, p);
+		game->heroAmmo->addAmmo(0, p);
 		p[0] = pos[0]-0.3;
-		Global::heroAmmo->addAmmo(0, p);
+		game->heroAmmo->addAmmo(0, p);
 		if(gunActive[0])
 		{
 			p[0] = pos[0]+0.45;
 			p[1] = pos[1]+0.2;
-			Global::heroAmmo->addAmmo(0, p);
+			game->heroAmmo->addAmmo(0, p);
 			p[0] = pos[0]-0.45;
-			Global::heroAmmo->addAmmo(0, p);
+			game->heroAmmo->addAmmo(0, p);
 			ammoStock[0] -= 0.5;
 		}
 		
@@ -392,16 +395,16 @@ void HeroAircraft::shootGun()
 		{
 			p[0] = pos[0]+0.37;
 			p[1] = pos[1]+0.6;
-			Global::heroAmmo->addAmmo(0, p);
+			game->heroAmmo->addAmmo(0, p);
 			p[0]  = pos[0]-0.37;
-			Global::heroAmmo->addAmmo(0, p);
+			game->heroAmmo->addAmmo(0, p);
 			if(gunActive[0])
 			{
 				p[0]  = pos[0]+0.52;
 				p[1]  = pos[1];
-				Global::heroAmmo->addAmmo(0, p);
+				game->heroAmmo->addAmmo(0, p);
 				p[0]  = pos[0]-0.52; 
-				Global::heroAmmo->addAmmo(0, p);
+				game->heroAmmo->addAmmo(0, p);
 				ammoStock[0] -= 0.75;
 			}
 		}
@@ -411,15 +414,15 @@ void HeroAircraft::shootGun()
 		gunPause[1] = 25;
 		p[0] = pos[0];
 		p[1] = pos[1] + 1.1;
-		Global::heroAmmo->addAmmo(1, p);
+		game->heroAmmo->addAmmo(1, p);
 		ammoStock[1] -= 1.5;
 		if(currentItemIndex == 1 && useItemArmed) // double fire
 		{
 			p[1] -= 0.2;
 			p[0] = pos[0]+0.09;
-			Global::heroAmmo->addAmmo(1, p);
+			game->heroAmmo->addAmmo(1, p);
 			p[0] = pos[0]-0.09;
-			Global::heroAmmo->addAmmo(1, p);
+			game->heroAmmo->addAmmo(1, p);
 			ammoStock[1] -= 4.5;
 		}
 	}
@@ -431,12 +434,12 @@ void HeroAircraft::shootGun()
 		if(gunSwap)
 		{
 			p[0] = pos[0]+0.7;
-			Global::heroAmmo->addAmmo(2, p);
+			game->heroAmmo->addAmmo(2, p);
 		}
 		else
 		{
 			p[0] = pos[0]-0.7;
-			Global::heroAmmo->addAmmo(2, p);
+			game->heroAmmo->addAmmo(2, p);
 		}
 		ammoStock[2] -= 1.5;
 		
@@ -446,13 +449,13 @@ void HeroAircraft::shootGun()
 			{
 				p[0] = pos[0]+0.85;
 				p[1] -= 0.75;
-				Global::heroAmmo->addAmmo(2, p);
+				game->heroAmmo->addAmmo(2, p);
 			}
 			else
 			{
 				p[0] = pos[0]-0.85;
 				p[1] -= 0.75;
-				Global::heroAmmo->addAmmo(2, p);
+				game->heroAmmo->addAmmo(2, p);
 			}
 			ammoStock[2] -= 3.5;
 		}
@@ -472,7 +475,7 @@ void	HeroAircraft::setAmmoStock(int index, float value)
 {
 	if(index >= 0 && index < NUM_HERO_AMMO_TYPES)
 	{
-		Global::statusDisplay->setAmmoAlpha(1.0);
+		game->statusDisplay->setAmmoAlpha(1.0);
 		gunPause[index] = 1;
 		gunActive[index] = true;
 		ammoStock[index] = value;
@@ -521,14 +524,14 @@ void HeroAircraft::checkForCollisions(EnemyFleet *fleet)
 			p[0] = enemy->pos[0]+r1;
 			p[1] = enemy->pos[1]+r2;
 			p[2] = enemy->pos[2];
-			Global::explosions->addExplo(Explosions::EnemyDamage, p);
+			game->explosions->addExplo(Explosions::EnemyDamage, p);
 			p[0] = pos[0]+r1;
 			p[1] = pos[1]+0.2+r2;
 			p[2] = pos[2];
 			if(shields > 0.0)
-				Global::explosions->addExplo(Explosions::HeroShields, p);
+				game->explosions->addExplo(Explosions::HeroShields, p);
 			else
-				Global::explosions->addExplo(Explosions::HeroDamage, p);
+				game->explosions->addExplo(Explosions::HeroDamage, p);
 			
 			secondaryMove[0] =  diffX*power*0.03;
 			secondaryMove[1] =  diffY*power*0.03;
@@ -573,7 +576,7 @@ void HeroAircraft::checkForPowerUps(PowerUps *powerUps)
 	float p0[3] = {10.4,-8.30, 25.0 };
 	float v0[3] = { 0.0, 0.08, 0.0 };
 	float clr[4] = { 1.0, 1.0, 1.0, 1.0 };
-	if(Global::gameMode == Global::Game)
+	if(game->gameMode == game->Game)
 		pwrUp = powerUps->getFirst();
 	else
 		pwrUp = 0;
@@ -582,54 +585,54 @@ void HeroAircraft::checkForPowerUps(PowerUps *powerUps)
 		dist = fabs(pos[0]-pwrUp->pos[0]) + fabs(pos[1]-pwrUp->pos[1]);
 		if(dist < size[1])
 		{
-			Global::audio->playSound(Audio::PowerUp, pos);
+			game->audio->playSound(Audio::PowerUp, pos);
 			switch(pwrUp->type)
 			{
 				case PowerUps::Shields:
 					if(shields < HERO_SHIELDS)
 						shields = HERO_SHIELDS;
-					Global::statusDisplay->setShieldAlpha(5.0);
+					game->statusDisplay->setShieldAlpha(5.0);
 					p0[0] = -10.4;
-					Global::explosions->addElectric(p0, v0, clr,  0);
-					Global::explosions->addElectric(p0, v0, clr, -1);
-					Global::explosions->addElectric(p0, v0, clr, -3);
-					Global::explosions->addElectric(p0, v0, clr, -4);
+					game->explosions->addElectric(p0, v0, clr,  0);
+					game->explosions->addElectric(p0, v0, clr, -1);
+					game->explosions->addElectric(p0, v0, clr, -3);
+					game->explosions->addElectric(p0, v0, clr, -4);
 					break;
 				case PowerUps::SuperShields:
-					Global::tipSuperShield++;
+					game->tipSuperShield++;
 					damage -= shields;
 					if(damage < HERO_DAMAGE)
 						damage = HERO_DAMAGE;
 					shields = HERO_SHIELDS*2;
-					Global::statusDisplay->setDamageAlpha(5.0);
-					Global::statusDisplay->setShieldAlpha(5.0);
+					game->statusDisplay->setDamageAlpha(5.0);
+					game->statusDisplay->setShieldAlpha(5.0);
 					p0[0] = -10.4;
-					Global::explosions->addElectric(p0, v0, clr,  0);
-					Global::explosions->addElectric(p0, v0, clr, -1);
-					Global::explosions->addElectric(p0, v0, clr, -3);
-					Global::explosions->addElectric(p0, v0, clr, -4);
-					Global::explosions->addElectric(p0, v0, clr, -10);
-					Global::explosions->addElectric(p0, v0, clr, -11);
-					Global::explosions->addElectric(p0, v0, clr, -13);
-					Global::explosions->addElectric(p0, v0, clr, -14);
+					game->explosions->addElectric(p0, v0, clr,  0);
+					game->explosions->addElectric(p0, v0, clr, -1);
+					game->explosions->addElectric(p0, v0, clr, -3);
+					game->explosions->addElectric(p0, v0, clr, -4);
+					game->explosions->addElectric(p0, v0, clr, -10);
+					game->explosions->addElectric(p0, v0, clr, -11);
+					game->explosions->addElectric(p0, v0, clr, -13);
+					game->explosions->addElectric(p0, v0, clr, -14);
 					p0[0] = 10.4;
-					Global::explosions->addElectric(p0, v0, clr,  0);
-					Global::explosions->addElectric(p0, v0, clr, -1);
-					Global::explosions->addElectric(p0, v0, clr, -3);
-					Global::explosions->addElectric(p0, v0, clr, -4);
-					Global::explosions->addElectric(p0, v0, clr, -10);
-					Global::explosions->addElectric(p0, v0, clr, -11);
-					Global::explosions->addElectric(p0, v0, clr, -13);
-					Global::explosions->addElectric(p0, v0, clr, -14);
+					game->explosions->addElectric(p0, v0, clr,  0);
+					game->explosions->addElectric(p0, v0, clr, -1);
+					game->explosions->addElectric(p0, v0, clr, -3);
+					game->explosions->addElectric(p0, v0, clr, -4);
+					game->explosions->addElectric(p0, v0, clr, -10);
+					game->explosions->addElectric(p0, v0, clr, -11);
+					game->explosions->addElectric(p0, v0, clr, -13);
+					game->explosions->addElectric(p0, v0, clr, -14);
 					break;
 				case PowerUps::Repair:
-					Global::statusDisplay->setDamageAlpha(5.0);
+					game->statusDisplay->setDamageAlpha(5.0);
 					damage = HERO_DAMAGE;
 					p0[0] = 10.4;
-					Global::explosions->addElectric(p0, v0, clr,  0);
-					Global::explosions->addElectric(p0, v0, clr, -1);
-					Global::explosions->addElectric(p0, v0, clr, -3);
-					Global::explosions->addElectric(p0, v0, clr, -4);
+					game->explosions->addElectric(p0, v0, clr,  0);
+					game->explosions->addElectric(p0, v0, clr, -1);
+					game->explosions->addElectric(p0, v0, clr, -3);
+					game->explosions->addElectric(p0, v0, clr, -4);
 					break;
 				case PowerUps::HeroAmmo00:
 					addScore(100.0);
@@ -655,7 +658,7 @@ void HeroAircraft::checkForPowerUps(PowerUps *powerUps)
 				default:
 					break;
 			}
-			Global::explosions->addExplo(Explosions::PowerBurst, pwrUp->pos);
+			game->explosions->addExplo(Explosions::PowerBurst, pwrUp->pos);
 			delUp = pwrUp;
 			pwrUp = powerUps->getNext();
 			powerUps->remove(delUp);
@@ -672,8 +675,8 @@ void HeroAircraft::update()
 {
 	if(dontShow > 1)
 	{
-		pos[0] =  		cos(Global::frame*0.02) * 9.0;
-		pos[1] =  4.0 + sin(Global::frame*0.07) * 2.0;
+		pos[0] =  		cos(game->frame*0.02) * 9.0;
+		pos[1] =  4.0 + sin(game->frame*0.07) * 2.0;
 	}
 	else if(dontShow == 1)
 	{
@@ -687,7 +690,7 @@ void HeroAircraft::update()
 	for(int i = 0; i < NUM_HERO_AMMO_TYPES; i++)
 	{
 		if(gunPause[i] >= 0)
-			gunPause[i] -= Global::speedAdj;
+			gunPause[i] -= game->speedAdj;
 		if(gunTrigger)
 		{
 			float flash;
@@ -695,8 +698,8 @@ void HeroAircraft::update()
 			switch(i)
 			{
 				case 0:
-					flash = 5.0/Global::speedAdj;
-					pause = gunPause[i]/Global::speedAdj;
+					flash = 5.0/game->speedAdj;
+					pause = gunPause[i]/game->speedAdj;
 					gunFlash0[i] = (flash-pause)/flash;
 					if(gunActive[i])
 						gunFlash1[i] = (flash-pause)/flash;
@@ -704,16 +707,16 @@ void HeroAircraft::update()
 						gunFlash1[i] = 0.0;
 					break;
 				case 1:
-					flash = 10.0/Global::speedAdj;
-					pause = gunPause[i]/Global::speedAdj;
+					flash = 10.0/game->speedAdj;
+					pause = gunPause[i]/game->speedAdj;
 					if(gunActive[i] && gunPause[i] < flash)
 						gunFlash0[i] = (flash-pause)/flash;
 					else
 						gunFlash0[i] = 0.0;
 					break;
 				case 2:
-					flash = 5.0/Global::speedAdj;
-					pause = gunPause[i]/Global::speedAdj;
+					flash = 5.0/game->speedAdj;
+					pause = gunPause[i]/game->speedAdj;
 					if(gunActive[i])
 					{
 						if(gunPause[i] < flash)
@@ -738,10 +741,10 @@ void HeroAircraft::update()
 		}
 		else
 		{
-			if(gunFlash0[i] > 0.0)	gunFlash0[i] -= 0.075*Global::speedAdj;
+			if(gunFlash0[i] > 0.0)	gunFlash0[i] -= 0.075*game->speedAdj;
 			else	gunFlash0[i] = 0.0;
 			
-			if(gunFlash1[i] > 0.0)	gunFlash1[i] -= 0.075*Global::speedAdj;
+			if(gunFlash1[i] > 0.0)	gunFlash1[i] -= 0.075*game->speedAdj;
 			else	gunFlash1[i] = 0.0;
 		}
 	}
@@ -763,15 +766,15 @@ void HeroAircraft::update()
 	//-- decrement supershields
 	if(shields >= HERO_SHIELDS)
 	{
-		shields -= 0.15*Global::speedAdj;
+		shields -= 0.15*game->speedAdj;
 		
 	}
 	
-	float s = (1.0-Global::speedAdj)+(Global::speedAdj*0.8);
+	float s = (1.0-game->speedAdj)+(game->speedAdj*0.8);
 	secondaryMove[0] *= s;
 	secondaryMove[1] *= s;
-	pos[0] += secondaryMove[0]*Global::speedAdj;
-	pos[1] += secondaryMove[1]*Global::speedAdj;
+	pos[0] += secondaryMove[0]*game->speedAdj;
+	pos[1] += secondaryMove[1]*game->speedAdj;
 	moveEvent(0,0);
 	
 }
@@ -816,8 +819,8 @@ void HeroAircraft::startDeath()
 	if(lives < 0)
 	{
 		fireGun(false);
-		Global::heroDeath = DEATH_TIME;
-		Global::gameMode = Global::HeroDead;
+		game->heroDeath = DEATH_TIME;
+		game->gameMode = game->HeroDead;
 		dontShow = -1;
 	}
 	else
@@ -838,14 +841,14 @@ void HeroAircraft::deathExplosions()
 	
 	deathStereo = 5.0;
 	p[0] = -deathStereo;
-	Global::audio->playSound(Audio::Explosion, p);
-	Global::audio->playSound(Audio::Explosion, p, -45);
+	game->audio->playSound(Audio::Explosion, p);
+	game->audio->playSound(Audio::Explosion, p, -45);
 	p[0] =  deathStereo;
-	Global::audio->playSound(Audio::Explosion, p);
-	Global::audio->playSound(Audio::Explosion, p, -20);
+	game->audio->playSound(Audio::Explosion, p);
+	game->audio->playSound(Audio::Explosion, p, -20);
 	p[0] =  0.0;
-	Global::audio->playSound(Audio::ExploBig, p);
-	Global::audio->playSound(Audio::ExploPop, p);
+	game->audio->playSound(Audio::ExploBig, p);
+	game->audio->playSound(Audio::ExploPop, p);
 	
 	//-- Caclulate radius
 	for(i = 0; i < DEATH_SPIKES; i++)
@@ -858,7 +861,7 @@ void HeroAircraft::deathExplosions()
 		p[0] = pos[0]+deathCircle[i][0];
 		p[1] = pos[1]+deathCircle[i][1];
 		p[2] = pos[2];
-		Global::explosions->addExplo(Explosions::EnemyDestroyed, p);
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p);
 	}
 	
 	//-- Set up explosions
@@ -875,21 +878,21 @@ void HeroAircraft::deathExplosions()
 				r = 1.25+4.0*((float)i/(float)DEATH_TIME);
 				p[0] = pos[0]+deathCircle[w][0]*r;
 				p[1] = pos[1]+deathCircle[w][1]*r;
-				Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -i);
+				game->explosions->addExplo(Explosions::EnemyDestroyed, p, -i);
 			}
 		}
 		else
 		{
 			p[0] = pos[0]+deathCircle[w][0];
 			p[1] = pos[1]+deathCircle[w][1];
-			Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -i);
+			game->explosions->addExplo(Explosions::EnemyDestroyed, p, -i);
 		}
 		if(!(i%21))
 		{
 			deathStereo = -deathStereo*1.5;
 			p[0] = deathStereo;
 			p[1] = -5.0;
-			Global::audio->playSound(Audio::Explosion, p, -i);
+			game->audio->playSound(Audio::Explosion, p, -i);
 		}
 	}
 }

@@ -71,13 +71,13 @@ bool MainSDL::process(SDL_Event *event)
 		default:
 			break;
 	}
-	return Global::game_quit;
+	return game->game_quit;
 }
 
 //----------------------------------------------------------
 void MainSDL::saveEvent(SDL_Event *event)
 {
-	if(Global::eventFile && Global::gameMode == Global::Game)
+	if(game->eventFile && game->gameMode == game->Game)
 	{
 		SDL_ActiveEvent 		*evA = 0;
 		SDL_KeyboardEvent 		*evK = 0;
@@ -87,50 +87,50 @@ void MainSDL::saveEvent(SDL_Event *event)
 		{
 //	    	case SDL_ACTIVEEVENT:
 //				evA = (SDL_ActiveEvent*)event;
-//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "A",
+//				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "A",
 //					(int)evA->type, (int)evA->gain, (int)evA->state, 0, 0, 0);
 //				break;
 //	    	case SDL_KEYDOWN:
 //	    	case SDL_KEYUP:
 //				evK = (SDL_KeyboardEvent*)event;
-//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "K",
+//				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "K",
 //					(int)evK->type, (int)evK->state, 
 //					(int)evK->keysym.scancode, (int)evK->keysym.sym, (int)evK->keysym.mod, (int)evK->keysym.unicode);
 //				break;
 //	    	case SDL_MOUSEMOTION:
 //				evM = (SDL_MouseMotionEvent*)event;
-//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "M",
+//				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "M",
 //					(int)evM->type, (int)evM->state, (int)evM->x, (int)evM->y, (int)evM->xrel, (int)evM->yrel);
 //				break;
 //	    	case SDL_MOUSEBUTTONDOWN:
 //	    	case SDL_MOUSEBUTTONUP:
 //				evB = (SDL_MouseButtonEvent*)event;
-//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "B",
+//				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "B",
 //					(int)evB->type, (int)evB->button, (int)evB->state, (int)evB->x, (int)evB->y, 0);
 //				break;
 //			default:
 //				break;
 	    	case SDL_ACTIVEEVENT:
 				evA = (SDL_ActiveEvent*)event;
-				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "A",
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "A",
 					evA->type, evA->gain, evA->state, 0, 0, 0);
 				break;
 	    	case SDL_KEYDOWN:
 	    	case SDL_KEYUP:
 				evK = (SDL_KeyboardEvent*)event;
-				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "K",
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "K",
 					evK->type, evK->state, 
 					evK->keysym.scancode, evK->keysym.sym, evK->keysym.mod, evK->keysym.unicode);
 				break;
 	    	case SDL_MOUSEMOTION:
 				evM = (SDL_MouseMotionEvent*)event;
-				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "M",
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "M",
 					evM->type, evM->state, evM->x, evM->y, evM->xrel, evM->yrel);
 				break;
 	    	case SDL_MOUSEBUTTONDOWN:
 	    	case SDL_MOUSEBUTTONUP:
 				evB = (SDL_MouseButtonEvent*)event;
-				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "B",
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "B",
 					evB->type, evB->button, evB->state, evB->x, evB->y, 0);
 				break;
 			default:
@@ -158,7 +158,7 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 		char	t;
 		
 		sscanf(buffer, "%d :%c: %d %d %d %d %d %d", &frame, &t, &a, &b, &c, &d, &e, &f);
-		if(frame == Global::gameFrame)
+		if(frame == game->gameFrame)
 		{
 			switch(t)
 			{
@@ -201,7 +201,7 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 			count++;
 		}
 		bool ok = true;
-		if(frame <= Global::gameFrame)
+		if(frame <= game->gameFrame)
 			ok = fgets(buffer, 256, infile);
 		if(!ok)
 		{
@@ -245,38 +245,38 @@ void MainSDL::keyDown(SDL_Event *event)
 	{
 	    case SDL_QUIT:
 		case SDLK_q:
-			Global::game_quit = true;
+			game->game_quit = true;
 			break;
 		case SDLK_g:
 			grabMouse(!mouseToggle);
 			break;
 		case SDLK_0:
-			Global::hero->useItem(0);
+			game->hero->useItem(0);
 			break;
 		case SDLK_9:
-			Global::hero->useItem(1);
+			game->hero->useItem(1);
 			break;
 		case SDLK_ESCAPE:
-			if(Global::gameMode == Global::Menu)
+			if(game->gameMode == game->Menu)
 			{
-				Global::gameMode = Global::Game;
-				Global::audio->setMusicMode(Audio::MusicGame);
+				game->gameMode = game->Game;
+				game->audio->setMusicMode(Audio::MusicGame);
 				grabMouse(true);
 			}
 			else
 			{
-				if(Global::gameMode != Global::Game)
+				if(game->gameMode != game->Game)
 				{
-					Global::newGame();
+					game->newGame();
 				}
-				Global::gameMode = Global::Menu;
-				Global::menu->startMenu();
-				Global::audio->setMusicMode(Audio::MusicMenu);
+				game->gameMode = game->Menu;
+				game->menu->startMenu();
+				game->audio->setMusicMode(Audio::MusicMenu);
 				grabMouse(false);
 			}
 			break;
 		default:
-			if(Global::gameMode == Global::Game)
+			if(game->gameMode == game->Game)
 				keyDownGame(event);
 			else
 			{
@@ -290,7 +290,7 @@ void MainSDL::keyDown(SDL_Event *event)
 					case SDLK_RETURN:	key = MainToolkit::KeyEnter;	break;
 					default: key = MainToolkit::KeyEnter;	break;
 				}
-				Global::menu->keyHit(key);
+				game->menu->keyHit(key);
 			}
 			break;
 	}
@@ -305,30 +305,30 @@ void MainSDL::keyDownGame(SDL_Event *event)
 //			resetMouseMotion();
 //			break;
 	    case SDLK_p:
-			Global::game_pause = !Global::game_pause;
-			Global::audio->pauseGameMusic(Global::game_pause);
+			game->game_pause = !game->game_pause;
+			game->audio->pauseGameMusic(game->game_pause);
 			break;
 	    case SDLK_n:
-			Global::audio->nextMusicIndex();
+			game->audio->nextMusicIndex();
 			break;
 	    case SDLK_LEFT:
-			Global::hero->moveEvent(-10, 0);
+			game->hero->moveEvent(-10, 0);
 			break;
 	    case SDLK_RIGHT:
-			Global::hero->moveEvent( 10, 0);
+			game->hero->moveEvent( 10, 0);
 			break;
 	    case SDLK_UP:
-			Global::hero->moveEvent(0, -10);
+			game->hero->moveEvent(0, -10);
 			break;
 	    case SDLK_DOWN:
-			Global::hero->moveEvent(0,  10);
+			game->hero->moveEvent(0,  10);
 			break;
 //	    case SDLK_SPACE:
-//			Global::hero->fireGun(true);
+//			game->hero->fireGun(true);
 //			break;
 		default:
 			fprintf(stderr, "key '%s' pressed\n", SDL_GetKeyName(event->key.keysym.sym));
-			fprintf(stderr, "Global::gameFrame = %d\n", Global::gameFrame);
+			fprintf(stderr, "game->gameFrame = %d\n", game->gameFrame);
 			break;
 	}
 }
@@ -354,7 +354,7 @@ void MainSDL::mouseMotion(SDL_Event *event)
 			yDiff =  yNow - yLast;
 			if(xDiff || yDiff)
 			{
-				Global::hero->moveEvent(xDiff, yDiff);
+				game->hero->moveEvent(xDiff, yDiff);
 				SDL_WarpMouse(xMid, yMid);
 			}
 		}
@@ -370,13 +370,13 @@ void MainSDL::mouseButtonDown(SDL_Event *ev)
 	switch(mEv->button)
 	{
 		case SDL_BUTTON_LEFT:
-			Global::hero->fireGun(++fire);
+			game->hero->fireGun(++fire);
 			break;
 		case SDL_BUTTON_MIDDLE:
-			Global::hero->nextItem();
+			game->hero->nextItem();
 			break;
 		case SDL_BUTTON_RIGHT:
-			Global::hero->useItem();
+			game->hero->useItem();
 			break;
 		default:
 			break;
@@ -390,7 +390,7 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 	switch(mEv->button)
 	{
 		case  SDL_BUTTON_LEFT:
-			Global::hero->fireGun(--fire);
+			game->hero->fireGun(--fire);
 			break;
 		default:
 			break;
@@ -401,13 +401,14 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 void MainSDL::grabMouse(bool status)
 {
 //	fprintf(stderr, "MainSDL::grabMouse(%d)\n", status);
-
+	Global *game = game->getInstance();
+	
 	mouseToggle = status;
 	if(status)
 	{
 		SDL_ShowCursor(0);
-		xMid = Global::screenW/2;
-		yMid = Global::screenH/2;
+		xMid = game->screenW/2;
+		yMid = game->screenH/2;
 		SDL_WarpMouse(xMid, yMid);
 		xLast = xMid;
 		yLast = yMid;
@@ -441,7 +442,7 @@ void MainSDL::joystickMotion(SDL_Event *)
 //			yDiff =  yNow - yLast;
 //			if(xDiff || yDiff)
 //			{
-//				Global::hero->moveEvent(xDiff, yDiff);
+//				game->hero->moveEvent(xDiff, yDiff);
 //				SDL_WarpMouse(xMid, yMid);
 //			}
 //		}
@@ -453,13 +454,13 @@ void MainSDL::joystickMotion(SDL_Event *)
 //----------------------------------------------------------
 void MainSDL::joystickButtonDown(SDL_Event *)
 {
-	Global::hero->fireGun(++fire);
+	game->hero->fireGun(++fire);
 }
 
 //----------------------------------------------------------
 void MainSDL::joystickButtonUp(SDL_Event *)
 {
-	Global::hero->fireGun(--fire);
+	game->hero->fireGun(--fire);
 }
 
 //----------------------------------------------------------
@@ -473,7 +474,7 @@ void MainSDL::joystickMove()
 		yjoy = SDL_JoystickGetAxis(joystick, 1)/div;
 		xjNow = 0.8*xjNow + 0.2*xjoy;
 		yjNow = 0.8*yjNow + 0.2*yjoy;
-		Global::hero->moveEvent((int)xjNow, (int)yjNow);
+		game->hero->moveEvent((int)xjNow, (int)yjNow);
 	}
 #endif
 }

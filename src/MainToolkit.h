@@ -8,6 +8,8 @@
 #ifndef MainToolkit_h
 #define MainToolkit_h
 
+class Global;
+
 //====================================================================
 class MainToolkit
 {
@@ -24,6 +26,9 @@ public:
 	virtual void setVideoMode() = 0;
 	
 	virtual void grabMouse(bool) = 0;
+
+protected:
+	Global *game;
 };
 
 

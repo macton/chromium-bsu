@@ -24,7 +24,9 @@ EnemyAircraft::EnemyAircraft(EnemyType et, float p[3], float randFact)
 {
 	type = et;
 	
-	float xBound = Global::screenBound[0]-2.0;
+	game = game->getInstance();
+	
+	float xBound = game->screenBound[0]-2.0;
 	if(pos[0] < -xBound)
 		pos[0] = -xBound;
 	if(pos[0] > xBound)
@@ -63,7 +65,7 @@ void EnemyAircraft::init(float *p, float randFact)
 	lastMoveX	= 0.0;
 	lastMoveY	= 0.0;
 	preFire		= 0.0;
-	target = Global::hero;
+	target = game->hero;
 	
 	next = 0;
 	back = 0;
@@ -82,7 +84,7 @@ void EnemyAircraft::init(float *p, float randFact)
 	switch(type)
 	{
 		case EnemyStraight:
-			damage = baseDamage = -110.0*Global::gameSkill;
+			damage = baseDamage = -110.0*game->gameSkill;
 			size[0] = 0.75;
 			size[1] = 1.02;
 			collisionMove = 0.5;
@@ -97,7 +99,7 @@ void EnemyAircraft::init(float *p, float randFact)
 //			vel[1] = -0.021-frand*0.04;
 			break;
 		case EnemyRayGun:
-			damage = baseDamage = -1000.0*Global::gameSkill;
+			damage = baseDamage = -1000.0*game->gameSkill;
 			size[0] = 1.2;
 			size[1] = 1.2;
 			collisionMove = 0.2;
@@ -105,7 +107,7 @@ void EnemyAircraft::init(float *p, float randFact)
 			randMoveX = 0.5+0.5*randMoveX;
 			break;
 		case EnemyTank:
-			damage = baseDamage = -2000.0*Global::gameSkill;
+			damage = baseDamage = -2000.0*game->gameSkill;
 			size[0] = 1.9;
 			size[1] = 2.1;
 			collisionMove = 0.1;
@@ -121,16 +123,16 @@ void EnemyAircraft::init(float *p, float randFact)
 			vel[1] = 0.1;
 			break;
 		case EnemyBoss00:
-			damage = baseDamage = -10000.0*Global::gameSkill;
-//			damage = baseDamage = -8.0*Global::gameSkill;
+			damage = baseDamage = -10000.0*game->gameSkill;
+//			damage = baseDamage = -8.0*game->gameSkill;
 			size[0] = 3.5;
 			size[1] = 2.275;
 			collisionMove = 0.05;
 			vel[1] = 0.02;
 			break;
 		case EnemyBoss01:
-			damage = baseDamage = -10000.0*Global::gameSkill;
-//			damage = baseDamage = -8.0*Global::gameSkill;
+			damage = baseDamage = -10000.0*game->gameSkill;
+//			damage = baseDamage = -8.0*game->gameSkill;
 			size[0] = 2.6;
 			size[1] = 2.3;
 			collisionMove = 0.1;
@@ -142,7 +144,7 @@ void EnemyAircraft::init(float *p, float randFact)
 	}
 }
 
-//-- NOTE: Many of the firing rates are not adjusted by Global::speedAdj
+//-- NOTE: Many of the firing rates are not adjusted by game->speedAdj
 //-- so they will not be totally correct. Should be close enough for jazz, though.
 //----------------------------------------------------------
 void EnemyAircraft::update()
@@ -150,11 +152,11 @@ void EnemyAircraft::update()
 	EnemyAircraft *tmpAircraft = 0;
 	float	v[3] = { 0.0, -0.2, 0.0 };
 //	float	*hpos = target->getPos();
-	float	*hpos = Global::hero->getPos();
+	float	*hpos = game->hero->getPos();
 	float	a = hpos[0]-pos[0];
 	float	b = hpos[1]-pos[1];
 	float	dist;
-	float	ammoSpeed = 0.35*Global::speedAdj;
+	float	ammoSpeed = 0.35*game->speedAdj;
 	
 	int 	omniSwap = 108;
 	int		tmpInt;
@@ -162,9 +164,9 @@ void EnemyAircraft::update()
 	age++;
 	shootInterval--;
 	
-	pos[0] += secondaryMove[0]*Global::speedAdj;
-	pos[1] += secondaryMove[1]*Global::speedAdj;
-	float s = (1.0-Global::speedAdj)+(Global::speedAdj*0.7);
+	pos[0] += secondaryMove[0]*game->speedAdj;
+	pos[1] += secondaryMove[1]*game->speedAdj;
+	float s = (1.0-game->speedAdj)+(game->speedAdj*0.7);
 	secondaryMove[0] *= s;
 	secondaryMove[1] *= s;
 	move();
@@ -182,7 +184,7 @@ void EnemyAircraft::update()
 			{
 				calcShootInterval();
 				p[1] -= 0.9;
-				Global::enemyAmmo->addAmmo(0, p, shootVec);
+				game->enemyAmmo->addAmmo(0, p, shootVec);
 			}
 			break;
 		//------------------------------- Omni
@@ -193,7 +195,7 @@ void EnemyAircraft::update()
 				if(!(shootSwap%6))
 				{
 					//ammoSpeed = 0.22;
-					ammoSpeed = 0.3*Global::gameSkill*Global::speedAdj;
+					ammoSpeed = 0.3*game->gameSkill*game->speedAdj;
 					dist = fabs(a) + fabs(b);
 					//dist = sqrt(a*a+b*b);
 					v[0] = a/dist;
@@ -202,9 +204,9 @@ void EnemyAircraft::update()
 					shootVec[0] = ammoSpeed*v[0];
 					shootVec[1] = ammoSpeed*v[1]/*+vel[1]*/;
 				}
-				Global::enemyAmmo->addAmmo(1, p, shootVec);
+				game->enemyAmmo->addAmmo(1, p, shootVec);
 			}
-			if(pos[1] < Global::screenBound[1])
+			if(pos[1] < game->screenBound[1])
 				shootSwap++;
 			break;
 		//------------------------------- Ray Gun
@@ -213,7 +215,7 @@ void EnemyAircraft::update()
 			{
 				v[1] = -0.6;
 				p[1] = pos[1]-0.5;
-				Global::enemyAmmo->addAmmo(3, p, v);
+				game->enemyAmmo->addAmmo(3, p, v);
 			}
 			break;
 		//------------------------------- Tank
@@ -225,9 +227,9 @@ void EnemyAircraft::update()
 				{
 					v[1] = -0.2;
 					p[0] = pos[0] + 1.5;
-					Global::enemyAmmo->addAmmo(0, p, v);
+					game->enemyAmmo->addAmmo(0, p, v);
 					p[0] = pos[0] - 1.5;
-					Global::enemyAmmo->addAmmo(0, p, v);
+					game->enemyAmmo->addAmmo(0, p, v);
 				}
 				shootSwap = ++shootSwap%100;
 			}
@@ -255,7 +257,7 @@ void EnemyAircraft::update()
 						shootVec[1] = 2.0*ammoSpeed*b/dist;
 						secondaryMove[0] -= shootVec[0]*0.1;
 						secondaryMove[1] -= shootVec[1]*0.1;
-						Global::enemyAmmo->addAmmo(2, p, shootVec);
+						game->enemyAmmo->addAmmo(2, p, shootVec);
 						preFire -= 0.4;
 						if(preFire < 0.0)
 							preFire = 0.0;	
@@ -276,7 +278,7 @@ void EnemyAircraft::update()
 				{
 					v[1] = -0.39;
 					p[1] = pos[1]-0.5;
-					Global::enemyAmmo->addAmmo(4, p, v);
+					game->enemyAmmo->addAmmo(4, p, v);
 				}
 			}
 			break;
@@ -286,7 +288,7 @@ void EnemyAircraft::update()
 			{
 				v[1] = -0.6;
 				p[1] = pos[1]-1.7;
-				Global::enemyAmmo->addAmmo(3, p, v);
+				game->enemyAmmo->addAmmo(3, p, v);
 			}
 			if(!(age%5)) //-- side cannons
 			{
@@ -296,9 +298,9 @@ void EnemyAircraft::update()
 					v[1] = -0.2;
 					p[1] = pos[1]-1.9;
 					p[0] = pos[0]+2.0+((shootSwap%3)*0.4);
-					Global::enemyAmmo->addAmmo(0, p, v);
+					game->enemyAmmo->addAmmo(0, p, v);
 					p[0] = pos[0]-2.0-((shootSwap%3)*0.4);
-					Global::enemyAmmo->addAmmo(0, p, v);
+					game->enemyAmmo->addAmmo(0, p, v);
 				}
 			}
 			if(!((age-1)%7))
@@ -315,9 +317,9 @@ void EnemyAircraft::update()
 					{
 						p[1] = pos[1]-0.45;
 						p[0] = pos[0]-1.1;
-						Global::enemyAmmo->addAmmo(1, p, shootVec);
+						game->enemyAmmo->addAmmo(1, p, shootVec);
 						p[0] = pos[0]+1.1;
-						Global::enemyAmmo->addAmmo(1, p, shootVec);
+						game->enemyAmmo->addAmmo(1, p, shootVec);
 					}
 					preFire = (age%100)/100.0f;
 				}
@@ -331,13 +333,13 @@ void EnemyAircraft::update()
 					dist = fabs(a) + fabs(b);
 					shootVec[0] = 2.0*ammoSpeed*a/dist;
 					shootVec[1] = 2.0*ammoSpeed*b/dist;
-					Global::enemyAmmo->addAmmo(2, p, shootVec);
+					game->enemyAmmo->addAmmo(2, p, shootVec);
 					p[0] = pos[0]+1.1;
 					a = hpos[0]-p[0];
 					dist = fabs(a) + fabs(b);
 					shootVec[0] = 2.0*ammoSpeed*a/dist;
 					shootVec[1] = 2.0*ammoSpeed*b/dist;
-					Global::enemyAmmo->addAmmo(2, p, shootVec);
+					game->enemyAmmo->addAmmo(2, p, shootVec);
 					preFire -= 0.4;
 					if(preFire < 0.0)
 						preFire = 0.0;
@@ -361,17 +363,17 @@ void EnemyAircraft::update()
 					{
 						p[0] = pos[0]+0.55;
 						p[1] = pos[1]-1.7;
-						Global::enemyAmmo->addAmmo(0, p, shootVec);
+						game->enemyAmmo->addAmmo(0, p, shootVec);
 						p[1] += 0.5;
-						Global::enemyAmmo->addAmmo(0, p, shootVec);
+						game->enemyAmmo->addAmmo(0, p, shootVec);
 					}
 					else
 					{
 						p[0] = pos[0]-1.22;
 						p[1] = pos[1]-1.22;
-						Global::enemyAmmo->addAmmo(0, p, shootVec);
+						game->enemyAmmo->addAmmo(0, p, shootVec);
 						p[1] += 0.5;
-						Global::enemyAmmo->addAmmo(0, p, shootVec);
+						game->enemyAmmo->addAmmo(0, p, shootVec);
 					}
 				}
 			}
@@ -387,7 +389,7 @@ void EnemyAircraft::update()
 				{
 					p[0] += 1.7;
 					p[1] += 1.2;
-					tmpAircraft = Global::itemAdd->dynamicEnemyAdd(EnemyGnat, p, Global::gameFrame+2);
+					tmpAircraft = game->itemAdd->dynamicEnemyAdd(EnemyGnat, p, game->gameFrame+2);
 					tmpAircraft->over = this;
 					tmpAircraft->setTarget(this);
 				}
@@ -420,7 +422,7 @@ void EnemyAircraft::calcShootInterval()
 	switch(type)
 	{
 		case EnemyStraight:
-			shootInterval = (int)((30.0 + FRAND*90.0)/Global::speedAdj);
+			shootInterval = (int)((30.0 + FRAND*90.0)/game->speedAdj);
 			break;
 		case EnemyOmni:
 			shootInterval = 1;
@@ -432,7 +434,7 @@ void EnemyAircraft::calcShootInterval()
 			shootInterval = 1;
 			break;
 		case EnemyGnat:
-			shootInterval = (int)((1.0 + FRAND*5.0)/Global::speedAdj);
+			shootInterval = (int)((1.0 + FRAND*5.0)/game->speedAdj);
 			break;
 		case EnemyBoss00:
 			shootInterval = 1;
@@ -465,12 +467,12 @@ void EnemyAircraft::move()
 	switch(type)
 	{
 		case EnemyStraight:
-			pos[1] += (Global::speedAdj*(vel[1] * Global::gameSkill));
+			pos[1] += (game->speedAdj*(vel[1] * game->gameSkill));
 			break;
 		case EnemyOmni:
 			lastMoveX = (0.9*lastMoveX)+(0.1*(0.01*diff[0]));
-			pos[0] += Global::speedAdj*(randMoveX*lastMoveX);
-			pos[1] += (Global::speedAdj*(vel[1] * Global::gameSkill));
+			pos[0] += game->speedAdj*(randMoveX*lastMoveX);
+			pos[1] += (game->speedAdj*(vel[1] * game->gameSkill));
 			break;
 		case EnemyRayGun:
 			if( (tmpd = fabs(diff[0])) < 3.0)
@@ -479,8 +481,8 @@ void EnemyAircraft::move()
 				diff[1] *= 0.1;
 			lastMoveX = (0.975*lastMoveX)+(0.0020*diff[0]);
 			lastMoveY = (0.90*lastMoveY)+(0.001*diff[1]);
-			pos[0] += Global::speedAdj*(randMoveX*lastMoveX * (Global::gameSkill+0.1) + tmps);
-			pos[1] += Global::speedAdj*(lastMoveY+vel[1] * (Global::gameSkill+0.1));
+			pos[0] += game->speedAdj*(randMoveX*lastMoveX * (game->gameSkill+0.1) + tmps);
+			pos[1] += game->speedAdj*(lastMoveY+vel[1] * (game->gameSkill+0.1));
 			break;
 		case EnemyTank:
 			if(fabs(diff[0]) > 8.0)
@@ -497,21 +499,21 @@ void EnemyAircraft::move()
 				vel[1] *= 0.99;
 				
 			if(pos[0] < 0.0)
-				pos[0] = Global::speedAdj*(0.998*pos[0] + 0.002*(-Global::screenBound[0]+2.85));
+				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-game->screenBound[0]+2.85));
 			else
-				pos[0] = Global::speedAdj*(0.998*pos[0] + 0.002*( Global::screenBound[0]-2.85));
+				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( game->screenBound[0]-2.85));
 			switch((age/50)%8)
 			{
 				case 2:
-					pos[1] += Global::speedAdj*(0.05);
+					pos[1] += game->speedAdj*(0.05);
 					break;
 				default:
-					pos[1] -= Global::speedAdj*(vel[1]);
+					pos[1] -= game->speedAdj*(vel[1]);
 					break;
 			}
 			break;
 		case EnemyGnat:
-			if(target == Global::hero)
+			if(target == game->hero)
 				randX = randMoveX;
 			else
 				randX = 0.75+FRAND*0.15;
@@ -530,7 +532,7 @@ void EnemyAircraft::move()
 				tmpY = y;
 				x = tmpd*tmpX + -(1.0-tmpd)*diff[1]/tmpd;
 				y = tmpd*tmpY +  (1.0-tmpd)*diff[0]/tmpd;
-				y += 0.01*sin(Global::gameFrame*0.001);
+				y += 0.01*sin(game->gameFrame*0.001);
 			}
 			else
 			{
@@ -570,53 +572,53 @@ void EnemyAircraft::move()
 				vel[1] = v1;
 			}
 			
-			pos[0] += Global::speedAdj*vel[0];
-			pos[1] += Global::speedAdj*vel[1];
+			pos[0] += game->speedAdj*vel[0];
+			pos[1] += game->speedAdj*vel[1];
 			
 			if(pos[1] < -10.0)
 				pos[1] = -10.0;
 			break;
 		case EnemyBoss00:
-			approachDist = 7.0*(2.0-Global::gameSkill);
-			if(fabs(diff[1]) < (approachDist+0.0*sin(Global::frame*0.05)) )
+			approachDist = 7.0*(2.0-game->gameSkill);
+			if(fabs(diff[1]) < (approachDist+0.0*sin(game->frame*0.05)) )
 			{
 				diff[1] = diff[1] * diff[1]/approachDist;
 			}
 			diff[0] += 5.0*sin(age*0.1);
-			lastMoveX = (0.98*lastMoveX)+(0.0005*Global::gameSkill*diff[0]);
-			lastMoveY = (0.90*lastMoveY)+(0.001*Global::gameSkill*diff[1]);
-			pos[0] += Global::speedAdj*(lastMoveX);
-			pos[1] += Global::speedAdj*(lastMoveY+vel[1]);
+			lastMoveX = (0.98*lastMoveX)+(0.0005*game->gameSkill*diff[0]);
+			lastMoveY = (0.90*lastMoveY)+(0.001*game->gameSkill*diff[1]);
+			pos[0] += game->speedAdj*(lastMoveX);
+			pos[1] += game->speedAdj*(lastMoveY+vel[1]);
 			break;
 		case EnemyBoss01:
 			if( (((age+25)/512)%2) )
-				approachDist = 9.0*(2.0-Global::gameSkill);
+				approachDist = 9.0*(2.0-game->gameSkill);
 			else
-				approachDist = 12.0*(2.0-Global::gameSkill);
+				approachDist = 12.0*(2.0-game->gameSkill);
 				
-			if(fabs(diff[1]) < (approachDist+2.0*sin(Global::frame*0.05)) )
+			if(fabs(diff[1]) < (approachDist+2.0*sin(game->frame*0.05)) )
 				diff[1] = diff[1] * diff[1]/approachDist;
 			diff[0] += 5.0*sin(age*0.1);
 			
 			if( ((age/512)%2) )
 			{
-				lastMoveX = (0.98*lastMoveX)+(0.0010*Global::gameSkill*diff[0]);
-				lastMoveY = (0.90*lastMoveY)+(0.0020*Global::gameSkill*diff[1]);
+				lastMoveX = (0.98*lastMoveX)+(0.0010*game->gameSkill*diff[0]);
+				lastMoveY = (0.90*lastMoveY)+(0.0020*game->gameSkill*diff[1]);
 			}
 			else //-- release gnats
 			{
-				lastMoveX = (0.90*lastMoveX)+(0.0003*Global::gameSkill*diff[0]);
-				lastMoveY = (0.90*lastMoveY)+(0.0010*Global::gameSkill*diff[1]);
+				lastMoveX = (0.90*lastMoveX)+(0.0003*game->gameSkill*diff[0]);
+				lastMoveY = (0.90*lastMoveY)+(0.0010*game->gameSkill*diff[1]);
 			}
-			pos[0] += Global::speedAdj*(lastMoveX);
-			pos[1] += Global::speedAdj*(lastMoveY+vel[1]);
+			pos[0] += game->speedAdj*(lastMoveX);
+			pos[1] += game->speedAdj*(lastMoveY+vel[1]);
 			break;
 		default:
-			pos[1] -= Global::speedAdj*0.02;
+			pos[1] -= game->speedAdj*0.02;
 			break;
 	}
-	if(pos[0] < -Global::screenBound[0])
-		pos[0] = -Global::screenBound[0];
-	if(pos[0] >  Global::screenBound[0])
-		pos[0] =  Global::screenBound[0];
+	if(pos[0] < -game->screenBound[0])
+		pos[0] = -game->screenBound[0];
+	if(pos[0] >  game->screenBound[0])
+		pos[0] =  game->screenBound[0];
 }

@@ -90,6 +90,7 @@ HEADERS		= \
 			HeroAircraft.h \
 			HeroAmmo.h \
 			Global.h \
+			GlobalStuff.h \
 			Ground.h \
 			GroundMetal.h \
 			GroundMetalSegment.h \
@@ -125,6 +126,7 @@ SOURCES		= \
 			HeroAircraft.cpp \
 			HeroAmmo.cpp \
 			Global.cpp \
+			GlobalStuff.cpp \
 			Ground.cpp \
 			GroundMetal.cpp \
 			GroundMetalSegment.cpp \

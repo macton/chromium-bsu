@@ -15,7 +15,7 @@
 #define FRAND (Global::randF[(++Global::randIndex)%256])
 #define IRAND (Global::randI[(++Global::randIndex)%256])
 
-#define INT_GAME_SKILL_BASE ((int)((Global::gameSkillBase+0.05)*10.0))
+#define INT_GAME_SKILL_BASE ((int)((Global::getInstance()->gameSkillBase+0.05)*10.0))
 
 #define AMMO_REFILL 150
 #define HERO_Z	25.0f

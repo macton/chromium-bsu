@@ -12,6 +12,8 @@
 #include <GL/gl.h>
 #include "HeroAircraft.h"
 
+class Global;
+
 //====================================================================
 class StatusDisplay
 {
@@ -60,6 +62,9 @@ private:
 	int tipSuperShow;
 	
 	float enemyWarn;
+
+private:
+	Global	*game;
 };
 
 #endif // StatusDisplay_h

@@ -8,23 +8,14 @@
 #include "Global.h"
 #include "extern.h"
 
-int	  Global::screenW		= 800;
-int	  Global::screenH		= 600;
 
 TexFont	*Global::texFont	= 0;
 
 MainToolkit *Global::toolkit = 0;
 	
-float	Global::screenA		=   1.3333333f;
-float	Global::screenFOV	=  30.0f;
-float	Global::screenNear	=  10.0;
-float	Global::screenFar	=  70.0;
-bool	Global::full_screen	=  false;
-int		Global::screenSize	=  2;
-float	Global::zTrans		= -56.5;
-bool	Global::blend_enable = true;
 
-float	Global::screenBound[2] = { 11.0, 9.0 };
+float	Global::mouseSpeed	= 0.03;
+bool	Global::mouseActive		= false;
 
 float	Global::fps			= 50.0;
 int		Global::frame		= 0;
@@ -42,20 +33,7 @@ int		Global::heroDeath	= 0;
 int		Global::heroSuccess	= 0;
 
 float	Global::scrollSpeed		= -0.045;
-float	Global::mouseSpeed	= 0.03;
 
-bool	Global::mouseActive		= false;
-bool	Global::has_multitex	= false;
-bool	Global::audio_enabled	= true;
-bool	Global::swap_stereo		= false;
-bool	Global::show_fps		= true;
-bool	Global::auto_speed		= false;
-bool	Global::true_color		= false;
-bool	Global::use_playList	= false;
-bool	Global::use_cdrom		= true;
-
-bool	Global::game_pause	= false;
-bool	Global::game_quit	= false;
 
 int		Global::gfxLevel = 2;
 float	Global::volSound = 0.9;
@@ -149,36 +127,107 @@ int Global::tipSuperShield	= 0;
 #include "AudioSDLMixer.h"
 #endif
 
+Global	*Global::instance = 0;
+
+//----------------------------------------------------------
+Global::Global()
+{
+	screenW		= 800;
+	screenH		= 600;
+	screenA		=   1.3333333f;
+	screenFOV	=  30.0f;
+	screenNear	=  10.0;
+	screenFar	=  70.0;
+	full_screen	=  false;
+	screenSize	=  2;
+	screenBound[0] = 11.0;
+	screenBound[1] =  9.0;
+	zTrans		= -56.5;
+	blend_enable = true;
+	
+	audio_enabled	= true;
+	swap_stereo		= false;
+	show_fps		= true;
+	auto_speed		= false;
+	true_color		= false;
+	use_playList	= false;
+	use_cdrom		= true;
+
+	game_pause		= false;
+	game_quit		= false;
+
+	readConfigFile();
+	readHiScoreFile();
+}
+
+Global::~Global()
+{
+	saveConfigFile();
+	saveHiScoreFile();
+}
+
+//----------------------------------------------------------
+Global *Global::init()
+{
+	if(!Global::instance)
+	{
+		Global::instance = new Global;
+	}
+	else
+	{
+		fprintf(stderr, "WARNING: Global::init() has already been called.\n");
+	}
+	return Global::instance;
+}
+
+//----------------------------------------------------------
+Global *Global::getInstance()
+{
+	if(!instance)
+	{
+		return Global::init();
+	}
+	else
+		return Global::instance;
+}
+
+//----------------------------------------------------------
+void Global::destroy()
+{
+	delete Global::instance;
+	Global::instance = 0;
+}
+
 //----------------------------------------------------------
 void Global::newGame()
 {
-	Global::setHiScore();
-	Global::gameSkill = Global::gameSkillBase + 0.5;
-	Global::gameSkill += (Global::gameLevel-1)*0.05;
-	Global::gameFrame = 0;
-	Global::enemyFleet->clear();
-	Global::powerUps->clear();
-	Global::enemyAmmo->clear();
-	Global::heroAmmo->clear();
-	Global::itemAdd->clear();
-	Global::explosions->clear();
-	Global::hero->newGame();
-	Global::hero->setLives(4);
+	setHiScore();
+	gameSkill = gameSkillBase + 0.5;
+	gameSkill += (gameLevel-1)*0.05;
+	gameFrame = 0;
+	enemyFleet->clear();
+	powerUps->clear();
+	enemyAmmo->clear();
+	heroAmmo->clear();
+	itemAdd->clear();
+	explosions->clear();
+	hero->newGame();
+	hero->setLives(4);
 	
 //	Global::generateRandom();
-	Global::itemAdd->loadScreenItems("");
-	if(Global::groundGame != Global::groundMenu) 
+	itemAdd->loadScreenItems("");
+	if(groundGame != groundMenu) 
 	{
 		//delete game ground and set to menu/game common ground
-		delete Global::groundGame;
-		Global::groundGame = Global::groundMenu;
+		delete groundGame;
+		groundGame = groundMenu;
 	}
-	Global::ground = Global::groundGame;
-	Global::ground->setVariation(Global::gameLevel-1);
-	if(Global::eventFile)
-		fclose(Global::eventFile);
+	ground = groundGame;
+	ground->setVariation(gameLevel-1);
+	if(eventFile)
+		fclose(eventFile);
 	
-	Global::audio->setMusicIndex(Global::gameLevel-1);
+	audio->setMusicIndex(gameLevel-1);
 //	//-- cheezy, partially functional record mechanism
 //	Global::eventFile = fopen("EVENT_FILE.txt", "w");
 //	Global::eventFile = fopen("EVENT_FILE.txt", "r");
@@ -192,59 +241,59 @@ void Global::gotoNextLevel()
 {
 //	Global::scrollSpeed = -Global::gameSkill*0.05;
 //	fprintf(stderr, "%f\n", Global::scrollSpeed);
-	Global::gameLevel++;
-	if(Global::maxLevel < Global::gameLevel)
-		Global::maxLevel = Global::gameLevel;
-	Global::gameSkill += 0.05;
-	if(Global::gameSkill > 1.9)
-		Global::gameSkill = 1.9;
-	Global::gameFrame = 0;
-	Global::enemyFleet->clear();
-	Global::powerUps->clear();
-	Global::enemyAmmo->clear();
-	Global::heroAmmo->clear();
-	Global::itemAdd->clear();
-	Global::hero->fullHealth();
+	gameLevel++;
+	if(maxLevel < gameLevel)
+		maxLevel = gameLevel;
+	gameSkill += 0.05;
+	if(gameSkill > 1.9)
+		gameSkill = 1.9;
+	gameFrame = 0;
+	enemyFleet->clear();
+	powerUps->clear();
+	enemyAmmo->clear();
+	heroAmmo->clear();
+	itemAdd->clear();
+	hero->fullHealth();
 	
-//	Global::generateRandom();
-	Global::itemAdd->loadScreenItems("");
+//	generateRandom();
+	itemAdd->loadScreenItems("");
 	
 	// when more than one ground is used, check here if it 
 	// need to be created.
-	Global::ground->nextVariation();
+	ground->nextVariation();
 	
-	Global::audio->nextMusicIndex();
+	audio->nextMusicIndex();
 }
 
 //----------------------------------------------------------
 void Global::createGame()
 {
 //	fprintf(stderr, "begin startup...");
-	Global::mainGL		= new MainGL();
-	Global::explosions	= new Explosions();
-	Global::enemyFleet	= new EnemyFleet();
-	Global::hero		= new HeroAircraft();
-	Global::heroAmmo	= new HeroAmmo();
-	Global::enemyAmmo	= new EnemyAmmo();
-	Global::statusDisplay = new StatusDisplay();
-	Global::powerUps	= new PowerUps();
-	Global::ground		= new GroundMetal();
-	Global::menu		= new MenuGL();
-	Global::itemAdd		= new ScreenItemAdd();
+	mainGL		= new MainGL();
+	explosions	= new Explosions();
+	enemyFleet	= new EnemyFleet();
+	hero		= new HeroAircraft();
+	heroAmmo	= new HeroAmmo();
+	enemyAmmo	= new EnemyAmmo();
+	statusDisplay = new StatusDisplay();
+	powerUps	= new PowerUps();
+	ground		= new GroundMetal();
+	menu		= new MenuGL();
+	itemAdd		= new ScreenItemAdd();
 	
 #if defined(AUDIO_OPENAL)
-	Global::audio		= new AudioOpenAL();
+	audio		= new AudioOpenAL();
 #elif defined(AUDIO_SDLMIXER)
-	Global::audio		= new AudioSDLMixer();
+	audio		= new AudioSDLMixer();
 #else
-	Global::audio		= new Audio();
+	audio		= new Audio();
 #endif
 
-	Global::groundGame	= Global::groundMenu = Global::ground;
+	groundGame	= groundMenu = ground;
 
-	Global::newGame();
+	newGame();
 	
-	Global::audio->setMusicMode(Audio::MusicMenu);
+	audio->setMusicMode(Audio::MusicMenu);
 	fprintf(stderr, "...startup complete.\n");
 }
 
@@ -252,17 +301,17 @@ void Global::createGame()
 void Global::deleteGame()
 {
 //	fprintf(stderr, "begin shutdown...\n");
-	delete Global::enemyFleet;
-	delete Global::hero;
-	delete Global::heroAmmo;
-	delete Global::enemyAmmo;
-	delete Global::statusDisplay;
-	delete Global::explosions;
-	delete Global::powerUps;
-	delete Global::ground;
-	delete Global::menu;
-	delete Global::itemAdd;
-	delete Global::audio;
+	delete enemyFleet;
+	delete hero;
+	delete heroAmmo;
+	delete enemyAmmo;
+	delete statusDisplay;
+	delete explosions;
+	delete powerUps;
+	delete ground;
+	delete menu;
+	delete itemAdd;
+	delete audio;
 //	fprintf(stderr, "...shutdown complete.\n");
 }
 
@@ -293,21 +342,21 @@ bool Global::readConfigFile()
 		numLines = i;
 		for(i = 0; i < numLines; i++)
 		{
-			if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n", &Global::screenSize); }
-			if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n", &Global::mouseSpeed); }
-			if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &Global::gameSkillBase); }
-			if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n", &Global::gfxLevel);   }
-			if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n", &Global::volSound);   }
-			if(strncmp(configStrings[i], "volMusic", 8) == 0) { sscanf(configStrings[i], "volMusic %f\n", &Global::volMusic);   }
-			if(strncmp(configStrings[i], "full_scr", 8) == 0) { sscanf(configStrings[i], "full_screen %d\n", &tmp);	Global::full_screen	= (bool)tmp; }
-			if(strncmp(configStrings[i], "true_col", 8) == 0) { sscanf(configStrings[i], "true_color %d\n", &tmp);	Global::true_color	= (bool)tmp; }
-			if(strncmp(configStrings[i], "swap_ste", 8) == 0) { sscanf(configStrings[i], "swap_stereo %d\n", &tmp);	Global::swap_stereo	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n", &tmp);	Global::auto_speed	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n", &tmp);	Global::show_fps	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);Global::use_playList= (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n", &tmp);   Global::use_cdrom   = (bool)tmp;  }
-			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n", &Global::maxLevel);  }
-			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n", &Global::viewGamma); }
+			if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n", &screenSize); }
+			if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n", &mouseSpeed); }
+			if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &gameSkillBase); }
+			if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n", &gfxLevel);   }
+			if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n", &volSound);   }
+			if(strncmp(configStrings[i], "volMusic", 8) == 0) { sscanf(configStrings[i], "volMusic %f\n", &volMusic);   }
+			if(strncmp(configStrings[i], "full_scr", 8) == 0) { sscanf(configStrings[i], "full_screen %d\n", &tmp);	full_screen	= (bool)tmp; }
+			if(strncmp(configStrings[i], "true_col", 8) == 0) { sscanf(configStrings[i], "true_color %d\n", &tmp);	true_color	= (bool)tmp; }
+			if(strncmp(configStrings[i], "swap_ste", 8) == 0) { sscanf(configStrings[i], "swap_stereo %d\n", &tmp);	swap_stereo	= (bool)tmp;  }
+			if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n", &tmp);	auto_speed	= (bool)tmp;  }
+			if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n", &tmp);	show_fps	= (bool)tmp;  }
+			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);use_playList= (bool)tmp;  }
+			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n", &tmp);   use_cdrom   = (bool)tmp;  }
+			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n", &maxLevel);  }
+			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n", &viewGamma); }
 		}
 	}
 	else
@@ -316,7 +365,7 @@ bool Global::readConfigFile()
 		retVal = false;
 	}
 	
-	Global::setScreenSize(Global::screenSize);
+	setScreenSize(screenSize);
 	
 	return retVal;
 }
@@ -337,21 +386,21 @@ bool Global::saveConfigFile()
 	file = fopen(configFilename, "w");
 	if(file)
 	{
-		fprintf(file, "use_playList %d\n",	(int)Global::use_playList);
-		fprintf(file, "use_cdrom %d\n",		(int)Global::use_cdrom);
-		fprintf(file, "full_screen %d\n", 	(int)Global::full_screen);
-		fprintf(file, "true_color %d\n", 	(int)Global::true_color);
-		fprintf(file, "swap_stereo %d\n",	(int)Global::swap_stereo);
-		fprintf(file, "auto_speed %d\n",	(int)Global::auto_speed);
-		fprintf(file, "show_fps %d\n",		(int)Global::show_fps);
-		fprintf(file, "screenSize %d\n",	Global::screenSize);
-		fprintf(file, "gfxLevel %d\n",		Global::gfxLevel);
-		fprintf(file, "gameSkillBase %g\n",	Global::gameSkillBase);
-		fprintf(file, "mouseSpeed %g\n",	Global::mouseSpeed);
-		fprintf(file, "maxLevel %d\n",		Global::maxLevel);
-		fprintf(file, "volSound %g\n",		Global::volSound);
-		fprintf(file, "volMusic %g\n",		Global::volMusic);
-		fprintf(file, "viewGamma %g\n",		Global::viewGamma);
+		fprintf(file, "use_playList %d\n",	(int)use_playList);
+		fprintf(file, "use_cdrom %d\n",		(int)use_cdrom);
+		fprintf(file, "full_screen %d\n", 	(int)full_screen);
+		fprintf(file, "true_color %d\n", 	(int)true_color);
+		fprintf(file, "swap_stereo %d\n",	(int)swap_stereo);
+		fprintf(file, "auto_speed %d\n",	(int)auto_speed);
+		fprintf(file, "show_fps %d\n",		(int)show_fps);
+		fprintf(file, "screenSize %d\n",	screenSize);
+		fprintf(file, "gfxLevel %d\n",		gfxLevel);
+		fprintf(file, "gameSkillBase %g\n",	gameSkillBase);
+		fprintf(file, "mouseSpeed %g\n",	mouseSpeed);
+		fprintf(file, "maxLevel %d\n",		maxLevel);
+		fprintf(file, "volSound %g\n",		volSound);
+		fprintf(file, "volMusic %g\n",		volMusic);
+		fprintf(file, "viewGamma %g\n",		viewGamma);
 
 		fclose(file);
 		fprintf(stderr, "wrote config file (%s)\n", configFilename);
@@ -393,9 +442,9 @@ bool Global::saveHiScoreFile()
 	file = fopen(configFilename, "w");
 	if(file)
 	{
-		fwrite(Global::hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-		fwrite(Global::hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-		fwrite(Global::hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+		fwrite(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
+		fwrite(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
+		fwrite(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
 		fclose(file);
 	}
 	else
@@ -432,9 +481,9 @@ bool Global::readHiScoreFile()
 	file = fopen(configFilename, "r");
 	if(file)
 	{
-		fread(Global::hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-		fread(Global::hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-		fread(Global::hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+		fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
+		fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
+		fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
 		fclose(file);
 	}
 	else 
@@ -449,19 +498,19 @@ bool Global::readHiScoreFile()
 //----------------------------------------------------------
 void Global::deleteTextures()
 {
-	fprintf(stderr, "Global::deleteTextures()\n");
+	fprintf(stderr, "deleteTextures()\n");
 //	return;
 	glFinish();
-	Global::mainGL->deleteTextures();
-	Global::enemyAmmo->deleteTextures();
-	Global::enemyFleet->deleteTextures();
-	Global::explosions->deleteTextures();
-	Global::hero->deleteTextures();
-	Global::heroAmmo->deleteTextures();
-	Global::ground->deleteTextures();
-	Global::menu->deleteTextures();
-	Global::powerUps->deleteTextures();
-	Global::statusDisplay->deleteTextures();
+	mainGL->deleteTextures();
+	enemyAmmo->deleteTextures();
+	enemyFleet->deleteTextures();
+	explosions->deleteTextures();
+	hero->deleteTextures();
+	heroAmmo->deleteTextures();
+	ground->deleteTextures();
+	menu->deleteTextures();
+	powerUps->deleteTextures();
+	statusDisplay->deleteTextures();
 	glFinish();
 }
 
@@ -471,16 +520,16 @@ void Global::loadTextures()
 	fprintf(stderr, "Global::loadTextures()\n");
 //	return;
 	glFinish();
-	Global::mainGL->loadTextures();
-	Global::enemyAmmo->loadTextures();
-	Global::enemyFleet->loadTextures();
-	Global::explosions->loadTextures();
-	Global::hero->loadTextures();
-	Global::heroAmmo->loadTextures();
-	Global::ground->loadTextures();
-	Global::menu->loadTextures();
-	Global::powerUps->loadTextures();
-	Global::statusDisplay->loadTextures();
+	mainGL->loadTextures();
+	enemyAmmo->loadTextures();
+	enemyFleet->loadTextures();
+	explosions->loadTextures();
+	hero->loadTextures();
+	heroAmmo->loadTextures();
+	ground->loadTextures();
+	menu->loadTextures();
+	powerUps->loadTextures();
+	statusDisplay->loadTextures();
 	glFinish();
 }
 
@@ -490,29 +539,29 @@ void Global::setScreenSize(int m)
 	switch(m)
 	{
 		case 0:
-			Global::screenW = 512;
-			Global::screenH = 384;
+			screenW = 512;
+			screenH = 384;
 			break;
 		case 1:
-			Global::screenW = 640;
-			Global::screenH = 480;
+			screenW = 640;
+			screenH = 480;
 			break;
 		case 2:
-			Global::screenW = 800;
-			Global::screenH = 600;
+			screenW = 800;
+			screenH = 600;
 			break;
 		case 3:
-			Global::screenW = 1024;
-			Global::screenH = 768;
+			screenW = 1024;
+			screenH = 768;
 			break;
 		case 4:
-			Global::screenW = 1280;
-			Global::screenH = 960;
+			screenW = 1280;
+			screenH = 960;
 			break;
 		default:
-			Global::screenSize = 1;
-			Global::screenW = 640;
-			Global::screenH = 480;
+			screenSize = 1;
+			screenW = 640;
+			screenH = 480;
 			break;
 	}
 }

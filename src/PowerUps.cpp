@@ -27,6 +27,7 @@
 //====================================================================
 PowerUps::PowerUps()
 {
+	game = Global::getInstance();
 	int i;
 	
 	activeCount = 0;
@@ -39,7 +40,7 @@ PowerUps::PowerUps()
 		tex[i] = 0;
 	}
 	
-	speed = Global::scrollSpeed * 0.8;
+	speed = game->scrollSpeed * 0.8;
 	
 	loadTextures();
 	
@@ -126,7 +127,7 @@ void	PowerUps::clear()
 //		fprintf(stderr, "cur = %p\n", cur);
 		del = cur;
 		cur = cur->next;
-		Global::itemAdd->killScreenItem(del);
+		game->itemAdd->killScreenItem(del);
 //		delete del;
 	}
 	pwrUpRoot->next = 0;
@@ -159,7 +160,7 @@ void	PowerUps::remove(PowerUp *pwr)
 		currentPwrUp = pwr->back;
 		pwr->seal();
 	}
-	Global::itemAdd->killScreenItem(pwr);
+	game->itemAdd->killScreenItem(pwr);
 	activeCount--;
 	fprintf(stderr, "active power ups = %d\n", activeCount);
 //	delete pwr;
@@ -190,10 +191,10 @@ void PowerUps::update()
 	while( pwrUp  )
 	{
 		pwrUp->age++;
-		pwrUp->pos[1] += (speed*Global::speedAdj);
+		pwrUp->pos[1] += (speed*game->speedAdj);
 		if(pwrUp->vel[0] || pwrUp->vel[1])
 		{
-			float s = (1.0-Global::speedAdj)+(Global::speedAdj*0.982);
+			float s = (1.0-game->speedAdj)+(game->speedAdj*0.982);
 			pwrUp->vel[0] *= s;
 			pwrUp->vel[1] *= s;
 			pwrUp->pos[0] += pwrUp->vel[0];
@@ -201,7 +202,7 @@ void PowerUps::update()
 			if(pwrUp->vel[0] < 0.01) pwrUp->vel[0] = 0.0;
 			if(pwrUp->vel[1] < 0.01) pwrUp->vel[1] = 0.0;
 		}
-		float b = Global::screenBound[0]-1.0;
+		float b = game->screenBound[0]-1.0;
 		if(pwrUp->pos[0] < -b)
 			pwrUp->pos[0] = -b;
 		if(pwrUp->pos[0] >  b)
@@ -209,19 +210,19 @@ void PowerUps::update()
 			
 		if(pwrUp->pos[1] < -12)
 		{
-			if(Global::gameMode == Global::Game)
+			if(game->gameMode == game->Game)
 				switch(pwrUp->type)
 				{
 					case PowerUps::SuperShields:
-						Global::hero->addLife();
-						Global::hero->addScore(2500.0);
+						game->hero->addLife();
+						game->hero->addScore(2500.0);
 						break;
 					case PowerUps::Shields:
 					case PowerUps::Repair:
-						Global::hero->addScore(10000.0);
+						game->hero->addScore(10000.0);
 						break;
 					default:
-						Global::hero->addScore(2500.0);
+						game->hero->addScore(2500.0);
 						break;
 				}
 			delUp = pwrUp;

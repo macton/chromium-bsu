@@ -27,6 +27,8 @@
 //====================================================================
 EnemyFleet::EnemyFleet()
 {	
+	game = Global::getInstance();
+	
 	loadTextures();
 	
 	currentShip = 0;
@@ -135,7 +137,7 @@ void	EnemyFleet::drawGL()
 				}
 			 	if(!((thisEnemy->age-192)%256))
 				{
-					retarget(EnemyGnat, Global::hero);
+					retarget(EnemyGnat, game->hero);
 				}
 				break;
 			case EnemyOmni:
@@ -213,7 +215,7 @@ void	EnemyFleet::drawGL()
 				}
 			 	if(!((thisEnemy->age-272)%256))
 				{
-					retarget(EnemyGnat, Global::hero);
+					retarget(EnemyGnat, game->hero);
 				}
 				break;
 			default:
@@ -272,41 +274,41 @@ void	EnemyFleet::update()
 		{
 			float s[2] = { thisEnemy->size[0]*0.7, thisEnemy->size[1]*0.7 };
 			if( thisEnemy->damage > thisEnemy->baseDamage*0.7 )
-				if( !(Global::gameFrame%18) )
+				if( !(game->gameFrame%18) )
 				{
 					p[0] = thisEnemy->pos[0] + SRAND*s[0];
 					p[1] = thisEnemy->pos[1] + SRAND*s[1];
 					p[2] = thisEnemy->pos[2];
-					Global::explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
+					game->explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
 				}
 			if( thisEnemy->damage > thisEnemy->baseDamage*0.5 )
-				if( !(Global::gameFrame%10) )
+				if( !(game->gameFrame%10) )
 				{
 					p[0] = thisEnemy->pos[0] + SRAND*s[0];
 					p[1] = thisEnemy->pos[1] + SRAND*s[1];
 					p[2] = thisEnemy->pos[2];
-					Global::explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
+					game->explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
 				}
 			if( thisEnemy->damage > thisEnemy->baseDamage*0.3 )
-				if( !(Global::gameFrame%4) )
+				if( !(game->gameFrame%4) )
 				{
 					p[0] = thisEnemy->pos[0] + SRAND*s[0];
 					p[1] = thisEnemy->pos[1] + SRAND*s[1];
 					p[2] = thisEnemy->pos[2];
-					Global::explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
+					game->explosions->addExplo(Explosions::EnemyDamage, p, 0, 1.0);
 				}
 		}
 		//-------------- Delete enemies that got through...
 		
 //		if( thisEnemy->pos[1] < -12.0 ) 
 		if( thisEnemy->pos[1] < -8.0 && thisEnemy->type != EnemyGnat) 
-			Global::statusDisplay->enemyWarning( 1.0-((thisEnemy->pos[1]+14.0)/6.0) );
+			game->statusDisplay->enemyWarning( 1.0-((thisEnemy->pos[1]+14.0)/6.0) );
 		if( thisEnemy->pos[1] < -14.0 ) 
 		{
 			thisEnemy->damage = 1;
 			thisEnemy->age = 0;
-			Global::hero->loseLife();
-			Global::tipShipPast++;
+			game->hero->loseLife();
+			game->tipShipPast++;
 		}
 		
 		//-------------- If enemies are critically damaged, destroy them...
@@ -330,62 +332,62 @@ void	EnemyFleet::update()
 						bossExplosion(thisEnemy);
 						
 						//--*** TRIGGER END OF LEVEL ***--//
-						Global::hero->addScore(5000.0);
-						Global::gameMode = Global::LevelOver;
-						Global::heroSuccess = 0;
+						game->hero->addScore(5000.0);
+						game->gameMode = game->LevelOver;
+						game->heroSuccess = 0;
 						break;
 					case EnemyOmni:	
-						Global::hero->addScore(25.0);
-						Global::explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos);
-						Global::explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos, -3, 0.7);
-						Global::explosions->addExplo(Explosions::EnemyAmmo04, thisEnemy->pos);
-						Global::audio->playSound(Audio::ExploPop, thisEnemy->pos);
+						game->hero->addScore(25.0);
+						game->explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos);
+						game->explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos, -3, 0.7);
+						game->explosions->addExplo(Explosions::EnemyAmmo04, thisEnemy->pos);
+						game->audio->playSound(Audio::ExploPop, thisEnemy->pos);
 						break;
 					case EnemyRayGun:
-						Global::hero->addScore(1000.0);
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p);
+						game->hero->addScore(1000.0);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p);
 						p[0] = thisEnemy->pos[0]+0.55;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -5, 1.5);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -5, 1.5);
 						p[0] = thisEnemy->pos[0]-0.5;
 						p[1] = thisEnemy->pos[1]+0.2;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -15);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -15);
 						p[0] = thisEnemy->pos[0];
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -20, 2.0);
-						Global::explosions->addExplo(Explosions::EnemyDamage, p, -30, 2.0);
-						Global::audio->playSound(Audio::Explosion, thisEnemy->pos);
-						Global::audio->playSound(Audio::ExploBig, thisEnemy->pos);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -20, 2.0);
+						game->explosions->addExplo(Explosions::EnemyDamage, p, -30, 2.0);
+						game->audio->playSound(Audio::Explosion, thisEnemy->pos);
+						game->audio->playSound(Audio::ExploBig, thisEnemy->pos);
 						break;
 					case EnemyTank:
-						Global::hero->addScore(1500.0);
+						game->hero->addScore(1500.0);
 						p[0] = thisEnemy->pos[0];
 						p[1] = thisEnemy->pos[1];
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -5, 2.5);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -5, 2.5);
 						p[0] = thisEnemy->pos[0]-0.9;
 						p[1] = thisEnemy->pos[1]-1.0;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -0, 1.5);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -0, 1.5);
 						p[0] = thisEnemy->pos[0]+1.0;
 						p[1] = thisEnemy->pos[1]-0.8;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -13, 2.0);
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p,  -2, 1.0);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -13, 2.0);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p,  -2, 1.0);
 						p[0] = thisEnemy->pos[0]+0.7;
 						p[1] = thisEnemy->pos[1]+0.7;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -20, 1.7);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -20, 1.7);
 						p[0] = thisEnemy->pos[0]-0.7;
 						p[1] = thisEnemy->pos[1]+0.9;
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, p, -8, 1.5);
-						Global::audio->playSound(Audio::Explosion, thisEnemy->pos);
-						Global::audio->playSound(Audio::ExploBig, thisEnemy->pos);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, p, -8, 1.5);
+						game->audio->playSound(Audio::Explosion, thisEnemy->pos);
+						game->audio->playSound(Audio::ExploBig, thisEnemy->pos);
 						break;
 					case EnemyGnat:	
-						Global::hero->addScore(10.0);
-						Global::explosions->addExplo(Explosions::EnemyAmmo04, thisEnemy->pos);
-						Global::audio->playSound(Audio::ExploPop, thisEnemy->pos);
+						game->hero->addScore(10.0);
+						game->explosions->addExplo(Explosions::EnemyAmmo04, thisEnemy->pos);
+						game->audio->playSound(Audio::ExploPop, thisEnemy->pos);
 						break;
 					default:	//-- Add extra Damage explosion delayed for nice bloom
-						Global::hero->addScore(75.0);
-						Global::explosions->addExplo(Explosions::EnemyDestroyed, thisEnemy->pos);
-						Global::explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos, -15);
-						Global::audio->playSound(Audio::Explosion, thisEnemy->pos);
+						game->hero->addScore(75.0);
+						game->explosions->addExplo(Explosions::EnemyDestroyed, thisEnemy->pos);
+						game->explosions->addExplo(Explosions::EnemyDamage, thisEnemy->pos, -15);
+						game->audio->playSound(Audio::Explosion, thisEnemy->pos);
 						break;
 				}
 			}
@@ -414,16 +416,16 @@ void	EnemyFleet::bossExplosion(EnemyAircraft *thisEnemy)
 		b = thisEnemy->size[1]*(i*0.2);
 		p[0] = thisEnemy->pos[0]+a*FRAND;
 		p[1] = thisEnemy->pos[1]+b*FRAND;
-		Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]-a*FRAND;
 		p[1] = thisEnemy->pos[1]+b*FRAND;
-		Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]+a*FRAND;
 		p[1] = thisEnemy->pos[1]-b*FRAND;
-		Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]-a*FRAND;
 		p[1] = thisEnemy->pos[1]-b*FRAND;
-		Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
 	}
 						
 	switch(thisEnemy->type)
@@ -460,42 +462,42 @@ void	EnemyFleet::bossExplosion(EnemyAircraft *thisEnemy)
 		p[0] = thisEnemy->pos[0]+xsin;
 		p[1] = thisEnemy->pos[1]+ycos;
 		if(!(i%4))
-			Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-ii*2.0f), 1.5+FRAND);
+			game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-ii*2.0f), 1.5+FRAND);
 		xsin = r*scaleX*sin(i* c );
 		ycos = r*scaleY*cos(i* d );
 		p[0] = thisEnemy->pos[0]+xsin* 1.5;
 		p[1] = thisEnemy->pos[1]-ycos* 1.5;
 		if(!(i%5))
 		{
-			Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-40.0f-ii*3.0f), 1.5+FRAND);
-			Global::explosions->addExplo(Explosions::EnemyDamage, p, (int)(-60.0f-ii*3.0f), 1.5+FRAND);
+			game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-40.0f-ii*3.0f), 1.5+FRAND);
+			game->explosions->addExplo(Explosions::EnemyDamage, p, (int)(-60.0f-ii*3.0f), 1.5+FRAND);
 		}
 		p[0] = thisEnemy->pos[0]+xsin* 1.5;
 		p[1] = thisEnemy->pos[1]+ycos* 1.0;
 		if(!(i%3))
-			Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)-ii, 1.5+FRAND);
+			game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)-ii, 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]-ycos;
 		p[1] = thisEnemy->pos[1]+xsin;
 		if(!(i%3))
-			Global::explosions->addExplo(Explosions::EnemyDestroyed, p, (int)-ii, 1.5+FRAND);
+			game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)-ii, 1.5+FRAND);
 	}
 	
 	//-- Boss Audio Explosion
 	p[0] = -10.0; p[1] = -5.0;
-	Global::audio->playSound(Audio::Explosion, p);
-	Global::audio->playSound(Audio::Explosion, p, -27);
-	Global::audio->playSound(Audio::ExploPop, p, -45);
+	game->audio->playSound(Audio::Explosion, p);
+	game->audio->playSound(Audio::Explosion, p, -27);
+	game->audio->playSound(Audio::ExploPop, p, -45);
 	p[0] =  10.0;
-	Global::audio->playSound(Audio::Explosion, p,  -3);
-	Global::audio->playSound(Audio::Explosion, p, -25);
-	Global::audio->playSound(Audio::ExploPop,  p, -40);
+	game->audio->playSound(Audio::Explosion, p,  -3);
+	game->audio->playSound(Audio::Explosion, p, -25);
+	game->audio->playSound(Audio::ExploPop,  p, -40);
 	p[0] =  0.0;
-	Global::audio->playSound(Audio::ExploBig, p,   0);
-	Global::audio->playSound(Audio::ExploBig, p, -60);
-	Global::audio->playSound(Audio::ExploPop, p, -55);
-	Global::audio->playSound(Audio::ExploPop, p, -80);
-	Global::audio->playSound(Audio::ExploPop, p, -120);
-	Global::audio->playSound(Audio::ExploPop, p, -160);
+	game->audio->playSound(Audio::ExploBig, p,   0);
+	game->audio->playSound(Audio::ExploBig, p, -60);
+	game->audio->playSound(Audio::ExploPop, p, -55);
+	game->audio->playSound(Audio::ExploPop, p, -80);
+	game->audio->playSound(Audio::ExploPop, p, -120);
+	game->audio->playSound(Audio::ExploPop, p, -160);
 }
 
 //----------------------------------------------------------
@@ -552,5 +554,5 @@ void	EnemyFleet::addEnemy(EnemyAircraft *newEnemy)
 //----------------------------------------------------------
 void	EnemyFleet::killEnemy(EnemyAircraft *enemy)
 {
-	Global::itemAdd->killScreenItem(enemy);
+	game->itemAdd->killScreenItem(enemy);
 }

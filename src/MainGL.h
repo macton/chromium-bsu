@@ -8,6 +8,9 @@
 #ifndef MainGL_h
 #define MainGL_h
 
+class Global;
+
+//====================================================================
 class MainGL
 {
 public:
@@ -24,6 +27,9 @@ public:
 	
 	void	loadTextures();
 	void	deleteTextures();
+
+private:
+	Global	*game;
 };
 
 #endif // mainGL_h

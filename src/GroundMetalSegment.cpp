@@ -44,11 +44,11 @@ void GroundMetalSegment::drawGL()
 	
 	age += 1.0;
 	
-	clr_sin = 0.5*sin(Global::gameFrame*0.001);
+	clr_sin = 0.5*sin(parent->game->gameFrame*0.001);
 	r1_clr[0] = 0.15+clr_sin;
 	r2_clr[0] = 0.15+clr_sin;
 	
-	clr_sin = 0.2*sin(Global::gameFrame*0.0005);
+	clr_sin = 0.2*sin(parent->game->gameFrame*0.0005);
 	c0_clr[0] = 0.28+clr_sin;
 	c0_clr[1] = 0.25+clr_sin;
 	c0_clr[2] = 0.16+clr_sin;
@@ -65,17 +65,17 @@ void GroundMetalSegment::drawGL()
 		case 0:
 			rep = 0.26;
 			tilt = 0.1;
-			S = -Global::frame*0.001;
+			S = -parent->game->frame*0.001;
 			blipMirrorT = false;
 			break;
 		case 1:
 			rep = 0.4;
 			tilt = 0.2;
-			S = -Global::frame*0.001;
+			S = -parent->game->frame*0.001;
 			blipMirrorT = true;
 			break;
 		case 2:
-			S = -Global::frame*0.005;
+			S = -parent->game->frame*0.005;
 			tmp = sin(S);
 			rep = 0.7+tmp;
 			tilt = 0.5+tmp;
@@ -83,7 +83,7 @@ void GroundMetalSegment::drawGL()
 			break;
 	}
 	
-	if(Global::gfxLevel > 1)
+	if(parent->game->gfxLevel > 1)
 	{
 		float repA = 0.0;
 		float repB = rep;
@@ -118,7 +118,7 @@ void GroundMetalSegment::drawGL()
 		rep = 1.0;
 		glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Base]);
 		glBegin(GL_TRIANGLES); //-- use triangles to prevent color popping on Utah
-		if(Global::gfxLevel > 0)
+		if(parent->game->gfxLevel > 0)
 		{
 			glColor4fv(c0_clr); glTexCoord2f( rep,  rep); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);
 			glColor4fv(c1_clr); glTexCoord2f( rep,  0.0); glVertex3f(         pos[0],          pos[1], pos[2]);

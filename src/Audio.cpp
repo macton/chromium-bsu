@@ -20,6 +20,8 @@ int		SDL_CDStatus(void*)	{ return 0; }
 //====================================================================
 Audio::Audio()
 {
+	game = Global::getInstance();
+	
     fileNames[HeroAmmo00]	= "wav/boom.wav";
 	fileNames[PowerUp]		= "wav/power.wav";
 	fileNames[Explosion]	= "wav/exploStd.wav";
@@ -34,7 +36,7 @@ Audio::Audio()
 	musicMax = 1;
 	musicIndex = 0;
 	
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		initCDROM();
 	}
@@ -101,7 +103,7 @@ static const char *trackType(int t)
 void Audio::initCDROM()
 {
 	int tmp;
-	if(Global::use_cdrom)
+	if(game->use_cdrom)
 	{
 		tmp = SDL_CDNumDrives();
 		fprintf(stderr, "%d CDROM drive(s).\n", tmp);
@@ -160,7 +162,7 @@ void Audio::initCDROM()
 //----------------------------------------------------------
 void	Audio::stopMusic()
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		if(cdrom)
 			SDL_CDStop(cdrom);
@@ -173,7 +175,7 @@ void	Audio::stopMusic()
 //----------------------------------------------------------
 void	Audio::pauseGameMusic(bool status)
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		if(cdrom)
 		{
@@ -197,7 +199,7 @@ void	Audio::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	Audio::setMusicMode(SoundType mode)
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		int cdromStatus = 0;
 		if(cdrom)
@@ -207,12 +209,12 @@ void	Audio::setMusicMode(SoundType mode)
 			{
 				default:
 				case MusicGame:
-					if(cdromStatus == CD_PAUSED && !Global::game_pause)
+					if(cdromStatus == CD_PAUSED && !game->game_pause)
 						SDL_CDResume(cdrom);
 					if(cdromStatus == CD_STOPPED)
 					{
 						SDL_CDPlayTracks(cdrom, musicIndex, 0, 1, 0);
-						if(Global::game_pause)
+						if(game->game_pause)
 							SDL_CDPause(cdrom);
 					}
 					break;
@@ -247,7 +249,7 @@ void	Audio::setSoundVolume(float)
 //----------------------------------------------------------
 void	Audio::setMusicIndex(int index)
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		bool	wasPlaying = false;
 		if(musicMax)

@@ -31,14 +31,15 @@ int		MainGLUT::now_time = 0;
 
 //====================================================================
 MainGLUT::MainGLUT(int argc, char **argv)
+	: MainToolkit(argc, argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(Global::screenW, Global::screenH);
+	glutInitWindowSize(game->screenW, game->screenH);
 	glutCreateWindow("Chromium B.S.U.");
 	
 	//-- Initialize OpenGL
-	Global::createGame();
+	game->createGame();
 	
 	glutDisplayFunc(MainGLUT::nullFunc);
 	glutReshapeFunc(MainGLUT::reshape);	
@@ -88,8 +89,8 @@ void MainGLUT::grabMouse(bool status)
 		glutSetCursor(GLUT_CURSOR_NONE);
 		glutMotionFunc(MainGLUT::mouseMotion);
 		glutPassiveMotionFunc(MainGLUT::mouseMotion);
-		xMid = Global::screenW/2;
-		yMid = Global::screenH/2;
+		xMid = game->screenW/2;
+		yMid = game->screenH/2;
 		glutWarpPointer(xMid, yMid);
 		xLast = xMid;
 		yLast = yMid;
@@ -105,30 +106,30 @@ void MainGLUT::grabMouse(bool status)
 //----------------------------------------------------------
 void MainGLUT::setVideoMode()
 {
-	Global::setScreenSize(Global::screenSize); //  set screenW & screenH for new screenSize
-	glutReshapeWindow(Global::screenW, Global::screenH);
-	Global::full_screen = false;
+	game->setScreenSize(game->screenSize); //  set screenW & screenH for new screenSize
+	glutReshapeWindow(game->screenW, game->screenH);
+	game->full_screen = false;
 }
 
 //----------------------------------------------------------
 void MainGLUT::reshape(int w, int h)
 {
-	Global::mainGL->reshapeGL(w, h);
+	game->mainGL->reshapeGL(w, h);
 }
 
 //----------------------------------------------------------
 void MainGLUT::nullFunc()
 {
-	Global::mainGL->drawGL();
+	game->mainGL->drawGL();
 	glutSwapBuffers();
 	
-	Global::frame++;
-	if( !(Global::gameFrame%10) )
+	game->frame++;
+	if( !(game->gameFrame%10) )
 	{
 		now_time = glutGet(GLUT_ELAPSED_TIME);
 		if(last_time)
 		{
-			Global::fps = (10.0/(now_time-last_time))*1000.0;
+			game->fps = (10.0/(now_time-last_time))*1000.0;
 		}
 		last_time = now_time;
 	}
@@ -140,9 +141,9 @@ void MainGLUT::drawGame(int)
 {
 	glutTimerFunc(33, MainGLUT::drawGame, 0);
 
-	Global::mainGL->drawGL();
+	game->mainGL->drawGL();
 	#ifdef CHECK_ERRORS
-	Global::toolkit->checkErrors();
+	game->toolkit->checkErrors();
 	#endif// CHECK_ERRORS
 	
 	glutPostRedisplay();
@@ -155,35 +156,35 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 	{
 		case 'q':
 		case 'Q':
-			Global::saveConfigFile();
-			Global::deleteGame();
+			game->saveConfigFile();
+			game->deleteGame();
 			exit(0);
 			break;
 		case 'G':
 		case 'g':
-			Global::toolkit->grabMouse(!mouseToggle);
+			game->toolkit->grabMouse(!mouseToggle);
 			break;
 		case 27: // <esc>
-			if(Global::gameMode == Global::Menu)
+			if(game->gameMode == game->Menu)
 			{
-				Global::gameMode = Global::Game;
-				Global::audio->setMusicMode(Audio::MusicGame);
-				Global::toolkit->grabMouse(true);
+				game->gameMode = game->Game;
+				game->audio->setMusicMode(Audio::MusicGame);
+				game->toolkit->grabMouse(true);
 			}
 			else
 			{
-				if(Global::gameMode != Global::Game)
+				if(game->gameMode != game->Game)
 				{
-					Global::newGame();
+					game->newGame();
 				}
-				Global::gameMode = Global::Menu;
-				Global::menu->startMenu();
-				Global::audio->setMusicMode(Audio::MusicMenu);
-				Global::toolkit->grabMouse(false);
+				game->gameMode = game->Menu;
+				game->menu->startMenu();
+				game->audio->setMusicMode(Audio::MusicMenu);
+				game->toolkit->grabMouse(false);
 			}
 			break;
 		default:
-			if(Global::gameMode == Global::Menu)
+			if(game->gameMode == game->Menu)
 			{
 				MainToolkit::Key tkkey = MainToolkit::KeySpace;
 				switch(key)
@@ -194,7 +195,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 						break;
 					default:	break;
 				}
-				Global::menu->keyHit(tkkey);
+				game->menu->keyHit(tkkey);
 			}
 			break;
 		
@@ -205,7 +206,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 //----------------------------------------------------------
 void MainGLUT::keyboardSpecial(int special, int, int)
 {
-	if(Global::gameMode == Global::Menu)
+	if(game->gameMode == game->Menu)
 	{
 		MainToolkit::Key tkkey;
 		switch(special)
@@ -216,7 +217,7 @@ void MainGLUT::keyboardSpecial(int special, int, int)
 			case GLUT_KEY_RIGHT:	tkkey = MainToolkit::KeyRight;	break;
 			default: break;
 		}
-		Global::menu->keyHit(tkkey);		
+		game->menu->keyHit(tkkey);		
 	}
 }
 
@@ -228,13 +229,13 @@ void MainGLUT::mouseEvent(int button, int state, int x, int y)
 		switch(button)
 		{
 			case GLUT_LEFT_BUTTON:
-				Global::hero->fireGun(++fire);
+				game->hero->fireGun(++fire);
 				break;
 			case GLUT_MIDDLE_BUTTON:
-				Global::hero->nextItem();
+				game->hero->nextItem();
 				break;
 			case GLUT_RIGHT_BUTTON:
-				Global::hero->useItem();
+				game->hero->useItem();
 				break;
 		}
 	}
@@ -243,7 +244,7 @@ void MainGLUT::mouseEvent(int button, int state, int x, int y)
 		switch(button)
 		{
 			case GLUT_LEFT_BUTTON:
-				Global::hero->fireGun(--fire);
+				game->hero->fireGun(--fire);
 				break;
 			case GLUT_MIDDLE_BUTTON:
 				break;
@@ -278,7 +279,7 @@ void MainGLUT::mouseMotion(int x, int y)
 			yDiff =  yNow - yLast;
 			if(xDiff || yDiff)
 			{
-				Global::hero->moveEvent(xDiff, yDiff);
+				game->hero->moveEvent(xDiff, yDiff);
 				glutWarpPointer(xMid, yMid);
 			}
 		}

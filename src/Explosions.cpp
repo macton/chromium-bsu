@@ -20,6 +20,8 @@
 //====================================================================
 Explosions::Explosions()
 {
+	game = Global::getInstance();
+	
 	int		i;	
 	for(i = 0; i < (int)NumExploTypes; i++)
 	{
@@ -293,7 +295,7 @@ void	Explosions::update()
 	for(int i = 0; i < NumExploTypes; i++)
 	{
 		if(exploPause[i][0] > 0.0)
-			exploPause[i][0] -= Global::speedAdj;
+			exploPause[i][0] -= game->speedAdj;
 		else
 			exploPause[i][0] = 0.0;
 		if(exploPause[i][2]) //-- if flag was set, init count
@@ -308,11 +310,11 @@ void	Explosions::update()
 			explo->age++;
 			if(explo->age > 0)
 			{
-				explo->pos[0] += explo->vel[0]*Global::speedAdj;
-				explo->pos[1] += explo->vel[1]*Global::speedAdj;
-				explo->pos[2] += explo->vel[2]*Global::speedAdj;
+				explo->pos[0] += explo->vel[0]*game->speedAdj;
+				explo->pos[1] += explo->vel[1]*game->speedAdj;
+				explo->pos[2] += explo->vel[2]*game->speedAdj;
 			}
-			if(explo->age > (exploStay[i]/Global::speedAdj))
+			if(explo->age > (exploStay[i]/game->speedAdj))
 			{
 				backExplo = explo->back;
 				nextExplo = explo->next;
@@ -375,7 +377,7 @@ void	Explosions::drawExplo(ExploType type)
 	glBegin(GL_QUADS);
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		if( age >= 0)
 		{
 			clr = age/exploStay[type];
@@ -391,7 +393,7 @@ void	Explosions::drawExplo(ExploType type)
 			glColor4f(tmp, tmp, tmp, clr);
 
 			if(type == HeroDamage)
-				p = Global::hero->pos;
+				p = game->hero->pos;
 			else
 				p = thisExplo->pos;
 
@@ -439,7 +441,7 @@ void	Explosions::drawAmmo(ExploType type)
 	glBegin(GL_QUADS);
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		ex = exploSize[type][0]*((age+5.0f)/(exploStay[type]+5.0f));
 		ey = exploSize[type][1]*((age+5.0f)/(exploStay[type]+5.0f));
 		clr = age/exploStay[type];
@@ -470,7 +472,7 @@ void	Explosions::drawBurst(ExploType type)
 	thisExplo = exploRoot[type]->next;
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		tmp = 1.0-age/exploStay[type];
 		clr = tmp;
 		ex = thisExplo->size*exploSize[type][0]*clr;
@@ -508,20 +510,20 @@ void	Explosions::drawShields(ExploType type)
 	float	*pos;
 	Explo	*thisExplo;
 	
-	if(!Global::hero->isVisible())
+	if(!game->hero->isVisible())
 		return;
 	glBindTexture(GL_TEXTURE_2D, tex[type]);
 	thisExplo = exploRoot[type]->next;
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		tmp = age/exploStay[type];
 		clr = 1.0-tmp;
 		tmp = 0.5+(clr*0.5);
 		ex = exploSize[type][0]*tmp;
 		ey = exploSize[type][1]*tmp;
 		glColor4f(clr, clr, 1.0, clr*0.7);
-		pos = Global::hero->pos;
+		pos = game->hero->pos;
 		glPushMatrix();
 		glTranslatef(pos[0], pos[1], pos[2]);
 		glRotatef(IRAND, 0.0, 0.0, 1.0);
@@ -551,7 +553,7 @@ void	Explosions::drawLife(ExploType type)
 	glBegin(GL_QUADS);
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		if(age >= 0)
 		{
 			p = thisExplo->pos;
@@ -604,7 +606,7 @@ void	Explosions::drawElectric(ExploType type)
 	thisExplo = exploRoot[type]->next;
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		if(age >= 0)
 		{
 			tmp = age/exploStay[type];
@@ -614,7 +616,7 @@ void	Explosions::drawElectric(ExploType type)
 			glColor4f(clr[0], clr[1], clr[2], clr[3]*alpha);
 			ex = exploSize[type][0];
 			ey = exploSize[type][1]*tmp;
-			tmp = (1.0-Global::speedAdj)+(Global::speedAdj*1.075);
+			tmp = (1.0-game->speedAdj)+(game->speedAdj*1.075);
 			thisExplo->vel[0] *= tmp;
 			thisExplo->vel[1] *= tmp;
 			thisExplo->vel[2] *= tmp;
@@ -648,7 +650,7 @@ void	Explosions::drawGlitter(ExploType type)
 	thisExplo = exploRoot[type]->next;
 	while(thisExplo)
 	{
-		age = thisExplo->age*Global::speedAdj;
+		age = thisExplo->age*game->speedAdj;
 		if( age >= 0)
 		{
 			tmp = age/exploStay[type];
@@ -704,7 +706,7 @@ void Explo::init(float p[3], int a, float s)
 	clr[1]	= 1.0;
 	clr[2]	= 1.0;
 	clr[3]	= 1.0;
-	age		= (int)(a/Global::speedAdj);
+	age		= (int)(a/(Global::getInstance()->speedAdj) );
 	size	= s;
 	back	= 0;
 	next 	= 0;
@@ -722,7 +724,7 @@ void Explo::init(float p[3], float v[3], float c[4], int a, float s)
 	clr[1]	= c[1];
 	clr[2]	= c[2];
 	clr[3]	= c[3];
-	age		= (int)(a/Global::speedAdj);
+	age		= (int)(a/(Global::getInstance()->speedAdj) );
 	size	= s;
 	back	= 0;
 	next 	= 0;

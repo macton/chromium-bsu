@@ -34,7 +34,9 @@ static float statClrAmmo[NUM_HERO_AMMO_TYPES][4] = {
 
 //====================================================================
 StatusDisplay::StatusDisplay()
-{	
+{
+	game = Global::getInstance();
+	
 	ammoAlpha = 0.0;
 	damageAlpha = 0.0;
     shieldAlpha = 0.0;
@@ -135,7 +137,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	
 	if(!hero)
 		return;
-	if(!(Global::frame%15) )
+	if(!(game->frame%15) )
 		blink = !blink;
 		
 	ammoAlpha *= 0.96;
@@ -154,31 +156,31 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	glColor4f(1.0, 1.0, 1.0, 0.4);
 	glPushMatrix();
 		sprintf(scoreBuf, "%07d", (int)hero->getScore());
-		txfBindFontTexture(Global::texFont);
+		txfBindFontTexture(game->texFont);
 		glTranslatef(-9.0, -8.2, 25.0);
 		glScalef(0.025, 0.02, 1.0);
-		txfRenderString(Global::texFont, scoreBuf, strlen(scoreBuf));
+		txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
 	glPopMatrix();
 	//-- draw fps
-	if(Global::show_fps)
+	if(game->show_fps)
 	{
 		glPushMatrix();
-			sprintf(scoreBuf, "%3.1f", Global::fps);
-			txfBindFontTexture(Global::texFont);
+			sprintf(scoreBuf, "%3.1f", game->fps);
+			txfBindFontTexture(game->texFont);
 			glTranslatef(7.75, 8.0, 25.0);
 			glScalef(0.018, 0.015, 1.0);
-			txfRenderString(Global::texFont, scoreBuf, strlen(scoreBuf));
+			txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
 		glPopMatrix();
 	}
 	
 	//-- draw ship lives
 	glPushMatrix();
 	glColor4f(0.6, 0.6, 0.7, 1.0);
-	glBindTexture(GL_TEXTURE_2D, Global::hero->heroTex);
+	glBindTexture(GL_TEXTURE_2D, game->hero->heroTex);
 	glTranslatef(10.2, 7.4, 25.0);
-	size[0] = Global::hero->getSize(0)*0.5;
-	size[1] = Global::hero->getSize(1)*0.5;
-	for(i = 0; i < Global::hero->getLives(); i++)
+	size[0] = game->hero->getSize(0)*0.5;
+	size[1] = game->hero->getSize(1)*0.5;
+	for(i = 0; i < game->hero->getLives(); i++)
 	{
 		drawQuad(size[0], size[1]);
 		glTranslatef(0.0, -size[1]*2.0, 0.0);
@@ -186,7 +188,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	glPopMatrix();	
 		
 	//-- draw usable items
-	if(Global::gfxLevel > 1)
+	if(game->gfxLevel > 1)
 	{
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 1.0);
@@ -195,9 +197,9 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		size[1] = 0.5;
 		for(i = 0; i < NUM_HERO_ITEMS; i++)
 		{
-			if(i == Global::hero->currentItem())
+			if(i == game->hero->currentItem())
 			{
-				float a = Global::hero->itemArmed()*0.8;
+				float a = game->hero->itemArmed()*0.8;
 				glColor4f(0.4+a, 0.4, 0.4, 0.4+a);
 				glBindTexture(GL_TEXTURE_2D, useFocus);
 				drawQuad(size[1], size[1]);
@@ -211,10 +213,10 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	}
 	
 	//-- draw 'enemy-got-past' Warning
-	if(enemyWarn && Global::hero->getLives() >= 0)
+	if(enemyWarn && game->hero->getLives() >= 0)
 	{
 		glPushMatrix();
-		glColor4f(1.0, 0.0, 0.0, enemyWarn+0.15*sin(Global::gameFrame*0.7));
+		glColor4f(1.0, 0.0, 0.0, enemyWarn+0.15*sin(game->gameFrame*0.7));
 		glTranslatef(0.0, -8.75, 25.0);
 		glBindTexture(GL_TEXTURE_2D, heroAmmoFlash[0]);
 		drawQuad(12.0, 3.0);
@@ -279,7 +281,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	float	szx = 0.5;
 	float	szy = 6.0;
 	static	float rot = 0;
-	rot+=2.0*Global::speedAdj;
+	rot+=2.0*game->speedAdj;
 	float	rot2;
 	rot2 = 2*((int)rot%180);
 	
@@ -289,7 +291,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		sls = dls = ((shields+superShields)/HERO_SHIELDS)-1.0;
 	
 	//------ draw Engine
-	if(hero->isVisible() && Global::gfxLevel >= 1)
+	if(hero->isVisible() && game->gfxLevel >= 1)
 	{
 		float c1f = 1.0+dl;
 		float c2f = -dl;
@@ -336,41 +338,41 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glPopMatrix();
 		
 		//------ add a bit of Glitter...
-		if(Global::gfxLevel > 1 && (!Global::game_pause) )
+		if(game->gfxLevel > 1 && (!game->game_pause) )
 		{
 			float p[3] = { 0.0, 0.0, hero->pos[2] };
 			float v[3] = { 0.01*SRAND, 0.0, 0.0 };
 			float c[4] = { 1.0, 1.0, 0.7, 1.0-sls*sls };
-			switch(Global::gameFrame%2)
+			switch(game->gameFrame%2)
 			{
 				case 0:
 					v[1] = -0.3+FRAND*0.05;
 					p[0] = hero->pos[0];
 					p[1] = hero->pos[1]-0.8;
-					Global::explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
+					game->explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
 					v[1] = -0.25+FRAND*0.05;
 					p[0] = hero->pos[0]+0.95;
 					p[1] = hero->pos[1]+0.1;
-					Global::explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
+					game->explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
 					p[0] = hero->pos[0]-0.95;
 					p[1] = hero->pos[1]+0.1;
-					Global::explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
+					game->explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
 					break;
 				case 1:
 					v[1] = -0.25+FRAND*0.05;
 					p[0] = hero->pos[0]+0.95;
 					p[1] = hero->pos[1]+0.1;
-					Global::explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
+					game->explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
 					p[0] = hero->pos[0]-0.95;
 					p[1] = hero->pos[1]+0.1;
-					Global::explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
+					game->explosions->addGlitter(p, v, c, 0, 0.4+0.4*FRAND);
 					break;
 			}
 		}
 	}
 	
 	//---------- Draw ammo flash
-	if(Global::gfxLevel > 1)
+	if(game->gfxLevel > 1)
 	{
 		glPushMatrix();
 		glTranslatef(hero->pos[0], hero->pos[1], hero->pos[2]);
@@ -444,7 +446,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTexCoord2f( 3.5, 0.0); glVertex3f( -statPosShld[0]+2.0,  statPosShld[1]+0.0, statPosShld[2] );
 	glEnd();
 		
-	if(Global::gfxLevel > 0)
+	if(game->gfxLevel > 0)
 	{
 		//-- Shields 
 		if( (sl < -0.7 && blink && shields > 0.0) || superShields )
@@ -620,56 +622,56 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	}
 	
 	//-- print message if we're paused...
-	if(Global::game_pause)
+	if(game->game_pause)
 	{
 		float off[2];
-		off[0] = 2.0 * sin(Global::frame*0.01);
-		off[1] = 1.0 * cos(Global::frame*0.011);
+		off[0] = 2.0 * sin(game->frame*0.01);
+		off[1] = 1.0 * cos(game->frame*0.011);
 		glPushMatrix();
-		txfBindFontTexture(Global::texFont);
+		txfBindFontTexture(game->texFont);
 		glTranslatef(-14.5, -3.0, 0.0);
 		glScalef(0.21, 0.21, 1.0);
 		glPushMatrix();
-		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(Global::frame*0.05)) );
-		txfRenderString(Global::texFont, "p a u s e d", 11);
+		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.05)) );
+		txfRenderString(game->texFont, "p a u s e d", 11);
 		glPopMatrix();
-		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(Global::frame*0.03)) );
+		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.03)) );
 		glTranslatef(off[0], off[1], 0.0);
-		txfRenderString(Global::texFont, "p a u s e d", 11);
+		txfRenderString(game->texFont, "p a u s e d", 11);
 		glPopMatrix();
 	}
-	if( Global::tipShipPast == 1 && Global::gameLevel == 1)
+	if( game->tipShipPast == 1 && game->gameLevel == 1)
 	{
-		Global::tipShipPast++;
+		game->tipShipPast++;
 		tipShipShow = 200;
 	}
-	if( Global::tipSuperShield == 1 && Global::gameLevel == 1)
+	if( game->tipSuperShield == 1 && game->gameLevel == 1)
 	{
-		Global::tipSuperShield++;
+		game->tipSuperShield++;
 		tipSuperShow = 200;
 	}
 	if(	tipShipShow > 0 )
 	{
 		tipShipShow--;
 		glPushMatrix();
-		txfBindFontTexture(Global::texFont);
+		txfBindFontTexture(game->texFont);
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipShipShow/300.0 );
 		char *str = "do not let -any- ships past you! each one costs you a life!";
-		txfRenderString(Global::texFont, str, strlen(str));
+		txfRenderString(game->texFont, str, strlen(str));
 		glPopMatrix();
 	}
 	if(	tipSuperShow > 0 )
 	{
 		tipSuperShow--;
 		glPushMatrix();
-		txfBindFontTexture(Global::texFont);
+		txfBindFontTexture(game->texFont);
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipSuperShow/300.0 );
 		char *str = "let super shields pass by for an extra life!";
-		txfRenderString(Global::texFont, str, strlen(str));
+		txfRenderString(game->texFont, str, strlen(str));
 		glPopMatrix();
 	}
 }

@@ -13,6 +13,8 @@
 
 #include "EnemyAircraft.h"
 
+class Global;
+
 //====================================================================
 class EnemyFleet
 {
@@ -56,7 +58,9 @@ private:
 	
 	EnemyAircraft	*squadRoot;
 	EnemyAircraft	*currentShip;
-	
+
+private:
+	Global	*game;
 };
 
 #endif // EnemyFleet_h

@@ -7,9 +7,11 @@
  */
 #include "MainToolkit.h"
 
+#include "Global.h"
 
 MainToolkit::MainToolkit(int, char **)
 {
+	game = Global::getInstance();
 }
 
 MainToolkit::~MainToolkit()

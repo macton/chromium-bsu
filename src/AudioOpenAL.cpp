@@ -89,12 +89,12 @@ AudioOpenAL::AudioOpenAL()
 		sourceExploPop[i]	= 0;
 	}
 	
-	// NOTE: If we can't create a valid context, Global::audio_enabled will
+	// NOTE: If we can't create a valid context, game->audio_enabled will
 	//       be set to false.
-	if(Global::audio_enabled == true) 
-		Global::audio_enabled = createContext();
+	if(game->audio_enabled == true) 
+		game->audio_enabled = createContext();
 	
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		initSound();
 
@@ -112,10 +112,10 @@ AudioOpenAL::AudioOpenAL()
 			audioScale[2] = 0.3;
 		}
 
-		if(Global::swap_stereo)
+		if(game->swap_stereo)
 			audioScale[0] = -audioScale[0];
 		
-		if(Global::use_playList && !cdrom)
+		if(game->use_playList && !cdrom)
 			loadMusicList();
 	}
 //	fprintf(stderr, "AudioOpenAL::Audio done\n");
@@ -277,8 +277,8 @@ void AudioOpenAL::initSound()
 	}
 	
 	
-	setSoundVolume(Global::volSound);
-	setMusicVolume(Global::volMusic);
+	setSoundVolume(game->volSound);
+	setMusicVolume(game->volMusic);
 		
 	initialized = true;
 	warning("Audio.cpp - initSound complete.", i);
@@ -324,7 +324,7 @@ void AudioOpenAL::checkForExtensions()
 //----------------------------------------------------------
 void AudioOpenAL::stopMusic()
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		Audio::stopMusic();
 		alSourceStop(source[MusicMenu]);
@@ -338,7 +338,7 @@ void AudioOpenAL::stopMusic()
 //----------------------------------------------------------
 void AudioOpenAL::pauseGameMusic(bool status)
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		if(cdrom)
 		{
@@ -358,7 +358,7 @@ void AudioOpenAL::pauseGameMusic(bool status)
 void AudioOpenAL::setMusicMode(SoundType mode)
 {
 //	fprintf(stderr, "AudioOpenAL::setMusicMode(SoundType mode)\n");
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		Audio::setMusicMode(mode);
 		switch(mode)
@@ -369,7 +369,7 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 				if(!cdrom)
 				{
 					alSourcei    (source[MusicGame], AL_LOOPING, AL_TRUE);
-					if(!Global::game_pause)
+					if(!game->game_pause)
 						alSourcePlay (source[MusicGame]);
 				}
 				break;
@@ -392,7 +392,7 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 void AudioOpenAL::setSoundVolume(float vol)
 {
 //	fprintf(stderr, "AudioOpenAL::setSoundVolume(%f)\n", vol);
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		int i;
 		if(vol > 1.0) vol = 1.0;
@@ -420,7 +420,7 @@ void AudioOpenAL::setSoundVolume(float vol)
 //----------------------------------------------------------
 void AudioOpenAL::setMusicVolume(float vol)
 {
-	if(Global::audio_enabled == true)
+	if(game->audio_enabled == true)
 	{
 		if(vol > 1.0) vol = 1.0;
 		if(vol < 0.0) vol = 0.0;
@@ -534,7 +534,7 @@ void AudioOpenAL::update()
 //----------------------------------------------------------
 void AudioOpenAL::playSound(SoundType type, float *pos, int age)
 {
-	if(Global::audio_enabled)
+	if(game->audio_enabled)
 	{
 		float p[3];
 		p[0] =  pos[0]*audioScale[0];
@@ -677,9 +677,9 @@ void AudioOpenAL::loadMusicList()
 		}
 	}
 	else
-		Global::use_playList = false;
+		game->use_playList = false;
 	if(musicMax < 1)
-		Global::use_playList = false;
+		game->use_playList = false;
 	
 	fprintf(stderr, "music playlist:\n");
 	for(i = 0; i < musicMax; i++)
@@ -705,10 +705,10 @@ void AudioOpenAL::setMusicIndex(int index)
 	{
 		Audio::	setMusicIndex(index);		
 	}
-	else if(initialized && Global::use_playList)
+	else if(initialized && game->use_playList)
 	{
 		bool loadSuccess = true;
-		if(Global::audio_enabled)
+		if(game->audio_enabled)
 		{
 			checkError("AudioOpenAL::setMusicIndex -- begin");
 			//-- if music is currently playing, we want to 

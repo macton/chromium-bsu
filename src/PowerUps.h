@@ -16,6 +16,7 @@
 #define WOBBLE_0 45
 #define WOBBLE_1 75
 
+class Global;
 class PowerUp;
 
 //====================================================================
@@ -56,6 +57,9 @@ private:
 	float	wobble_1[WOBBLE_1];
 	
 	int	activeCount;
+
+private:
+	Global	*game;
 };
 
 //====================================================================

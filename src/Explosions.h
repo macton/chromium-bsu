@@ -11,6 +11,7 @@
 #include "compatibility.h"
 #include <GL/gl.h>
 
+class Global;
 class Explo;
 
 //====================================================================
@@ -58,6 +59,9 @@ private:
 	
 	Explo	*getNewExplo();
 	void 	killExplo(Explo *dead);
+
+private:
+	Global	*game;
 };
 
 //====================================================================

@@ -18,6 +18,8 @@
 //==============================================================================
 ScreenItemAdd::ScreenItemAdd()
 {
+	game = Global::getInstance();
+	
 	root = new ItemThing();
 	
 	float p[3] = { 0.0, 0.0, 0.0 };
@@ -76,15 +78,15 @@ void ScreenItemAdd::putScreenItems()
 	
 	while(curItem)
 	{
-		if(curItem->releaseTime <= Global::gameFrame)
+		if(curItem->releaseTime <= game->gameFrame)
 		{
 			switch(curItem->item->itemType())
 			{
 				case ScreenItem::ItemEnemy:
-					Global::enemyFleet->addEnemy( (EnemyAircraft*)(curItem->item) );
+					game->enemyFleet->addEnemy( (EnemyAircraft*)(curItem->item) );
 					break;
 				case ScreenItem::ItemPowerUp:
-					Global::powerUps->addPowerUp( (PowerUp*)(curItem->item) );
+					game->powerUps->addPowerUp( (PowerUp*)(curItem->item) );
 					break;
 				case ScreenItem::ItemHero:
 					fprintf(stderr, "ScreenItemAdd::putScreenItems() Hero??? HUH???\n");
@@ -120,7 +122,7 @@ void ScreenItemAdd::killScreenItem(ScreenItem *del)
 //----------------------------------------------------------	
 bool ScreenItemAdd::loadScreenItems(const char*)
 {
-	switch((Global::gameLevel-1)%3)
+	switch((game->gameLevel-1)%3)
 	{
 		case 0:
 			loadLevel1();
@@ -169,8 +171,8 @@ void ScreenItemAdd::addWave(EnemyWave &ew)
 	int		interval = 1;
 	int		iteration = 0;
 	float	p[3] = { ew.pos[0], ew.pos[1], ew.pos[2] };
-	int	jitter = (int)(ew.jitter * (2.0-Global::gameSkill));
-	int	period = (int)(ew.period * (2.0-Global::gameSkill));
+	int	jitter = (int)(ew.jitter * (2.0-game->gameSkill));
+	int	period = (int)(ew.period * (2.0-game->gameSkill));
 	
 	if(jitter >= period)
 		jitter = period - 1;
@@ -232,8 +234,8 @@ EnemyAircraft *ScreenItemAdd::dynamicEnemyAdd(EnemyType et, float *pos, int relT
 void ScreenItemAdd::loadLevelXXX()
 {
 	int i;
-	int	numIterations = (int)(11100 * Global::gameSkill);
-//	int	numIterations = (int)(1100 * Global::gameSkill);
+	int	numIterations = (int)(11100 * game->gameSkill);
+//	int	numIterations = (int)(1100 * game->gameSkill);
 	
 	//-- Enemies
 	float	r;
@@ -254,7 +256,7 @@ void ScreenItemAdd::loadLevelXXX()
 		else				addOmniWave(i, waveDuration, d);
 
 		i += waveDuration;
-		waveDuration = (int)(600.0*Global::gameSkill) + (int)(100*SRAND);
+		waveDuration = (int)(600.0*game->gameSkill) + (int)(100*SRAND);
 		i += 50 + (int)(50*FRAND);
 	}
 	
@@ -608,8 +610,8 @@ void ScreenItemAdd::addGnatWave(int o, int duration, float density, bool mixed)
 		}
 		
 		EnemyWave	gnatWave(EnemyGnat);
-	//	gnatWave.setInOut(o, o+(17*Global::gameSkill)*(1.0+FRAND*0.2));
-		gnatWave.setInOut(o, o+(int)((25*Global::gameSkill)*(1.0+FRAND*0.2)));
+	//	gnatWave.setInOut(o, o+(17*game->gameSkill)*(1.0+FRAND*0.2));
+		gnatWave.setInOut(o, o+(int)((25*game->gameSkill)*(1.0+FRAND*0.2)));
 		gnatWave.setPos(SRAND*5.0, 10.0);
 		gnatWave.setFrequency((int)(3*freq), 0);
 		gnatWave.setXRand(3.0);
@@ -618,7 +620,7 @@ void ScreenItemAdd::addGnatWave(int o, int duration, float density, bool mixed)
 	else
 	{
 		EnemyWave	gnatWave(EnemyGnat);
-	//	gnatWave.setInOut(o, o+(17*Global::gameSkill)*(1.0+FRAND*0.2));
+	//	gnatWave.setInOut(o, o+(17*game->gameSkill)*(1.0+FRAND*0.2));
 		gnatWave.setPos(-3.0+SRAND*5.0, 10.0);
 		gnatWave.setFrequency((int)(1*freq), 0);
 		gnatWave.setXRand(3.0);
@@ -647,7 +649,7 @@ void ScreenItemAdd::addAmmunition(int o, int duration, int a, int b, int c)
 	int		ammoPause01 = b +(int)(FRAND*200);
 	int		ammoPause02 = c +(int)(FRAND*500);
 #endif
-	float	skill = 2.0-Global::gameSkill;
+	float	skill = 2.0-game->gameSkill;
 	float	p[3] = {0.0, 9.0, 25.0};
 
 	for(i = o; i < o+duration; i++)

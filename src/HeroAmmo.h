@@ -14,6 +14,7 @@
 #include "define.h"
 #include "Ammo.h"
 
+class Global;
 class EnemyFleet;
 
 //====================================================================
@@ -47,6 +48,9 @@ private:
 	float		ammoDamage[NUM_HERO_AMMO_TYPES];
 		
 	GLuint	ammoTex[NUM_HERO_AMMO_TYPES];
+
+private:
+	Global	*game;
 };
 
 
