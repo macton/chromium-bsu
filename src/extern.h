@@ -8,7 +8,10 @@
 #ifndef extern_h
 #define extern_h
 
+#include <stdio.h>
+
 const char *dataLoc(const char *filename, bool doCheck = true);
 const char *alterPathForPlatform(char *filename);
+void printExtensions(FILE *fstream, const char* extstr_in);
 
 #endif // extern_h

@@ -1,3 +1,5 @@
+Chromium 0.9.11a
+ - fixed configure script to properly detect SDL version.
 Chromium 0.9.11
  - added high scores. Default is to have high scores per-user, but the 
    CHROMIUM_SCORE environment variable can be set to a common file for

@@ -214,12 +214,13 @@ void AudioOpenAL::initSound()
 	
 //	fprintf(stderr, "AudioOpenAL::initSound() begin...\n");
 			
-	fprintf(stderr, "-OpenAL---------------------------------------\n");
+	fprintf(stderr, "-OpenAL-----------------------------------------------------\n");
 	fprintf(stderr, "Vendor     : %s\n", alGetString( AL_VENDOR ) );
 	fprintf(stderr, "Renderer   : %s\n", alGetString( AL_RENDERER ) );
 	fprintf(stderr, "Version    : %s\n", alGetString( AL_VERSION ) );
-	fprintf(stderr, "Extensions : %s\n", alGetString( AL_EXTENSIONS ) );
-	fprintf(stderr, "----------------------------------------------\n");
+//	fprintf(stderr, "Extensions : %s\n", alGetString( AL_EXTENSIONS ) );
+	printExtensions(stderr,  (const char*)alGetString( AL_EXTENSIONS ));
+	fprintf(stderr, "------------------------------------------------------------\n");
 
 	checkForExtensions();
 	

@@ -250,7 +250,7 @@ void GroundMetalSegment::drawMultiTex(float rep, float S, float tilt, bool blipM
 	
 	glActiveTextureARB(GL_TEXTURE0_ARB);
 	glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Blip]);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 	
 	
 	glActiveTextureARB(GL_TEXTURE1_ARB);

@@ -79,12 +79,12 @@ MainSDL::MainSDL(int argc, char **argv)
 
 	setVideoMode();
 
-	fprintf(stderr, "-OpenGL---------------------------------------\n");
+	fprintf(stderr, "-OpenGL-----------------------------------------------------\n");
 	fprintf(stderr, "Vendor     : %s\n", glGetString( GL_VENDOR ) );
 	fprintf(stderr, "Renderer   : %s\n", glGetString( GL_RENDERER ) );
 	fprintf(stderr, "Version    : %s\n", glGetString( GL_VERSION ) );
-//	fprintf(stderr, "Extensions : %s\n", glGetString( GL_EXTENSIONS ) );
-	fprintf(stderr, "----------------------------------------------\n");
+	printExtensions(stderr,  (const char*)glGetString( GL_EXTENSIONS ));
+	fprintf(stderr, "------------------------------------------------------------\n");
 
 	//-- Set the window manager title bar
 	SDL_WM_SetCaption( "chromium B.S.U.", "chromium B.S.U." );

@@ -5,7 +5,7 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
-#ifndef AudioOpenAL_h
+#ifndef AudioOpenAL_h 
 #define AudioOpenAL_h
 
 #ifdef AUDIO_OPENAL

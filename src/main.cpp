@@ -202,3 +202,35 @@ const char* dataLoc(const char* filename, bool doCheck)
 	return buffer;
 }
 
+//----------------------------------------------------------
+void printExtensions(FILE *fstream, const char* extstr_in)
+{
+	char	*extstr;
+	char	*walker;
+	char	*space;
+	int		len = strlen(extstr_in);
+	int		cnt = 0;
+	extstr = new char[len+1];
+	strcpy(extstr, extstr_in);
+	walker = extstr;
+	
+	fprintf(fstream, "Extensions :");
+	while( (walker-extstr) < len )
+	{
+		space = strchr(walker, ' ');
+		if(space)
+		{
+			if( (cnt%2) == 0)
+				fprintf(fstream, "\n");
+			*space = '\0';
+			fprintf(fstream, "%-31s ", walker);
+			walker = space+1;
+			cnt++;
+		}
+		else
+			break;
+	}
+	fprintf(fstream, "\n");
+	
+	delete [] extstr;
+}

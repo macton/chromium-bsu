@@ -279,8 +279,8 @@ void ScreenItemAdd::loadLevelXXX()
 	addWave(bossWave);
 		
 	//-- Ammunition and PowerUps
-	addAmmunition(0, numIterations+5000);
-	addPowerUps(0, numIterations+5000);
+	addAmmunition(0, numIterations+9000);
+	addPowerUps(0, numIterations+9000);
 }
 
 //----------------------------------------------------------	
@@ -392,8 +392,8 @@ void ScreenItemAdd::loadLevel2()
 	addWave(bossWave);
 	
 	//-- Ammunition and PowerUps
-	addAmmunition(0, numIterations+5000);
-	addPowerUps(0, numIterations+5000);
+	addAmmunition(0, numIterations+9000);
+	addPowerUps(0, numIterations+9000);
 	
 }
 
@@ -485,8 +485,8 @@ void ScreenItemAdd::loadLevel3()
 	addWave(tankWave);
 			
 	//-- Ammunition and PowerUps
-	addAmmunition(0, numIterations+5000);
-	addPowerUps(0, numIterations+5000);
+	addAmmunition(0, numIterations+9000);
+	addPowerUps(0, numIterations+9000);
 	
 }
 
