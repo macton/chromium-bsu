@@ -10,7 +10,7 @@
 
 #ifdef AUDIO_SDLMIXER
 
-#include <SDL_mixer.h>
+#include <SDL/SDL_mixer.h>
 
 #include "Audio.h"
 

@@ -9,7 +9,7 @@
 #define MainSDL_h
 
 #ifdef USE_SDL
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include "MainToolkit.h"
 

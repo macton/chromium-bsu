@@ -33,19 +33,24 @@ TMAKE_TEXT	= include ../config.mak
 TMAKE_CFLAGS	+= $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS)
 TMAKE_CXXFLAGS	+= $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS)
 
-INCLUDEPATH = ../support/include ../support/glpng/include /usr/X11R6/include
-LIBDIRS		= -L../support/glpng/lib -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
-LIBS		= $$LIBDIRS $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
-#LIBS		= $$LIBDIRS $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lSDL_mixer
+isEmpty(GL_LIBS) {
+	CONFIG += opengl
+}
+
+	
+
+INCLUDEPATH += /usr/include /usr/X11R6/include ../support/include ../support/glpng/include
+LIBDIRS		+= -L../support/glpng/lib -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
+LIBS		+= $$LIBDIRS  -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
 
 ##-- Debug --
-#CONFIG		= warn_on debug
-#DEFINES 	= _REENTRANT AUDIO_OPENAL OLD_OPENAL CHECK_ERRORS NO_PARACHUTE
-##DEFINES 	= _REENTRANT AUDIO_SDLMIXER CHECK_ERRORS NO_PARACHUTE
-##DEFINES 	= _REENTRANT AUDIO_SDLMIXER AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
+#CONFIG		+= warn_on debug
+#DEFINES 	+= _REENTRANT AUDIO_OPENAL OLD_OPENAL CHECK_ERRORS NO_PARACHUTE
+##DEFINES 	+= _REENTRANT AUDIO_SDLMIXER CHECK_ERRORS NO_PARACHUTE
+##DEFINES 	+= _REENTRANT AUDIO_SDLMIXER AUDIO_OPENAL CHECK_ERRORS NO_PARACHUTE
 #-- Release --
-CONFIG		= warn_off release
-DEFINES 	= OLD_OPENAL AUDIO_OPENAL _REENTRANT 
+CONFIG		+= warn_off release
+DEFINES 	= USE_SDL AUDIO_SDLMIXER _REENTRANT 
 
 ##############################
 ## IRIX

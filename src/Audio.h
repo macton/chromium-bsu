@@ -17,7 +17,7 @@ class SoundInfo;
 class Global;
 
 #ifdef USE_SDL
-#include <SDL.h> // for CDROM
+#include <SDL/SDL.h> // for CDROM
 #else
 #define SDL_CD void
 #endif

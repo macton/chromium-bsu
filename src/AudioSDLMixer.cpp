@@ -31,15 +31,15 @@ AudioSDLMixer::AudioSDLMixer()
 	: Audio()
 {    
 	Config	*config = Config::instance();
-	//UNCLEAN - if initSound fails, config->getAudio() will be set to false
-	if(config->getAudio() == true)
+	//UNCLEAN - if initSound fails, config->audioEnabled() will be set to false
+	if(config->audioEnabled() == true)
 		initSound();
 }
 
 AudioSDLMixer::~AudioSDLMixer()
 {
 	Config	*config = Config::instance();
-	if(config->getAudio()) 
+	if(config->audioEnabled()) 
 	{
     	for (int i = 0; i < NumSoundTypes; i++)
         	Mix_FreeChunk (sounds[i]);
@@ -78,7 +78,7 @@ void	AudioSDLMixer::initSound()
 void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 {
 	Config	*config = Config::instance();
-	if (config->getAudio()) 
+	if (config->audioEnabled()) 
 	{
 		Mix_PlayChannel (-1, sounds[type], 0);
     }
@@ -91,7 +91,7 @@ void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 void AudioSDLMixer::pauseGameMusic(bool status)
 {
 	Config	*config = Config::instance();
-	if (config->getAudio()) 
+	if (config->audioEnabled()) 
 	{
 		if(cdrom)
 		{
@@ -114,7 +114,7 @@ void AudioSDLMixer::pauseGameMusic(bool status)
 void	AudioSDLMixer::stopMusic()
 {
 	Config	*config = Config::instance();
-    if (config->getAudio()) 
+    if (config->audioEnabled()) 
 	{
 		Audio::stopMusic();
 		Mix_HaltChannel (0);
@@ -125,7 +125,7 @@ void	AudioSDLMixer::stopMusic()
 void	AudioSDLMixer::setMusicMode(SoundType mode)
 {
 	Config	*config = Config::instance();
-    if (config->getAudio())
+    if (config->audioEnabled())
 	{
 		Audio::setMusicMode(mode);
 		switch(mode)
@@ -151,7 +151,7 @@ void	AudioSDLMixer::setMusicMode(SoundType mode)
 void	AudioSDLMixer::setMusicVolume(float value)
 {
 	Config	*config = Config::instance();
-    if (config->getAudio())
+    if (config->audioEnabled())
 	{
 		Mix_Volume (0, (int)(MIX_MAX_VOLUME*value) );
 	}
@@ -164,7 +164,7 @@ void	AudioSDLMixer::setMusicVolume(float value)
 void	AudioSDLMixer::setSoundVolume(float value)
 {
 	Config	*config = Config::instance();
-    if (config->getAudio())
+    if (config->audioEnabled())
 	{
 		for (int i = 1; i < MIX_CHANNELS; i++)
 			Mix_Volume (i, (int)(MIX_MAX_VOLUME*value) );
