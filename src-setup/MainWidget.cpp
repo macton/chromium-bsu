@@ -26,7 +26,7 @@ extern const char* argv_0;
 MainWidget::MainWidget()
 	: QMainWindow(0, 0)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	tabWidget = new QTabWidget(this);
 	setCentralWidget(tabWidget);
 	
@@ -40,7 +40,7 @@ MainWidget::MainWidget()
 	tabWidget->setBackgroundMode(PaletteMid);
 //	tabWidget->setBackgroundMode(PaletteButton);
 	
-	if(!config->getUsePlayList())
+	if(!config->usePlayList())
 		tabWidget->setTabEnabled(playList, false);	
 		
 	helpPage = new HelpPage(this, 0, true);

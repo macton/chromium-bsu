@@ -157,14 +157,14 @@ void ConfigFile::exit()
 void ConfigFile::saveCurrentConfig()
 {
 	updateVars();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	config->saveFile();
 }
 	
 //----------------------------------------------------------
 void ConfigFile::loadCurrentConfig()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	config->readFile();
 	altered = true;
 	initWidgets();
@@ -173,19 +173,19 @@ void ConfigFile::loadCurrentConfig()
 //----------------------------------------------------------
 void ConfigFile::initWidgets()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	
 	bool tmp = altered;
-	configSelect[Skill]->setValue(skillToOption(config->getGameSkillBase()));
-	configSelect[screenSize]->setValue(config->getScreenSize());
-	configSelect[gfxLevel]->setValue(config->getGfxLevel());
-	configSelect[cdromDevice]->setValue(config->getCDROMDevice());
-	if(config->getCDROMCount() < 2)
+	configSelect[Skill]->setValue(skillToOption(config->gameSkillBase()));
+	configSelect[screenSize]->setValue(config->screenSize());
+	configSelect[gfxLevel]->setValue(config->gfxLevel());
+	configSelect[cdromDevice]->setValue(config->CDROMDevice());
+	if(config->CDROMCount() < 2)
 		configSelect[cdromDevice]->hide();
 	else
 	{
 		configSelect[cdromDevice]->clear();
-		for(int i = 0; i < config->getCDROMCount(); i++)
+		for(int i = 0; i < config->CDROMCount(); i++)
 		{
 			if(i == MAX_CDROMS)
 				break;
@@ -193,21 +193,21 @@ void ConfigFile::initWidgets()
 		}
 		configSelect[cdromDevice]->show();
 	}
-	if(!config->getUseCDROM())
+	if(!config->useCDROM())
 		configSelect[cdromDevice]->setEnabled(false);
 	
-	configFloat[volSound]->setValue(config->getVolSound());
-	configFloat[volMusic]->setValue(config->getVolMusic());
-	configFloat[mouseSpeed]->setValue(config->getMouseSpeed());
-	configFloat[viewGamma]->setValue(config->getViewGamma());
+	configFloat[volSound]->setValue(config->volSound());
+	configFloat[volMusic]->setValue(config->volMusic());
+	configFloat[mouseSpeed]->setValue(config->mouseSpeed());
+	configFloat[viewGamma]->setValue(config->viewGamma());
 	
-	configBool[full_screen]->setValue(config->getFullScreen());
-	configBool[true_color]->setValue(config->getTrueColor());
-	configBool[swap_stereo]->setValue(config->getSwapStereo());
-	configBool[auto_speed]->setValue(config->getAutoSpeed());
-	configBool[show_fps]->setValue(config->getShowFPS());
-	configBool[use_playList]->setValue(config->getUsePlayList());
-	configBool[use_cdrom]->setValue(config->getUseCDROM());
+	configBool[full_screen]->setValue(config->fullScreen());
+	configBool[true_color]->setValue(config->trueColor());
+	configBool[swap_stereo]->setValue(config->swapStereo());
+	configBool[auto_speed]->setValue(config->autoSpeed());
+	configBool[show_fps]->setValue(config->showFPS());
+	configBool[use_playList]->setValue(config->usePlayList());
+	configBool[use_cdrom]->setValue(config->useCDROM());
 	// setting these triggers altered to true...
 	altered = tmp;
 }
@@ -215,7 +215,7 @@ void ConfigFile::initWidgets()
 //----------------------------------------------------------
 void ConfigFile::updateVars()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	
 	config->setGameSkillBase( optionToSkill(configSelect[Skill]->getValue()) );
 	config->setScreenSize	( configSelect[screenSize]->getValue() );
@@ -251,7 +251,7 @@ float ConfigFile::optionToSkill(int o)
 //----------------------------------------------------------
 void ConfigFile::setSkill(int)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	static QString tmp;
 	config->setGameSkillBase( optionToSkill(configSelect[Skill]->getValue()) );
 	tmp = configSelect[Skill]->currentText();

@@ -15,8 +15,18 @@
 #include <qsgistyle.h> 
 #endif
 
+#if        QT_VERSION < 200
+#error "------------------------------------"
+#error "The Chromium setup app requires Qt2."
+#error "You are trying to build it with Qt1."
+#error "   Please read the INSTALL file.    "
+#error "------------------------------------"
+#else   // QT_VERSION < 200
+
 #include "MainWidget.h"
 #include "PlayList.h"
+
+#endif  // QT_VERSION < 200
 
 #include "../src/Config.h"
 #include "../src/HiScore.h"

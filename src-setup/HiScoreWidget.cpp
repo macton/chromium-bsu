@@ -82,7 +82,7 @@ void HiScoreWidget::show()
 //----------------------------------------------------------
 void HiScoreWidget::updateScores()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	HiScore	*hiScore = HiScore::getInstance();
 	QListViewItem *item;
 	
@@ -93,7 +93,7 @@ void HiScoreWidget::updateScores()
 		char sName[64];
 		char sScore[32];
 		struct tm *tmptr; 
-		int l = config->getIntSkill();
+		int l = config->intSkill();
 		for(int j = HI_SCORE_HIST-1; j >= 0; j--)
 		{
 			time_t	t = hiScore->getDate(l,j);
