@@ -81,7 +81,7 @@ bool MainSDL::process(SDL_Event *event)
 void MainSDL::saveEvent(SDL_Event *event)
 {
 	Global	*game = Global::getInstance();
-	if(game->eventFile && game->gameMode == game->Game)
+	if(game->eventFile && game->gameMode == Global::Game)
 	{
 		SDL_ActiveEvent 		*evA = 0;
 		SDL_KeyboardEvent 		*evK = 0;
@@ -263,26 +263,26 @@ void MainSDL::keyDown(SDL_Event *event)
 			game->hero->useItem(1);
 			break;
 		case SDLK_ESCAPE:
-			if(game->gameMode == game->Menu)
+			if(game->gameMode == Global::Menu)
 			{
-				game->gameMode = game->Game;
+				game->gameMode = Global::Game;
 				game->audio->setMusicMode(Audio::MusicGame);
 				grabMouse(true);
 			}
 			else
 			{
-				if(game->gameMode != game->Game)
+				if(game->gameMode != Global::Game)
 				{
 					game->newGame();
 				}
-				game->gameMode = game->Menu;
+				game->gameMode = Global::Menu;
 				game->menu->startMenu();
 				game->audio->setMusicMode(Audio::MusicMenu);
 				grabMouse(false);
 			}
 			break;
 		default:
-			if(game->gameMode == game->Game)
+			if(game->gameMode == Global::Game)
 				keyDownGame(event);
 			else
 			{

@@ -107,7 +107,7 @@ void GroundMetal::drawGL()
 	glClearColor( 0.2+pulse, 0.2, 0.25, 1.0 );
 	
 	//-- draw ground segments
-	if( !game->game_pause || game->gameMode == game->Menu)
+	if( !game->game_pause || game->gameMode == Global::Menu)
 	{
 		seg = rootSeg->next;
 		while(seg)

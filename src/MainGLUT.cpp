@@ -178,26 +178,26 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 			game->toolkit->grabMouse(!mouseToggle);
 			break;
 		case 27: // <esc>
-			if(game->gameMode == game->Menu)
+			if(game->gameMode == Global::Menu)
 			{
-				game->gameMode = game->Game;
+				game->gameMode = Global::Game;
 				game->audio->setMusicMode(Audio::MusicGame);
 				game->toolkit->grabMouse(true);
 			}
 			else
 			{
-				if(game->gameMode != game->Game)
+				if(game->gameMode != Global::Game)
 				{
 					game->newGame();
 				}
-				game->gameMode = game->Menu;
+				game->gameMode = Global::Menu;
 				game->menu->startMenu();
 				game->audio->setMusicMode(Audio::MusicMenu);
 				game->toolkit->grabMouse(false);
 			}
 			break;
 		default:
-			if(game->gameMode == game->Menu)
+			if(game->gameMode == Global::Menu)
 			{
 				MainToolkit::Key tkkey = MainToolkit::KeySpace;
 				switch(key)
@@ -220,7 +220,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 void MainGLUT::keyboardSpecial(int special, int, int)
 {
 	Global	*game = Global::getInstance();
-	if(game->gameMode == game->Menu)
+	if(game->gameMode == Global::Menu)
 	{
 		MainToolkit::Key tkkey;
 		switch(special)

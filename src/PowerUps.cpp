@@ -214,7 +214,7 @@ void PowerUps::update()
 			
 		if(pwrUp->pos[1] < -12)
 		{
-			if(game->gameMode == game->Game)
+			if(game->gameMode == Global::Game)
 				switch(pwrUp->type)
 				{
 					case PowerUps::SuperShields:

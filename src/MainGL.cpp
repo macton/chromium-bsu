@@ -121,16 +121,16 @@ void MainGL::drawGL()
 {
 	switch(game->gameMode)
 	{
-		case game->Game:
+		case Global::Game:
 			drawGameGL();
 			break;
-		case game->HeroDead:
+		case Global::HeroDead:
 			drawDeadGL();
 			break;
-		case game->LevelOver:
+		case Global::LevelOver:
 			drawSuccessGL();
 			break;
-		case game->Menu:
+		case Global::Menu:
 			game->menu->drawGL();
 			break;
 		default:
@@ -164,7 +164,7 @@ void MainGL::drawGameGL()
 		game->heroAmmo->updateAmmo();
 		game->enemyAmmo->updateAmmo();
 		game->heroAmmo->checkForHits(game->enemyFleet);
-		if(game->gameMode == game->Game)
+		if(game->gameMode == Global::Game)
 		{
 			game->enemyAmmo->checkForHits(game->hero);
 			game->hero->checkForCollisions(game->enemyFleet);
@@ -285,7 +285,7 @@ void MainGL::drawSuccessGL()
 	if(game->heroSuccess < -500)
 	{
 		game->gotoNextLevel();
-		game->gameMode = game->Game;
+		game->gameMode = Global::Game;
 		game->audio->setMusicMode(Audio::MusicGame);
 		game->audio->setMusicVolume(config->getVolMusic());
 		return;

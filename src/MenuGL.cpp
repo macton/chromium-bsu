@@ -721,7 +721,7 @@ void MenuGL::activateItem()
 	switch(curSel)
 	{
 		case NewGame:
-			game->gameMode = game->Game;
+			game->gameMode = Global::Game;
 			game->newGame();
 			game->toolkit->grabMouse(true);
 			game->audio->setMusicMode(Audio::MusicGame);
@@ -745,7 +745,7 @@ void MenuGL::activateItem()
 		case Music:
 			break;
 		case MouseSpeed:
-			game->gameMode = game->Game;
+			game->gameMode = Global::Game;
 			game->toolkit->grabMouse(true);
 			game->audio->setMusicMode(Audio::MusicGame);
 			break;

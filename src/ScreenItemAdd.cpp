@@ -234,7 +234,8 @@ EnemyAircraft *ScreenItemAdd::dynamicEnemyAdd(EnemyType et, float *pos, int relT
 void ScreenItemAdd::loadLevelXXX()
 {
 	int i;
-	int	numIterations = (int)(11100 * game->gameSkill);
+	int	numIterations = 12000;
+//	int	numIterations = (int)(11100 * game->gameSkill);
 //	int	numIterations = (int)(1100 * game->gameSkill);
 	
 	//-- Enemies

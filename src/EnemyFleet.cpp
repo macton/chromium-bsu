@@ -333,7 +333,7 @@ void	EnemyFleet::update()
 						
 						//--*** TRIGGER END OF LEVEL ***--//
 						game->hero->addScore(5000.0);
-						game->gameMode = game->LevelOver;
+						game->gameMode = Global::LevelOver;
 						game->heroSuccess = 0;
 						break;
 					case EnemyOmni:	

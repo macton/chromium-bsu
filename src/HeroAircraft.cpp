@@ -156,7 +156,7 @@ void HeroAircraft::fullHealth()
 //----------------------------------------------------------
 void HeroAircraft::addScore(float in)
 {
-	if(game->gameMode != game->HeroDead)
+	if(game->gameMode != Global::HeroDead)
 		score += in;
 }
 
@@ -201,7 +201,7 @@ void HeroAircraft::loseLife()
 		game->explosions->addExplo(Explosions::LoseLife, p, -13, 1.5);
 		game->explosions->addExplo(Explosions::PowerBurst, p);
 	}
-	if(lives < 0 && game->gameMode != game->HeroDead)
+	if(lives < 0 && game->gameMode != Global::HeroDead)
 	{
 		damage = 0;
 		shields = 0;
@@ -238,7 +238,7 @@ void HeroAircraft::useItem(int index)
 //----------------------------------------------------------
 void HeroAircraft::useItem()
 {
-	if(game->gameMode == game->Game && !superBomb && !game->game_pause)
+	if(game->gameMode == Global::Game && !superBomb && !game->game_pause)
 	{
 		if(!useItemArmed)
 		{
@@ -283,7 +283,7 @@ void HeroAircraft::useItem()
 void HeroAircraft::moveEvent(int x, int y)
 {
 	Config	*config = Config::getInstance();
-	if(game->gameMode != game->HeroDead && !game->game_pause)
+	if(game->gameMode != Global::HeroDead && !game->game_pause)
 	{
 		pos[0] +=  x*config->getMouseSpeed();
 		pos[1] += -y*config->getMouseSpeed();
@@ -351,7 +351,7 @@ void HeroAircraft::fireGun(bool status)
 {
 	if(dontShow)
 		return;
-	if(status && game->gameMode != game->HeroDead)
+	if(status && game->gameMode != Global::HeroDead)
 	{
 		gunTrigger = true;
 		gunPause[0] = 0;
@@ -578,7 +578,7 @@ void HeroAircraft::checkForPowerUps(PowerUps *powerUps)
 	float p0[3] = {10.4,-8.30, 25.0 };
 	float v0[3] = { 0.0, 0.08, 0.0 };
 	float clr[4] = { 1.0, 1.0, 1.0, 1.0 };
-	if(game->gameMode == game->Game)
+	if(game->gameMode == Global::Game)
 		pwrUp = powerUps->getFirst();
 	else
 		pwrUp = 0;
@@ -822,7 +822,7 @@ void HeroAircraft::startDeath()
 	{
 		fireGun(false);
 		game->heroDeath = DEATH_TIME;
-		game->gameMode = game->HeroDead;
+		game->gameMode = Global::HeroDead;
 		dontShow = -1;
 	}
 	else

@@ -135,7 +135,7 @@ bool MainSDL::run()
 //		//-- cheezy, partially functional record mechanism
 //		bool write = false;
 //		SDL_Event *fileEvent;
-//		if( !write && game->gameMode == game->Game)
+//		if( !write && game->gameMode == Global::Game)
 //		{
 //			while( (fileEvent = getEvent(game->eventFile)) ) 
 //				done = this->process(fileEvent);
@@ -161,7 +161,7 @@ bool MainSDL::run()
 			}
 			last_time = now_time;
 			
-			if(game->gameMode != game->Menu)
+			if(game->gameMode != Global::Menu)
 			{
 				if(game->gameFrame < 400)
 				{
