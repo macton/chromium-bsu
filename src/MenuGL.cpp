@@ -37,7 +37,6 @@ static char mssgHelpText[NumMssg][128] = {
 "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
 };
 
-
 //====================================================================
 MenuGL::MenuGL()
 {
@@ -51,6 +50,10 @@ MenuGL::MenuGL()
 	textAngle = 0.0;
 	txtHeight = 0.5;
 	titleTilt = -10.0;
+	
+	butHeight	= 0.5;
+	butWidth	= butHeight*4.0;
+	butOffset	= 3.05;
 
 	menuText[NewGame]	= "n e w    g a m e";
 	menuText[GameLevel]	= "l e v e l";
@@ -438,7 +441,6 @@ void MenuGL::drawIndicator()
 	char	buf[32];
 	float	szx = 10.0;
 	float	szy = txtHeight;
-	float	sud = szy*2.0;
 	float	level = 0.0;
 	float	sc = 0.025;
 	int		tmp;
@@ -518,14 +520,17 @@ void MenuGL::drawIndicator()
 				glVertex3f(    szx*level, 0.0, 0.0);
 			glEnd();
 			
-			float udo = 2.5;
+			//-- draw +/- buttons ---
+			float	bx = butWidth;
+			float	by = butHeight;
+			float	bo = butOffset;
 			glBindTexture(GL_TEXTURE_2D, updwnTex);
 			glBegin(GL_QUADS);
-				glColor4f(1.0, 1.0, 1.0, 0.7);
-				glTexCoord2f(1.0, 0.0);	glVertex3f(	sud-udo, szy, 0.0);
-				glTexCoord2f(0.0, 0.0);	glVertex3f(	0.0-udo, szy, 0.0);
-				glTexCoord2f(0.0, 1.0);	glVertex3f(	0.0-udo, 0.0, 0.0);
-				glTexCoord2f(1.0, 1.0);	glVertex3f( sud-udo, 0.0, 0.0);
+				glColor4f(1.0, 1.0, 1.0, 0.6);
+				glTexCoord2f(1.0, 0.0);	glVertex3f(	 bx-bo,  by, 0.0);
+				glTexCoord2f(0.0, 0.0);	glVertex3f(	0.0-bo,  by, 0.0);
+				glTexCoord2f(0.0, 1.0);	glVertex3f(	0.0-bo, 0.0, 0.0);
+				glTexCoord2f(1.0, 1.0);	glVertex3f(  bx-bo, 0.0, 0.0);
 			glEnd();
 			
 			glColor4f(1.0, 1.0, 1.0, 0.5);
@@ -535,12 +540,6 @@ void MenuGL::drawIndicator()
 			txfRenderString(game->texFont, buf, strlen(buf));
 		}
 		glPopMatrix();
-		
-		//-- draw updown
-		sc *= 1.5;
-		glTranslatef(-2.5, 0.0, 0.0);
-		glScalef(sc, sc, 1.0);
-		//txfRenderString(game->texFont, "-|+", 3);
 		
 	glPopMatrix();
 	
@@ -789,9 +788,6 @@ void MenuGL::activateItem()
 		case Music:
 			break;
 		case MouseSpeed:
-			game->gameMode = Global::Game;
-			game->toolkit->grabMouse(true);
-			game->audio->setMusicMode(Audio::MusicGame);
 			break;
 		case Quit:
 			game->game_quit = true;
@@ -958,12 +954,13 @@ void MenuGL::mousePress(MainToolkit::Button but, int xi, int yi)
 				}
 			}
 		}
-		float l = -8.0 + -2.5;
+		float l  = -8.0 - butOffset;
+		float hw = butWidth*0.5;
 		if(mSel >= 0)
 		{
-			if(x > l && x < l+txtHeight )
+			if(x > l && x < l+hw )
 				decItem();
-			else if (x > l+txtHeight && x < l+txtHeight*2.0)
+			else if (x > l+hw && x < l+butWidth)
 				incItem();
 			else
 				activateItem();

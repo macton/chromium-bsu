@@ -69,6 +69,9 @@ private:
 	int		textCount;
 	
 	float	txtHeight;
+	float	butHeight;
+	float	butWidth;
+	float	butOffset;
 
 	bool	thickText;
 	

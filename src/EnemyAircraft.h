@@ -8,6 +8,8 @@
 #ifndef EnemyAircraft_h
 #define EnemyAircraft_h
 
+#include <GL/gl.h>
+
 #include "ScreenItem.h"
 
 class ActiveAmmo;
@@ -39,6 +41,8 @@ public:
 	
 	bool	checkHit(ActiveAmmo *ammo);
 	void	setTarget(ScreenItem *t) { target = t; }
+	
+	void	drawGL(GLuint tex, GLuint xtraTex);
 
 	EnemyType	type;
 	float		size[2];
@@ -74,6 +78,16 @@ protected:
 
 protected:
 	Global	*game;
+
+	inline void drawQuad(float szx, float szy)
+	{
+		glBegin(GL_TRIANGLE_STRIP);
+			glTexCoord2f(1.0, 0.0); glVertex3f( szx,  szy, 0.0);
+			glTexCoord2f(0.0, 0.0); glVertex3f(-szx,  szy, 0.0);
+			glTexCoord2f(1.0, 1.0); glVertex3f( szx, -szy, 0.0);
+			glTexCoord2f(0.0, 1.0); glVertex3f(-szx, -szy, 0.0);
+		glEnd();
+	}
 
 private:
 	static int	allocated;
