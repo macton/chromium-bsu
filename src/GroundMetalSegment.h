@@ -22,6 +22,13 @@ public:
 
 	void	drawGL();
 
+	void	drawBlip(float rep, float S, float tilt, bool blipMirrorT);
+	void	drawSurface(float *c0_clr,
+						float *c1_clr,
+						float *r0_clr,
+						float *r1_clr,
+						float *r2_clr);
+
 friend class Ground;
 friend class GroundMetal;
 };
