@@ -2,6 +2,8 @@ Chromium 0.9.12
  - added mouse support to menu. +/- buttons can be clicked on items that
    increment/decrement, else double click activates.
  - music tracks resets to 0 if max is reached
+ - split EnemyAircraft into separate subclasses to get rid of the ugly 
+   switch statements.
 
 Chromium 0.9.11a
  - fixed configure script to properly detect SDL version.
