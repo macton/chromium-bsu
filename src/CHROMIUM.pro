@@ -112,7 +112,6 @@ HEADERS		= \
 			MainSDL.h \
 			MainGL.h \
 			MenuGL.h \
-			NCString.h \
 			PowerUps.h \
 			ScreenItem.h \
 			ScreenItemAdd.h \
@@ -152,7 +151,6 @@ SOURCES		= \
 			GroundSeaSegment.cpp \
 			GroundSegment.cpp \
 			HiScore.cpp \
-			NCString.cpp \
 			MainToolkit.cpp \
 			MainGLUT.cpp \
 			MainSDL.cpp \

@@ -18,16 +18,20 @@ HelpPage::HelpPage(QWidget *parent, const char* name, bool modal)
 {
 	page = new QTextBrowser(this);
 	
+#if QT_VERSION >= 300
+	page->setColor(QColor(192, 192, 255));
+	page->setPaper(QBrush(QColor(70, 60, 100)));
+#else
 	QColorGroup	cgroup;
 	cgroup.setColor(QColorGroup::Base, QColor(70, 60, 100));
 	cgroup.setColor(QColorGroup::Text, QColor(220, 220, 220));
-	QFont	font("Helvetica", 12, false);
 	page->setPaperColorGroup(cgroup);
 	page->setLinkColor(QColor(192, 192, 255));
-	page->setFont(font);
+#endif
 
 	backBut = new QPushButton(this);
 	backBut->setText("&Back");
+	backBut->hide();
 	
 	closeBut = new QPushButton(this);
 	closeBut->setText("&Close");
@@ -63,8 +67,11 @@ HelpPage::~HelpPage()
 //--------------------------------------------------------------------
 bool HelpPage::setPageSource(const char* filename)
 {
+	QFont	font("Helvetica", 12, QFont::Normal);
+	page->setFont(font);
 	linkEdit->clear();
 	page->setSource(filename);
+	page->setFont(font);
 	return true;
 }
 

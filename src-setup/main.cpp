@@ -79,7 +79,7 @@ int main( int argc, char **argv )
 	QFont font("Helvetica", 12, QFont::Bold);
 	a.setFont(font);
 
-#if QT_VERSION >= 220
+#if (QT_VERSION >= 220) && ( QT_VERSION < 300)
 	a.setStyle(new QSGIStyle());
 #endif
 

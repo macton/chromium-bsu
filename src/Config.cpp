@@ -14,8 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "NCString.h"
-
 #include "Audio.h"
 #include "Ground.h"
 #include "MenuGL.h"
