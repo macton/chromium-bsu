@@ -208,6 +208,7 @@ bool AudioOpenAL::createContext()
 //----------------------------------------------------------
 void AudioOpenAL::initSound()
 {
+	Config	*config = Config::getInstance();
 	int i;
 	ALfloat pos[] = { 0.0, -5.0,  25.0 };
 	
@@ -280,8 +281,8 @@ void AudioOpenAL::initSound()
 	}
 	
 	
-	setSoundVolume(game->volSound);
-	setMusicVolume(game->volMusic);
+	setSoundVolume(config->getVolSound());
+	setMusicVolume(config->getVolMusic());
 		
 	initialized = true;
 	warning("Audio.cpp - initSound complete.", i);

@@ -191,7 +191,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	glPopMatrix();	
 		
 	//-- draw usable items
-	if(game->gfxLevel > 1)
+	if(config->getGfxLevel() > 1)
 	{
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 1.0);
@@ -294,7 +294,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		sls = dls = ((shields+superShields)/HERO_SHIELDS)-1.0;
 	
 	//------ draw Engine
-	if(hero->isVisible() && game->gfxLevel >= 1)
+	if(hero->isVisible() && config->getGfxLevel() >= 1)
 	{
 		float c1f = 1.0+dl;
 		float c2f = -dl;
@@ -341,7 +341,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glPopMatrix();
 		
 		//------ add a bit of Glitter...
-		if(game->gfxLevel > 1 && (!game->game_pause) )
+		if(config->getGfxLevel() > 1 && (!game->game_pause) )
 		{
 			float p[3] = { 0.0, 0.0, hero->pos[2] };
 			float v[3] = { 0.01*SRAND, 0.0, 0.0 };
@@ -375,7 +375,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	}
 	
 	//---------- Draw ammo flash
-	if(game->gfxLevel > 1)
+	if(config->getGfxLevel() > 1)
 	{
 		glPushMatrix();
 		glTranslatef(hero->pos[0], hero->pos[1], hero->pos[2]);
@@ -449,7 +449,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTexCoord2f( 3.5, 0.0); glVertex3f( -statPosShld[0]+2.0,  statPosShld[1]+0.0, statPosShld[2] );
 	glEnd();
 		
-	if(game->gfxLevel > 0)
+	if(config->getGfxLevel() > 0)
 	{
 		//-- Shields 
 		if( (sl < -0.7 && blink && shields > 0.0) || superShields )

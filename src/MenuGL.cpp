@@ -306,7 +306,7 @@ void MenuGL::drawGL()
 			int i,len;
 			float trans;
 			time_t nowTime = time(NULL);
-			int l = INT_GAME_SKILL_BASE;
+			int l = config->getIntSkill();
 			int recentHiScore = -1;
 			time_t mostRecent = 0;
 			for(i = 0; i < HI_SCORE_HIST; i++)
@@ -327,7 +327,7 @@ void MenuGL::drawGL()
 				else
 					glColor4f(1.0, 1.0, 1.0, 0.2+0.2*r);
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
-				sprintf(buf, "%d", (int)hiScore->getScore(INT_GAME_SKILL_BASE, i) );
+				sprintf(buf, "%d", (int)hiScore->getScore(config->getIntSkill(), i) );
 				len = strlen(buf);
 				trans = txfStringLength(game->texFont, buf, len);
 				glTranslatef( 80-trans, 0.0, 0.0);
@@ -458,13 +458,13 @@ void MenuGL::drawIndicator()
 			sprintf(buf, "%d", game->gameLevel);	 
 			break;
 		case SkillLevel: 
-			level = game->gameSkillBase;
+			level = config->getGameSkillBase();
 			tmp = (int)((level+0.05)*10.0);
 			sprintf(buf, skillString(tmp));
 			break;
 		case Graphics: 
-			level = game->gfxLevel/2.0;
-			switch(game->gfxLevel)
+			level = config->getGfxLevel()/2.0;
+			switch(config->getGfxLevel())
 			{
 				case 0: sprintf(buf, "low"); break;
 				case 1: sprintf(buf, "med"); break;
@@ -488,15 +488,15 @@ void MenuGL::drawIndicator()
 			else sprintf(buf, "false");
 			break;
 		case Sound: 
-			level = game->volSound; 
+			level = config->getVolSound(); 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case Music: 
-			level = game->volMusic; 
+			level = config->getVolMusic(); 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case MouseSpeed: 
-			level = game->mouseSpeed*10.0; 
+			level = config->getMouseSpeed()*10.0; 
 			sprintf(buf, "%d", (int)((level+0.005)*100.0));	 
 			break;
 		default: 
@@ -767,28 +767,24 @@ void MenuGL::incItem()
 		case NewGame:
 			break;
 		case SkillLevel:
-			game->gameSkillBase += 0.1;
-			if(game->gameSkillBase > 0.9) 
-				game->gameSkillBase = 0.9;
-			hiScore->print(INT_GAME_SKILL_BASE);
+			config->setGameSkillBase(config->getGameSkillBase()+0.1);
+			hiScore->print(config->getIntSkill());
 			game->newGame();
 			break;
 		case GameLevel:
 			game->gameLevel++;
-			if(game->gameLevel > game->maxLevel) 
+			if(game->gameLevel > config->getMaxLevel()) 
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
-				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", game->maxLevel, game->gameLevel);
-				game->gameLevel = game->maxLevel;
+				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", config->getMaxLevel(), game->gameLevel);
+				game->gameLevel = config->getMaxLevel();
 			}
 			else
 				game->newGame();
 			break;
 		case Graphics:
-			game->gfxLevel++;
-				if(game->gfxLevel > 2)
-					game->gfxLevel = 2;
+			config->setGfxLevel(config->getGfxLevel()+1);
 			break;
 		case ScreenSize:
 			config->setScreenSize(config->getScreenSize()+1);
@@ -806,22 +802,16 @@ void MenuGL::incItem()
 			}
 			break;
 		case Sound:
-			game->volSound += 0.05;
-			if(game->volSound > 1.0)
-				game->volSound = 1.0;
-			game->audio->setSoundVolume(game->volSound);
+			config->setVolSound(config->getVolSound()+0.05);
+			game->audio->setSoundVolume(config->getVolSound());
 			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			game->volMusic += 0.05;
-			if(game->volMusic > 1.0)
-				game->volMusic = 1.0;
-			game->audio->setMusicVolume(game->volMusic);
+			config->setVolMusic(config->getVolMusic()+0.05);
+			game->audio->setMusicVolume(config->getVolMusic());
 			break;
 		case MouseSpeed:
-			game->mouseSpeed += 0.005;
-			if(game->mouseSpeed >= 0.1)
-				game->mouseSpeed = 0.1;
+			config->setMouseSpeed(config->getMouseSpeed()+0.005);
 			break;
 		case Quit:
 			break;
@@ -841,10 +831,8 @@ void MenuGL::decItem()
 		case NewGame:
 			break;
 		case SkillLevel:
-			game->gameSkillBase -= 0.1;
-			if(game->gameSkillBase < 0.2) 
-				game->gameSkillBase = 0.2;
-			hiScore->print(INT_GAME_SKILL_BASE);
+			config->setGameSkillBase(config->getGameSkillBase()-0.1);
+			hiScore->print(config->getIntSkill());
 			game->newGame();
 			break;
 		case GameLevel:
@@ -854,9 +842,7 @@ void MenuGL::decItem()
 			game->newGame();
 			break;
 		case Graphics:
-			game->gfxLevel--;
-			if(game->gfxLevel < 0)
-				game->gfxLevel = 0;
+			config->setGfxLevel(config->getGfxLevel()-1);
 			break;
 		case ScreenSize:
 			config->setScreenSize(config->getScreenSize()-1);
@@ -874,22 +860,16 @@ void MenuGL::decItem()
 			}
 			break;
 		case Sound:
-			game->volSound -= 0.05;
-			if(game->volSound < 0.0)
-				game->volSound = 0.0;
-			game->audio->setSoundVolume(game->volSound);
+			config->setVolSound(config->getVolSound()-0.05);
+			game->audio->setSoundVolume(config->getVolSound());
 			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			game->volMusic -= 0.05;
-			if(game->volMusic < 0.0)
-				game->volMusic = 0.0;
-			game->audio->setMusicVolume(game->volMusic);
+			config->setVolMusic(config->getVolMusic()-0.05);
+			game->audio->setMusicVolume(config->getVolMusic());
 			break;
 		case MouseSpeed:
-			game->mouseSpeed -= 0.005;
-			if(game->mouseSpeed <= 0.01)
-				game->mouseSpeed = 0.01;
+			config->setMouseSpeed(config->getMouseSpeed()-0.005);
 			break;
 		case Quit:
 			break;

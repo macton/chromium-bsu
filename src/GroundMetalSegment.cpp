@@ -14,6 +14,7 @@
 //#define GL_EXT_
 //#include <GL/glext.h>
 
+#include "Config.h"
 #include "Global.h"
 #include "Ground.h"
 
@@ -30,6 +31,7 @@ GroundMetalSegment::~GroundMetalSegment()
 //----------------------------------------------------------
 void GroundMetalSegment::drawGL()
 {
+	Config *config = Config::getInstance();
 	static float c0_clr[4] = { 0.65, 0.62, 0.53, 1.0 };
 	static float c1_clr[4] = { 0.79, 0.82, 0.69, 1.0 };
 	static float r0_clr[4]  = { 0.07, 0.07, 0.13, 1.0 };
@@ -83,7 +85,7 @@ void GroundMetalSegment::drawGL()
 			break;
 	}
 	
-	if(parent->game->gfxLevel > 1)
+	if(config->getGfxLevel() > 1)
 	{
 		float repA = 0.0;
 		float repB = rep;
@@ -118,7 +120,7 @@ void GroundMetalSegment::drawGL()
 		rep = 1.0;
 		glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Base]);
 		glBegin(GL_TRIANGLES); //-- use triangles to prevent color popping on Utah
-		if(parent->game->gfxLevel > 0)
+		if(config->getGfxLevel() > 0)
 		{
 			glColor4fv(c0_clr); glTexCoord2f( rep,  rep); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);
 			glColor4fv(c1_clr); glTexCoord2f( rep,  0.0); glVertex3f(         pos[0],          pos[1], pos[2]);

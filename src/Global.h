@@ -53,7 +53,6 @@ public:
 	
 	static MainToolkit *toolkit;
 	
-	static float 	mouseSpeed;
 	static bool 	mouseActive;
 	
 	static TexFont	*texFont;
@@ -62,21 +61,14 @@ public:
 	static int		frame;
 	static int		gameFrame;
 	static float	gameSpeed;
-	static float	gameSkillBase;
 	static float	gameSkill;
 	static int		gameLevel;
-	static int		maxLevel;
-	static int		gfxLevel;
-	static float	viewGamma;
 	static float	speedAdj;
 	
 	static float	scrollSpeed;
 		
 	bool	 game_pause;
 	bool	 game_quit;
-	
-	static float	volSound;
-	static float	volMusic;
 	
 	static int		heroDeath;
 	static int		heroSuccess;

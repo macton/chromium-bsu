@@ -18,6 +18,9 @@
 #include "MainWidget.h"
 #include "PlayList.h"
 
+#include "../src/Config.h"
+#include "../src/HiScore.h"
+
 #include "icon.xpm"
 
 const char *argv_0 = 0; // we'll use this in MainWidget::launchGame
@@ -44,6 +47,9 @@ int main( int argc, char **argv )
 
 	argc = my_argc;
 	argv = my_argv;
+	
+	Config::init();
+	HiScore::init();
 	
 	QApplication::setColorSpec( QApplication::ManyColor );
     QApplication a(argc,argv);

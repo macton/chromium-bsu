@@ -16,7 +16,7 @@
 #include "HelpPage.h"
 #include "PlayList.h"
 #include "ConfigFile.h"
-#include "HiScore.h"
+#include "HiScoreWidget.h"
 
 //====================================================================
 class MainWidget : public QMainWindow
@@ -45,7 +45,7 @@ private:
 	
 	PlayList	*playList;
 	ConfigFile	*configFile;
-	HiScore		*hiScore;
+	HiScoreWidget		*hiScore;
 	
 	HelpPage	*helpPage;
 

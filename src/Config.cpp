@@ -9,27 +9,6 @@
 #include "extern.h"
 #include "HiScore.h"
 
-float	Config::mouseSpeed	= 0.03;
-bool	Config::mouseActive		= false;
-
-float	Config::fps			= 50.0;
-int		Config::frame		= 0;
-int		Config::gameFrame	= 0;
-float	Config::gameSpeed	= 0.5;
-float	Config::gameSkill	= 1.0;
-float	Config::gameSkillBase	= 0.5;
-int		Config::gameLevel	= 1;
-int		Config::maxLevel	= 1;
-float	Config::viewGamma	= 1.1;
-float	Config::speedAdj	= 1.0;
-
-float	Config::scrollSpeed		= -0.045;
-
-
-int		Config::gfxLevel = 2;
-float	Config::volSound = 0.9;
-float	Config::volMusic = 0.5;
-	
 //====================================================================
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,6 +64,15 @@ Config::Config()
 	true_color		= false;
 	use_playList	= false;
 	use_cdrom		= true;
+
+	maxLevel		= 1;
+	gfxLevel		= 2;
+
+	mouseSpeed		=  0.03;
+	gameSkillBase	=  0.5;
+	viewGamma		=  1.1;
+	volSound		=  0.9;
+	volMusic		=  0.5;
 
 	readFile();
 }

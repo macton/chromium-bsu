@@ -8,14 +8,12 @@
 #include "Global.h"
 #include "extern.h"
 #include "HiScore.h"
-
+#include "Config.h"
 
 TexFont	*Global::texFont	= 0;
 
 MainToolkit *Global::toolkit = 0;
-	
 
-float	Global::mouseSpeed	= 0.03;
 bool	Global::mouseActive		= false;
 
 float	Global::fps			= 50.0;
@@ -23,10 +21,7 @@ int		Global::frame		= 0;
 int		Global::gameFrame	= 0;
 float	Global::gameSpeed	= 0.5;
 float	Global::gameSkill	= 1.0;
-float	Global::gameSkillBase	= 0.5;
 int		Global::gameLevel	= 1;
-int		Global::maxLevel	= 1;
-float	Global::viewGamma	= 1.1;
 float	Global::speedAdj	= 1.0;
 Global::GameMode Global::gameMode = Menu;
 
@@ -35,11 +30,6 @@ int		Global::heroSuccess	= 0;
 
 float	Global::scrollSpeed		= -0.045;
 
-
-int		Global::gfxLevel = 2;
-float	Global::volSound = 0.9;
-float	Global::volMusic = 0.5;
-	
 HeroAircraft	*Global::hero		= 0;
 EnemyFleet		*Global::enemyFleet	= 0;
 HeroAmmo		*Global::heroAmmo	= 0;
@@ -137,8 +127,9 @@ void Global::destroy()
 //----------------------------------------------------------
 void Global::newGame()
 {
-	HiScore::getInstance()->set(INT_GAME_SKILL_BASE, hero->getScore());
-	gameSkill = gameSkillBase + 0.5;
+	Config *config = Config::getInstance();
+	HiScore::getInstance()->set(config->getIntSkill(), hero->getScore());
+	gameSkill = config->getGameSkillBase() + 0.5;
 	gameSkill += (gameLevel-1)*0.05;
 	gameFrame = 0;
 	enemyFleet->clear();
@@ -175,11 +166,10 @@ void Global::newGame()
 //----------------------------------------------------------
 void Global::gotoNextLevel()
 {
-//	Global::scrollSpeed = -Global::gameSkill*0.05;
-//	fprintf(stderr, "%f\n", Global::scrollSpeed);
+	Config *config = Config::getInstance();
 	gameLevel++;
-	if(maxLevel < gameLevel)
-		maxLevel = gameLevel;
+	if(config->getMaxLevel() < gameLevel)
+		config->setMaxLevel(gameLevel);
 	gameSkill += 0.05;
 	if(gameSkill > 1.9)
 		gameSkill = 1.9;

@@ -27,22 +27,24 @@ LIBS		= $$LIBDIRS $(SDL_LIBS) $(AL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lm -pthre
 HEADERS		= \
 			Audio.h \
 			ConfigFile.h \
-			Global.h \
 			HelpPage.h \
-			HiScore.h \
+			HiScoreWidget.h \
 			MainWidget.h \
 			PlayList.h \
 			../src/define.h \
+			../src/Config.h \
+			../src/HiScore.h \
 			main.h
 			
 SOURCES		= \
 			Audio.cpp \
 			ConfigFile.cpp \
-			Global.cpp \
 			HelpPage.cpp \
-			HiScore.cpp \
+			HiScoreWidget.cpp \
 			MainWidget.cpp \
 			PlayList.cpp \
+			../src/Config.cpp \
+			../src/HiScore.cpp \
 			main.cpp
 
 INTERFACES	= 

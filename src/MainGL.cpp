@@ -89,7 +89,7 @@ int MainGL::initGL()
 	glLineWidth(1.0);
 	glClearColor( 0.0, 0.0, 0.0, 1.0 );
 	
-	pngSetViewingGamma(game->viewGamma);
+	pngSetViewingGamma(config->getViewGamma());
 	
 	return 0;
 }
@@ -186,7 +186,7 @@ void MainGL::drawGameGL()
 	game->enemyFleet->drawGL();
 	game->hero->drawGL();
 	
-	if(game->gfxLevel > 0)
+	if(config->getGfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -243,7 +243,7 @@ void MainGL::drawDeadGL()
 	//-- Draw actors
 	game->enemyFleet->drawGL();
 	
-	if(game->gfxLevel > 0)
+	if(config->getGfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -256,7 +256,7 @@ void MainGL::drawDeadGL()
 	//-- Draw stats
 	game->statusDisplay->drawGL(game->hero);
 	
-	int		skill = INT_GAME_SKILL_BASE;
+	int		skill = config->getIntSkill();
 	float	heroScore = game->hero->getScore();
 	HiScore *hiScore = HiScore::getInstance();
 	char buffer[128];
@@ -287,14 +287,14 @@ void MainGL::drawSuccessGL()
 		game->gotoNextLevel();
 		game->gameMode = game->Game;
 		game->audio->setMusicMode(Audio::MusicGame);
-		game->audio->setMusicVolume(game->volMusic);
+		game->audio->setMusicVolume(config->getVolMusic());
 		return;
 	}
 	
 	float f	= -game->heroSuccess/450.0;
 	if(game->heroSuccess < 0)
 	{
-		float vol = game->volMusic - (game->volMusic*f);
+		float vol = config->getVolMusic() - (config->getVolMusic()*f);
 		game->audio->setMusicVolume(vol);
 	}
 	
@@ -318,7 +318,7 @@ void MainGL::drawSuccessGL()
 	//-- Draw actors
 	game->hero->drawGL();
 	
-	if(game->gfxLevel > 0)
+	if(config->getGfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -331,7 +331,7 @@ void MainGL::drawSuccessGL()
 		
 	char	buffer[256];
 	sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
-//	if(game->hero->getScore() > game->hiScore[INT_GAME_SKILL_BASE][0])
+//	if(game->hero->getScore() > game->hiScore[config->getIntSkill()][0])
 //	{
 //		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
 //	}

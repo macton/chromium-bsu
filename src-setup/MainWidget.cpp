@@ -18,7 +18,7 @@
 #include <qmessagebox.h>
 
 #include "../src/define.h"
-#include "Global.h"
+#include "../src/Config.h"
 
 extern const char* argv_0;
 
@@ -26,12 +26,13 @@ extern const char* argv_0;
 MainWidget::MainWidget()
 	: QMainWindow(0, 0)
 {
+	Config	*config = Config::getInstance();
 	tabWidget = new QTabWidget(this);
 	setCentralWidget(tabWidget);
 	
 	playList	= new PlayList(this);
 	configFile	= new ConfigFile(this);
-	hiScore		= new HiScore(this);
+	hiScore		= new HiScoreWidget(this);
 	
 	tabWidget->addTab(configFile, "Config");
 	tabWidget->addTab(hiScore,    "High Scores");
@@ -39,7 +40,7 @@ MainWidget::MainWidget()
 	tabWidget->setBackgroundMode(PaletteMid);
 //	tabWidget->setBackgroundMode(PaletteButton);
 	
-	if(!Global::use_playList)
+	if(!config->getUsePlayList())
 		tabWidget->setTabEnabled(playList, false);	
 		
 	helpPage = new HelpPage(this, 0, true);

@@ -1,4 +1,4 @@
-#include "HiScore.h"
+#include "HiScoreWidget.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,10 +6,11 @@
 #include <qfileinfo.h>
 
 #include "../src/define.h"
-#include "Global.h"
+#include "../src/Config.h"
+#include "../src/HiScore.h"
 
 //====================================================================
-HiScore::HiScore(QWidget *parent, const char *name)
+HiScoreWidget::HiScoreWidget(QWidget *parent, const char *name)
 	: QWidget(parent, name)
 {
 	chromLabel = new QLabel(this);
@@ -58,12 +59,12 @@ HiScore::HiScore(QWidget *parent, const char *name)
 	updateScores();
 }
 
-HiScore::~HiScore()
+HiScoreWidget::~HiScoreWidget()
 {
 }
 
 //----------------------------------------------------------
-void HiScore::setLevelText(const QString &s)
+void HiScoreWidget::setLevelText(const QString &s)
 {
 	char buffer[128];
 	sprintf(buffer, "high scores for \"%s\" skill level : ", (const char*)s);
@@ -72,15 +73,17 @@ void HiScore::setLevelText(const QString &s)
 }
 
 //----------------------------------------------------------
-void HiScore::show()
+void HiScoreWidget::show()
 {
 //	updateScores();
 	QWidget::show();
 }
 
 //----------------------------------------------------------
-void HiScore::updateScores()
+void HiScoreWidget::updateScores()
 {
+	Config	*config = Config::getInstance();
+	HiScore	*hiScore = HiScore::getInstance();
 	QListViewItem *item;
 	
 	listView->clear();
@@ -90,13 +93,14 @@ void HiScore::updateScores()
 		char sName[64];
 		char sScore[32];
 		struct tm *tmptr; 
-		int l = INT_GAME_SKILL_BASE;
+		int l = config->getIntSkill();
 		for(int j = HI_SCORE_HIST-1; j >= 0; j--)
 		{
-			tmptr = localtime(&Global::hiScoreDate[l][j]);
+			time_t	t = hiScore->getDate(l,j);
+			tmptr = localtime(&t);
 			sprintf(sDate,  "%02d/%02d/%04d", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year);
-			sprintf(sName,  "%s", Global::hiScoreName[l][j]);
-			sprintf(sScore, "%d", (int)(Global::hiScore[l][j]));
+			sprintf(sName,  "%s", hiScore->getName(l,j)  );
+			sprintf(sScore, "%d", (int)hiScore->getScore(l,j) );
 			item = new QListViewItem(listView, sDate, sName, sScore);
 		}
 	}
@@ -119,41 +123,12 @@ const char* alterPathForPlatform(char* filename)
 }
 
 //----------------------------------------------------------
-const char *HiScore::getFileName()
+bool HiScoreWidget::readScoreFile()
 {
-	static char	configFilename[256];
-	const char *envFile = getenv("CHROMIUM_SCORE");
-	if(envFile && strlen(envFile) < 256)
-	{
-		strcpy(configFilename, envFile);
-	}
-	else
-	{
-		const char *homeDir = getenv("HOME");
-		if(!homeDir)
-			homeDir = "./";
-		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
-		alterPathForPlatform(configFilename);
-	}
-	return configFilename;
-}
-
-//----------------------------------------------------------
-bool HiScore::readScoreFile()
-{
+	HiScore *hiScore = HiScore::getInstance();
 	bool retVal = true;
-	FILE	*file;
-		
-	file = fopen(getFileName(), "r");
-	if(file)
-	{
-		fread(Global::hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-		fread(Global::hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-		fread(Global::hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
-		fclose(file);
-	}
-	else 
-		retVal = false;
+
+	retVal = hiScore->readFile();	
 	
 	checkFilePermissions();
 	
@@ -161,13 +136,14 @@ bool HiScore::readScoreFile()
 }
 
 //----------------------------------------------------------
-void HiScore::checkFilePermissions()
+void HiScoreWidget::checkFilePermissions()
 {
+	HiScore	*hiScore = HiScore::getInstance();
 	char		filename[256];
 	QFileInfo	fileInfo;
 	QString		tmpString;
 	
-	sprintf(filename, "%s", getFileName());
+	sprintf(filename, "%s", hiScore->getFileName());
 	const char *envFile = getenv("CHROMIUM_SCORE");
 	if(envFile)
 	{

@@ -135,7 +135,7 @@ int main(int argc, char **argv)
 #error "USE_SDL or USE_GLUT must be defined"
 #endif
 		
-	hiScore->print(INT_GAME_SKILL_BASE);
+	hiScore->print(config->getIntSkill());
 	game->toolkit->run();
 
 	hiScore->destroy();

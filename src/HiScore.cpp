@@ -140,21 +140,15 @@ time_t HiScore::getDate(int skill, int index)
 }
 
 /**
- * Save high score file. If CHROMIUM_SCORE environment variable is set, that
- * filename will be used. Otherwise, ~/.chromium-score.
- * @returns success
+ * @returns name of score file
  */
 //----------------------------------------------------------
-bool HiScore::saveFile()
+const char *HiScore::getFileName()
 {
-	bool retVal = true;
-	char	configFilename[256];
-	FILE	*file;
-
+	static char	configFilename[256];
 	const char *envFile = getenv("CHROMIUM_SCORE");
 	if(envFile && strlen(envFile) < 256)
 	{
-		fprintf(stderr, "CHROMIUM_SCORE=%s\n", envFile);
 		strcpy(configFilename, envFile);
 	}
 	else
@@ -165,8 +159,21 @@ bool HiScore::saveFile()
 		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
 		alterPathForPlatform(configFilename);
 	}
-	
-	file = fopen(configFilename, "w");
+	return configFilename;
+}
+
+/**
+ * Save high score file. If CHROMIUM_SCORE environment variable is set, that
+ * filename will be used. Otherwise, ~/.chromium-score.
+ * @returns success
+ */
+//----------------------------------------------------------
+bool HiScore::saveFile()
+{
+	bool retVal = true;
+	FILE	*file;
+
+	file = fopen(getFileName(), "w");
 	if(file)
 	{
 		fwrite(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
@@ -176,7 +183,7 @@ bool HiScore::saveFile()
 	}
 	else
 	{
-		fprintf(stderr, "WARNING: could not write score file (%s)\n", configFilename);
+		fprintf(stderr, "WARNING: could not write score file (%s)\n", getFileName());
 		retVal = false;
 	}
 	return retVal;
@@ -192,25 +199,9 @@ bool HiScore::saveFile()
 bool HiScore::readFile()
 {
 	bool retVal = true;
-	char	configFilename[256];
 	FILE	*file;
 
-	const char *envFile = getenv("CHROMIUM_SCORE");
-	if(envFile && strlen(envFile) < 256)
-	{
-		fprintf(stderr, "CHROMIUM_SCORE=%s\n", envFile);
-		strcpy(configFilename, envFile);
-	}
-	else
-	{
-		const char *homeDir = getenv("HOME");
-		if(!homeDir)
-			homeDir = "./";
-		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
-		alterPathForPlatform(configFilename);
-	}
-		
-	file = fopen(configFilename, "r");
+	file = fopen(getFileName(), "r");
 	if(file)
 	{
 		fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
@@ -220,7 +211,7 @@ bool HiScore::readFile()
 	}
 	else 
 	{
-		fprintf(stderr, "WARNING: could not read score file (%s)\n", configFilename);
+		fprintf(stderr, "WARNING: could not read score file (%s)\n", getFileName());
 		retVal = false;
 	}
 		

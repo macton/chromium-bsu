@@ -14,8 +14,6 @@
 #include <qtooltip.h>
 #include <qmessagebox.h>
 
-#include "Global.h"
-
 //====================================================================
 PlayList::PlayList(QWidget *parent, const char* name)
 	: QWidget(parent, name)

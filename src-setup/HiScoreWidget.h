@@ -5,8 +5,8 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
-#ifndef HiScore_h
-#define HiScore_h
+#ifndef HiScoreWidget_h
+#define HiScoreWidget_h
 
 #include <time.h>
 
@@ -16,12 +16,12 @@
 #include <qlistview.h>
 
 //====================================================================
-class HiScore : public QWidget
+class HiScoreWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	HiScore(QWidget *parent = 0, const char *name = 0);
-	~HiScore();
+	HiScoreWidget(QWidget *parent = 0, const char *name = 0);
+	~HiScoreWidget();
 
 	void	updateScores();
 	void	show();
@@ -32,7 +32,6 @@ public slots:
 protected:
 	bool	readScoreFile();
 	void	checkFilePermissions();
-	const char *getFileName();
 
 private:
 	QVBoxLayout	*topVLayout;
@@ -45,4 +44,4 @@ private:
 };
 	
 
-#endif // HiScore_h
+#endif // HiScoreWidget_h

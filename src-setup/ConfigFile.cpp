@@ -15,7 +15,7 @@
 #include <qmessagebox.h>
 #include <qtooltip.h>
 
-#include "Global.h"
+#include "../src/Config.h"
 
 static bool altered = false;
 
@@ -138,112 +138,42 @@ void ConfigFile::exit()
 //----------------------------------------------------------
 void ConfigFile::saveCurrentConfig()
 {
-	char	configFilename[256];
-	FILE	*file;
-	const char *homeDir = getenv("HOME");
-
-	if(!homeDir)
-		homeDir = "./";
-		
-	sprintf(configFilename, "%s/.chromium", homeDir);
-	file = fopen(configFilename, "w");
-	if(file)
-	{
-		updateVars();
-		fprintf(file, "screenSize %d\n",	Global::screenSize);
-		fprintf(file, "gfxLevel %d\n",		Global::gfxLevel);
-		fprintf(file, "gameSkillBase %g\n",	Global::gameSkillBase);
-		fprintf(file, "mouseSpeed %g\n",	Global::mouseSpeed);
-		fprintf(file, "maxLevel %d\n",		Global::maxLevel);
-		fprintf(file, "volSound %g\n",		Global::volSound);
-		fprintf(file, "volMusic %g\n",		Global::volMusic);
-		fprintf(file, "full_screen %d\n", 	(int)Global::full_screen);
-		fprintf(file, "true_color %d\n", 	(int)Global::true_color);
-		fprintf(file, "swap_stereo %d\n",	(int)Global::swap_stereo);
-		fprintf(file, "auto_speed %d\n",	(int)Global::auto_speed);
-		fprintf(file, "show_fps %d\n",		(int)Global::show_fps);
-		fprintf(file, "use_playList %d\n",	(int)Global::use_playList);
-		fprintf(file, "use_cdrom %d\n",		(int)Global::use_cdrom);
-		fprintf(file, "viewGamma %g\n",		Global::viewGamma);
-
-		fclose(file);
-		fprintf(stderr, "wrote config file (%s)\n", configFilename);
-		altered = false;
-	}
-	else
-		fprintf(stderr, "WARNING: could not write config file (%s)\n", configFilename);
+	updateVars();
+	Config	*config = Config::getInstance();
+	config->saveFile();
 }
 	
 //----------------------------------------------------------
 void ConfigFile::loadCurrentConfig()
 {
-	int		i;
-	int		numLines;
-	int		tmp;
-	FILE	*file;
-	char	configStrings[32][64];
-	char	configFilename[256];
-	const char *homeDir = getenv("HOME");
-	if(!homeDir)
-		homeDir = "./";
-	sprintf(configFilename, "%s/.chromium", homeDir);
-	file = fopen(configFilename, "r");
-	if(file)
-	{
-		fprintf(stderr, "loading \"%s\"...", configFilename);
-		i = numLines = 0;
-		while( fgets(configStrings[i], 64, file) )
-			i++;
-		fprintf(stderr, "done.\n");
-		fclose(file);
-		
-		numLines = i;
-		for(i = 0; i < numLines; i++)
-		{
-			if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n", &Global::screenSize); }
-			if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n", &Global::mouseSpeed); }
-			if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &Global::gameSkillBase); }
-			if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n", &Global::gfxLevel);   }
-			if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n", &Global::volSound);   }
-			if(strncmp(configStrings[i], "volMusic", 8) == 0) { sscanf(configStrings[i], "volMusic %f\n", &Global::volMusic);   }
-			if(strncmp(configStrings[i], "full_scr", 8) == 0) { sscanf(configStrings[i], "full_screen %d\n", &tmp);	Global::full_screen	= (bool)tmp; }
-			if(strncmp(configStrings[i], "true_col", 8) == 0) { sscanf(configStrings[i], "true_color %d\n", &tmp);	Global::true_color	= (bool)tmp; }
-			if(strncmp(configStrings[i], "swap_ste", 8) == 0) { sscanf(configStrings[i], "swap_stereo %d\n", &tmp);	Global::swap_stereo	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n", &tmp);	Global::auto_speed	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n", &tmp);	Global::show_fps	= (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);Global::use_playList= (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n", &tmp);   Global::use_cdrom   = (bool)tmp;  }
-			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n", &Global::maxLevel);  }
-			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n", &Global::viewGamma); }
-		}
-		altered = false;
-	}
-	else
-		altered = true;
-		
+	Config	*config = Config::getInstance();
+	config->readFile();
+	altered = true;
 	initWidgets();
 }
 	
 //----------------------------------------------------------
 void ConfigFile::initWidgets()
 {
+	Config	*config = Config::getInstance();
+	
 	bool tmp = altered;
-	configSelect[Skill]->setValue(skillToOption(Global::gameSkillBase));
-	configSelect[screenSize]->setValue(Global::screenSize);
-	configSelect[gfxLevel]->setValue(Global::gfxLevel);
+	configSelect[Skill]->setValue(skillToOption(config->getGameSkillBase()));
+	configSelect[screenSize]->setValue(config->getScreenSize());
+	configSelect[gfxLevel]->setValue(config->getGfxLevel());
 	
-	configFloat[volSound]->setValue(Global::volSound);
-	configFloat[volMusic]->setValue(Global::volMusic);
-	configFloat[mouseSpeed]->setValue(Global::mouseSpeed);
-	configFloat[viewGamma]->setValue(Global::viewGamma);
+	configFloat[volSound]->setValue(config->getVolSound());
+	configFloat[volMusic]->setValue(config->getVolMusic());
+	configFloat[mouseSpeed]->setValue(config->getMouseSpeed());
+	configFloat[viewGamma]->setValue(config->getViewGamma());
 	
-	configBool[full_screen]->setValue(Global::full_screen);
-	configBool[true_color]->setValue(Global::true_color);
-	configBool[swap_stereo]->setValue(Global::swap_stereo);
-	configBool[auto_speed]->setValue(Global::auto_speed);
-	configBool[show_fps]->setValue(Global::show_fps);
-	configBool[use_playList]->setValue(Global::use_playList);
-	configBool[use_cdrom]->setValue(Global::use_cdrom);
+	configBool[full_screen]->setValue(config->getFullScreen());
+	configBool[true_color]->setValue(config->getTrueColor());
+	configBool[swap_stereo]->setValue(config->getSwapStereo());
+	configBool[auto_speed]->setValue(config->getAutoSpeed());
+	configBool[show_fps]->setValue(config->getShowFPS());
+	configBool[use_playList]->setValue(config->getUsePlayList());
+	configBool[use_cdrom]->setValue(config->getUseCDROM());
 	// setting these triggers altered to true...
 	altered = tmp;
 }
@@ -251,22 +181,24 @@ void ConfigFile::initWidgets()
 //----------------------------------------------------------
 void ConfigFile::updateVars()
 {
-	Global::gameSkillBase = optionToSkill(configSelect[Skill]->getValue());
-	Global::screenSize	= configSelect[screenSize]->getValue();
-	Global::gfxLevel	= configSelect[gfxLevel]->getValue();
+	Config	*config = Config::getInstance();
 	
-	Global::volSound	= configFloat[volSound]->getValue();
-	Global::volMusic	= configFloat[volMusic]->getValue();
-	Global::mouseSpeed	= configFloat[mouseSpeed]->getValue();
-	Global::viewGamma	= configFloat[viewGamma]->getValue();
+	config->setGameSkillBase( optionToSkill(configSelect[Skill]->getValue()) );
+	config->setScreenSize	( configSelect[screenSize]->getValue() );
+	config->setGfxLevel		( configSelect[gfxLevel]->getValue() );
 	
-	Global::full_screen	= configBool[full_screen]->getValue();
-	Global::true_color	= configBool[true_color]->getValue();
-	Global::swap_stereo	= configBool[swap_stereo]->getValue();
-	Global::auto_speed	= configBool[auto_speed]->getValue();
-	Global::show_fps	= configBool[show_fps]->getValue();
-	Global::use_playList= configBool[use_playList]->getValue();
-	Global::use_cdrom   = configBool[use_cdrom]->getValue();
+	config->setVolSound		( configFloat[volSound]->getValue() );
+	config->setVolMusic		( configFloat[volMusic]->getValue() );
+	config->setMouseSpeed	( configFloat[mouseSpeed]->getValue() );
+	config->setViewGamma	( configFloat[viewGamma]->getValue() );
+	
+	config->setFullScreen	( configBool[full_screen]->getValue() );
+	config->setTrueColor	( configBool[true_color]->getValue() );
+	config->setSwapStereo	( configBool[swap_stereo]->getValue() );
+	config->setAutoSpeed	( configBool[auto_speed]->getValue() );
+	config->setShowFPS		( configBool[show_fps]->getValue() );
+	config->setUsePlayList	( configBool[use_playList]->getValue() );
+	config->setUseCDROM		( configBool[use_cdrom]->getValue() );
 }
 
 //----------------------------------------------------------
@@ -284,8 +216,9 @@ float ConfigFile::optionToSkill(int o)
 //----------------------------------------------------------
 void ConfigFile::setSkill(int)
 {
+	Config	*config = Config::getInstance();
 	static QString tmp;
-	Global::gameSkillBase = optionToSkill(configSelect[Skill]->getValue());
+	config->setGameSkillBase( optionToSkill(configSelect[Skill]->getValue()) );
 	tmp = configSelect[Skill]->currentText();
 	emit newSkillSelected(tmp);
 }
