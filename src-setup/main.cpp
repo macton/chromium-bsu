@@ -36,12 +36,24 @@ int main( int argc, char **argv )
 	int	my_argc = argc+4;
 	char *my_argv[16];
 	int i;
-		
-	my_argv[0] = argv[0];
-	my_argv[1] = "-bg";
-	my_argv[2] = "#9494B0";
-	my_argv[3] = "-fg";
-	my_argv[4] = "black";
+	
+	switch(0)
+	{
+		case 0:
+			my_argv[0] = argv[0];
+			my_argv[1] = "-bg";
+			my_argv[2] = "#9494B0";
+			my_argv[3] = "-fg";
+			my_argv[4] = "black";
+			break;
+		case 1:
+			my_argv[0] = argv[0];
+			my_argv[1] = "-bg";
+			my_argv[2] = "grey55";
+			my_argv[3] = "-fg";
+			my_argv[4] = "grey10";
+			break;
+	}
 	for(i = 5; i < argc+4; i++)
 		my_argv[i] = argv[i-4];
 

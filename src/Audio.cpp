@@ -109,9 +109,10 @@ void Audio::initCDROM()
 	{
 		tmp = SDL_CDNumDrives();
 		fprintf(stderr, "%d CDROM drive(s).\n", tmp);
+		config->setCDROMCount(tmp);
 		if(tmp > 0)
 		{
-			cdrom = SDL_CDOpen(0);
+			cdrom = SDL_CDOpen(config->getCDROMDevice());
 			if(cdrom)
 			{
 				tmp = SDL_CDStatus(cdrom);
@@ -149,7 +150,9 @@ void Audio::initCDROM()
 			}
 			else
 			{
-				fprintf(stderr, "Could not access CDROM device : %s\n", SDL_GetError());
+				fprintf(stderr, "ERROR! Could not access CDROM device %d : %s\n", config->getCDROMDevice(), SDL_GetError());
+				SDL_ClearError();
+				config->setCDROMDevice(0); 
 			}
 		}
 	}

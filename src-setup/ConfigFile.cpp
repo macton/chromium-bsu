@@ -19,6 +19,18 @@
 
 static bool altered = false;
 
+#define MAX_CDROMS 8
+static char cdromStrings[MAX_CDROMS][10] = {
+	"first",
+	"second", 
+	"third",
+	"fourth",
+	"fifth",
+	"sixth",
+	"seventh",
+	"eighth"
+};
+	
 //====================================================================
 ConfigFile::ConfigFile(QWidget *parent, const char* name)
 	: QWidget(parent, name)
@@ -45,6 +57,16 @@ ConfigFile::ConfigFile(QWidget *parent, const char* name)
 	}
 	
 	//----
+	configSelect[Skill]->setText("Skill Level");
+	configSelect[Skill]->insertItem("fish in a barrel");
+	configSelect[Skill]->insertItem("whimp");
+	configSelect[Skill]->insertItem("easy");
+	configSelect[Skill]->insertItem("normal");
+	configSelect[Skill]->insertItem("experienced");
+	configSelect[Skill]->insertItem("fun");
+	configSelect[Skill]->insertItem("insane");
+	configSelect[Skill]->insertItem("impossible");
+	
 	configSelect[screenSize]->setText("Screen Size");
 	configSelect[screenSize]->insertItem(" 512x384");
 	configSelect[screenSize]->insertItem(" 640x480");
@@ -57,15 +79,7 @@ ConfigFile::ConfigFile(QWidget *parent, const char* name)
 	configSelect[gfxLevel]->insertItem("medium");
 	configSelect[gfxLevel]->insertItem("high");
 	
-	configSelect[Skill]->setText("Skill Level");
-	configSelect[Skill]->insertItem("fish in a barrel");
-	configSelect[Skill]->insertItem("whimp");
-	configSelect[Skill]->insertItem("easy");
-	configSelect[Skill]->insertItem("normal");
-	configSelect[Skill]->insertItem("experienced");
-	configSelect[Skill]->insertItem("fun");
-	configSelect[Skill]->insertItem("insane");
-	configSelect[Skill]->insertItem("impossible");
+	configSelect[cdromDevice]->setText("CDROM");
 	
 	//----
 	configFloat[mouseSpeed]->setText("Mouse Speed");
@@ -87,39 +101,43 @@ ConfigFile::ConfigFile(QWidget *parent, const char* name)
 	configBool[use_cdrom]->setText("Enable CDROM");
 	
 	launchBut = new QPushButton(this);
-	launchBut->setText("\nlaunch\nc h r o m i u m   b . s . u\n");
+	launchBut->setText("\nlaunch\nc h r o m i u m   b . s . u.\n");
 	
-	//-- Connext
+	//-- Connect
 	QObject::connect(configSelect[Skill], SIGNAL(activated(int)), this, SLOT(setSkill(int)) );
 	QObject::connect(launchBut, SIGNAL(clicked()), this, SIGNAL(launchGame()) );
 	QObject::connect(configBool[use_playList], SIGNAL(toggled(bool)), this, SIGNAL(playListEnabled(bool)) );
+	QObject::connect(configBool[use_cdrom],    SIGNAL(toggled(bool)), this,   SLOT(cdromEnabled(bool)) );
 	
 	//-- Layout
-	topVLayout	= new QVBoxLayout(this, 5, 5);
-	hLayout		= new QHBoxLayout(50);
+	topVLayout	= new QVBoxLayout(this, 10, 5);
+	hLayout		= new QHBoxLayout(30);
 	v1Layout	= new QVBoxLayout(5);
-	v2Layout	= new QVBoxLayout(5);
-	
+	v2Layout	= new QVBoxLayout(1);
+	              
 	topVLayout->addWidget(chromLabel, 0);
 	topVLayout->addLayout(hLayout, 1);
 		hLayout->addLayout(v1Layout, 3);
 			for(i = 0; i < (int)NumSelectOptions; i++)
 				v1Layout->addWidget(configSelect[i], 0);
-			v1Layout->addSpacing(20);	
+			v1Layout->addSpacing(10);	
 			v1Layout->addStretch(1);
 			for(i = 0; i < (int)NumFloatOptions; i++)
 				v1Layout->addWidget(configFloat[i], 0);
 		hLayout->addLayout(v2Layout, 2);
+			v2Layout->addWidget(launchBut, 0);
+			v2Layout->addSpacing(10);
+			v2Layout->addStretch(1);
 			for(i = 0; i < (int)NumBoolOptions; i++)
 				v2Layout->addWidget(configBool[i], 0);
-			v2Layout->addStretch(1);
-			v2Layout->addWidget(launchBut, 0);
-	topVLayout->addSpacing(5);
+	topVLayout->addSpacing(2);
 	
 	
 	
 	loadCurrentConfig();
 	setupToolTips();
+	
+	setBackgroundPixmap(QPixmap("./default.png"));
 }
 
 ConfigFile::~ConfigFile()
@@ -161,6 +179,22 @@ void ConfigFile::initWidgets()
 	configSelect[Skill]->setValue(skillToOption(config->getGameSkillBase()));
 	configSelect[screenSize]->setValue(config->getScreenSize());
 	configSelect[gfxLevel]->setValue(config->getGfxLevel());
+	configSelect[cdromDevice]->setValue(config->getCDROMDevice());
+	if(config->getCDROMCount() < 2)
+		configSelect[cdromDevice]->hide();
+	else
+	{
+		configSelect[cdromDevice]->clear();
+		for(int i = 0; i < config->getCDROMCount(); i++)
+		{
+			if(i == MAX_CDROMS)
+				break;
+			configSelect[cdromDevice]->insertItem(cdromStrings[i]);
+		}
+		configSelect[cdromDevice]->show();
+	}
+	if(!config->getUseCDROM())
+		configSelect[cdromDevice]->setEnabled(false);
 	
 	configFloat[volSound]->setValue(config->getVolSound());
 	configFloat[volMusic]->setValue(config->getVolMusic());
@@ -186,6 +220,7 @@ void ConfigFile::updateVars()
 	config->setGameSkillBase( optionToSkill(configSelect[Skill]->getValue()) );
 	config->setScreenSize	( configSelect[screenSize]->getValue() );
 	config->setGfxLevel		( configSelect[gfxLevel]->getValue() );
+	config->setCDROMDevice	( configSelect[cdromDevice]->getValue() );
 	
 	config->setVolSound		( configFloat[volSound]->getValue() );
 	config->setVolMusic		( configFloat[volMusic]->getValue() );
@@ -223,6 +258,15 @@ void ConfigFile::setSkill(int)
 	emit newSkillSelected(tmp);
 }
 
+//----------------------------------------------------------
+void ConfigFile::cdromEnabled(bool status)
+{
+	if(status)
+		configSelect[cdromDevice]->setEnabled(true);
+	else
+		configSelect[cdromDevice]->setEnabled(false);
+}
+
 //====================================================================
 ConfigBool::ConfigBool(QWidget *parent, const char* name)
 	: QCheckBox(parent, name)
@@ -241,19 +285,20 @@ void ConfigBool::setAltered()
 
 //====================================================================
 ConfigFloat::ConfigFloat(QWidget *parent, const char* name)
-	: QWidget(parent, name)
+	: QFrame(parent, name)
 {
+	setFrameStyle(QFrame::Sunken | QFrame::Panel);
 	textLabel	= new QLabel("text", this);
 	textLabel->setMinimumWidth(100);
 	textLabel->setAlignment( AlignRight | AlignVCenter);
 	valueLabel	= new QLabel("0", this);
-	valueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+//	valueLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 	valueLabel->setFixedWidth(40);
 	slider	= new QSlider(QSlider::Horizontal, this);
 	
 	QObject::connect(slider, SIGNAL(valueChanged(int)), this, SLOT(valueChanged(int)) );
 	
-	hLayout = new QHBoxLayout(this, 0, 5);
+	hLayout = new QHBoxLayout(this, 2, 5);
 	hLayout->addWidget(textLabel, 0);
 	hLayout->addWidget(slider, 1);
 	hLayout->addWidget(valueLabel, 0);
@@ -295,8 +340,9 @@ float ConfigFloat::getValue()
 
 //====================================================================
 ConfigSelect::ConfigSelect(QWidget *parent, const char* name)
-	: QWidget(parent, name)
+	: QFrame(parent, name)
 {
+	setFrameStyle(QFrame::Sunken | QFrame::Panel);
 	textLabel = new QLabel("text", this);
 	textLabel->setMinimumWidth(100);
 	textLabel->setAlignment( AlignRight | AlignVCenter);
@@ -306,7 +352,7 @@ ConfigSelect::ConfigSelect(QWidget *parent, const char* name)
 	QObject::connect(comboBox, SIGNAL(activated(int)), this, SLOT(setAltered(int)) );
 	QObject::connect(comboBox, SIGNAL(activated(int)), this, SIGNAL(activated(int)) );
 	
-	hLayout = new QHBoxLayout(this, 0, 5);
+	hLayout = new QHBoxLayout(this, 2, 5);
 	hLayout->addWidget(textLabel, 0);
 	hLayout->addWidget(comboBox, 1);
 }
@@ -331,7 +377,10 @@ void ConfigSelect::setAltered(int)
 {
 	altered = true;
 }
-
+void ConfigSelect::clear()
+{
+	comboBox->clear();
+}
 
 
 //----------------------------------------------------------
@@ -344,6 +393,10 @@ void ConfigFile::setupToolTips()
 											" \'low\' looks like crap.\n"
 											" \n"
 											" If framerate is erratic, lower the gfx level");
+
+	QToolTip::add(configSelect[cdromDevice]," If you have more than one CDROM on your machine,\n"
+											" select which one you want Chromium to check for\n"
+											" music CDs.");
 
 	QToolTip::add(configFloat[volSound], 	" sound volume ");
 	QToolTip::add(configFloat[volMusic], 	" music volume ");

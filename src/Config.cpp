@@ -58,6 +58,9 @@ Config::Config()
 	true_color		= false;
 	use_playList	= false;
 	use_cdrom		= true;
+	
+	cdromDevice		= 0;
+	cdromCount		= 1;
 
 	maxLevel		= 1;
 	gfxLevel		= 2;
@@ -168,6 +171,8 @@ bool Config::readFile()
 			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n", &maxLevel);  }
 			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n", &viewGamma); }
 			if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n", &tmp); audioType = (AudioType)tmp; }
+			if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n", &cdromCount); }
+			if(strncmp(configStrings[i], "cdromDev", 8) == 0) { sscanf(configStrings[i], "cdromDevice %d\n", &cdromDevice); }
 		}
 	}
 	else
@@ -217,6 +222,8 @@ bool Config::saveFile()
 		fprintf(file, "volMusic %g\n",		volMusic);
 		fprintf(file, "viewGamma %g\n",		viewGamma);
 		fprintf(file, "audioType %d\n",		(int)audioType);
+		fprintf(file, "cdromCount %d\n",	cdromCount);
+		fprintf(file, "cdromDevice %d\n",	cdromDevice);
 
 		fclose(file);
 		fprintf(stderr, "wrote config file (%s)\n", configFilename);

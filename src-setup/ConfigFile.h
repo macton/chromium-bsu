@@ -8,6 +8,7 @@
 #ifndef ConfigFile_h
 #define ConfigFile_h
 
+#include <qframe.h>
 #include <qlabel.h>
 #include <qwidget.h>
 #include <qlayout.h>
@@ -36,6 +37,7 @@ signals:
 
 public slots:
 	void setSkill(int);
+	void cdromEnabled(bool);
 	void saveCurrentConfig();
 	void loadCurrentConfig();
 	void exit();
@@ -59,7 +61,7 @@ private:
 	
 	QPushButton	*launchBut;
 	
-	enum			OptionSelect	{ Skill, screenSize, gfxLevel, NumSelectOptions };
+	enum			OptionSelect	{ Skill, screenSize, gfxLevel, cdromDevice, NumSelectOptions };
 	int				valueSelect[NumSelectOptions];
 	ConfigSelect	*configSelect[NumSelectOptions];
 	
@@ -89,7 +91,7 @@ protected slots:
 };
 
 //====================================================================
-class ConfigFloat : public QWidget
+class ConfigFloat : public QFrame
 {
 	Q_OBJECT
 public:
@@ -113,7 +115,7 @@ private:
 };
 
 //====================================================================
-class ConfigSelect : public QWidget
+class ConfigSelect : public QFrame
 {
 	Q_OBJECT
 public:
@@ -125,6 +127,7 @@ public:
 	void	setValue(int);
 	int		getValue() { return comboBox->currentItem(); }
 	QString currentText() { return comboBox->currentText(); }
+	void	clear();
 
 signals:	
 	void activated(int);

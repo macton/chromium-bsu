@@ -59,6 +59,11 @@ public:
 	void	setUsePlayList(bool s)	{	use_playList = s;	}
 	void	setUseCDROM(bool s)		{	use_cdrom = s;		}
 	
+	int		getCDROMDevice()		{	return cdromDevice;	}
+	int		getCDROMCount()			{	return cdromCount;	}
+	void	setCDROMDevice(int i)	{	cdromDevice = i;	}
+	void	setCDROMCount(int c)	{	cdromCount  = c;	}
+	
 	int 	getGfxLevel()		{	return gfxLevel;	}
 	int 	getMaxLevel()		{	return maxLevel;	}
 	void	setGfxLevel(int a)	{	gfxLevel = a; if(gfxLevel < 0) gfxLevel = 0; if(gfxLevel > 2) gfxLevel = 2; }
@@ -103,6 +108,8 @@ private:
 	
 	int 	 gfxLevel;
 	int 	 maxLevel;
+	int		 cdromDevice;
+	int		 cdromCount;
 
 	float	 mouseSpeed;
 	float	 gameSkillBase;

@@ -158,7 +158,8 @@ fi
 ## set up other config.mak variables
 ######################################################################
 GL_LIBS="-lglpng -lGL -lGLU -lm"
-AL_LIBS="-lopenal -ldl" 
+AL_LIBS="-L../support/openal/lib -lopenal -ldl" 
+AL_CFLAGS="-I../support/openal/linux/include -I../support/openal/include"
 
 ## write out config.mak
 ######################################################################
@@ -167,6 +168,7 @@ echo ""                               >> config.mak
 echo "SDL_CONFIG   = $SDL_CONFIG"     >> config.mak
 echo "SMPEG_CONFIG = $SMPEG_CONFIG"   >> config.mak
 echo ""                               >> config.mak
+echo "AL_CFLAGS    = $AL_CFLAGS"      >> config.mak
 echo "SDL_CFLAGS   = $SDL_CFLAGS"     >> config.mak
 echo "SMPEG_CFLAGS = $SMPEG_CFLAGS"   >> config.mak
 echo "PKG_CFLAGS   = $PKG_CFLAGS"     >> config.mak

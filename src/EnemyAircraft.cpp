@@ -40,6 +40,8 @@ EnemyAircraft::EnemyAircraft(EnemyType et, float p[3], float randFact)
 	
 	Config *config = Config::getInstance();
 	
+	EnemyAircraft::init(p, randFact);
+	
 	float xBound = config->getScreenBoundX()-2.0;
 	if(pos[0] < -xBound)
 		pos[0] = -xBound;
@@ -53,48 +55,6 @@ EnemyAircraft::EnemyAircraft(EnemyType et, float p[3], float randFact)
 EnemyAircraft::~EnemyAircraft()
 {
 	allocated--;
-}
-
-//----------------------------------------------------------
-void EnemyAircraft::printNumAllocated(void)
-{
-	fprintf(stderr, "%d EnemyAircraft allocated\n", allocated);
-}
-
-//----------------------------------------------------------
-EnemyAircraft* EnemyAircraft::makeNewEnemy(EnemyType et, float p[3], float randFact)
-{
-	EnemyAircraft *enemy = 0;
-	
-	switch(et)
-	{
-		case EnemyStraight:
-			enemy = new EnemyAircraft_Straight(et, p, randFact);
-			break;
-		case EnemyOmni:
-			enemy = new EnemyAircraft_Omni(et, p, randFact);
-			break;
-		case EnemyRayGun:
-			enemy = new EnemyAircraft_RayGun(et, p, randFact);
-			break;
-		case EnemyTank:
-			enemy = new EnemyAircraft_Tank(et, p, randFact);
-			break;
-		case EnemyGnat:
-			enemy = new EnemyAircraft_Gnat(et, p, randFact);
-			break;
-		case EnemyBoss00:
-			enemy = new EnemyAircraft_Boss00(et, p, randFact);
-			break;
-		case EnemyBoss01:
-			enemy = new EnemyAircraft_Boss01(et, p, randFact);
-			break;
-		case NumEnemyTypes:
-		default:
-			enemy = 0;
-			break;
-	}
-	return enemy;
 }
 
 //----------------------------------------------------------
@@ -137,6 +97,48 @@ void EnemyAircraft::init(float *p, float randFact)
 	vel[2] = 0.0;
 }
 
+
+//----------------------------------------------------------
+void EnemyAircraft::printNumAllocated(void)
+{
+	fprintf(stderr, "%d EnemyAircraft allocated\n", allocated);
+}
+
+//----------------------------------------------------------
+EnemyAircraft* EnemyAircraft::makeNewEnemy(EnemyType et, float p[3], float randFact)
+{
+	EnemyAircraft *enemy = 0;
+	
+	switch(et)
+	{
+		case EnemyStraight:
+			enemy = new EnemyAircraft_Straight(et, p, randFact);
+			break;
+		case EnemyOmni:
+			enemy = new EnemyAircraft_Omni(et, p, randFact);
+			break;
+		case EnemyRayGun:
+			enemy = new EnemyAircraft_RayGun(et, p, randFact);
+			break;
+		case EnemyTank:
+			enemy = new EnemyAircraft_Tank(et, p, randFact);
+			break;
+		case EnemyGnat:
+			enemy = new EnemyAircraft_Gnat(et, p, randFact);
+			break;
+		case EnemyBoss00:
+			enemy = new EnemyAircraft_Boss00(et, p, randFact);
+			break;
+		case EnemyBoss01:
+			enemy = new EnemyAircraft_Boss01(et, p, randFact);
+			break;
+		case NumEnemyTypes:
+		default:
+			enemy = 0;
+			break;
+	}
+	return enemy;
+}
 
 ////----------------------------------------------------------
 //void EnemyAircraft::drawGL(GLuint tex, GLuint xtraTex)
