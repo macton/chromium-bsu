@@ -90,13 +90,13 @@ HEADERS		= \
 			HeroAircraft.h \
 			HeroAmmo.h \
 			Global.h \
-			GlobalStuff.h \
 			Ground.h \
 			GroundMetal.h \
 			GroundMetalSegment.h \
 			GroundSea.h \
 			GroundSeaSegment.h \
 			GroundSegment.h \
+			HiScore.h \
 			MainToolkit.h \
 			MainGLUT.h \
 			MainSDL.h \
@@ -126,13 +126,13 @@ SOURCES		= \
 			HeroAircraft.cpp \
 			HeroAmmo.cpp \
 			Global.cpp \
-			GlobalStuff.cpp \
 			Ground.cpp \
 			GroundMetal.cpp \
 			GroundMetalSegment.cpp \
 			GroundSea.cpp \
 			GroundSeaSegment.cpp \
 			GroundSegment.cpp \
+			HiScore.cpp \
 			MainToolkit.cpp \
 			MainGLUT.cpp \
 			MainSDL.cpp \

@@ -15,8 +15,6 @@
 #include "TexFont.h"
 #include "MainToolkit.h"
 
-#include "GlobalStuff.h"
-
 class HeroAircraft;
 class HeroAmmo;
 class EnemyFleet;
