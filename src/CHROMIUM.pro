@@ -83,6 +83,7 @@ HEADERS		= \
 			AudioOpenAL.h \
 			AudioSDLMixer.h \
 			Ammo.h \
+			Config.h \
 			EnemyAircraft.h \
 			EnemyAmmo.h \
 			EnemyFleet.h \
@@ -119,6 +120,7 @@ SOURCES		= \
 			AudioOpenAL.cpp \
 			AudioSDLMixer.cpp \
 			Ammo.cpp \
+			Config.cpp \
 			EnemyAircraft.cpp \
 			EnemyAmmo.cpp \
 			EnemyFleet.cpp \

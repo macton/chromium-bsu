@@ -15,7 +15,7 @@
 
 /**
  * keep track of high scores. A history of HI_SCORE_HIST scores is 
- * retained for each skill level.
+ * retained for each skill level. Singleton.
  */
 //====================================================================
 class HiScore
