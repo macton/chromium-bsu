@@ -220,24 +220,24 @@ bool HiScore::readFile()
 
 
 //----------------------------------------------------------
-void HiScore::insertScore(int level, int rank, float score)
+void HiScore::insertScore(int skill, int rank, float score)
 {
 	int i;
 	i = HI_SCORE_HIST-2;
 	while(i >= rank)
 	{
-		HiScore::hiScore[level][i+1] = HiScore::hiScore[level][i];
-		strcpy(HiScore::hiScoreName[level][i+1], HiScore::hiScoreName[level][i]);
-		memcpy(&(HiScore::hiScoreDate[level][i+1]), &(HiScore::hiScoreDate[level][i]), sizeof(time_t));
+		HiScore::hiScore[skill][i+1] = HiScore::hiScore[skill][i];
+		strcpy(HiScore::hiScoreName[skill][i+1], HiScore::hiScoreName[skill][i]);
+		memcpy(&(HiScore::hiScoreDate[skill][i+1]), &(HiScore::hiScoreDate[skill][i]), sizeof(time_t));
 		i--;
 	}
-	HiScore::hiScore[level][rank] = score;
+	HiScore::hiScore[skill][rank] = score;
 	char *name = getenv("USER");
 	if(name)
-		strcpy(HiScore::hiScoreName[level][rank], name);
+		strcpy(HiScore::hiScoreName[skill][rank], name);
 	else
-		strcpy(HiScore::hiScoreName[level][rank], "player");
-	time(&HiScore::hiScoreDate[level][rank]);
+		strcpy(HiScore::hiScoreName[skill][rank], "player");
+	time(&HiScore::hiScoreDate[skill][rank]);
 }
 
 /**

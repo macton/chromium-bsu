@@ -39,7 +39,7 @@ public:
 	void		print(int skill);
 	
 private:
-	void	insertScore(int level, int rank, float score);
+	void	insertScore(int skill, int rank, float score);
 
 private:
 	static HiScore	*instance;

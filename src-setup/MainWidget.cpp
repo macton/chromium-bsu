@@ -35,8 +35,8 @@ MainWidget::MainWidget()
 	hiScore		= new HiScoreWidget(this);
 	
 	tabWidget->addTab(configFile, "Config");
-	tabWidget->addTab(hiScore,    "High Scores");
 	tabWidget->addTab(playList,   "Music PlayList");
+	tabWidget->addTab(hiScore,    "High Scores");
 	tabWidget->setBackgroundMode(PaletteMid);
 //	tabWidget->setBackgroundMode(PaletteButton);
 	
