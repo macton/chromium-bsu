@@ -88,7 +88,8 @@ void MenuGL::loadTextures()
 	pngInfo tmpInfo;
 	elecTex   = pngBind(dataLoc("png/electric.png"),  PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	backTex   = pngBind(dataLoc("png/menu_back.png"), PNG_NOMIPMAPS, PNG_SOLID, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
-	curTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+//	curTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	curTex    = pngBind(dataLoc("png/heroAmmoFlash00.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	//-- Environment map
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
@@ -163,39 +164,6 @@ void MenuGL::startMenu()
 }
 
 //----------------------------------------------------------
-void MenuGL::keyHit(MainToolkit::Key key)
-{
-	switch(key)
-	{
-		case MainToolkit::KeyUp:
-			if(curSel == (MenuSelection)0)
-				curSel = (MenuSelection)(NumSelections-1);
-			else
-				curSel = (MenuSelection)(curSel - 1);
-//			curSel = (MenuSelection)(curSel - 1);
-//			if(curSel < (MenuSelection)0)
-//				curSel = (MenuSelection)(NumSelections-1);
-			elecOffX = 0.0;
-			break;
-		case MainToolkit::KeyDown:
-			curSel = (MenuSelection)((curSel+1)%NumSelections);
-			elecOffX = 0.0;
-			break;
-		case MainToolkit::KeyLeft:
-			decItem();
-			break;
-		case MainToolkit::KeyRight:
-			incItem();
-			break;
-		case MainToolkit::KeyEnter:
-			activateItem();
-			break;
-		default:
-			break;
-	}
-}
-
-//----------------------------------------------------------
 void MenuGL::drawGL()
 {
 	Config	*config = Config::getInstance();
@@ -233,15 +201,12 @@ void MenuGL::drawGL()
 	
 	float	szx		=   9.0;
 	float	szy		=   4.5;
-	float	top		=   4.0;
+	float	top		=   1.0;
 	float	left	=  -8.0;
 	float	inc		=  -txtHeight*2.5;
 	
 	//----- Draw credits texture --------------------------------
 	glPushMatrix();
-		//-- move menu down for title
-		glTranslatef(0.0, -3.0, 0.0);
-
 		// NOTE: corners of back tex is white, alpha 1 and
 		// we are in modulate blend...
 		glBindTexture(GL_TEXTURE_2D, backTex);
@@ -250,20 +215,20 @@ void MenuGL::drawGL()
 		//-- darken
 		glBegin(GL_QUADS);
 		glColor4f(0.0, 0.0, 0.0, 0.8);
-			glVertex3f( szx,  szy+0.25, 10.0);
-			glVertex3f(-szx,  szy+0.25, 10.0);
+			glVertex3f( szx,  szy+0.25-3.0, 10.0);
+			glVertex3f(-szx,  szy+0.25-3.0, 10.0);
 		glColor4f(0.0, 0.0, 0.0, 0.4);
-			glVertex3f(-szx, -10.0, 10.0);
-			glVertex3f( szx, -10.0, 10.0);
+			glVertex3f(-szx, -13.0, 10.0);
+			glVertex3f( szx, -13.0, 10.0);
 		glEnd();
 
 		glBegin(GL_QUADS);
 		glColor4f(0.0, 0.0, 0.0, mssgAlpha);
-			glVertex3f( 16.0,  -7.7, 10.0);
-			glVertex3f(-16.0,  -7.7, 10.0);
+			glVertex3f( 16.0,  -10.7, 10.0);
+			glVertex3f(-16.0,  -10.7, 10.0);
 		glColor4f(0.0, 0.0, 0.0, mssgAlpha);
-			glVertex3f(-16.0, -8.9, 10.0);
-			glVertex3f( 16.0, -8.9, 10.0);
+			glVertex3f(-16.0, -11.9, 10.0);
+			glVertex3f( 16.0, -11.9, 10.0);
 		glEnd();
 
 		szx = 12.0;
@@ -302,7 +267,7 @@ void MenuGL::drawGL()
 			glPushMatrix();
 //			glColor4f(1.0+r, r, r, 0.6+0.2*r);
 			glColor4f(1.0, 1.0, 1.0, 0.6+0.2*r);
-			glTranslatef(-18.75, -5.5, 0.0);
+			glTranslatef(-18.75, -8.5, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
 			txfRenderString(game->texFont, "high scores", 11);
 			glTranslatef(-100.0, -30.0, 0.0);
@@ -357,7 +322,7 @@ void MenuGL::drawGL()
 			else		alpha = 0.4;
 			glColor4f(1.0, 1.0, 1.0, alpha);
 			sc = 0.03;
-			glTranslatef(14.0, -8.5, 0.0);
+			glTranslatef(14.0, -11.5, 0.0);
 			glScalef(sc, sc, 1.0);
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
@@ -387,7 +352,7 @@ void MenuGL::drawGL()
 			else
 				glColor4f(0.5, 0.5, 0.9, (0.2+mssgAlpha));		
 			sc = 0.042;
-			glTranslatef(-19.5, -11.0, 0.0);
+			glTranslatef(-19.5, -14.0, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
 			if(ti > strlen(mssgText))
@@ -404,7 +369,7 @@ void MenuGL::drawGL()
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glPushMatrix();
-	glTranslatef(0.0, 7.75, 25.0);
+	glTranslatef(0.0, 4.75, 25.0);
 	glColor4f(1.0, 1.0, 1.0, 1.0);
 	glDepthMask(GL_FALSE);	//XXX Hack to make Voodoo3 XF4 work
 	drawTitleBack();
@@ -412,19 +377,21 @@ void MenuGL::drawGL()
 	drawTitle();
 	glPopMatrix();
 	
-	{
-		float x = Global::cursorPos[0]*11.25;
-		float y = Global::cursorPos[1]* 8.45;
-		float z = Global::cursorPos[2];
-		float sz = 0.4;
-		glBindTexture(GL_TEXTURE_2D, curTex);
-		glBegin(GL_QUADS);
-		glTexCoord2f(1.0, 1.0); glVertex3f( x+sz, y+sz, z);
-		glTexCoord2f(0.0, 1.0); glVertex3f( x-sz, y+sz, z);
-		glTexCoord2f(0.0, 0.0); glVertex3f( x-sz, y-sz, z);
-		glTexCoord2f(1.0, 0.0); glVertex3f( x+sz, y-sz, z);
-		glEnd();
-	}
+//	//-- draw cursor...
+//	{
+//		float x = Global::cursorPos[0]*16.60;
+//		float y = Global::cursorPos[1]*12.45;
+//		float z = 10.0;
+//		float sz;
+//		glBindTexture(GL_TEXTURE_2D, curTex);
+//		sz = 0.2;
+//		glBegin(GL_QUADS);
+//		glTexCoord2f(1.0, 1.0); glVertex3f( x+sz, y+sz, z);
+//		glTexCoord2f(0.0, 1.0); glVertex3f( x-sz, y+sz, z);
+//		glTexCoord2f(0.0, 0.0); glVertex3f( x-sz, y-sz, z);
+//		glTexCoord2f(1.0, 0.0); glVertex3f( x+sz, y-sz, z);
+//		glEnd();
+//	}
 	
 	if(thickText && game->fps < 30)
 	{
@@ -731,6 +698,39 @@ void MenuGL::drawTitle()
 }
 
 //----------------------------------------------------------
+void MenuGL::keyHit(MainToolkit::Key key)
+{
+	switch(key)
+	{
+		case MainToolkit::KeyUp:
+			if(curSel == (MenuSelection)0)
+				curSel = (MenuSelection)(NumSelections-1);
+			else
+				curSel = (MenuSelection)(curSel - 1);
+//			curSel = (MenuSelection)(curSel - 1);
+//			if(curSel < (MenuSelection)0)
+//				curSel = (MenuSelection)(NumSelections-1);
+			elecOffX = 0.0;
+			break;
+		case MainToolkit::KeyDown:
+			curSel = (MenuSelection)((curSel+1)%NumSelections);
+			elecOffX = 0.0;
+			break;
+		case MainToolkit::KeyLeft:
+			decItem();
+			break;
+		case MainToolkit::KeyRight:
+			incItem();
+			break;
+		case MainToolkit::KeyEnter:
+			activateItem();
+			break;
+		default:
+			break;
+	}
+}
+
+//----------------------------------------------------------
 void MenuGL::activateItem()
 {
 	Config	*config = Config::getInstance();
@@ -783,6 +783,7 @@ void MenuGL::incItem()
 	switch(curSel)
 	{
 		case NewGame:
+			activateItem();
 			break;
 		case SkillLevel:
 			config->setGameSkillBase(config->getGameSkillBase()+0.1);
@@ -832,6 +833,7 @@ void MenuGL::incItem()
 			config->setMouseSpeed(config->getMouseSpeed()+0.005);
 			break;
 		case Quit:
+			activateItem();
 			break;
 		case NumSelections:
 			break;
@@ -896,5 +898,40 @@ void MenuGL::decItem()
 	}
 }
 
-
+//----------------------------------------------------------
+void MenuGL::mousePress(int but, int xi, int yi)
+{
+	float x,y;
+	Global *game = Global::getInstance();
+	Config *config = Config::getInstance();
+	x = -2.0*(0.5-(((float)xi)/config->getScreenW()))* 16.60;
+	y =  2.0*(0.5-(((float)yi)/config->getScreenH()))* 12.45;
+	
+	float	p = -y+(1.0+txtHeight*1.5);
+	float	s = txtHeight*2.5;
+	int		cSel = (int)curSel;
+	int		mSel = -1;
+	if(p > 0.0)
+	{
+			elecOffX = 0.0;
+		p = p/s;
+		mSel = (int)floor(p);
+		if( mSel >= 0 && mSel < (int)NumSelections)
+		{
+			if(mSel != (int)curSel)
+			{
+				curSel = (MenuSelection)mSel;
+				elecOffX = 0.0;
+				mSel = -1;
+			}
+		}
+	}	
+	if(mSel >= 0)
+	{
+		if(but == 0)
+			incItem();
+		else
+			decItem();
+	}
+}
 

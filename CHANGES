@@ -1,3 +1,7 @@
+Chromium 0.9.12
+ - added rudimentary mouse support to menu. Click over a menu item to 
+   select it - once selected: left-click increments, right-click decrements.
+
 Chromium 0.9.11a
  - fixed configure script to properly detect SDL version.
 Chromium 0.9.11

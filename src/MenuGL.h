@@ -34,6 +34,8 @@ public:
 	void	loadTextures();
 	void	deleteTextures();
 
+	void	mousePress(int but, int x, int y);
+	
 protected:
 	void	activateItem();
 	void	incItem();

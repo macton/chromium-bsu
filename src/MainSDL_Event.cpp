@@ -366,15 +366,8 @@ void MainSDL::mouseMotion(SDL_Event *event)
 				SDL_WarpMouse(xMid, yMid);
 			}
 		}
-			xLast = xNow;
-			yLast = yNow;
-	}
-	else
-	{
-		Config *config = Config::getInstance();
-		Global::cursorPos[0] = -2.0*(0.5-(((float)event->motion.x)/config->getScreenW()));
-		Global::cursorPos[1] =  2.0*(0.5-(((float)event->motion.y)/config->getScreenH()));
-		fprintf(stderr, "%f %f\n", Global::cursorPos[0], Global::cursorPos[1]);
+		xLast = xNow;
+		yLast = yNow;
 	}
 }
 
@@ -383,20 +376,24 @@ void MainSDL::mouseButtonDown(SDL_Event *ev)
 {
 	Global	*game = Global::getInstance();
 	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
-	switch(mEv->button)
+	if(game->gameMode == Global::Game)
 	{
-		case SDL_BUTTON_LEFT:
-			game->hero->fireGun(++fire);
-			break;
-		case SDL_BUTTON_MIDDLE:
-			game->hero->nextItem();
-			break;
-		case SDL_BUTTON_RIGHT:
-			game->hero->useItem();
-			break;
-		default:
-			break;
+		switch(mEv->button)
+		{
+			case SDL_BUTTON_LEFT:
+				game->hero->fireGun(++fire);
+				break;
+			case SDL_BUTTON_MIDDLE:
+				game->hero->nextItem();
+				break;
+			case SDL_BUTTON_RIGHT:
+				game->hero->useItem();
+				break;
+			default:
+				break;
+		}
 	}
+	
 }
 
 //----------------------------------------------------------
@@ -404,13 +401,33 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 {
 	Global	*game = Global::getInstance();
 	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
-	switch(mEv->button)
+	if(game->gameMode == Global::Game)
 	{
-		case  SDL_BUTTON_LEFT:
-			game->hero->fireGun(--fire);
-			break;
-		default:
-			break;
+		switch(mEv->button)
+		{
+			case  SDL_BUTTON_LEFT:
+				game->hero->fireGun(--fire);
+				break;
+			default:
+				break;
+		}
+	}
+	else if(game->gameMode == Global::Menu)
+	{
+		switch(mEv->button)
+		{
+			case SDL_BUTTON_LEFT:
+				game->menu->mousePress(0, mEv->x, mEv->y);
+				break;
+			case SDL_BUTTON_MIDDLE:
+				game->menu->mousePress(1, mEv->x, mEv->y);
+				break;
+			case SDL_BUTTON_RIGHT:
+				game->menu->mousePress(2, mEv->x, mEv->y);
+				break;
+			default:
+				break;
+		}
 	}
 }
 
@@ -422,18 +439,14 @@ void MainSDL::grabMouse(bool status)
 	
 	mouseToggle = status;
 	if(status)
-	{
 		SDL_ShowCursor(0);
-		xMid = config->getScreenW()/2;
-		yMid = config->getScreenH()/2;
-		SDL_WarpMouse(xMid, yMid);
-		xLast = xMid;
-		yLast = yMid;
-	}
 	else
-	{
-//		SDL_ShowCursor(1);
-	}
+		SDL_ShowCursor(1);
+	xMid = config->getScreenW()/2;
+	yMid = config->getScreenH()/2;
+	SDL_WarpMouse(xMid, yMid);
+	xLast = xMid;
+	yLast = yMid;
 }
 
 //----------------------------------------------------------
