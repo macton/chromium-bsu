@@ -1,0 +1,49 @@
+SUPPORT_DIRS	=	 \
+			./support/openal/ \
+			./support/glpng/src
+
+CHROMIUM_DIRS	=	\
+			./src
+
+			
+all: $(SUPPORT_DIRS) chromium
+
+chromium: $(CHROMIUM_DIRS) finish
+
+support: $(SUPPORT_DIRS)
+
+$(CHROMIUM_DIRS): FORCE
+	cd $@; $(MAKE)
+
+$(SUPPORT_DIRS): FORCE
+	cd $@; $(MAKE)
+
+finish: 
+	@echo ""
+	@mv -vf ./src/chromium ./bin
+	@echo ""
+	-ls --color ./bin/*
+	@echo ""
+	@echo "Now cd to ./bin and run chromium!"
+	@echo ""
+
+clean:
+	for i in $(SUPPORT_DIRS); do ( cd $$i ; $(MAKE) clean ) ; done
+	for i in $(CHROMIUM_DIRS); do ( cd $$i ; $(MAKE) clean ) ; done
+	-rm -f ./bin/*
+	-rm -f *~ core
+	-rm -f *.bck
+
+distclean: clean
+	-cp -f ./data/.chromium-score-blank ./data/.chromium-score
+	@echo ""
+	-rm -f scripts/*.bck
+	@echo -e "\n ** freshen up the doc files **\n--------------------------------"
+	-cp -f /home/mallan/HTML/mba/software/chromium/faq.htm ./data/doc
+	-cp -f /home/mallan/HTML/mba/software/chromium/info.htm ./data/doc
+	@echo ""
+	-rm -f ./config.mak
+	-rm -f ./Makefile
+	@echo ""
+
+FORCE:

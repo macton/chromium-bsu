@@ -1,0 +1,39 @@
+ Ogg/Vorbis is not always detected in the OpenAL configure
+script. If you are running Mandrake7.2, you can enable Vorbis support
+by following these directions.
+
+cd to the Chromium directory:
+
+> ./configure --enable-vorbis
+> make support
+> cd ./support/openal/linux
+
+Open up "config.h" in your favorite editor, go to the end of the 
+file, and add this line:
+
+#define VORBIS_SUPPORT 1
+
+Then:
+
+> make
+> cp -f ./src/libopenal.a ../lib
+> cd ../../../
+> make chromium
+
+Chromium B.S.U. should now have been built with Ogg/Vorbis support. To
+verify:
+
+> cd ./bin
+> ./chromium-setup 
+
+Click on the "Enable PlayList" checkbox, click on the "Music PlayList" 
+tab, then click the "OpenAL" button in the lower right corner. If 
+"*.ogg;*.OGG" is in the "Supported file types" box, you're good to go.
+
+
+
+
+
+
+
+

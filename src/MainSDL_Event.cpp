@@ -1,0 +1,481 @@
+/*
+ * Copyright (c) 2000 Mark B. Allan. All rights reserved.
+ *
+ * "Chromium B.S.U." is free software; you can redistribute 
+ * it and/or use it and/or modify it under the terms of the 
+ * "Artistic License" 
+ */
+#include "MainSDL.h"
+
+#ifdef USE_SDL
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "Global.h"
+#include "HeroAircraft.h"
+#include "MenuGL.h"
+#include "Audio.h"
+#include "Ground.h"
+
+//----------------------------------------------------------
+bool MainSDL::process(SDL_Event *event)
+{
+#if 0
+	static int cnt = 0;
+	cnt++;
+	switch( event->type ) 
+	{
+	    case SDL_ACTIVEEVENT:		fprintf(stderr, "%-5d SDL_ACTIVEEVENT  \n"		, cnt); break;
+	    case SDL_KEYDOWN:			fprintf(stderr, "%-5d SDL_KEYDOWN  \n"			, cnt); break;
+	    case SDL_KEYUP: 			fprintf(stderr, "%-5d SDL_KEYUP  \n"			, cnt); break;
+	    case SDL_MOUSEMOTION:		fprintf(stderr, "%-5d SDL_MOUSEMOTION  \n"		, cnt); break;
+	    case SDL_MOUSEBUTTONDOWN:	fprintf(stderr, "%-5d SDL_MOUSEBUTTONDOWN  \n"	, cnt); break;
+	    case SDL_MOUSEBUTTONUP: 	fprintf(stderr, "%-5d SDL_MOUSEBUTTONUP  \n"	, cnt); break;
+		case SDL_JOYBUTTONDOWN: 	fprintf(stderr, "%-5d SDL_JOYBUTTONDOWN  \n"	, cnt); break;
+		case SDL_JOYBUTTONUP:		fprintf(stderr, "%-5d SDL_JOYBUTTONUP  \n"		, cnt); break;
+		default:
+			break;
+	}
+#endif
+	switch(event->type) 
+	{
+	    case SDL_ACTIVEEVENT:
+			activation(event);
+			break;
+	    case SDL_KEYDOWN:
+			keyDown(event);
+			break;
+	    case SDL_KEYUP:
+			keyUp(event);
+			break;
+	    case SDL_MOUSEMOTION:
+			mouseMotion(event);
+			break;
+	    case SDL_MOUSEBUTTONDOWN:
+			mouseButtonDown(event);
+			break;
+	    case SDL_MOUSEBUTTONUP:
+			mouseButtonUp(event);
+			break;
+//		case SDL_JOYAXISMOTION:
+//			joystickMotion(event);
+//			break;
+		case SDL_JOYBUTTONDOWN:
+			joystickButtonDown(event);
+			break;
+		case SDL_JOYBUTTONUP:
+			joystickButtonUp(event);
+			break;
+		default:
+			break;
+	}
+	return Global::game_quit;
+}
+
+//----------------------------------------------------------
+void MainSDL::saveEvent(SDL_Event *event)
+{
+	if(Global::eventFile && Global::gameMode == Global::Game)
+	{
+		SDL_ActiveEvent 		*evA = 0;
+		SDL_KeyboardEvent 		*evK = 0;
+		SDL_MouseMotionEvent 	*evM = 0;
+		SDL_MouseButtonEvent 	*evB = 0;
+		switch(event->type) 
+		{
+//	    	case SDL_ACTIVEEVENT:
+//				evA = (SDL_ActiveEvent*)event;
+//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "A",
+//					(int)evA->type, (int)evA->gain, (int)evA->state, 0, 0, 0);
+//				break;
+//	    	case SDL_KEYDOWN:
+//	    	case SDL_KEYUP:
+//				evK = (SDL_KeyboardEvent*)event;
+//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "K",
+//					(int)evK->type, (int)evK->state, 
+//					(int)evK->keysym.scancode, (int)evK->keysym.sym, (int)evK->keysym.mod, (int)evK->keysym.unicode);
+//				break;
+//	    	case SDL_MOUSEMOTION:
+//				evM = (SDL_MouseMotionEvent*)event;
+//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "M",
+//					(int)evM->type, (int)evM->state, (int)evM->x, (int)evM->y, (int)evM->xrel, (int)evM->yrel);
+//				break;
+//	    	case SDL_MOUSEBUTTONDOWN:
+//	    	case SDL_MOUSEBUTTONUP:
+//				evB = (SDL_MouseButtonEvent*)event;
+//				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "B",
+//					(int)evB->type, (int)evB->button, (int)evB->state, (int)evB->x, (int)evB->y, 0);
+//				break;
+//			default:
+//				break;
+	    	case SDL_ACTIVEEVENT:
+				evA = (SDL_ActiveEvent*)event;
+				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "A",
+					evA->type, evA->gain, evA->state, 0, 0, 0);
+				break;
+	    	case SDL_KEYDOWN:
+	    	case SDL_KEYUP:
+				evK = (SDL_KeyboardEvent*)event;
+				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "K",
+					evK->type, evK->state, 
+					evK->keysym.scancode, evK->keysym.sym, evK->keysym.mod, evK->keysym.unicode);
+				break;
+	    	case SDL_MOUSEMOTION:
+				evM = (SDL_MouseMotionEvent*)event;
+				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "M",
+					evM->type, evM->state, evM->x, evM->y, evM->xrel, evM->yrel);
+				break;
+	    	case SDL_MOUSEBUTTONDOWN:
+	    	case SDL_MOUSEBUTTONUP:
+				evB = (SDL_MouseButtonEvent*)event;
+				fprintf(Global::eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", Global::gameFrame, "B",
+					evB->type, evB->button, evB->state, evB->x, evB->y, 0);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+//----------------------------------------------------------
+SDL_Event *MainSDL::getEvent(FILE *infile)
+{
+	static int count = 0;
+	static	SDL_Event ev;
+	static	char buffer[256] = { "-1 :K: 2 0 0 0 0 0"};
+	SDL_Event	*retVal = 0;
+	
+	if(infile)
+	{
+		SDL_ActiveEvent 		*evA = (SDL_ActiveEvent*)&ev;
+		SDL_KeyboardEvent 		*evK = (SDL_KeyboardEvent*)&ev;
+		SDL_MouseMotionEvent 	*evM = (SDL_MouseMotionEvent*)&ev;
+		SDL_MouseButtonEvent 	*evB = (SDL_MouseButtonEvent*)&ev;
+		int		frame;
+		int		a,b,c,d,e,f;
+		char	t;
+		
+		sscanf(buffer, "%d :%c: %d %d %d %d %d %d", &frame, &t, &a, &b, &c, &d, &e, &f);
+		if(frame == Global::gameFrame)
+		{
+			switch(t)
+			{
+				case 'A':
+					evA->type	= (Uint8)a;
+					evA->gain	= (Uint8)b;
+					evA->state	= (Uint8)c;
+					retVal = &ev;
+					break;
+				case 'K':
+					evK->type	= (Uint8)a;
+					evK->state	= (Uint8)b;
+					evK->keysym.scancode = (Uint8)c;
+					evK->keysym.sym		 = (SDLKey)d;
+					evK->keysym.mod		 = (SDLMod)e;
+					evK->keysym.unicode	 = (Uint16)f;
+					retVal = &ev;	
+					break;
+				case 'M':
+					evM->type	= (Uint8)a;
+					evM->state	= (Uint8)b;
+					evM->x		= (Uint16)c;
+					evM->y		= (Uint16)d;
+					evM->xrel	= (Sint16)e;
+					evM->yrel	= (Sint16)f;
+					retVal = &ev;
+					break;
+				case 'B':
+					evB->type	= (Uint8)a;
+					evB->button	= (Uint8)b;
+					evB->state	= (Uint8)c;
+					evB->x		= (Uint16)d;
+					evB->y		= (Uint16)e;
+					retVal = &ev;
+					break;
+				default:
+					fprintf(stderr, "MainSDL::getEvent HUH?\n");
+					break;
+			}
+			count++;
+		}
+		bool ok = true;
+		if(frame <= Global::gameFrame)
+			ok = fgets(buffer, 256, infile);
+		if(!ok)
+		{
+			fprintf(stderr, "buffer = \"%s\n\"", buffer);
+			exit(1);
+		}
+	}
+	return retVal;
+}
+
+//----------------------------------------------------------
+void MainSDL::activation(SDL_Event *event)
+{
+	return;
+//	fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
+	if ( event->active.state & SDL_APPACTIVE ) 
+	{
+//		fprintf(stderr, "app active " );
+	} 
+	else if ( event->active.state & SDL_APPMOUSEFOCUS ) 
+	{
+//		fprintf(stderr, "mouse active" );
+		SDL_GetMouseState(&xLast, &yLast);
+	} 
+	else if ( event->active.state & SDL_APPINPUTFOCUS ) 
+	{
+//		fprintf(stderr, "input active" );
+	}
+//	fprintf(stderr, "focus\n" );
+}
+
+//----------------------------------------------------------
+void MainSDL::keyUp(SDL_Event *)
+{
+}
+
+//----------------------------------------------------------
+void MainSDL::keyDown(SDL_Event *event)
+{
+	switch(event->key.keysym.sym)
+	{
+	    case SDL_QUIT:
+		case SDLK_q:
+			Global::game_quit = true;
+			break;
+		case SDLK_g:
+			grabMouse(!mouseToggle);
+			break;
+		case SDLK_0:
+			Global::hero->useItem(0);
+			break;
+		case SDLK_9:
+			Global::hero->useItem(1);
+			break;
+		case SDLK_ESCAPE:
+			if(Global::gameMode == Global::Menu)
+			{
+				Global::gameMode = Global::Game;
+				Global::audio->setMusicMode(Audio::MusicGame);
+				grabMouse(true);
+			}
+			else
+			{
+				if(Global::gameMode != Global::Game)
+				{
+					Global::newGame();
+				}
+				Global::gameMode = Global::Menu;
+				Global::menu->startMenu();
+				Global::audio->setMusicMode(Audio::MusicMenu);
+				grabMouse(false);
+			}
+			break;
+		default:
+			if(Global::gameMode == Global::Game)
+				keyDownGame(event);
+			else
+			{
+				MainToolkit::Key key;
+				switch(event->key.keysym.sym)
+				{
+					case SDLK_UP:		key = MainToolkit::KeyUp;		break;
+					case SDLK_DOWN:		key = MainToolkit::KeyDown;		break;
+					case SDLK_LEFT:		key = MainToolkit::KeyLeft;		break;
+					case SDLK_RIGHT:	key = MainToolkit::KeyRight;	break;
+					case SDLK_RETURN:	key = MainToolkit::KeyEnter;	break;
+					default: key = MainToolkit::KeyEnter;	break;
+				}
+				Global::menu->keyHit(key);
+			}
+			break;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::keyDownGame(SDL_Event *event)
+{
+	switch(event->key.keysym.sym)
+	{
+//	    case SDLK_RETURN:
+//			resetMouseMotion();
+//			break;
+	    case SDLK_p:
+			Global::game_pause = !Global::game_pause;
+			Global::audio->pauseGameMusic(Global::game_pause);
+			break;
+	    case SDLK_n:
+			Global::audio->nextMusicIndex();
+			break;
+	    case SDLK_LEFT:
+			Global::hero->moveEvent(-10, 0);
+			break;
+	    case SDLK_RIGHT:
+			Global::hero->moveEvent( 10, 0);
+			break;
+	    case SDLK_UP:
+			Global::hero->moveEvent(0, -10);
+			break;
+	    case SDLK_DOWN:
+			Global::hero->moveEvent(0,  10);
+			break;
+//	    case SDLK_SPACE:
+//			Global::hero->fireGun(true);
+//			break;
+		default:
+			fprintf(stderr, "key '%s' pressed\n", SDL_GetKeyName(event->key.keysym.sym));
+			fprintf(stderr, "Global::gameFrame = %d\n", Global::gameFrame);
+			break;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::mouseMotion(SDL_Event *event)
+{
+	int xNow;
+	int yNow;
+	int xDiff;
+	int yDiff;
+	if(mouseToggle)
+	{
+		xNow = event->motion.x;
+		yNow = event->motion.y;
+		if(xNow == xMid && yNow == yMid)
+		{
+			// ignore
+		}
+		else
+		{
+			xDiff =  xNow - xLast;
+			yDiff =  yNow - yLast;
+			if(xDiff || yDiff)
+			{
+				Global::hero->moveEvent(xDiff, yDiff);
+				SDL_WarpMouse(xMid, yMid);
+			}
+		}
+			xLast = xNow;
+			yLast = yNow;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::mouseButtonDown(SDL_Event *ev)
+{
+	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
+	switch(mEv->button)
+	{
+		case SDL_BUTTON_LEFT:
+			Global::hero->fireGun(++fire);
+			break;
+		case SDL_BUTTON_MIDDLE:
+			Global::hero->nextItem();
+			break;
+		case SDL_BUTTON_RIGHT:
+			Global::hero->useItem();
+			break;
+		default:
+			break;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::mouseButtonUp(SDL_Event *ev)
+{
+	SDL_MouseButtonEvent *mEv = (SDL_MouseButtonEvent*)ev;
+	switch(mEv->button)
+	{
+		case  SDL_BUTTON_LEFT:
+			Global::hero->fireGun(--fire);
+			break;
+		default:
+			break;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::grabMouse(bool status)
+{
+//	fprintf(stderr, "MainSDL::grabMouse(%d)\n", status);
+
+	mouseToggle = status;
+	if(status)
+	{
+		SDL_ShowCursor(0);
+		xMid = Global::screenW/2;
+		yMid = Global::screenH/2;
+		SDL_WarpMouse(xMid, yMid);
+		xLast = xMid;
+		yLast = yMid;
+	}
+	else
+	{
+		SDL_ShowCursor(1);
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::joystickMotion(SDL_Event *)
+{
+//	static int c = 0;
+//	fprintf(stderr, "joy %05d : axis(%d), value(%d)\n", c++, event->jaxis.axis, event->jaxis.value);
+//	int xNow;
+//	int yNow;
+//	int xDiff;
+//	int yDiff;
+//	if(joystickToggle)
+//	{
+//		xNow = event->motion.x;
+//		yNow = event->motion.y;
+//		if(xNow == xMid && yNow == yMid)
+//		{
+//			// ignore
+//		}
+//		else
+//		{
+//			xDiff =  xNow - xLast;
+//			yDiff =  yNow - yLast;
+//			if(xDiff || yDiff)
+//			{
+//				Global::hero->moveEvent(xDiff, yDiff);
+//				SDL_WarpMouse(xMid, yMid);
+//			}
+//		}
+//			xLast = xNow;
+//			yLast = yNow;
+//	}
+}
+
+//----------------------------------------------------------
+void MainSDL::joystickButtonDown(SDL_Event *)
+{
+	Global::hero->fireGun(++fire);
+}
+
+//----------------------------------------------------------
+void MainSDL::joystickButtonUp(SDL_Event *)
+{
+	Global::hero->fireGun(--fire);
+}
+
+//----------------------------------------------------------
+void MainSDL::joystickMove()
+{
+#ifdef WITH_JOYSTICK
+	static int div = 32768/16;
+	if(joystick)
+	{
+		xjoy = SDL_JoystickGetAxis(joystick, 0)/div;
+		yjoy = SDL_JoystickGetAxis(joystick, 1)/div;
+		xjNow = 0.8*xjNow + 0.2*xjoy;
+		yjNow = 0.8*yjNow + 0.2*yjoy;
+		Global::hero->moveEvent((int)xjNow, (int)yjNow);
+	}
+#endif
+}
+
+#endif // USE_SDL

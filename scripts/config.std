@@ -1,0 +1,15 @@
+OPENAL_CONFIG_OPTS = configure
+
+SDL_CONFIG		= sdl-config
+SMPEG_CONFIG	= 
+
+SDL_CFLAGS		= `$(SDL_CONFIG) --cflags`
+SMPEG_CFLAGS	= 
+PKG_FLAGS		= 
+
+GL_LIBS		= -lglpng -lGL -lGLU -lm
+AL_LIBS		= -lopenal 
+SDL_LIBS	= `$(SDL_CONFIG) --libs`
+SMPEG_LIBS	= 
+VORBIS_LIBS	= 
+

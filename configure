@@ -1,0 +1,196 @@
+#!/bin/sh
+
+## Minimum versions of libs
+###################################
+SDL_MIN_VERSION="1.1.6"
+SMPEG_MIN_VERSION="0.4.2"
+
+## Defaults
+###################################
+ENABLE_SDL="yes"
+ENABLE_SMPEG="yes"
+ENABLE_VORBIS="no"
+ENABLE_SETUP="yes"
+
+## Where do we look for stuff?
+###################################
+std_bin_dirs="/usr/bin /usr/X11R6/bin /usr/local/bin $HOME/bin"
+std_lib_dirs="/usr/lib /usr/X11R6/lib /usr/local/lib $HOME/lib"
+
+## Bring in the functions
+###################################
+source ./scripts/configure_functions
+
+## print introduction
+###################################
+print_separator
+print_warning "This is a script to determine what options"
+print_warning "should be built into Chromium B.S.U."
+print_warning "It is not an autoconf configure script."
+print_separator
+
+## Check command line for options
+###################################
+check_command_line $@
+
+## Check SDL installation
+######################################################################
+if [ $ENABLE_SDL = "yes" ]; then
+	print_message ""
+	print_message "Verify SDL install:"
+	print_message "------------------"
+	if check_for_sdl_config; then
+		print_message "found $SDL_CONFIG"
+		SDL_LIBS="\`\$(SDL_CONFIG) --libs\`"
+		SDL_CFLAGS="\`\$(SDL_CONFIG) --cflags\` -DUSE_SDL"
+	else
+		print_error "ERROR - sdl-config could not be found in: $std_bin_dirs"
+		print_sdl_error
+		exit 1
+	fi
+
+	if check_sdl_version; then
+		print_message "SDL version (`$SDL_CONFIG --version`) ok."
+	else
+		print_error "ERROR!! - SDL version (`$SDL_CONFIG --version`) is too old! ($SDL_MIN_VERSION or greater required)"
+		print_sdl_error
+		exit 1
+	fi
+else
+	# try using GLUT...
+	SDL_CFLAGS="-DUSE_GLUT"
+	SDL_LIBS="-lglut -lpthread -lXmu"
+	# can't use smpeg w/o SDL...
+	ENABLE_SMPEG="no"
+fi
+
+## Check smpeg installation
+######################################################################
+if [ $ENABLE_SMPEG = "yes" ]; then
+	print_message ""
+	print_message "Verify smpeg install:"
+	print_message "--------------------"
+	if check_for_smpeg_config; then
+		print_message "  found $SMPEG_CONFIG"
+		SMPEG_LIBS="\`\$(SMPEG_CONFIG) --libs\`"
+		SMPEG_CFLAGS="\`\$(SMPEG_CONFIG) --cflags\`"
+	else
+		print_warning "WARNING - smpeg-config could not be found in: $std_bin_dirs"
+		print_smpeg_warning
+		SMPEG_CONFIG=""
+		SMPEG_CFLAGS=""
+		SMPEG_LIBS=""
+		ENABLE_SMPEG="no"
+	fi
+
+	if [ -z $SMPEG_CONFIG ]; then
+		echo "" > /dev/null
+	else
+		if check_smpeg_version; then 
+			print_message "smpeg version (`$SMPEG_CONFIG --version`) ok."
+		else
+			print_warning "WARNING - smpeg version (`$SMPEG_CONFIG --version`) is too old! ($SMPEG_MIN_VERSION or greater required)"
+			print_smpeg_warning
+			SMPEG_CONFIG=""
+			SMPEG_CFLAGS=""
+			SMPEG_LIBS=""
+			ENABLE_SMPEG="no"
+		fi
+	fi
+fi
+
+
+## Check Ogg/Vorbis installation
+######################################################################
+if [ $ENABLE_VORBIS = "yes" ]; then
+	print_message ""
+	print_message "Verify Ogg/Vorbis install:"
+	print_message "-------------------------"
+	if check_for_vorbis_libs; then
+		print_message "found required Vorbis libs."
+		print_message "VORBIS_LIBS=$VORBIS_LIBS"
+		print_vorbis_notes
+	else
+		print_warning "WARNING - Ogg/Vorbis libs (vorbis and vorbisfile) could not be found in: $std_lib_dirs"
+		print_vorbis_warning
+		VORBIS_LIBS=""
+		ENABLE_VORBIS="no"
+	fi
+fi
+
+## Do half-assed check for Qt
+######################################################################
+if [ $ENABLE_SETUP = "yes" ]; then
+	if [ -z $QTDIR ]; then
+		echo""
+		print_warning "WARNING: QTDIR environment variable not set!"
+		print_warning "If you want to build the chromium-setup app, you need to have"
+		print_warning "Qt 2.x or greater installed, and set the QTDIR environment"
+		print_warning "variable to where it is installed. Common locations for Qt"
+		print_warning "would be /usr/lib/qt2 or /usr/lib/qt-2.x.x."
+		print_warning "The setup app is *NOT* a requirement to play Chromium B.S.U. - "
+		print_warning "it is merely a convinent way to set game options and create"
+		print_warning "playlists."
+		print_warning "The setup app will not be built."
+		ENABLE_SETUP="no"
+	fi
+fi
+	
+## OpenAL configure options
+######################################################################
+OPENAL_CONFIG_OPTS="./configure"
+
+# are we using SDL?
+if [ $ENABLE_SDL = "yes" ]; then
+	OPENAL_CONFIG_OPTS="$OPENAL_CONFIG_OPTS --enable-sdl"
+fi
+
+# do we have smpeg?
+if [ $ENABLE_SMPEG = "yes" ]; then
+	OPENAL_CONFIG_OPTS="$OPENAL_CONFIG_OPTS --enable-smpeg"
+fi
+
+# do we have Ogg/Vorbis?
+if [ $ENABLE_VORBIS = "yes" ]; then
+	OPENAL_CONFIG_OPTS="$OPENAL_CONFIG_OPTS --enable-vorbis"
+fi
+
+## set up other config.mak variables
+######################################################################
+GL_LIBS="-lglpng -lGL -lGLU -lm"
+AL_LIBS="-lopenal -ldl" 
+
+## write out config.mak
+######################################################################
+echo "OPENAL_CONFIG_OPTS = $OPENAL_CONFIG_OPTS" > config.mak
+echo ""                               >> config.mak
+echo "SDL_CONFIG   = $SDL_CONFIG"     >> config.mak
+echo "SMPEG_CONFIG = $SMPEG_CONFIG"   >> config.mak
+echo ""                               >> config.mak
+echo "SDL_CFLAGS   = $SDL_CFLAGS"     >> config.mak
+echo "SMPEG_CFLAGS = $SMPEG_CFLAGS"   >> config.mak
+echo "PKG_CFLAGS   = $PKG_CFLAGS"     >> config.mak
+echo ""                               >> config.mak
+echo "GL_LIBS      = $GL_LIBS"        >> config.mak
+echo "AL_LIBS      = $AL_LIBS"        >> config.mak
+echo "SDL_LIBS     = $SDL_LIBS"       >> config.mak
+echo "SMPEG_LIBS   = $SMPEG_LIBS"     >> config.mak
+echo "VORBIS_LIBS  = $VORBIS_LIBS"    >> config.mak
+
+
+## done!
+######################################################################
+print_message ""
+print_separator
+print_message "wrote ./config.mak"
+if [ $ENABLE_SETUP = "yes" ]; then
+	cp -f ./scripts/Makefile.all ./Makefile
+else
+	cp -f ./scripts/Makefile.no-setup ./Makefile
+fi
+print_message "wrote ./Makefile"
+print_message ""
+print_message "Now, type 'make' to build Chromium B.S.U.!"
+print_message ""
+
+
