@@ -88,8 +88,9 @@ void MenuGL::loadTextures()
 	pngInfo tmpInfo;
 	elecTex   = pngBind(dataLoc("png/electric.png"),  PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	backTex   = pngBind(dataLoc("png/menu_back.png"), PNG_NOMIPMAPS, PNG_SOLID, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
-//	curTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	curTex    = pngBind(dataLoc("png/heroAmmoFlash00.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+//	csrTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	csrTex    = pngBind(dataLoc("png/heroAmmoFlash00.png"),PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	updwnTex  = pngBind(dataLoc("png/menu_updown.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
 	//-- Environment map
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
@@ -106,9 +107,13 @@ void MenuGL::deleteTextures()
 	glDeleteTextures(1, &elecTex);
 	glDeleteTextures(1, &backTex);
 	glDeleteTextures(1, &envTex);
-	elecTex = 0;
-	backTex = 0;
-	envTex = 0;
+	glDeleteTextures(1, &csrTex);
+	glDeleteTextures(1, &updwnTex);
+	elecTex	= 0;
+	backTex	= 0;
+	envTex	= 0;
+	csrTex	= 0;
+	updwnTex = 0;
 	
 	glDeleteLists(listChrom, 1);
 	glDeleteLists(listBSU, 1);
@@ -383,7 +388,7 @@ void MenuGL::drawGL()
 //		float y = Global::cursorPos[1]*12.45;
 //		float z = 10.0;
 //		float sz;
-//		glBindTexture(GL_TEXTURE_2D, curTex);
+//		glBindTexture(GL_TEXTURE_2D, csrTex);
 //		sz = 0.2;
 //		glBegin(GL_QUADS);
 //		glTexCoord2f(1.0, 1.0); glVertex3f( x+sz, y+sz, z);
@@ -433,6 +438,7 @@ void MenuGL::drawIndicator()
 	char	buf[32];
 	float	szx = 10.0;
 	float	szy = txtHeight;
+	float	sud = szy*2.0;
 	float	level = 0.0;
 	float	sc = 0.025;
 	int		tmp;
@@ -498,6 +504,9 @@ void MenuGL::drawIndicator()
 			glVertex3f(   -szx, 0.0, 0.0);
 			glVertex3f(    szx, 0.0, 0.0);
 		glEnd();
+		
+		//-- draw level indicator and/or text
+		glPushMatrix();
 		if(level > -1.0)
 		{
 			glBegin(GL_QUADS);
@@ -509,12 +518,30 @@ void MenuGL::drawIndicator()
 				glVertex3f(    szx*level, 0.0, 0.0);
 			glEnd();
 			
+			float udo = 2.5;
+			glBindTexture(GL_TEXTURE_2D, updwnTex);
+			glBegin(GL_QUADS);
+				glColor4f(1.0, 1.0, 1.0, 0.7);
+				glTexCoord2f(1.0, 0.0);	glVertex3f(	sud-udo, szy, 0.0);
+				glTexCoord2f(0.0, 0.0);	glVertex3f(	0.0-udo, szy, 0.0);
+				glTexCoord2f(0.0, 1.0);	glVertex3f(	0.0-udo, 0.0, 0.0);
+				glTexCoord2f(1.0, 1.0);	glVertex3f( sud-udo, 0.0, 0.0);
+			glEnd();
+			
 			glColor4f(1.0, 1.0, 1.0, 0.5);
 			glTranslatef(11.0, 0.0, 0.0);
 			glScalef(sc, sc, 1.0);
 			txfBindFontTexture(game->texFont);
 			txfRenderString(game->texFont, buf, strlen(buf));
 		}
+		glPopMatrix();
+		
+		//-- draw updown
+		sc *= 1.5;
+		glTranslatef(-2.5, 0.0, 0.0);
+		glScalef(sc, sc, 1.0);
+		//txfRenderString(game->texFont, "-|+", 3);
+		
 	glPopMatrix();
 	
 }
@@ -898,8 +925,11 @@ void MenuGL::decItem()
 	}
 }
 
+/**
+ * horrible, hacky, but quick to implement....
+ */
 //----------------------------------------------------------
-void MenuGL::mousePress(int but, int xi, int yi)
+void MenuGL::mousePress(MainToolkit::Button but, int xi, int yi)
 {
 	float x,y;
 	Global *game = Global::getInstance();
@@ -913,7 +943,9 @@ void MenuGL::mousePress(int but, int xi, int yi)
 	int		mSel = -1;
 	if(p > 0.0)
 	{
-			elecOffX = 0.0;
+		// reset electric 
+		elecOffX = 0.0;
+		
 		p = p/s;
 		mSel = (int)floor(p);
 		if( mSel >= 0 && mSel < (int)NumSelections)
@@ -925,13 +957,16 @@ void MenuGL::mousePress(int but, int xi, int yi)
 				mSel = -1;
 			}
 		}
-	}	
+	}
+	float l = -8.0 + -2.5;
 	if(mSel >= 0)
 	{
-		if(but == 0)
+		if(x > l && x < l+txtHeight )
+			decItem();
+		else if (x > l+txtHeight && x < l+txtHeight*2.0)
 			incItem();
 		else
-			decItem();
+			activateItem();
 	}
 }
 

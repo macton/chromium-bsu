@@ -29,12 +29,12 @@ public:
 	
 	void	startMenu();
 	void	keyHit(MainToolkit::Key key);
+	void	mousePress(MainToolkit::Button but, int x, int y);
+
 	void	drawGL();
 	
 	void	loadTextures();
 	void	deleteTextures();
-
-	void	mousePress(int but, int x, int y);
 	
 protected:
 	void	activateItem();
@@ -57,9 +57,10 @@ private:
 	GLuint	listBSU;
 	
 	GLuint	envTex;
-	GLuint	curTex;
+	GLuint	csrTex;
 	GLuint	backTex;
 	GLuint	elecTex;
+	GLuint	updwnTex;
 	
 	float	elecOffX;
 	float	elecOffY;

@@ -6,15 +6,18 @@ Prerequisites
 
 * Hardware accelerated OpenGL/Mesa environment (GLU required)
 
-* SDL 1.1.6
+	You'll need to have the OpenGL development packages installed
+	(such as mesa-devel*.rpm, etc.) 
+	
+* SDL 1.1.6 or greater. 
 
-Optional
+OPTIONAL
 --------
 * Qt 2.2.x - for the chromium-setup utility. This utility lets you set
   all available options for Chromium, as well as browse for music files
   to add to your playList.
 
-* SMPEG 0.4.2 - if you want to play MP3 files for background music
+* SMPEG 0.4.2 or greater - if you want to play MP3 files for background music
 
 * Ogg/Vorbis - if you want to play OGG files for background music
 
@@ -34,6 +37,16 @@ This will do the following:
  * build glpng (in ./support/glpng)
  * build Chromium B.S.U. (in ./src)
  * build the Chromium B.S.U. setup utility (in ./src-setup)
+ 
+ If you have Qt2 installed, make sure that your QTDIR environment variable
+is set to point to the proper directory (most distribs put Qt2 in 
+/usr/lib/qt2 or something similar). 
+ If you are having problems building the setup app, just run 'configure'
+again and disable it, e.g.
+configure --disable-setup
+
+You may also want to check the FAQ:
+http://www.reptilelabour.com/software/chromium/faq.htm
 
 If you encounter any problems, I can be reached at 
 mallanmba@yahoo.com

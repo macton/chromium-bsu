@@ -63,10 +63,10 @@ void StatusDisplay::loadTextures()
 	char	filename[128];
 	pngInfo tmpInfo;
 	GLenum clamp = GL_CLAMP;
-#ifdef GL_VERSION_1_2
+#ifdef GL_VERSION_1_2__FOO
 	clamp = GL_CLAMP_TO_EDGE;
 #endif
-
+	
 	statTex      = pngBind(dataLoc("png/statBar.png"),      PNG_NOMIPMAPS,     PNG_BLEND1, &tmpInfo, GL_REPEAT, GL_NEAREST, GL_NEAREST);
 	shldTex      = pngBind(dataLoc("png/shields.png"),      PNG_SIMPLEMIPMAPS, PNG_BLEND1, &tmpInfo, clamp, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR);
 	topTex       = pngBind(dataLoc("png/stat-top.png"),     PNG_NOMIPMAPS,     PNG_BLEND1, &tmpInfo, clamp, GL_LINEAR, GL_NEAREST);

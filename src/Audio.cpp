@@ -293,7 +293,10 @@ void	Audio::setMusicIndex(int index)
 //----------------------------------------------------------
 void	Audio::nextMusicIndex()
 {
-	setMusicIndex(musicIndex+1);
+	int i = musicIndex + 1;
+	if(i >= musicMax )
+		i = 0;
+	setMusicIndex(i);
 }
 
 //====================================================================

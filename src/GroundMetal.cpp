@@ -54,9 +54,10 @@ void GroundMetal::loadTextures()
 	pngInfo tmpInfo;
 	float tbc[4] = { 0.2, 0.2, 0.2, 1.0 };
 	GLenum clamp = GL_REPEAT;
-#ifdef GL_VERSION_1_2
+#ifdef GL_VERSION_1_2__FOO
 	clamp = GL_CLAMP_TO_EDGE;
 #endif
+
 	switch(variation)
 	{
 		case 0:

@@ -38,6 +38,7 @@
 #include "define.h"
 #include "Global.h"
 
+#ifdef OLD_OPENAL
 #ifdef USE_SDL 
 	//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
 	#ifdef __linux__ 
@@ -46,6 +47,16 @@
 		#include <AL/alkludgetypes.h>
 	#endif //__linux__
 #endif //USE_SDL
+#else
+#ifdef USE_SDL 
+	//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
+	#ifdef __linux__ 
+		#define CD_VOLUME 1
+//		#include <AL/alext.h>
+		#include <AL/alexttypes.h>
+	#endif //__linux__
+#endif //USE_SDL
+#endif
 
 #ifdef __linux__
 #define USE_PLAYLIST 1
@@ -132,7 +143,7 @@ AudioOpenAL::~AudioOpenAL()
 	
 		#ifdef CD_VOLUME
 		if(cdrom && alcSetAudioChannel)
-		{
+		{ 
 			alcSetAudioChannel(ALC_CHAN_CD_LOKI, origCDvolume);
 		}
 		#endif //CD_VOLUME
@@ -183,12 +194,14 @@ bool AudioOpenAL::createContext()
 	context_id=(void*)alcCreateContext(dev,NULL);
 	alcMakeContextCurrent((ALCcontext*)context_id);
 #else
-//	ALCdevice *dev;
-//	dev = alcOpenDevice( NULL );
-//	context_id = alcCreateContext(dev, NULL);
-//	alcMakeContextCurrent(context_id);
-
+#ifdef OLD_OPENAL
 	context_id = alcCreateContext(NULL);
+#else
+	ALCdevice *dev;
+	dev = alcOpenDevice( NULL );
+	context_id = alcCreateContext(dev, NULL);
+	alcMakeContextCurrent(context_id);
+#endif
 #endif
 
 	if(!context_id)
@@ -728,8 +741,11 @@ void AudioOpenAL::setMusicIndex(int index)
 			//-- if music is currently playing, we want to 
 			//   re-start playing after loading new song
 			ALint state = AL_INITIAL;
-//			alGetSourceiv(source[MusicGame], AL_SOURCE_STATE, &state);
+#ifdef OLD_OPENAL
 			alGetSourcei(source[MusicGame], AL_SOURCE_STATE, &state);
+#else
+			alGetSourceiv(source[MusicGame], AL_SOURCE_STATE, &state);
+#endif
 			if(state == AL_PLAYING) 
 				wasPlaying = true;
 
@@ -777,8 +793,11 @@ void AudioOpenAL::setMusicIndex(int index)
 	else if(initialized)
 	{
 		ALint state = AL_INITIAL;
-//		alGetSourceiv(source[MusicGame], AL_SOURCE_STATE, &state);
+#ifdef OLD_OPENAL
 		alGetSourcei(source[MusicGame], AL_SOURCE_STATE, &state);
+#else
+		alGetSourceiv(source[MusicGame], AL_SOURCE_STATE, &state);
+#endif
 		if(state == AL_PLAYING) 
 			wasPlaying = true;
 		alSourceStop(source[MusicGame]);

@@ -1,6 +1,7 @@
 Chromium 0.9.12
- - added rudimentary mouse support to menu. Click over a menu item to 
-   select it - once selected: left-click increments, right-click decrements.
+ - added mouse support to menu. +/- buttons can be clicked on items that
+   increment/decrement, else double click activates.
+ - music tracks resets to 0 if max is reached
 
 Chromium 0.9.11a
  - fixed configure script to properly detect SDL version.

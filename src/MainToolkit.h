@@ -18,6 +18,8 @@ public:
 	enum Key { KeyEnter, KeySpace, KeyTab, KeyEscape, 
 				KeyUp, KeyDown, KeyLeft, KeyRight };
 
+	enum Button { Left, Middle, Right };
+
 	virtual bool run() = 0;
 	virtual bool checkErrors() = 0;
 	

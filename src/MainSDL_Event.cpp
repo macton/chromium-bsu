@@ -417,13 +417,13 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 		switch(mEv->button)
 		{
 			case SDL_BUTTON_LEFT:
-				game->menu->mousePress(0, mEv->x, mEv->y);
+				game->menu->mousePress(MainToolkit::Left, mEv->x, mEv->y);
 				break;
 			case SDL_BUTTON_MIDDLE:
-				game->menu->mousePress(1, mEv->x, mEv->y);
+				game->menu->mousePress(MainToolkit::Middle, mEv->x, mEv->y);
 				break;
 			case SDL_BUTTON_RIGHT:
-				game->menu->mousePress(2, mEv->x, mEv->y);
+				game->menu->mousePress(MainToolkit::Right, mEv->x, mEv->y);
 				break;
 			default:
 				break;
