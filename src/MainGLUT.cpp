@@ -36,10 +36,10 @@ MainGLUT::MainGLUT(int argc, char **argv)
 	: MainToolkit(argc, argv)
 {
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(config->getScreenW(), config->getScreenH());
+	glutInitWindowSize(config->screenW(), config->screenH());
 	glutCreateWindow("Chromium B.S.U.");
 	
 	//-- Initialize OpenGL
@@ -87,15 +87,15 @@ bool MainGLUT::checkErrors()
 //----------------------------------------------------------
 void MainGLUT::grabMouse(bool status)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	mouseToggle = status;
 	if(status)
 	{
 		glutSetCursor(GLUT_CURSOR_NONE);
 		glutMotionFunc(MainGLUT::mouseMotion);
 		glutPassiveMotionFunc(MainGLUT::mouseMotion);
-		xMid = config->getScreenW()/2;
-		yMid = config->getScreenH()/2;
+		xMid = config->screenW()/2;
+		yMid = config->screenH()/2;
 		glutWarpPointer(xMid, yMid);
 		xLast = xMid;
 		yLast = yMid;
@@ -111,9 +111,9 @@ void MainGLUT::grabMouse(bool status)
 //----------------------------------------------------------
 void MainGLUT::setVideoMode()
 {
-	Config	*config = Config::getInstance();
-	config->setScreenSize(config->getScreenSize()); //  set screenW & screenH for new screenSize
-	glutReshapeWindow(config->getScreenW(), config->getScreenH());
+	Config	*config = Config::instance();
+	config->setScreenSize(config->screenSize()); //  set screenW & screenH for new screenSize
+	glutReshapeWindow(config->screenW(), config->screenH());
 	config->setFullScreen(false);
 }
 
@@ -162,7 +162,7 @@ void MainGLUT::drawGame(int)
 void MainGLUT::keyboardASCII(unsigned char key, int, int)
 {
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	HiScore	*hiScore = HiScore::getInstance();
 	switch(key)
 	{

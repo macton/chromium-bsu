@@ -283,11 +283,11 @@ void HeroAircraft::useItem()
 //----------------------------------------------------------
 void HeroAircraft::moveEvent(int x, int y)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	if(game->gameMode != Global::HeroDead && !game->game_pause)
 	{
-		pos[0] +=  x*config->getMouseSpeed();
-		pos[1] += -y*config->getMouseSpeed();
+		pos[0] +=  x*config->mouseSpeed();
+		pos[1] += -y*config->mouseSpeed();
 		if		(pos[0] < bound[0][0])	pos[0] = bound[0][0];
 		else if	(pos[0] > bound[0][1])	pos[0] = bound[0][1];
 		if		(pos[1] < bound[1][0])	pos[1] = bound[1][0];

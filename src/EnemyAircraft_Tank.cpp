@@ -131,7 +131,7 @@ void EnemyAircraft_Tank::update()
 //----------------------------------------------------------
 void EnemyAircraft_Tank::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -155,9 +155,9 @@ void EnemyAircraft_Tank::move()
 		vel[1] *= 0.99;
 
 	if(pos[0] < 0.0)
-		pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-config->getScreenBoundX()+2.85));
+		pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-config->screenBoundX()+2.85));
 	else
-		pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( config->getScreenBoundX()-2.85));
+		pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( config->screenBoundX()-2.85));
 	switch((age/50)%8)
 	{
 		case 2:
@@ -169,8 +169,8 @@ void EnemyAircraft_Tank::move()
 	}
 
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

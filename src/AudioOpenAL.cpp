@@ -66,7 +66,7 @@
 AudioOpenAL::AudioOpenAL()
 	: Audio()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	int i;
 	context_id	= 0;
 	initialized = false;
@@ -103,12 +103,12 @@ AudioOpenAL::AudioOpenAL()
 		sourceExploPop[i]	= 0;
 	}
 	
-	// NOTE: If we can't create a valid context, config->getAudioEnabled() will
+	// NOTE: If we can't create a valid context, config->audioEnabled() will
 	//       be set to false.
-	if(config->getAudioEnabled() == true) 
-		config->setAudioEnabled(createContext());
+	if(config->audioEnabled() == true) 
+		config->setAudio(createContext());
 	
-	if(config->getAudioEnabled() == true)
+	if(config->audioEnabled() == true)
 	{
 		initSound();
 
@@ -126,10 +126,10 @@ AudioOpenAL::AudioOpenAL()
 			audioScale[2] = 0.3;
 		}
 
-		if(config->getSwapStereo())
+		if(config->swapStereo())
 			audioScale[0] = -audioScale[0];
 		
-		if(config->getUsePlayList() && !cdrom)
+		if(config->usePlayList() && !cdrom)
 			loadMusicList();
 	}
 //	fprintf(stderr, "AudioOpenAL::Audio done\n");
@@ -221,7 +221,7 @@ bool AudioOpenAL::createContext()
 //----------------------------------------------------------
 void AudioOpenAL::initSound()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	int i;
 	ALfloat pos[] = { 0.0, -5.0,  25.0 };
 	
@@ -295,8 +295,8 @@ void AudioOpenAL::initSound()
 	}
 	
 	
-	setSoundVolume(config->getVolSound());
-	setMusicVolume(config->getVolMusic());
+	setSoundVolume(config->volSound());
+	setMusicVolume(config->volMusic());
 		
 	initialized = true;
 	warning("Audio.cpp - initSound complete.", i);
@@ -342,8 +342,8 @@ void AudioOpenAL::checkForExtensions()
 //----------------------------------------------------------
 void AudioOpenAL::stopMusic()
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		Audio::stopMusic();
 		alSourceStop(source[MusicMenu]);
@@ -357,8 +357,8 @@ void AudioOpenAL::stopMusic()
 //----------------------------------------------------------
 void AudioOpenAL::pauseGameMusic(bool status)
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		if(cdrom)
 		{
@@ -379,8 +379,8 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 {
 //	fprintf(stderr, "AudioOpenAL::setMusicMode(SoundType mode)\n");
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		Audio::setMusicMode(mode);
 		switch(mode)
@@ -414,8 +414,8 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 void AudioOpenAL::setSoundVolume(float vol)
 {
 //	fprintf(stderr, "AudioOpenAL::setSoundVolume(%f)\n", vol);
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		int i;
 		if(vol > 1.0) vol = 1.0;
@@ -443,8 +443,8 @@ void AudioOpenAL::setSoundVolume(float vol)
 //----------------------------------------------------------
 void AudioOpenAL::setMusicVolume(float vol)
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		if(vol > 1.0) vol = 1.0;
 		if(vol < 0.0) vol = 0.0;
@@ -558,8 +558,8 @@ void AudioOpenAL::update()
 //----------------------------------------------------------
 void AudioOpenAL::playSound(SoundType type, float *pos, int age)
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled())
+	Config	*config = Config::instance();
+	if(config->audioEnabled())
 	{
 		float p[3];
 		p[0] =  pos[0]*audioScale[0];
@@ -629,7 +629,7 @@ void AudioOpenAL::playSoundExploPop(float p[3])
 //----------------------------------------------------------
 void AudioOpenAL::loadMusicList()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	int		i;
 	bool	ok = false;
 	int		lineCount = 0;
@@ -722,7 +722,7 @@ void AudioOpenAL::loadMusicList()
 //----------------------------------------------------------
 void AudioOpenAL::setMusicIndex(int index)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	bool	wasPlaying = false;
 	
 	if(musicMax)
@@ -732,10 +732,10 @@ void AudioOpenAL::setMusicIndex(int index)
 	{
 		Audio::	setMusicIndex(index);		
 	}
-	else if(initialized && config->getUsePlayList())
+	else if(initialized && config->usePlayList())
 	{
 		bool loadSuccess = true;
-		if(config->getAudioEnabled())
+		if(config->audioEnabled())
 		{
 			checkError("AudioOpenAL::setMusicIndex -- begin");
 			//-- if music is currently playing, we want to 

@@ -184,7 +184,7 @@ void HeroAmmo::printList(int type)
 //----------------------------------------------------------
 void HeroAmmo::updateAmmo()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	int i;
 	ActiveAmmo *thisAmmo;
 	
@@ -194,7 +194,7 @@ void HeroAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(thisAmmo->pos[1] > config->getScreenBoundY()) // remove ammo
+			if(thisAmmo->pos[1] > config->screenBoundY()) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;

@@ -147,7 +147,7 @@ void EnemyAircraft_Boss00::update()
 //----------------------------------------------------------
 void EnemyAircraft_Boss00::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -168,8 +168,8 @@ void EnemyAircraft_Boss00::move()
 	pos[1] += game->speedAdj*(lastMoveY+vel[1]);
 
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

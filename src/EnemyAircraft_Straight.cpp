@@ -91,7 +91,7 @@ void EnemyAircraft_Straight::calcShootInterval()
 //----------------------------------------------------------
 void EnemyAircraft_Straight::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -101,8 +101,8 @@ void EnemyAircraft_Straight::move()
 	pos[1] += (game->speedAdj*(vel[1] * game->gameSkill));
 //	fprintf(stderr, "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n", this, pos[1], vel[1]);
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

@@ -21,7 +21,7 @@ int		SDL_CDStatus(void*)	{ return 0; }
 //====================================================================
 Audio::Audio()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	
     fileNames[HeroAmmo00]	= "wav/boom.wav";
 	fileNames[PowerUp]		= "wav/power.wav";
@@ -37,7 +37,7 @@ Audio::Audio()
 	musicMax = 1;
 	musicIndex = 0;
 	
-	if(config->getAudioEnabled() == true)
+	if(config->audioEnabled() == true)
 	{
 		initCDROM();
 	}
@@ -103,16 +103,16 @@ static const char *trackType(int t)
 }
 void Audio::initCDROM()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	int tmp;
-	if(config->getUseCDROM())
+	if(config->useCDROM())
 	{
 		tmp = SDL_CDNumDrives();
 		fprintf(stderr, "%d CDROM drive(s).\n", tmp);
 		config->setCDROMCount(tmp);
 		if(tmp > 0)
 		{
-			cdrom = SDL_CDOpen(config->getCDROMDevice());
+			cdrom = SDL_CDOpen(config->CDROMDevice());
 			if(cdrom)
 			{
 				tmp = SDL_CDStatus(cdrom);
@@ -150,7 +150,7 @@ void Audio::initCDROM()
 			}
 			else
 			{
-				fprintf(stderr, "ERROR! Could not access CDROM device %d : %s\n", config->getCDROMDevice(), SDL_GetError());
+				fprintf(stderr, "ERROR! Could not access CDROM device %d : %s\n", config->CDROMDevice(), SDL_GetError());
 				SDL_ClearError();
 				config->setCDROMDevice(0); 
 			}
@@ -167,8 +167,8 @@ void Audio::initCDROM()
 //----------------------------------------------------------
 void	Audio::stopMusic()
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		if(cdrom)
 			SDL_CDStop(cdrom);
@@ -181,8 +181,8 @@ void	Audio::stopMusic()
 //----------------------------------------------------------
 void	Audio::pauseGameMusic(bool status)
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		if(cdrom)
 		{
@@ -207,8 +207,8 @@ void	Audio::pauseGameMusic(bool status)
 void	Audio::setMusicMode(SoundType mode)
 {
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		int cdromStatus = 0;
 		if(cdrom)
@@ -259,8 +259,8 @@ void	Audio::setSoundVolume(float)
 void	Audio::setMusicIndex(int index)
 {
 #ifdef USE_SDL
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	if(config->audioEnabled() == true)
 	{
 		bool	wasPlaying = false;
 		if(musicMax)

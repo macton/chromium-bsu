@@ -31,7 +31,7 @@ GroundMetalSegment::~GroundMetalSegment()
 //----------------------------------------------------------
 void GroundMetalSegment::drawGL()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	static float c0_clr[4] = { 0.65, 0.62, 0.53, 1.0 };
 	static float c1_clr[4] = { 0.79, 0.82, 0.69, 1.0 };
 	static float r0_clr[4]  = { 0.07, 0.07, 0.13, 1.0 };
@@ -90,7 +90,7 @@ void GroundMetalSegment::drawGL()
 					r1_clr,
 					r2_clr);
 #else // EXPERIMENTAL
-	if(config->getGfxLevel() > 1)
+	if(config->gfxLevel() > 1)
 	{
 		drawBlip(rep, S, tilt, blipMirrorT);
 	}
@@ -155,11 +155,11 @@ void GroundMetalSegment::drawBlip(float rep, float S, float tilt, bool blipMirro
 void GroundMetalSegment::drawSurface(float *c0_clr, float *c1_clr,
 									 float *r0_clr, float *r1_clr, float *r2_clr)
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float rep = 1.0;
 	glBindTexture(GL_TEXTURE_2D, parent->tex[Ground::Base]);
 	glBegin(GL_TRIANGLES); //-- use triangles to prevent color popping on Utah
-	if(config->getGfxLevel() > 0)
+	if(config->gfxLevel() > 0)
 	{
 		glColor4fv(c0_clr); glTexCoord2f( rep,  rep); glVertex3f(         pos[0], -size[1]+pos[1], pos[2]);
 		glColor4fv(c1_clr); glTexCoord2f( rep,  0.0); glVertex3f(         pos[0],          pos[1], pos[2]);

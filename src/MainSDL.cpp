@@ -32,7 +32,7 @@ MainSDL::MainSDL(int argc, char **argv)
 	: MainToolkit(argc, argv)
 {	
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	mouseToggle = game->mouseActive;
 	fire = 0;
 	xjoy = yjoy = xjNow = yjNow = 0;
@@ -48,7 +48,7 @@ MainSDL::MainSDL(int argc, char **argv)
 #ifdef NO_PARACHUTE
 	initOpts = initOpts|SDL_INIT_NOPARACHUTE;
 #endif
-	if(config->getUseCDROM())
+	if(config->useCDROM())
 		initOpts = initOpts|SDL_INIT_CDROM;
 		
 	if( SDL_Init( initOpts ) < 0 ) 
@@ -101,7 +101,7 @@ MainSDL::~MainSDL()
 bool MainSDL::run()
 {
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	float targetAdj		= 1.0;
 	Uint32 start_time	= 0; 
 	Uint32 now_time		= 0; 
@@ -178,7 +178,7 @@ bool MainSDL::run()
 						fprintf(stdout, "init----> %3.2ffps targetAdj = %g, tmp = %g\n", game->fps, targetAdj, tmp);
 					}
 				}
-				else if( config->getAutoSpeed() && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
+				else if( config->autoSpeed() && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
 				{
 					//game->speedAdj = targetAdj;
 					// Everything was originally based on 50fps - attempt to adjust
@@ -257,7 +257,7 @@ bool MainSDL::checkErrors()
 void MainSDL::setVideoMode() 
 {
 	Global	*game = Global::getInstance();
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	int w;
 	int h;
 	Uint32 video_flags;
@@ -265,15 +265,15 @@ void MainSDL::setVideoMode()
 	
 	//-- Set the flags we want to use for setting the video mode
 	video_flags = SDL_OPENGL;
-	if(config->getFullScreen())
+	if(config->fullScreen())
 		video_flags |= SDL_FULLSCREEN;
 	
-	w = config->getScreenW();
-	h = config->getScreenH();
+	w = config->screenW();
+	h = config->screenH();
 	
 	int rs, gs, bs, ds;
 	int bpp;
-	if(config->getTrueColor())
+	if(config->trueColor())
 	{
 		//-- 24 bit color
 		bpp = 24;

@@ -174,7 +174,7 @@ void MenuGL::startMenu()
 //----------------------------------------------------------
 void MenuGL::drawGL()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	Global	*game = Global::getInstance();
 	HiScore	*hiScore = HiScore::getInstance();
 	int		i;
@@ -195,7 +195,7 @@ void MenuGL::drawGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, config->getZTrans());
+	glTranslatef(0.0, 0.0, config->zTrans());
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
@@ -283,7 +283,7 @@ void MenuGL::drawGL()
 			int i,len;
 			float trans;
 			time_t nowTime = time(NULL);
-			int l = config->getIntSkill();
+			int l = config->intSkill();
 			int recentHiScore = -1;
 			time_t mostRecent = 0;
 			for(i = 0; i < HI_SCORE_HIST; i++)
@@ -304,7 +304,7 @@ void MenuGL::drawGL()
 				else
 					glColor4f(1.0, 1.0, 1.0, 0.2+0.2*r);
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
-				sprintf(buf, "%d", (int)hiScore->getScore(config->getIntSkill(), i) );
+				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
 				len = strlen(buf);
 				trans = txfStringLength(game->texFont, buf, len);
 				glTranslatef( 80-trans, 0.0, 0.0);
@@ -436,7 +436,7 @@ void MenuGL::drawGL()
 //----------------------------------------------------------
 void MenuGL::drawIndicator()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	Global	*game = Global::getInstance();
 	char	buf[32];
 	float	szx = 10.0;
@@ -451,13 +451,13 @@ void MenuGL::drawIndicator()
 			sprintf(buf, "%d", game->gameLevel);	 
 			break;
 		case SkillLevel: 
-			level = config->getGameSkillBase();
+			level = config->gameSkillBase();
 			tmp = (int)((level+0.05)*10.0);
 			sprintf(buf, skillString(tmp));
 			break;
 		case Graphics: 
-			level = config->getGfxLevel()/2.0;
-			switch(config->getGfxLevel())
+			level = config->gfxLevel()/2.0;
+			switch(config->gfxLevel())
 			{
 				case 0: sprintf(buf, "low"); break;
 				case 1: sprintf(buf, "med"); break;
@@ -465,8 +465,8 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case ScreenSize: 
-			level = (float)config->getScreenSize()/(float)MAX_SCREEN_SIZE; 
-			switch(config->getScreenSize())
+			level = (float)config->screenSize()/(float)MAX_SCREEN_SIZE; 
+			switch(config->screenSize())
 			{
 				case 0: sprintf(buf, "512x384"); break;
 				case 1: sprintf(buf, "640x480"); break;
@@ -476,20 +476,20 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case FullScreen: 
-			level = (float)config->getFullScreen(); 
-			if(config->getFullScreen()) sprintf(buf, "true");
+			level = (float)config->fullScreen(); 
+			if(config->fullScreen()) sprintf(buf, "true");
 			else sprintf(buf, "false");
 			break;
 		case Sound: 
-			level = config->getVolSound(); 
+			level = config->volSound(); 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case Music: 
-			level = config->getVolMusic(); 
+			level = config->volMusic(); 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
 		case MouseSpeed: 
-			level = config->getMouseSpeed()*10.0; 
+			level = config->mouseSpeed()*10.0; 
 			sprintf(buf, "%d", (int)((level+0.005)*100.0));	 
 			break;
 		default: 
@@ -759,7 +759,7 @@ void MenuGL::keyHit(MainToolkit::Key key)
 //----------------------------------------------------------
 void MenuGL::activateItem()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	Global *game = Global::getInstance();
 	switch(curSel)
 	{
@@ -778,7 +778,7 @@ void MenuGL::activateItem()
 		case ScreenSize:
 			break;
 		case FullScreen:
-			config->setFullScreen(!config->getFullScreen());
+			config->setFullScreen(!config->fullScreen());
 			game->deleteTextures();
 			game->toolkit->setVideoMode();
 			game->loadTextures();
@@ -800,7 +800,7 @@ void MenuGL::activateItem()
 //----------------------------------------------------------
 void MenuGL::incItem()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
@@ -809,33 +809,33 @@ void MenuGL::incItem()
 			activateItem();
 			break;
 		case SkillLevel:
-			config->setGameSkillBase(config->getGameSkillBase()+0.1);
-			hiScore->print(config->getIntSkill());
+			config->setGameSkillBase(config->gameSkillBase()+0.1);
+			hiScore->print(config->intSkill());
 			game->newGame();
 			break;
 		case GameLevel:
 			game->gameLevel++;
-			if(game->gameLevel > config->getMaxLevel()) 
+			if(game->gameLevel > config->maxLevel()) 
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
-				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", config->getMaxLevel(), game->gameLevel);
-				game->gameLevel = config->getMaxLevel();
+				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", config->maxLevel(), game->gameLevel);
+				game->gameLevel = config->maxLevel();
 			}
 			else
 				game->newGame();
 			break;
 		case Graphics:
-			config->setGfxLevel(config->getGfxLevel()+1);
+			config->setGfxLevel(config->gfxLevel()+1);
 			break;
 		case ScreenSize:
-			config->setScreenSize(config->getScreenSize()+1);
+			config->setScreenSize(config->screenSize()+1);
 			game->deleteTextures();
 			game->toolkit->setVideoMode();
 			game->loadTextures();
 			break;
 		case FullScreen:
-			if(!config->getFullScreen())
+			if(!config->fullScreen())
 			{
 				config->setFullScreen(true);
 				game->deleteTextures();
@@ -844,16 +844,16 @@ void MenuGL::incItem()
 			}
 			break;
 		case Sound:
-			config->setVolSound(config->getVolSound()+0.05);
-			game->audio->setSoundVolume(config->getVolSound());
+			config->setVolSound(config->volSound()+0.05);
+			game->audio->setSoundVolume(config->volSound());
 			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			config->setVolMusic(config->getVolMusic()+0.05);
-			game->audio->setMusicVolume(config->getVolMusic());
+			config->setVolMusic(config->volMusic()+0.05);
+			game->audio->setMusicVolume(config->volMusic());
 			break;
 		case MouseSpeed:
-			config->setMouseSpeed(config->getMouseSpeed()+0.005);
+			config->setMouseSpeed(config->mouseSpeed()+0.005);
 			break;
 		case Quit:
 			activateItem();
@@ -866,7 +866,7 @@ void MenuGL::incItem()
 //----------------------------------------------------------
 void MenuGL::decItem()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
@@ -874,8 +874,8 @@ void MenuGL::decItem()
 		case NewGame:
 			break;
 		case SkillLevel:
-			config->setGameSkillBase(config->getGameSkillBase()-0.1);
-			hiScore->print(config->getIntSkill());
+			config->setGameSkillBase(config->gameSkillBase()-0.1);
+			hiScore->print(config->intSkill());
 			game->newGame();
 			break;
 		case GameLevel:
@@ -885,16 +885,16 @@ void MenuGL::decItem()
 			game->newGame();
 			break;
 		case Graphics:
-			config->setGfxLevel(config->getGfxLevel()-1);
+			config->setGfxLevel(config->gfxLevel()-1);
 			break;
 		case ScreenSize:
-			config->setScreenSize(config->getScreenSize()-1);
+			config->setScreenSize(config->screenSize()-1);
 			game->deleteTextures();
 			game->toolkit->setVideoMode();
 			game->loadTextures();
 			break;
 		case FullScreen:
-			if(config->getFullScreen())
+			if(config->fullScreen())
 			{
 				config->setFullScreen(false);
 				game->deleteTextures();
@@ -903,16 +903,16 @@ void MenuGL::decItem()
 			}
 			break;
 		case Sound:
-			config->setVolSound(config->getVolSound()-0.05);
-			game->audio->setSoundVolume(config->getVolSound());
+			config->setVolSound(config->volSound()-0.05);
+			game->audio->setSoundVolume(config->volSound());
 			game->audio->playSound(Audio::Explosion, pos);
 			break;
 		case Music:
-			config->setVolMusic(config->getVolMusic()-0.05);
-			game->audio->setMusicVolume(config->getVolMusic());
+			config->setVolMusic(config->volMusic()-0.05);
+			game->audio->setMusicVolume(config->volMusic());
 			break;
 		case MouseSpeed:
-			config->setMouseSpeed(config->getMouseSpeed()-0.005);
+			config->setMouseSpeed(config->mouseSpeed()-0.005);
 			break;
 		case Quit:
 			break;
@@ -930,9 +930,9 @@ void MenuGL::mousePress(MainToolkit::Button but, int xi, int yi)
 	if(but == MainToolkit::Left)
 	{
 		float x,y;
-		Config *config = Config::getInstance();
-		x = -2.0*(0.5-(((float)xi)/config->getScreenW()))* 16.60;
-		y =  2.0*(0.5-(((float)yi)/config->getScreenH()))* 12.45;
+		Config *config = Config::instance();
+		x = -2.0*(0.5-(((float)xi)/config->screenW()))* 16.60;
+		y =  2.0*(0.5-(((float)yi)/config->screenH()))* 12.45;
 
 		float	p = -y+(1.0+txtHeight*1.5);
 		float	s = txtHeight*2.5;

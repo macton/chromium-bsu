@@ -438,15 +438,15 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 void MainSDL::grabMouse(bool status)
 {
 //	fprintf(stderr, "MainSDL::grabMouse(%d)\n", status);
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	
 	mouseToggle = status;
 	if(status)
 		SDL_ShowCursor(0);
 	else
 		SDL_ShowCursor(1);
-	xMid = config->getScreenW()/2;
-	yMid = config->getScreenH()/2;
+	xMid = config->screenW()/2;
+	yMid = config->screenH()/2;
 	SDL_WarpMouse(xMid, yMid);
 	xLast = xMid;
 	yLast = yMid;

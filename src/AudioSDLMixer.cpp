@@ -30,16 +30,16 @@
 AudioSDLMixer::AudioSDLMixer()
 	: Audio()
 {    
-	Config	*config = Config::getInstance();
-	//UNCLEAN - if initSound fails, config->getAudioEnabled() will be set to false
-	if(config->getAudioEnabled() == true)
+	Config	*config = Config::instance();
+	//UNCLEAN - if initSound fails, config->getAudio() will be set to false
+	if(config->getAudio() == true)
 		initSound();
 }
 
 AudioSDLMixer::~AudioSDLMixer()
 {
-	Config	*config = Config::getInstance();
-	if(config->getAudioEnabled()) 
+	Config	*config = Config::instance();
+	if(config->getAudio()) 
 	{
     	for (int i = 0; i < NumSoundTypes; i++)
         	Mix_FreeChunk (sounds[i]);
@@ -54,11 +54,11 @@ AudioSDLMixer::~AudioSDLMixer()
 //----------------------------------------------------------
 void	AudioSDLMixer::initSound()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
     if ( Mix_OpenAudio (22050, AUDIO_S16, 2, 512) < 0 )
 	{
 		fprintf(stderr, "ERROR initializing audio - AudioSDLMixer::initSound()\n");
-        config->setAudioEnabled(false);
+        config->setAudio(false);
 	}
 	else
 	{
@@ -77,8 +77,8 @@ void	AudioSDLMixer::initSound()
 //----------------------------------------------------------
 void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 {
-	Config	*config = Config::getInstance();
-	if (config->getAudioEnabled()) 
+	Config	*config = Config::instance();
+	if (config->getAudio()) 
 	{
 		Mix_PlayChannel (-1, sounds[type], 0);
     }
@@ -90,8 +90,8 @@ void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
 //----------------------------------------------------------
 void AudioSDLMixer::pauseGameMusic(bool status)
 {
-	Config	*config = Config::getInstance();
-	if (config->getAudioEnabled()) 
+	Config	*config = Config::instance();
+	if (config->getAudio()) 
 	{
 		if(cdrom)
 		{
@@ -113,8 +113,8 @@ void AudioSDLMixer::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	AudioSDLMixer::stopMusic()
 {
-	Config	*config = Config::getInstance();
-    if (config->getAudioEnabled()) 
+	Config	*config = Config::instance();
+    if (config->getAudio()) 
 	{
 		Audio::stopMusic();
 		Mix_HaltChannel (0);
@@ -124,8 +124,8 @@ void	AudioSDLMixer::stopMusic()
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicMode(SoundType mode)
 {
-	Config	*config = Config::getInstance();
-    if (config->getAudioEnabled())
+	Config	*config = Config::instance();
+    if (config->getAudio())
 	{
 		Audio::setMusicMode(mode);
 		switch(mode)
@@ -150,8 +150,8 @@ void	AudioSDLMixer::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicVolume(float value)
 {
-	Config	*config = Config::getInstance();
-    if (config->getAudioEnabled())
+	Config	*config = Config::instance();
+    if (config->getAudio())
 	{
 		Mix_Volume (0, (int)(MIX_MAX_VOLUME*value) );
 	}
@@ -163,8 +163,8 @@ void	AudioSDLMixer::setMusicVolume(float value)
 //----------------------------------------------------------
 void	AudioSDLMixer::setSoundVolume(float value)
 {
-	Config	*config = Config::getInstance();
-    if (config->getAudioEnabled())
+	Config	*config = Config::instance();
+    if (config->getAudio())
 	{
 		for (int i = 1; i < MIX_CHANNELS; i++)
 			Mix_Volume (i, (int)(MIX_MAX_VOLUME*value) );

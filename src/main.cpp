@@ -77,11 +77,15 @@ int main(int argc, char **argv)
 		}
 		else if( strcmp(argv[i], "-na") == 0 || strcmp(argv[i], "--noaudio") == 0)
 		{
-			config->setAudioEnabled(false);
+			config->setAudio(false);
 		}
 		else if( strcmp(argv[i], "-nb") == 0 || strcmp(argv[i], "--noblend") == 0)
 		{
-			config->setBlendEnabled(false);
+			config->setBlend(false);
+		}
+		else if( strcmp(argv[i], "-nt") == 0 || strcmp(argv[i], "--notexborder") == 0)
+		{
+			config->setTexBorder(false);
 		}
 		else
 		{
@@ -97,6 +101,8 @@ int main(int argc, char **argv)
 			fprintf(stderr, "                       :      3 = 1024 x  768\n");
 			fprintf(stderr, "                       :      4 = 1280 x  960\n");
 			fprintf(stderr, "  -na/--noaudio        : do not initialize audio\n");
+			fprintf(stderr, "  -nb/--noblend        : disable blending (OpenGL)\n");
+			fprintf(stderr, "  -nt/--notexborder    : do not set tex border color (OpenGL)\n");
 			fprintf(stderr, "--------------------------------------------------\n");
 			fprintf(stderr, "\n");
 			exit(0);
@@ -139,7 +145,7 @@ int main(int argc, char **argv)
 #error "USE_SDL or USE_GLUT must be defined"
 #endif
 		
-	hiScore->print(config->getIntSkill());
+	hiScore->print(config->intSkill());
 	game->toolkit->run();
 
 	hiScore->destroy();

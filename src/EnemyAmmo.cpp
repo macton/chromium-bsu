@@ -184,7 +184,7 @@ void EnemyAmmo::addAmmo(int type, float pos[3], float vel[3])
 //----------------------------------------------------------
 void EnemyAmmo::updateAmmo()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	int i;
 	ActiveAmmo *thisAmmo;
 	
@@ -194,10 +194,10 @@ void EnemyAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(	thisAmmo->pos[0] >  config->getScreenBoundX() ||
-				thisAmmo->pos[0] < -config->getScreenBoundX() ||
-				thisAmmo->pos[1] >  config->getScreenBoundY() ||
-				thisAmmo->pos[1] < -config->getScreenBoundY() ) // remove ammo
+			if(	thisAmmo->pos[0] >  config->screenBoundX() ||
+				thisAmmo->pos[0] < -config->screenBoundX() ||
+				thisAmmo->pos[1] >  config->screenBoundY() ||
+				thisAmmo->pos[1] < -config->screenBoundY() ) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;

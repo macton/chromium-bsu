@@ -58,7 +58,7 @@ void EnemyAircraft_Omni::init(float *p, float randFact)
 //----------------------------------------------------------
 void EnemyAircraft_Omni::update()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	float	v[3] = { 0.0, -0.2, 0.0 };
 //	float	*hpos = target->getPos();
 	float	*hpos = game->hero->getPos();
@@ -98,7 +98,7 @@ void EnemyAircraft_Omni::update()
 			}
 			game->enemyAmmo->addAmmo(1, p, shootVec);
 		}
-		if(pos[1] < config->getScreenBoundY())
+		if(pos[1] < config->screenBoundY())
 			shootSwap++;
 
 }
@@ -106,7 +106,7 @@ void EnemyAircraft_Omni::update()
 //----------------------------------------------------------
 void EnemyAircraft_Omni::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -119,8 +119,8 @@ void EnemyAircraft_Omni::move()
 	pos[1] += (game->speedAdj*(vel[1] * game->gameSkill));
 
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

@@ -20,7 +20,7 @@ public:
 	~Config();
 	
 	static Config	*init();
-	static Config	*getInstance();
+	static Config	*instance();
 	static void		destroy();
 	
 	bool	readFile();
@@ -29,98 +29,101 @@ public:
 	
 	void	setScreenSize(int m);
 
-	int		getScreenSize()		{	return screenSize;		}
-	int		getScreenW()		{	return screenW;			}
-	int		getScreenH()		{	return screenH;			}
-	float	getScreenA()		{	return screenA;			}
-	float	getScreenFOV()		{	return screenFOV;		}
-	float	getScreenNear()		{	return screenNear;		}
-	float	getScreenFar()		{	return screenFar;		}
-	float	getScreenBoundX()	{	return screenBound[0];	}
-	float	getScreenBoundY()	{	return screenBound[1];	}
-	float	getZTrans()			{	return zTrans;			}
+	int		screenSize()		{	return m_screenSize;	}
+	int		screenW()			{	return m_screenW;		}
+	int		screenH()			{	return m_screenH;		}
+	float	screenA()			{	return m_screenA;		}
+	float	screenFOV()			{	return m_screenFOV;		}
+	float	screenNear()		{	return m_screenNear;	}
+	float	screenFar()			{	return m_screenFar;		}
+	float	screenBoundX()		{	return m_screenBound[0];}
+	float	screenBoundY()		{	return m_screenBound[1];}
+	float	zTrans()			{	return m_zTrans;		}
 	
-	bool	getFullScreen()		{	return	full_screen;	}
-	bool	getBlendEnabled()	{	return	blend_enabled;	}
-	bool	getAudioEnabled()	{	return	audio_enabled;	}
-	bool	getSwapStereo()		{	return  swap_stereo;	}
-	bool	getAutoSpeed()		{	return  auto_speed;		}
-	bool	getShowFPS()		{	return  show_fps;		}
-	bool	getTrueColor()		{	return  true_color;		}
-	bool	getUsePlayList()	{	return  use_playList;	}
-	bool	getUseCDROM()		{	return  use_cdrom;		}
-	void	setFullScreen(bool s)	{	full_screen = s;	}
-	void	setBlendEnabled(bool s)	{	blend_enabled = s;	}
-	void	setAudioEnabled(bool s)	{	audio_enabled = s;	}
-	void	setSwapStereo(bool s)	{	swap_stereo = s;	}
-	void	setAutoSpeed(bool s)	{	auto_speed = s;		}
-	void	setShowFPS(bool s)		{	show_fps = s;		}
-	void	setTrueColor(bool s)	{	true_color = s;		}
-	void	setUsePlayList(bool s)	{	use_playList = s;	}
-	void	setUseCDROM(bool s)		{	use_cdrom = s;		}
+	bool	fullScreen()		{	return	m_full_screen;	}
+	bool	blend()				{	return	m_blend_enabled;}
+	bool	texBorder()			{	return	m_tex_border;	}
+	bool	audioEnabled()		{	return	m_audio_enabled;}
+	bool	swapStereo()		{	return  m_swap_stereo;	}
+	bool	autoSpeed()			{	return  m_auto_speed;	}
+	bool	showFPS()			{	return  m_show_fps;		}
+	bool	trueColor()			{	return  m_true_color;	}
+	bool	usePlayList()		{	return  m_use_playList;	}
+	bool	useCDROM()			{	return  m_use_cdrom;		}
+	void	setFullScreen(bool s)		{	m_full_screen = s;	}
+	void	setBlend(bool s)			{	m_blend_enabled = s;}
+	void	setTexBorder(bool s)		{	m_tex_border = s;	}
+	void	setAudio(bool s)			{	m_audio_enabled = s;}
+	void	setSwapStereo(bool s)		{	m_swap_stereo = s;	}
+	void	setAutoSpeed(bool s)		{	m_auto_speed = s;	}
+	void	setShowFPS(bool s)			{	m_show_fps = s;		}
+	void	setTrueColor(bool s)		{	m_true_color = s;	}
+	void	setUsePlayList(bool s)		{	m_use_playList = s;	}
+	void	setUseCDROM(bool s)			{	m_use_cdrom = s;	}
 	
-	int		getCDROMDevice()		{	return cdromDevice;	}
-	int		getCDROMCount()			{	return cdromCount;	}
-	void	setCDROMDevice(int i)	{	cdromDevice = i;	}
-	void	setCDROMCount(int c)	{	cdromCount  = c;	}
+	int		CDROMDevice()			{   return m_cdromDevice;	}
+	int		CDROMCount()			{   return m_cdromCount;	}
+	void	setCDROMDevice(int i)	{	m_cdromDevice = i;		}
+	void	setCDROMCount(int c)	{	m_cdromCount  = c;		}
 	
-	int 	getGfxLevel()		{	return gfxLevel;	}
-	int 	getMaxLevel()		{	return maxLevel;	}
-	void	setGfxLevel(int a)	{	gfxLevel = a; if(gfxLevel < 0) gfxLevel = 0; if(gfxLevel > 2) gfxLevel = 2; }
-	void	setMaxLevel(int a)	{	maxLevel = a; if(maxLevel > 10) maxLevel = 10;	}
+	int 	gfxLevel()		{	return m_gfxLevel;	}
+	int 	maxLevel()		{	return m_maxLevel;	}
+	void	setGfxLevel(int a)	{	m_gfxLevel = a; if(m_gfxLevel < 0) m_gfxLevel = 0; if(m_gfxLevel > 2) m_gfxLevel = 2; }
+	void	setMaxLevel(int a)	{	m_maxLevel = a; if(m_maxLevel > 10) m_maxLevel = 10;	}
 	
-	float	 getMouseSpeed()		{	return mouseSpeed;		}
-	float	 getGameSkillBase()		{	return gameSkillBase;	}
-	float	 getViewGamma()			{	return viewGamma;		}
-	float	 getVolSound()			{	return volSound;		}
-	float	 getVolMusic()			{	return volMusic;		}
-	void	 setMouseSpeed(float f)		{	mouseSpeed = f;	if(mouseSpeed < 0.01) mouseSpeed = 0.01; if(mouseSpeed > 0.1) mouseSpeed = 0.1;	}
-	void	 setGameSkillBase(float f)	{	gameSkillBase = f;	if(gameSkillBase > 0.9) gameSkillBase = 0.9; if(gameSkillBase < 0.2) gameSkillBase = 0.2;}
-	void	 setViewGamma(float f)		{	viewGamma = f;		}
-	void	 setVolSound(float f)		{	volSound = f;	if(volSound < 0.0) volSound = 0.0; if(volSound > 1.0) volSound = 1.0;	}
-	void	 setVolMusic(float f)		{	volMusic = f;	if(volMusic < 0.0) volMusic = 0.0; if(volMusic > 1.0) volMusic = 1.0;	}
+	float	mouseSpeed()		{	return m_mouseSpeed;		}
+	float	gameSkillBase()		{	return m_gameSkillBase;	}
+	float	viewGamma()			{	return m_viewGamma;		}
+	float	volSound()			{	return m_volSound;		}
+	float	volMusic()			{	return m_volMusic;		}
+	void	setMouseSpeed(float f)		{	m_mouseSpeed = f;	if(m_mouseSpeed < 0.01) m_mouseSpeed = 0.01; if(m_mouseSpeed > 0.1) m_mouseSpeed = 0.1;	}
+	void	setGameSkillBase(float f)	{	m_gameSkillBase = f;	if(m_gameSkillBase > 0.9) m_gameSkillBase = 0.9; if(m_gameSkillBase < 0.2) m_gameSkillBase = 0.2;}
+	void	setViewGamma(float f)		{	m_viewGamma = f;		}
+	void	setVolSound(float f)		{	m_volSound = f;	if(m_volSound < 0.0) m_volSound = 0.0; if(m_volSound > 1.0) m_volSound = 1.0;	}
+	void	setVolMusic(float f)		{	m_volMusic = f;	if(m_volMusic < 0.0) m_volMusic = 0.0; if(m_volMusic > 1.0) m_volMusic = 1.0;	}
 	
-	int		getIntSkill()	{ return (int)((gameSkillBase+0.05)*10.0); }
+	int		intSkill()	{ return (int)((m_gameSkillBase+0.05)*10.0); }
 
 	enum AudioType { AudioOpenAL, AudioSDL_Mixer, NumAudioTypes };
-	AudioType	getAudioType()	{ return audioType; };
+	AudioType	audioType()	{ return m_audioType; };
 	
 private:
-	int 	 screenW;
-	int 	 screenH;
-	float	 screenA;
-	float	 screenFOV;
-	float	 screenNear;
-	float	 screenFar;
-	bool	 full_screen;
-	int 	 screenSize;
-	float	 screenBound[2];
-	float	 zTrans;
+	int 	 m_screenW;
+	int 	 m_screenH;
+	float	 m_screenA;
+	float	 m_screenFOV;
+	float	 m_screenNear;
+	float	 m_screenFar;
+	bool	 m_full_screen;
+	int 	 m_screenSize;
+	float	 m_screenBound[2];
+	float	 m_zTrans;
 	
-	bool	 blend_enabled;
-	bool	 audio_enabled;
-	bool	 swap_stereo;
-	bool	 auto_speed;
-	bool	 show_fps;
-	bool	 true_color;
-	bool	 use_playList;
-	bool	 use_cdrom;
+	bool	 m_blend_enabled;
+	bool	 m_tex_border;
+	bool	 m_audio_enabled;
+	bool	 m_swap_stereo;
+	bool	 m_auto_speed;
+	bool	 m_show_fps;
+	bool	 m_true_color;
+	bool	 m_use_playList;
+	bool	 m_use_cdrom;
 	
-	int 	 gfxLevel;
-	int 	 maxLevel;
-	int		 cdromDevice;
-	int		 cdromCount;
+	int 	 m_gfxLevel;
+	int 	 m_maxLevel;
+	int		 m_cdromDevice;
+	int		 m_cdromCount;
 
-	float	 mouseSpeed;
-	float	 gameSkillBase;
-	float	 viewGamma;
-	float	 volSound;
-	float	 volMusic;
+	float	 m_mouseSpeed;
+	float	 m_gameSkillBase;
+	float	 m_viewGamma;
+	float	 m_volSound;
+	float	 m_volMusic;
 	
-	AudioType	audioType;
+	AudioType	m_audioType;
 
 private:
-	static Config	*instance;
+	static Config	*m_instance;
 	
 	Config();
 };

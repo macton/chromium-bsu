@@ -99,7 +99,7 @@ void EnemyAircraft_Gnat::calcShootInterval()
 //----------------------------------------------------------
 void EnemyAircraft_Gnat::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -180,8 +180,8 @@ void EnemyAircraft_Gnat::move()
 	if(pos[1] < -10.0)
 		pos[1] = -10.0;
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

@@ -53,9 +53,9 @@ MainGL::~MainGL()
 //----------------------------------------------------------
 int MainGL::initGL()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 //	fprintf(stderr, "initGL()\n");
-	reshapeGL(config->getScreenW(), config->getScreenH());
+	reshapeGL(config->screenW(), config->screenH());
 
 	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -66,7 +66,7 @@ int MainGL::initGL()
 //	glDisable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
-	if(config->getBlendEnabled())
+	if(config->blend())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -89,7 +89,7 @@ int MainGL::initGL()
 	glLineWidth(1.0);
 	glClearColor( 0.0, 0.0, 0.0, 1.0 );
 	
-	pngSetViewingGamma(config->getViewGamma());
+	pngSetViewingGamma(config->viewGamma());
 	
 	return 0;
 }
@@ -142,14 +142,14 @@ void MainGL::drawGL()
 //----------------------------------------------------------
 void MainGL::drawGameGL()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	//-- Clear buffers
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //	glClear( GL_COLOR_BUFFER_BIT );
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, config->getZTrans());
+	glTranslatef(0.0, 0.0, config->zTrans());
 //	glTranslatef(0.0, 5.0, -12.0);
 	
 	if(!game->game_pause)
@@ -186,7 +186,7 @@ void MainGL::drawGameGL()
 	game->enemyFleet->drawGL();
 	game->hero->drawGL();
 	
-	if(config->getGfxLevel() > 0)
+	if(config->gfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -208,7 +208,7 @@ void MainGL::drawGameGL()
 //----------------------------------------------------------
 void MainGL::drawDeadGL()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	game->heroDeath--;
 	
 	//-- Clear buffers
@@ -219,10 +219,10 @@ void MainGL::drawDeadGL()
 	if(game->heroDeath > 0)
 	{
 		float z = 1.0*game->heroDeath/DEATH_TIME;
-		glTranslatef(0.0, 0.0, config->getZTrans()-z*z);
+		glTranslatef(0.0, 0.0, config->zTrans()-z*z);
 	}
 	else
-		glTranslatef(0.0, 0.0, config->getZTrans());
+		glTranslatef(0.0, 0.0, config->zTrans());
 	
 	//-- Add items to scene
 	game->itemAdd->putScreenItems();
@@ -243,7 +243,7 @@ void MainGL::drawDeadGL()
 	//-- Draw actors
 	game->enemyFleet->drawGL();
 	
-	if(config->getGfxLevel() > 0)
+	if(config->gfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -256,7 +256,7 @@ void MainGL::drawDeadGL()
 	//-- Draw stats
 	game->statusDisplay->drawGL(game->hero);
 	
-	int		skill = config->getIntSkill();
+	int		skill = config->intSkill();
 	float	heroScore = game->hero->getScore();
 	HiScore *hiScore = HiScore::getInstance();
 	char buffer[128];
@@ -279,7 +279,7 @@ void MainGL::drawDeadGL()
 //----------------------------------------------------------
 void MainGL::drawSuccessGL()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	game->heroSuccess--;
 	
 	if(game->heroSuccess < -500)
@@ -287,14 +287,14 @@ void MainGL::drawSuccessGL()
 		game->gotoNextLevel();
 		game->gameMode = Global::Game;
 		game->audio->setMusicMode(Audio::MusicGame);
-		game->audio->setMusicVolume(config->getVolMusic());
+		game->audio->setMusicVolume(config->volMusic());
 		return;
 	}
 	
 	float f	= -game->heroSuccess/450.0;
 	if(game->heroSuccess < 0)
 	{
-		float vol = config->getVolMusic() - (config->getVolMusic()*f);
+		float vol = config->volMusic() - (config->volMusic()*f);
 		game->audio->setMusicVolume(vol);
 	}
 	
@@ -303,7 +303,7 @@ void MainGL::drawSuccessGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, config->getZTrans());
+	glTranslatef(0.0, 0.0, config->zTrans());
 	
 	//-- Update scene
 	game->enemyFleet->update();
@@ -318,7 +318,7 @@ void MainGL::drawSuccessGL()
 	//-- Draw actors
 	game->hero->drawGL();
 	
-	if(config->getGfxLevel() > 0)
+	if(config->gfxLevel() > 0)
 		game->statusDisplay->darkenGL();
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -331,7 +331,7 @@ void MainGL::drawSuccessGL()
 		
 	char	buffer[256];
 	sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
-//	if(game->hero->getScore() > game->hiScore[config->getIntSkill()][0])
+//	if(game->hero->getScore() > game->hiScore[config->intSkill()][0])
 //	{
 //		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
 //	}
@@ -408,13 +408,13 @@ void MainGL::drawTextGL(char *string, float pulse, float scale)
 //----------------------------------------------------------
 void MainGL::reshapeGL(int , int )
 {
-	Config *config = Config::getInstance();	
+	Config *config = Config::instance();	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective( config->getScreenFOV(), 
-					config->getScreenA(), 
-					config->getScreenNear(), 
-					config->getScreenFar());
+	gluPerspective( config->screenFOV(), 
+					config->screenA(), 
+					config->screenNear(), 
+					config->screenFar());
 	glMatrixMode(GL_MODELVIEW);
-	glViewport(0, 0, config->getScreenW(), config->getScreenH());
+	glViewport(0, 0, config->screenW(), config->screenH());
 }

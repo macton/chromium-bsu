@@ -187,7 +187,7 @@ void PowerUps::addPowerUp(PowerUp *pwrUp)
 //----------------------------------------------------------
 void PowerUps::update()
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 
 	PowerUp	*pwrUp;
 	PowerUp *delUp;
@@ -206,7 +206,7 @@ void PowerUps::update()
 			if(pwrUp->vel[0] < 0.01) pwrUp->vel[0] = 0.0;
 			if(pwrUp->vel[1] < 0.01) pwrUp->vel[1] = 0.0;
 		}
-		float b = config->getScreenBoundX()-1.0;
+		float b = config->screenBoundX()-1.0;
 		if(pwrUp->pos[0] < -b)
 			pwrUp->pos[0] = -b;
 		if(pwrUp->pos[0] >  b)

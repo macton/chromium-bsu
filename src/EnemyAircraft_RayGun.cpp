@@ -87,7 +87,7 @@ void EnemyAircraft_RayGun::update()
 //----------------------------------------------------------
 void EnemyAircraft_RayGun::move()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -106,8 +106,8 @@ void EnemyAircraft_RayGun::move()
 	pos[0] += game->speedAdj*(randMoveX*lastMoveX * (game->gameSkill+0.1) + tmps);
 	pos[1] += game->speedAdj*(lastMoveY+vel[1] * (game->gameSkill+0.1));
 
-	if(pos[0] < -config->getScreenBoundX())
-		pos[0] = -config->getScreenBoundX();
-	if(pos[0] >  config->getScreenBoundX())
-		pos[0] =  config->getScreenBoundX();
+	if(pos[0] < -config->screenBoundX())
+		pos[0] = -config->screenBoundX();
+	if(pos[0] >  config->screenBoundX())
+		pos[0] =  config->screenBoundX();
 }

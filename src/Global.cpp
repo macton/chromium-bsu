@@ -130,9 +130,9 @@ void Global::destroy()
 //----------------------------------------------------------
 void Global::newGame()
 {
-	Config *config = Config::getInstance();
-	HiScore::getInstance()->set(config->getIntSkill(), hero->getScore());
-	gameSkill = config->getGameSkillBase() + 0.5;
+	Config *config = Config::instance();
+	HiScore::getInstance()->set(config->intSkill(), hero->getScore());
+	gameSkill = config->gameSkillBase() + 0.5;
 	gameSkill += (gameLevel-1)*0.05;
 	gameFrame = 0;
 	enemyFleet->clear();
@@ -169,9 +169,9 @@ void Global::newGame()
 //----------------------------------------------------------
 void Global::gotoNextLevel()
 {
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	gameLevel++;
-	if(config->getMaxLevel() < gameLevel)
+	if(config->maxLevel() < gameLevel)
 		config->setMaxLevel(gameLevel);
 	gameSkill += 0.05;
 	if(gameSkill > 1.9)
@@ -211,8 +211,8 @@ void Global::createGame()
 	itemAdd		= new ScreenItemAdd();
 
 #if defined(AUDIO_OPENAL) && defined(AUDIO_SDLMIXER) 
-	Config *config = Config::getInstance();
-	if(config->getAudioType() == Config::AudioOpenAL)
+	Config *config = Config::instance();
+	if(config->audioType() == Config::AudioOpenAL)
 		audio = new AudioOpenAL();
 	else
 		audio = new AudioSDLMixer();

@@ -12,6 +12,7 @@
 
 #include "extern.h"
 #include "Global.h"
+#include "Config.h"
 #include "GroundMetalSegment.h"
 
 //==============================================================================
@@ -51,6 +52,7 @@ GroundMetal::~GroundMetal()
 //----------------------------------------------------------
 void GroundMetal::loadTextures()
 {
+	Config	*config = Config::instance();
 	pngInfo tmpInfo;
 	float tbc[4] = { 0.2, 0.2, 0.2, 1.0 };
 	GLenum clamp = GL_REPEAT;
@@ -73,7 +75,8 @@ void GroundMetal::loadTextures()
 			tex[Base] = pngBind(dataLoc("png/gndMetalBase00.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, clamp, GL_LINEAR, GL_LINEAR);
 			break;
 	}
-	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, tbc);
+	if(config->texBorder())
+		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, tbc);
 	tex[Blip] = pngBind(dataLoc("png/gndMetalBlip.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
 }
 

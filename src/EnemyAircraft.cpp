@@ -38,11 +38,11 @@ EnemyAircraft::EnemyAircraft(EnemyType et, float p[3], float randFact)
 	
 	game = Global::getInstance();
 	
-	Config *config = Config::getInstance();
+	Config *config = Config::instance();
 	
 	EnemyAircraft::init(p, randFact);
 	
-	float xBound = config->getScreenBoundX()-2.0;
+	float xBound = config->screenBoundX()-2.0;
 	if(pos[0] < -xBound)
 		pos[0] = -xBound;
 	if(pos[0] > xBound)
@@ -381,7 +381,7 @@ void EnemyAircraft::calcShootInterval()
 ////----------------------------------------------------------
 //void EnemyAircraft::update()
 //{
-//	Config	*config = Config::getInstance();
+//	Config	*config = Config::instance();
 //	EnemyAircraft *tmpAircraft = 0;
 //	float	v[3] = { 0.0, -0.2, 0.0 };
 ////	float	*hpos = target->getPos();
@@ -439,7 +439,7 @@ void EnemyAircraft::calcShootInterval()
 //				}
 //				game->enemyAmmo->addAmmo(1, p, shootVec);
 //			}
-//			if(pos[1] < config->getScreenBoundY())
+//			if(pos[1] < config->screenBoundY())
 //				shootSwap++;
 //			break;
 //		//------------------------------- Ray Gun
@@ -667,7 +667,7 @@ void EnemyAircraft::calcShootInterval()
 ////----------------------------------------------------------
 //void EnemyAircraft::move()
 //{
-//	Config *config = Config::getInstance();
+//	Config *config = Config::instance();
 //	float	*hpos;
 //	if(target)
 //		hpos = target->getPos();
@@ -717,9 +717,9 @@ void EnemyAircraft::calcShootInterval()
 //				vel[1] *= 0.99;
 //				
 //			if(pos[0] < 0.0)
-//				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-config->getScreenBoundX()+2.85));
+//				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-config->screenBoundX()+2.85));
 //			else
-//				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( config->getScreenBoundX()-2.85));
+//				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( config->screenBoundX()-2.85));
 //			switch((age/50)%8)
 //			{
 //				case 2:
@@ -835,9 +835,9 @@ void EnemyAircraft::calcShootInterval()
 //			pos[1] -= game->speedAdj*0.02;
 //			break;
 //	}
-//	if(pos[0] < -config->getScreenBoundX())
-//		pos[0] = -config->getScreenBoundX();
-//	if(pos[0] >  config->getScreenBoundX())
-//		pos[0] =  config->getScreenBoundX();
+//	if(pos[0] < -config->screenBoundX())
+//		pos[0] = -config->screenBoundX();
+//	if(pos[0] >  config->screenBoundX())
+//		pos[0] =  config->screenBoundX();
 //}
 //

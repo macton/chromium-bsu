@@ -3,7 +3,8 @@ TEMPLATE	= app
 CLEAN_FILES += *.bck
 MOC_DIR		=	moc
 
-CONFIG		= qt warn_on release
+#CONFIG		= qt warn_on release
+CONFIG		= qt warn_on debug
 
 ## NOTE:
 ## The Makefile NEEDS to 'include ../config.mak'. I added this line:

@@ -129,7 +129,7 @@ void StatusDisplay::darkenGL()
 //----------------------------------------------------------
 void StatusDisplay::drawGL(HeroAircraft	*hero)
 {
-	Config	*config = Config::getInstance();
+	Config	*config = Config::instance();
 	static	char scoreBuf[32];
 	int 	i;
 	bool 	statClrWarnAmmo = false;
@@ -165,7 +165,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
 	glPopMatrix();
 	//-- draw fps
-	if(config->getShowFPS())
+	if(config->showFPS())
 	{
 		glPushMatrix();
 			sprintf(scoreBuf, "%3.1f", game->fps);
@@ -191,7 +191,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	glPopMatrix();	
 		
 	//-- draw usable items
-	if(config->getGfxLevel() > 1)
+	if(config->gfxLevel() > 1)
 	{
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 1.0);
@@ -294,7 +294,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		sls = dls = ((shields+superShields)/HERO_SHIELDS)-1.0;
 	
 	//------ draw Engine
-	if(hero->isVisible() && config->getGfxLevel() >= 1)
+	if(hero->isVisible() && config->gfxLevel() >= 1)
 	{
 		float c1f = 1.0+dl;
 		float c2f = -dl;
@@ -341,7 +341,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glPopMatrix();
 		
 		//------ add a bit of Glitter...
-		if(config->getGfxLevel() > 1 && (!game->game_pause) )
+		if(config->gfxLevel() > 1 && (!game->game_pause) )
 		{
 			float p[3] = { 0.0, 0.0, hero->pos[2] };
 			float v[3] = { 0.01*SRAND, 0.0, 0.0 };
@@ -375,7 +375,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	}
 	
 	//---------- Draw ammo flash
-	if(config->getGfxLevel() > 1)
+	if(config->gfxLevel() > 1)
 	{
 		glPushMatrix();
 		glTranslatef(hero->pos[0], hero->pos[1], hero->pos[2]);
@@ -449,7 +449,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTexCoord2f( 3.5, 0.0); glVertex3f( -statPosShld[0]+2.0,  statPosShld[1]+0.0, statPosShld[2] );
 	glEnd();
 		
-	if(config->getGfxLevel() > 0)
+	if(config->gfxLevel() > 0)
 	{
 		//-- Shields 
 		if( (sl < -0.7 && blink && shields > 0.0) || superShields )
@@ -526,12 +526,14 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		if( (dl < -0.7 && blink) || superShields )
 		{
 			glColor4fv(statClrWarn);
-			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, statClrWarn );
+			if(config->texBorder())
+				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, statClrWarn );
 		}
 		else
 		{
 			glColor4f(0.9+dc, 0.6+dc, 0.7+dc, 0.5+damageAlpha);
-			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, statClrZero );
+			if(config->texBorder())
+				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, statClrZero );
 		}
 		//-- Life
 		glPushMatrix();
