@@ -8,7 +8,6 @@
 #include "HiScore.h"
 #include "extern.h"
 
-#include "Global.h"
 #include "HeroAircraft.h"
 
 //====================================================================
@@ -18,6 +17,9 @@
 
 HiScore	*HiScore::instance = 0;
 
+/**
+ * initialize variables, then read high score file
+ */
 //----------------------------------------------------------
 HiScore::HiScore()
 {
@@ -45,11 +47,18 @@ HiScore::HiScore()
 	readFile();
 }
 
+/**
+ * save file before we go away...
+ */
 HiScore::~HiScore()
 {
 	saveFile();
 }
 
+/**
+ * create single HiScore object
+ * @returns HiScore::instance
+ */
 //----------------------------------------------------------
 HiScore *HiScore::init()
 {
@@ -64,6 +73,9 @@ HiScore *HiScore::init()
 	return HiScore::instance;
 }
 
+/**
+ * @returns HiScore::instance
+ */
 //----------------------------------------------------------
 HiScore *HiScore::getInstance()
 {
@@ -75,6 +87,9 @@ HiScore *HiScore::getInstance()
 		return HiScore::instance;
 }
 
+/**
+ * deletes singleton instance and sets HiScore::instance to 0.
+ */
 //----------------------------------------------------------
 void HiScore::destroy()
 {
@@ -82,6 +97,53 @@ void HiScore::destroy()
 	HiScore::instance = 0;
 }
 
+/**
+ * return score for given level and index.
+ * @returns score, or -1 if skill,index is out of range
+ */
+//----------------------------------------------------------
+double HiScore::getScore(int skill, int index)
+{
+	double retVal = -1.0;
+	if(skill > 0 && skill < 10)
+		if(index >= 0 && index < HI_SCORE_HIST)
+			retVal = hiScore[skill][index];
+	return retVal;
+}
+
+/**
+ * return high scorer's name for given level and index.
+ * @returns name, or "OUT_OF_RANGE" if skill,index is out of range
+ */
+//----------------------------------------------------------
+const char *HiScore::getName(int skill, int index)
+{
+	char *retVal = "OUT_OF_RANGE";
+	if(skill > 0 && skill < 10)
+		if(index >= 0 && index < HI_SCORE_HIST)
+			retVal = hiScoreName[skill][index];
+	return retVal;
+}
+
+/**
+ * return date of high score for given level and index.
+ * @returns date (int time_t format), or 0 if skill,index is out of range
+ */
+//----------------------------------------------------------
+time_t HiScore::getDate(int skill, int index)
+{
+	int retVal = 0;
+	if(skill > 0 && skill < 10)
+		if(index >= 0 && index < HI_SCORE_HIST)
+			retVal = hiScoreDate[skill][index];
+	return retVal;
+}
+
+/**
+ * Save high score file. If CHROMIUM_SCORE environment variable is set, that
+ * filename will be used. Otherwise, ~/.chromium-score.
+ * @returns success
+ */
 //----------------------------------------------------------
 bool HiScore::saveFile()
 {
@@ -121,6 +183,11 @@ bool HiScore::saveFile()
 }
 
 
+/**
+ * Read high score file. If CHROMIUM_SCORE environment variable is set, that
+ * filename will be used. Otherwise, ~/.chromium-score.
+ * @returns success
+ */
 //----------------------------------------------------------
 bool HiScore::readFile()
 {
@@ -182,26 +249,28 @@ void HiScore::insertScore(int level, int rank, float score)
 	time(&HiScore::hiScoreDate[level][rank]);
 }
 
+/**
+ * reads high score file, inserts current score (if appropriate), then saves 
+ * high score file. If multiple users are sharing a common high score file, 
+ * we want to keep it as current as possible.
+ */
 //----------------------------------------------------------
-int HiScore::set()
+int HiScore::set(int skill, float score)
 {
-	Global *game = Global::getInstance();
 	int retVal = 0;
-	int l = INT_GAME_SKILL_BASE;
-	if(l > 0 && l < 10)
+	if(skill > 0 && skill < 10)
 	{
 		readFile();
 		int i;
 		int rank = -1;
-		float score = game->hero->getScore();
 		for(i = HI_SCORE_HIST-1; i >= 0; i--)
 		{
-			if(score > HiScore::hiScore[l][i])
+			if(score > HiScore::hiScore[skill][i])
 				rank = i;
 		}
 		if(rank > -1)
 		{
-			insertScore(l, rank, score);
+			insertScore(skill, rank, score);
 			retVal = rank+1;
 		}
 		saveFile();
@@ -210,20 +279,21 @@ int HiScore::set()
 	return retVal;
 }
 
+/**
+ * check whether score qualifies as high score
+ * returns rank of player {1..HI_SCORE_HIST}, or 0
+ */
 //----------------------------------------------------------
-int HiScore::check()
+int HiScore::check(int skill, float score)
 {
-	Global *game = Global::getInstance();
 	int retVal = 0;
-	int l = INT_GAME_SKILL_BASE;
-	if(l > 0 && l < 10)
+	if(skill > 0 && skill < 10)
 	{
 		int i;
 		int rank = -1;
-		float score = game->hero->getScore();
 		for(i = HI_SCORE_HIST-1; i >= 0; i--)
 		{
-			if(score > hiScore[l][i])
+			if(score > hiScore[skill][i])
 				rank = i;
 		}
 		if(rank > -1)
@@ -234,16 +304,18 @@ int HiScore::check()
 	return retVal;
 }
 
+/**
+ * print high scores to stderr
+ */
 //----------------------------------------------------------
-void HiScore::print()
+void HiScore::print(int skill)
 {
 	struct tm *tmptr; 
-	int l = INT_GAME_SKILL_BASE;
 	fprintf(stderr, "high scores:\n");
 	for(int j = 0; j < HI_SCORE_HIST; j++)
 	{
-		tmptr = localtime(&HiScore::hiScoreDate[l][j]);
+		tmptr = localtime(&HiScore::hiScoreDate[skill][j]);
 		fprintf(stderr, "%02d/%02d/%04d %16s %d\n", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
-				HiScore::hiScoreName[l][j], (int)(HiScore::hiScore[l][j]));
+				HiScore::hiScoreName[skill][j], (int)(HiScore::hiScore[skill][j]));
 	}
 }

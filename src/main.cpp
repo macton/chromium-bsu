@@ -26,6 +26,7 @@
 #include "MainGLUT.h"
 
 #include "Global.h"
+#include "HiScore.h"
 
 static char dataDir[256] = "../data";
 
@@ -42,7 +43,8 @@ int main(int argc, char **argv)
 	setenv("SDL_VIDEO_X11_DGAMOUSE", "0", false);
 #endif
 	
-	Global *game = Global::init();
+	Global	*game = Global::init();
+	HiScore	*hiScore = HiScore::init();
 
 	for ( i=1; i < argc; i++ )
 	{
@@ -131,11 +133,11 @@ int main(int argc, char **argv)
 #error "USE_SDL or USE_GLUT must be defined"
 #endif
 		
-	game->printHiScore();
+	hiScore->print(INT_GAME_SKILL_BASE);
 	game->toolkit->run();
 
 	game->saveConfigFile();
-	game->saveHiScoreFile();
+	hiScore->destroy();
 
 	fprintf(stderr, "done.\n");
 	fprintf(stderr, " \n");

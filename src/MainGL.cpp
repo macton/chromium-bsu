@@ -20,6 +20,7 @@
 #include "extern.h"
 #include "TexFont.h"
 #include "Global.h"
+#include "HiScore.h"
 #include "EnemyFleet.h"
 #include "HeroAmmo.h"
 #include "EnemyAmmo.h"
@@ -250,15 +251,18 @@ void MainGL::drawDeadGL()
 	//-- Draw stats
 	game->statusDisplay->drawGL(game->hero);
 	
+	int		skill = INT_GAME_SKILL_BASE;
+	float	heroScore = game->hero->getScore();
+	HiScore *hiScore = HiScore::getInstance();
 	char buffer[128];
-	if(game->checkHiScore() == 1)
+	if(hiScore->check(skill, heroScore) == 1)
 	{
-		sprintf(buffer, "new high score!\n\n%d", (int)game->hero->getScore());
+		sprintf(buffer, "new high score!\n\n%d", (int)heroScore);
 		drawTextGL(buffer, game->heroDeath, 0.15);
 	}
-	else if(game->checkHiScore() > 1)
+	else if(hiScore->check(skill, heroScore) > 1)
 	{
-		sprintf(buffer, "n o t   b a d !\nrank : %d\n\n%d", game->checkHiScore(), (int)game->hero->getScore());
+		sprintf(buffer, "n o t   b a d !\nrank : %d\n\n%d", hiScore->check(skill, heroScore), (int)heroScore);
 		drawTextGL(buffer, game->heroDeath, 0.15);	
 	}
 	else

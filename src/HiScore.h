@@ -13,6 +13,10 @@
 
 #include "define.h"
 
+/**
+ * keep track of high scores. A history of HI_SCORE_HIST scores is 
+ * retained for each skill level.
+ */
 //====================================================================
 class HiScore
 {
@@ -23,12 +27,15 @@ public:
 	static HiScore	*getInstance();
 	static void		destroy();
 	
+	double		getScore(int skill, int index);
+	const char	*getName(int skill, int index);
+	time_t		getDate(int skill, int index);
+	
 	bool		readFile();
 	bool		saveFile();
-	int			set();
-	int			check();
-	void		print();
-
+	int			set(int skill, float score);
+	int			check(int skill, float score);
+	void		print(int skill);
 	
 private:
 	void	insertScore(int level, int rank, float score);

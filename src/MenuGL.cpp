@@ -17,6 +17,7 @@
 #include "extern.h"
 #include "define.h"
 #include "Global.h"
+#include "HiScore.h"
 #include "TexFont.h"
 #include "Ground.h"
 #include "Audio.h"
@@ -192,6 +193,7 @@ void MenuGL::keyHit(MainToolkit::Key key)
 void MenuGL::drawGL()
 {
 	Global	*game = game->getInstance();
+	HiScore	*hiScore = HiScore::getInstance();
 	int		i;
 		
 	if(--textCount < 0)
@@ -306,11 +308,11 @@ void MenuGL::drawGL()
 			time_t mostRecent = 0;
 			for(i = 0; i < HI_SCORE_HIST; i++)
 			{
-				if(	game->hiScoreDate[l][i] > nowTime-1000 &&
-					game->hiScoreDate[l][i] >	mostRecent )
+				if(	hiScore->getDate(l, i) > nowTime-300 && // highlight score for 5 minutes (300)
+					hiScore->getDate(l, i) > mostRecent )
 				{
 					recentHiScore = i;
-					mostRecent = game->hiScoreDate[l][i];
+					mostRecent = hiScore->getDate(l, i);
 				}
 			}
 			for(i = 0; i < HI_SCORE_HIST; i++)
@@ -322,7 +324,7 @@ void MenuGL::drawGL()
 				else
 					glColor4f(1.0, 1.0, 1.0, 0.2+0.2*r);
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
-				sprintf(buf, "%d", (int)game->hiScore[INT_GAME_SKILL_BASE][i]);
+				sprintf(buf, "%d", (int)hiScore->getScore(INT_GAME_SKILL_BASE, i) );
 				len = strlen(buf);
 				trans = txfStringLength(game->texFont, buf, len);
 				glTranslatef( 80-trans, 0.0, 0.0);
@@ -752,6 +754,7 @@ void MenuGL::activateItem()
 //----------------------------------------------------------
 void MenuGL::incItem()
 {
+	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
 	{
@@ -761,7 +764,7 @@ void MenuGL::incItem()
 			game->gameSkillBase += 0.1;
 			if(game->gameSkillBase > 0.9) 
 				game->gameSkillBase = 0.9;
-			game->printHiScore();
+			hiScore->print(INT_GAME_SKILL_BASE);
 			game->newGame();
 			break;
 		case GameLevel:
@@ -826,6 +829,7 @@ void MenuGL::incItem()
 //----------------------------------------------------------
 void MenuGL::decItem()
 {
+	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
 	{
@@ -835,7 +839,7 @@ void MenuGL::decItem()
 			game->gameSkillBase -= 0.1;
 			if(game->gameSkillBase < 0.2) 
 				game->gameSkillBase = 0.2;
-			game->printHiScore();
+			hiScore->print(INT_GAME_SKILL_BASE);
 			game->newGame();
 			break;
 		case GameLevel:

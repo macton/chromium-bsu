@@ -7,6 +7,7 @@
  */
 #include "Global.h"
 #include "extern.h"
+#include "HiScore.h"
 
 
 TexFont	*Global::texFont	= 0;
@@ -38,48 +39,6 @@ float	Global::scrollSpeed		= -0.045;
 int		Global::gfxLevel = 2;
 float	Global::volSound = 0.9;
 float	Global::volMusic = 0.5;
-
-//double	Global::hiScore[10][HI_SCORE_HIST];
-double	Global::hiScore[10][HI_SCORE_HIST] = {
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 },
-	{ 250000.0, 200000.0, 150000.0, 100000.0, 50000.0 } 
-};
-
-/** initialized to nobody */
-char	Global::hiScoreName[10][HI_SCORE_HIST][64] = {	
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" },
-	{ "nobody",  "nobody",  "nobody",  "nobody",  "nobody" }
-};	  
-
-/** initialized to 01/01/2000 */
-time_t	Global::hiScoreDate[10][HI_SCORE_HIST]=	{ 
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 },
-	{ 946713600, 946713600, 946713600, 946713600, 946713600 }
-};
 	
 HeroAircraft	*Global::hero		= 0;
 EnemyFleet		*Global::enemyFleet	= 0;
@@ -157,13 +116,11 @@ Global::Global()
 	game_quit		= false;
 
 	readConfigFile();
-	readHiScoreFile();
 }
 
 Global::~Global()
 {
 	saveConfigFile();
-	saveHiScoreFile();
 }
 
 //----------------------------------------------------------
@@ -201,7 +158,7 @@ void Global::destroy()
 //----------------------------------------------------------
 void Global::newGame()
 {
-	setHiScore();
+	HiScore::getInstance()->set(INT_GAME_SKILL_BASE, hero->getScore());
 	gameSkill = gameSkillBase + 0.5;
 	gameSkill += (gameLevel-1)*0.05;
 	gameFrame = 0;
@@ -416,85 +373,6 @@ bool Global::saveConfigFile()
 	return retVal;
 }
 
-
-//----------------------------------------------------------
-bool Global::saveHiScoreFile()
-{
-	bool retVal = true;
-	char	configFilename[256];
-	FILE	*file;
-
-	const char *envFile = getenv("CHROMIUM_SCORE");
-	if(envFile && strlen(envFile) < 256)
-	{
-		fprintf(stderr, "CHROMIUM_SCORE=%s\n", envFile);
-		strcpy(configFilename, envFile);
-	}
-	else
-	{
-		const char *homeDir = getenv("HOME");
-		if(!homeDir)
-			homeDir = "./";
-		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
-		alterPathForPlatform(configFilename);
-	}
-	
-	file = fopen(configFilename, "w");
-	if(file)
-	{
-		fwrite(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-		fwrite(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-		fwrite(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
-		fclose(file);
-	}
-	else
-	{
-		fprintf(stderr, "WARNING: could not write score file (%s)\n", configFilename);
-		retVal = false;
-	}
-	return retVal;
-}
-
-
-//----------------------------------------------------------
-bool Global::readHiScoreFile()
-{
-	bool retVal = true;
-	char	configFilename[256];
-	FILE	*file;
-
-	const char *envFile = getenv("CHROMIUM_SCORE");
-	if(envFile && strlen(envFile) < 256)
-	{
-		fprintf(stderr, "CHROMIUM_SCORE=%s\n", envFile);
-		strcpy(configFilename, envFile);
-	}
-	else
-	{
-		const char *homeDir = getenv("HOME");
-		if(!homeDir)
-			homeDir = "./";
-		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
-		alterPathForPlatform(configFilename);
-	}
-		
-	file = fopen(configFilename, "r");
-	if(file)
-	{
-		fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-		fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-		fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
-		fclose(file);
-	}
-	else 
-	{
-		fprintf(stderr, "WARNING: could not read score file (%s)\n", configFilename);
-		retVal = false;
-	}
-		
-	return retVal;
-}
-
 //----------------------------------------------------------
 void Global::deleteTextures()
 {
@@ -639,86 +517,3 @@ void Global::generateRandom(bool r)
 //	fprintf(stdout, "\n};\n\n");
 }
 
-static void insertScore(int level, int rank, float score)
-{
-	int i;
-	i = HI_SCORE_HIST-2;
-	while(i >= rank)
-	{
-		Global::hiScore[level][i+1] = Global::hiScore[level][i];
-		strcpy(Global::hiScoreName[level][i+1], Global::hiScoreName[level][i]);
-		memcpy(&(Global::hiScoreDate[level][i+1]), &(Global::hiScoreDate[level][i]), sizeof(time_t));
-		i--;
-	}
-	Global::hiScore[level][rank] = score;
-	char *name = getenv("USER");
-	if(name)
-		strcpy(Global::hiScoreName[level][rank], name);
-	else
-		strcpy(Global::hiScoreName[level][rank], "player");
-	time(&Global::hiScoreDate[level][rank]);
-}
-
-//----------------------------------------------------------
-int Global::setHiScore()
-{
-	int retVal = 0;
-	int l = INT_GAME_SKILL_BASE;
-	if(l > 0 && l < 10)
-	{
-		readHiScoreFile();
-		int i;
-		int rank = -1;
-		float score = Global::hero->getScore();
-		for(i = HI_SCORE_HIST-1; i >= 0; i--)
-		{
-			if(score > Global::hiScore[l][i])
-				rank = i;
-		}
-		if(rank > -1)
-		{
-			insertScore(l, rank, score);
-			retVal = rank+1;
-		}
-		saveHiScoreFile();
-	}
-			
-	return retVal;
-}
-
-//----------------------------------------------------------
-int Global::checkHiScore()
-{
-	int retVal = 0;
-	int l = INT_GAME_SKILL_BASE;
-	if(l > 0 && l < 10)
-	{
-		int i;
-		int rank = -1;
-		float score = Global::hero->getScore();
-		for(i = HI_SCORE_HIST-1; i >= 0; i--)
-		{
-			if(score > Global::hiScore[l][i])
-				rank = i;
-		}
-		if(rank > -1)
-		{
-			retVal = rank+1;
-		}
-	}
-	return retVal;
-}
-
-//----------------------------------------------------------
-void Global::printHiScore()
-{
-	struct tm *tmptr; 
-	int l = INT_GAME_SKILL_BASE;
-	fprintf(stderr, "high scores:\n");
-	for(int j = 0; j < HI_SCORE_HIST; j++)
-	{
-		tmptr = localtime(&Global::hiScoreDate[l][j]);
-		fprintf(stderr, "%02d/%02d/%04d %16s %d\n", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
-				Global::hiScoreName[l][j], (int)(Global::hiScore[l][j]));
-	}
-}

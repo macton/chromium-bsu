@@ -42,8 +42,6 @@ public:
 	
 	bool		readConfigFile();
 	bool		saveConfigFile();
-	bool		readHiScoreFile();
-	bool		saveHiScoreFile();
 	
 	void		newGame();
 	void		gotoNextLevel();
@@ -58,10 +56,6 @@ public:
 	void		deleteTextures();
 	void		loadTextures();
 	
-	int			setHiScore();
-	int			checkHiScore();
-	void		printHiScore();
-
 	static char	configFileName[128];
 	
 	static MainToolkit *toolkit;
@@ -136,10 +130,6 @@ public:
 	static float	randF[256];
 	static float	randS[256];
 	static int		randIndex;
-	
-	static double	hiScore[10][HI_SCORE_HIST];
-	static char		hiScoreName[10][HI_SCORE_HIST][64];
-	static time_t	hiScoreDate[10][HI_SCORE_HIST];
 	
 	static FILE	*eventFile;
 	
