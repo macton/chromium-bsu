@@ -15,6 +15,8 @@
 #include <GL/gl.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "Global.h"
 #include "Explosions.h"
@@ -185,6 +187,8 @@ void PowerUps::addPowerUp(PowerUp *pwrUp)
 //----------------------------------------------------------
 void PowerUps::update()
 {
+	Config	*config = Config::getInstance();
+
 	PowerUp	*pwrUp;
 	PowerUp *delUp;
 	pwrUp = pwrUpRoot->next;
@@ -202,7 +206,7 @@ void PowerUps::update()
 			if(pwrUp->vel[0] < 0.01) pwrUp->vel[0] = 0.0;
 			if(pwrUp->vel[1] < 0.01) pwrUp->vel[1] = 0.0;
 		}
-		float b = game->screenBound[0]-1.0;
+		float b = config->getScreenBoundX()-1.0;
 		if(pwrUp->pos[0] < -b)
 			pwrUp->pos[0] = -b;
 		if(pwrUp->pos[0] >  b)

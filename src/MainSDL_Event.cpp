@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "Config.h"
+
 #include "Global.h"
 #include "HeroAircraft.h"
 #include "MenuGL.h"
@@ -401,14 +403,14 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 void MainSDL::grabMouse(bool status)
 {
 //	fprintf(stderr, "MainSDL::grabMouse(%d)\n", status);
-	Global *game = game->getInstance();
+	Config *config = Config::getInstance();
 	
 	mouseToggle = status;
 	if(status)
 	{
 		SDL_ShowCursor(0);
-		xMid = game->screenW/2;
-		yMid = game->screenH/2;
+		xMid = config->getScreenW()/2;
+		yMid = config->getScreenH()/2;
 		SDL_WarpMouse(xMid, yMid);
 		xLast = xMid;
 		yLast = yMid;

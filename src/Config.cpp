@@ -76,7 +76,7 @@ Config::Config()
 	screenBound[0] = 11.0;
 	screenBound[1] =  9.0;
 	zTrans		= -56.5;
-	blend_enable = true;
+	blend_enabled = true;
 	
 	audio_enabled	= true;
 	swap_stereo		= false;
@@ -85,9 +85,6 @@ Config::Config()
 	true_color		= false;
 	use_playList	= false;
 	use_cdrom		= true;
-
-	game_pause		= false;
-	game_quit		= false;
 
 	readFile();
 }
@@ -255,7 +252,12 @@ bool Config::saveFile()
 //----------------------------------------------------------
 void Config::setScreenSize(int m)
 {
-	switch(m)
+	screenSize = m;
+	if(screenSize > MAX_SCREEN_SIZE)
+		screenSize = MAX_SCREEN_SIZE;
+	if(screenSize < MIN_SCREEN_SIZE)
+		screenSize = MIN_SCREEN_SIZE;
+	switch(screenSize)
 	{
 		case 0:
 			screenW = 512;

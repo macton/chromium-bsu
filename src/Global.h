@@ -40,14 +40,9 @@ public:
 	static Global	*getInstance();
 	static void		destroy();
 	
-	bool		readConfigFile();
-	bool		saveConfigFile();
-	
 	void		newGame();
 	void		gotoNextLevel();
 	
-	void		setScreenSize(int m);
-
 	static void	generateRandom(bool r = true);
 	
 	void		createGame();
@@ -56,21 +51,7 @@ public:
 	void		deleteTextures();
 	void		loadTextures();
 	
-	static char	configFileName[128];
-	
 	static MainToolkit *toolkit;
-	
-	int 	 screenW;
-	int 	 screenH;
-	float	 screenA;
-	float	 screenFOV;
-	float	 screenNear;
-	float	 screenFar;
-	bool	 full_screen;
-	int 	 screenSize;
-	float	 screenBound[2];
-	float	 zTrans;
-	bool	 blend_enable;
 	
 	static float 	mouseSpeed;
 	static bool 	mouseActive;
@@ -90,15 +71,7 @@ public:
 	static float	speedAdj;
 	
 	static float	scrollSpeed;
-	
-	bool	 audio_enabled;
-	bool	 swap_stereo;
-	bool	 auto_speed;
-	bool	 show_fps;
-	bool	 true_color;
-	bool	 use_playList;
-	bool	 use_cdrom;
-	
+		
 	bool	 game_pause;
 	bool	 game_quit;
 	

@@ -25,6 +25,7 @@
 #include "MainSDL.h"
 #include "MainGLUT.h"
 
+#include "Config.h"
 #include "Global.h"
 #include "HiScore.h"
 
@@ -43,18 +44,19 @@ int main(int argc, char **argv)
 	setenv("SDL_VIDEO_X11_DGAMOUSE", "0", false);
 #endif
 	
-	Global	*game = Global::init();
+	Config	*config	= Config::init();
+	Global	*game	= Global::init();
 	HiScore	*hiScore = HiScore::init();
 
 	for ( i=1; i < argc; i++ )
 	{
 		if ( strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--fullscreen") == 0 )
 		{
-			game->full_screen = true;
+			config->setFullScreen(true);
 		}
 		else if ( strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--window") == 0 )
 		{
-			game->full_screen = false;
+			config->setFullScreen(false);
 		}
 		else if ( strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "--vidmode") == 0 )
 		{
@@ -67,15 +69,15 @@ int main(int argc, char **argv)
 					i++;
 				}
 			}
-			game->screenSize = vm;
+			config->setScreenSize(vm);
 		}
 		else if( strcmp(argv[i], "-na") == 0 || strcmp(argv[i], "--noaudio") == 0)
 		{
-			game->audio_enabled = false;
+			config->setAudioEnabled(false);
 		}
 		else if( strcmp(argv[i], "-nb") == 0 || strcmp(argv[i], "--noblend") == 0)
 		{
-			game->blend_enable = false;
+			config->setBlendEnabled(false);
 		}
 		else
 		{
@@ -136,8 +138,8 @@ int main(int argc, char **argv)
 	hiScore->print(INT_GAME_SKILL_BASE);
 	game->toolkit->run();
 
-	game->saveConfigFile();
 	hiScore->destroy();
+	config->destroy();
 
 	fprintf(stderr, "done.\n");
 	fprintf(stderr, " \n");

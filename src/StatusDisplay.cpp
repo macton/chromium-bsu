@@ -16,6 +16,8 @@
 #include <GL/gl.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "define.h"
 #include "extern.h"
 #include "Global.h"
@@ -127,6 +129,7 @@ void StatusDisplay::darkenGL()
 //----------------------------------------------------------
 void StatusDisplay::drawGL(HeroAircraft	*hero)
 {
+	Config	*config = Config::getInstance();
 	static	char scoreBuf[32];
 	int 	i;
 	bool 	statClrWarnAmmo = false;
@@ -162,7 +165,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
 	glPopMatrix();
 	//-- draw fps
-	if(game->show_fps)
+	if(config->getShowFPS())
 	{
 		glPushMatrix();
 			sprintf(scoreBuf, "%3.1f", game->fps);

@@ -17,6 +17,8 @@
 #include <GL/glu.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "TexFont.h"
 #include "Global.h"
@@ -51,8 +53,9 @@ MainGL::~MainGL()
 //----------------------------------------------------------
 int MainGL::initGL()
 {
+	Config *config = Config::getInstance();
 //	fprintf(stderr, "initGL()\n");
-	reshapeGL(game->screenW, game->screenH);
+	reshapeGL(config->getScreenW(), config->getScreenH());
 
 	glDisable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -63,7 +66,7 @@ int MainGL::initGL()
 //	glDisable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
-	if(game->blend_enable)
+	if(config->getBlendEnabled())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -139,13 +142,14 @@ void MainGL::drawGL()
 //----------------------------------------------------------
 void MainGL::drawGameGL()
 {
+	Config *config = Config::getInstance();
 	//-- Clear buffers
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 //	glClear( GL_COLOR_BUFFER_BIT );
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, game->zTrans);
+	glTranslatef(0.0, 0.0, config->getZTrans());
 //	glTranslatef(0.0, 5.0, -12.0);
 	
 	if(!game->game_pause)
@@ -204,6 +208,7 @@ void MainGL::drawGameGL()
 //----------------------------------------------------------
 void MainGL::drawDeadGL()
 {
+	Config *config = Config::getInstance();
 	game->heroDeath--;
 	
 	//-- Clear buffers
@@ -214,10 +219,10 @@ void MainGL::drawDeadGL()
 	if(game->heroDeath > 0)
 	{
 		float z = 1.0*game->heroDeath/DEATH_TIME;
-		glTranslatef(0.0, 0.0, game->zTrans-z*z);
+		glTranslatef(0.0, 0.0, config->getZTrans()-z*z);
 	}
 	else
-		glTranslatef(0.0, 0.0, game->zTrans);
+		glTranslatef(0.0, 0.0, config->getZTrans());
 	
 	//-- Add items to scene
 	game->itemAdd->putScreenItems();
@@ -274,6 +279,7 @@ void MainGL::drawDeadGL()
 //----------------------------------------------------------
 void MainGL::drawSuccessGL()
 {
+	Config *config = Config::getInstance();
 	game->heroSuccess--;
 	
 	if(game->heroSuccess < -500)
@@ -297,7 +303,7 @@ void MainGL::drawSuccessGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, game->zTrans);
+	glTranslatef(0.0, 0.0, config->getZTrans());
 	
 	//-- Update scene
 	game->enemyFleet->update();
@@ -396,19 +402,19 @@ void MainGL::drawTextGL(char *string, float pulse, float scale)
 	}	
 }
 
+/**
+ * incoming width and height are ignored - Config values are always used
+ */
 //----------------------------------------------------------
-void MainGL::reshapeGL(int w, int h)
+void MainGL::reshapeGL(int , int )
 {
-	game->screenW = w;
-	game->screenH = h;
-	game->screenA = (float)w/(float)h;
-	
+	Config *config = Config::getInstance();	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective( game->screenFOV, 
-					game->screenA, 
-					game->screenNear, 
-					game->screenFar);
+	gluPerspective( config->getScreenFOV(), 
+					config->getScreenA(), 
+					config->getScreenNear(), 
+					config->getScreenFar());
 	glMatrixMode(GL_MODELVIEW);
-	glViewport(0, 0, game->screenW, game->screenH);
+	glViewport(0, 0, config->getScreenW(), config->getScreenH());
 }

@@ -14,6 +14,8 @@
 #include <GL/gl.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "Global.h"
 #include "Explosions.h"
@@ -182,6 +184,7 @@ void HeroAmmo::printList(int type)
 //----------------------------------------------------------
 void HeroAmmo::updateAmmo()
 {
+	Config *config = Config::getInstance();
 	int i;
 	ActiveAmmo *thisAmmo;
 	
@@ -191,7 +194,7 @@ void HeroAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(thisAmmo->pos[1] > game->screenBound[1]) // remove ammo
+			if(thisAmmo->pos[1] > config->getScreenBoundY()) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;

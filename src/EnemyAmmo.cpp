@@ -15,6 +15,8 @@
 #include <GL/gl.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "Global.h"
 #include "Explosions.h"
@@ -182,9 +184,9 @@ void EnemyAmmo::addAmmo(int type, float pos[3], float vel[3])
 //----------------------------------------------------------
 void EnemyAmmo::updateAmmo()
 {
+	Config *config = Config::getInstance();
 	int i;
 	ActiveAmmo *thisAmmo;
-	Global	*game = game->getInstance();
 	
 	for(i = 0; i < NUM_ENEMY_AMMO_TYPES; i++)
 	{
@@ -192,10 +194,10 @@ void EnemyAmmo::updateAmmo()
 		while(thisAmmo)
 		{
 			//-- clean up ammo
-			if(	thisAmmo->pos[0] >  game->screenBound[0] ||
-				thisAmmo->pos[0] < -game->screenBound[0] ||
-				thisAmmo->pos[1] >  game->screenBound[1] ||
-				thisAmmo->pos[1] < -game->screenBound[1] ) // remove ammo
+			if(	thisAmmo->pos[0] >  config->getScreenBoundX() ||
+				thisAmmo->pos[0] < -config->getScreenBoundX() ||
+				thisAmmo->pos[1] >  config->getScreenBoundY() ||
+				thisAmmo->pos[1] < -config->getScreenBoundY() ) // remove ammo
 			{
 				ActiveAmmo *backAmmo = thisAmmo->back;
 				ActiveAmmo *nextAmmo = thisAmmo->next;

@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include "Config.h"
+
 #include "define.h"
 #include "Ammo.h"
 #include "Global.h"
@@ -24,9 +26,11 @@ EnemyAircraft::EnemyAircraft(EnemyType et, float p[3], float randFact)
 {
 	type = et;
 	
-	game = game->getInstance();
+	game = Global::getInstance();
 	
-	float xBound = game->screenBound[0]-2.0;
+	Config *config = Config::getInstance();
+	
+	float xBound = config->getScreenBoundX()-2.0;
 	if(pos[0] < -xBound)
 		pos[0] = -xBound;
 	if(pos[0] > xBound)
@@ -149,6 +153,7 @@ void EnemyAircraft::init(float *p, float randFact)
 //----------------------------------------------------------
 void EnemyAircraft::update()
 {
+	Config	*config = Config::getInstance();
 	EnemyAircraft *tmpAircraft = 0;
 	float	v[3] = { 0.0, -0.2, 0.0 };
 //	float	*hpos = target->getPos();
@@ -206,7 +211,7 @@ void EnemyAircraft::update()
 				}
 				game->enemyAmmo->addAmmo(1, p, shootVec);
 			}
-			if(pos[1] < game->screenBound[1])
+			if(pos[1] < config->getScreenBoundY())
 				shootSwap++;
 			break;
 		//------------------------------- Ray Gun
@@ -450,6 +455,7 @@ void EnemyAircraft::calcShootInterval()
 //----------------------------------------------------------
 void EnemyAircraft::move()
 {
+	Config *config = Config::getInstance();
 	float	*hpos;
 	if(target)
 		hpos = target->getPos();
@@ -499,9 +505,9 @@ void EnemyAircraft::move()
 				vel[1] *= 0.99;
 				
 			if(pos[0] < 0.0)
-				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-game->screenBound[0]+2.85));
+				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*(-config->getScreenBoundX()+2.85));
 			else
-				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( game->screenBound[0]-2.85));
+				pos[0] = game->speedAdj*(0.998*pos[0] + 0.002*( config->getScreenBoundX()-2.85));
 			switch((age/50)%8)
 			{
 				case 2:
@@ -617,8 +623,8 @@ void EnemyAircraft::move()
 			pos[1] -= game->speedAdj*0.02;
 			break;
 	}
-	if(pos[0] < -game->screenBound[0])
-		pos[0] = -game->screenBound[0];
-	if(pos[0] >  game->screenBound[0])
-		pos[0] =  game->screenBound[0];
+	if(pos[0] < -config->getScreenBoundX())
+		pos[0] = -config->getScreenBoundX();
+	if(pos[0] >  config->getScreenBoundX())
+		pos[0] =  config->getScreenBoundX();
 }

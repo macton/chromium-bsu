@@ -35,7 +35,7 @@ MainGLUT::MainGLUT(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(game->screenW, game->screenH);
+	glutInitWindowSize(config->getScreenW(), config->getScreenH());
 	glutCreateWindow("Chromium B.S.U.");
 	
 	//-- Initialize OpenGL
@@ -89,8 +89,8 @@ void MainGLUT::grabMouse(bool status)
 		glutSetCursor(GLUT_CURSOR_NONE);
 		glutMotionFunc(MainGLUT::mouseMotion);
 		glutPassiveMotionFunc(MainGLUT::mouseMotion);
-		xMid = game->screenW/2;
-		yMid = game->screenH/2;
+		xMid = config->getScreenW()/2;
+		yMid = config->getScreenH()/2;
 		glutWarpPointer(xMid, yMid);
 		xLast = xMid;
 		yLast = yMid;
@@ -106,9 +106,9 @@ void MainGLUT::grabMouse(bool status)
 //----------------------------------------------------------
 void MainGLUT::setVideoMode()
 {
-	game->setScreenSize(game->screenSize); //  set screenW & screenH for new screenSize
-	glutReshapeWindow(game->screenW, game->screenH);
-	game->full_screen = false;
+	game->setScreenSize(config->getScreenSize()); //  set screenW & screenH for new screenSize
+	glutReshapeWindow(config->getScreenW(), config->getScreenH());
+	config->setFullScreen(false);
 }
 
 //----------------------------------------------------------

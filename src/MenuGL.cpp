@@ -14,6 +14,8 @@
 #include <GL/gl.h>
 #include <GL/glpng.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "define.h"
 #include "Global.h"
@@ -192,7 +194,8 @@ void MenuGL::keyHit(MainToolkit::Key key)
 //----------------------------------------------------------
 void MenuGL::drawGL()
 {
-	Global	*game = game->getInstance();
+	Config	*config = Config::getInstance();
+	Global	*game = Global::getInstance();
 	HiScore	*hiScore = HiScore::getInstance();
 	int		i;
 		
@@ -212,7 +215,7 @@ void MenuGL::drawGL()
 
 	//-- Place camera
 	glLoadIdentity();
-	glTranslatef(0.0, 0.0, game->zTrans);
+	glTranslatef(0.0, 0.0, config->getZTrans());
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
@@ -440,7 +443,8 @@ void MenuGL::drawGL()
 //----------------------------------------------------------
 void MenuGL::drawIndicator()
 {
-	Global	*game = game->getInstance();
+	Config	*config = Config::getInstance();
+	Global	*game = Global::getInstance();
 	char	buf[32];
 	float	szx = 10.0;
 	float	szy = txtHeight;
@@ -468,8 +472,8 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case ScreenSize: 
-			level = (float)game->screenSize/(float)MAX_SCREEN_SIZE; 
-			switch(game->screenSize)
+			level = (float)config->getScreenSize()/(float)MAX_SCREEN_SIZE; 
+			switch(config->getScreenSize())
 			{
 				case 0: sprintf(buf, "512x384"); break;
 				case 1: sprintf(buf, "640x480"); break;
@@ -479,8 +483,8 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case FullScreen: 
-			level = (float)game->full_screen; 
-			if(game->full_screen) sprintf(buf, "true");
+			level = (float)config->getFullScreen(); 
+			if(config->getFullScreen()) sprintf(buf, "true");
 			else sprintf(buf, "false");
 			break;
 		case Sound: 
@@ -711,7 +715,8 @@ void MenuGL::drawTitle()
 //----------------------------------------------------------
 void MenuGL::activateItem()
 {
-	Global *game = game->getInstance();
+	Config	*config = Config::getInstance();
+	Global *game = Global::getInstance();
 	switch(curSel)
 	{
 		case NewGame:
@@ -729,7 +734,7 @@ void MenuGL::activateItem()
 		case ScreenSize:
 			break;
 		case FullScreen:
-			game->full_screen = !game->full_screen;
+			config->setFullScreen(!config->getFullScreen());
 			game->deleteTextures();
 			game->toolkit->setVideoMode();
 			game->loadTextures();
@@ -754,6 +759,7 @@ void MenuGL::activateItem()
 //----------------------------------------------------------
 void MenuGL::incItem()
 {
+	Config	*config = Config::getInstance();
 	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
@@ -785,21 +791,19 @@ void MenuGL::incItem()
 					game->gfxLevel = 2;
 			break;
 		case ScreenSize:
-			game->screenSize++;
-			if(game->screenSize > MAX_SCREEN_SIZE)
-				game->screenSize = MAX_SCREEN_SIZE;
-			else
+			config->setScreenSize(config->getScreenSize()+1);
+			game->deleteTextures();
+			game->toolkit->setVideoMode();
+			game->loadTextures();
+			break;
+		case FullScreen:
+			if(!config->getFullScreen())
 			{
+				config->setFullScreen(true);
 				game->deleteTextures();
 				game->toolkit->setVideoMode();
 				game->loadTextures();
 			}
-			break;
-		case FullScreen:
-			game->full_screen = true;
-			game->deleteTextures();
-			game->toolkit->setVideoMode();
-			game->loadTextures();
 			break;
 		case Sound:
 			game->volSound += 0.05;
@@ -829,6 +833,7 @@ void MenuGL::incItem()
 //----------------------------------------------------------
 void MenuGL::decItem()
 {
+	Config	*config = Config::getInstance();
 	HiScore *hiScore = HiScore::getInstance();
 	float	pos[3] = { 0.0, 0.0, 25.0 };
 	switch(curSel)
@@ -854,21 +859,19 @@ void MenuGL::decItem()
 				game->gfxLevel = 0;
 			break;
 		case ScreenSize:
-			game->screenSize--;
-			if(game->screenSize < 0)
-				game->screenSize = 0;
-			else
+			config->setScreenSize(config->getScreenSize()-1);
+			game->deleteTextures();
+			game->toolkit->setVideoMode();
+			game->loadTextures();
+			break;
+		case FullScreen:
+			if(config->getFullScreen())
 			{
+				config->setFullScreen(false);
 				game->deleteTextures();
 				game->toolkit->setVideoMode();
 				game->loadTextures();
 			}
-			break;
-		case FullScreen:
-			game->full_screen = false;
-			game->deleteTextures();
-			game->toolkit->setVideoMode();
-			game->loadTextures();
 			break;
 		case Sound:
 			game->volSound -= 0.05;

@@ -23,8 +23,6 @@ public:
 	
 	void		setScreenSize(int m);
 
-	static char	configFileName[128];
-	
 	int		getScreenSize()	{	return screenSize;	}
 	int		getScreenW()	{	return screenW;		}
 	int		getScreenH()	{	return screenH;		}
@@ -36,8 +34,25 @@ public:
 	float	getScreenBoundY()	{	return screenBound[1];	}
 	float	getZTrans()		{	return zTrans;	}
 	
-	bool	isFullScreen()	{	return full_screen;		}
-	bool	isBlendEnable()	{	return blend_enable;	}
+	bool	getFullScreen()		{	return	full_screen;	}
+	bool	getBlendEnabled()	{	return	blend_enabled;	}
+	bool	getAudioEnabled()	{	return	audio_enabled;	}
+	bool	getSwapStereo()		{	return  swap_stereo;	}
+	bool	getAutoSpeed()		{	return  auto_speed;	}
+	bool	getShowFPS()		{	return  show_fps;	}
+	bool	getTrueColor()		{	return  true_color;	}
+	bool	getUsePlayList()	{	return  use_playList;	}
+	bool	getUseCDROM()		{	return  use_cdrom;	}
+	
+	void	setFullScreen(bool s)	{	full_screen = s;	}
+	void	setBlendEnabled(bool s)	{	blend_enabled = s;	}
+	void	setAudioEnabled(bool s)	{	audio_enabled = s;	}
+	void	setSwapStereo(bool s)	{	swap_stereo = s;	}
+	void	setAutoSpeed(bool s)	{	auto_speed = s;		}
+	void	setShowFPS(bool s)		{	show_fps = s;		}
+	void	setTrueColor(bool s)	{	true_color = s;		}
+	void	setUsePlayList(bool s)	{	use_playList = s;	}
+	void	setUseCDROM(bool s)		{	use_cdrom = s;		}
 	
 	static float 	mouseSpeed;
 	static bool 	mouseActive;
@@ -56,17 +71,6 @@ public:
 	
 	static float	scrollSpeed;
 	
-	bool	 audio_enabled;
-	bool	 swap_stereo;
-	bool	 auto_speed;
-	bool	 show_fps;
-	bool	 true_color;
-	bool	 use_playList;
-	bool	 use_cdrom;
-	
-	bool	 game_pause;
-	bool	 game_quit;
-	
 	static float	volSound;
 	static float	volMusic;
 	
@@ -81,7 +85,15 @@ private:
 	int 	 screenSize;
 	float	 screenBound[2];
 	float	 zTrans;
-	bool	 blend_enable;
+	
+	bool	 blend_enabled;
+	bool	 audio_enabled;
+	bool	 swap_stereo;
+	bool	 auto_speed;
+	bool	 show_fps;
+	bool	 true_color;
+	bool	 use_playList;
+	bool	 use_cdrom;
 	
 private:
 	static Config	*instance;

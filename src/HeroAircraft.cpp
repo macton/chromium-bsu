@@ -282,7 +282,7 @@ void HeroAircraft::moveEvent(int x, int y)
 {
 	if(game->gameMode != game->HeroDead && !game->game_pause)
 	{
-		Global *game = game->getInstance();
+		Global *game = Global::getInstance();
 		pos[0] +=  x*game->mouseSpeed;
 		pos[1] += -y*game->mouseSpeed;
 		if		(pos[0] < bound[0][0])	pos[0] = bound[0][0];

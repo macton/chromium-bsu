@@ -17,6 +17,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "Config.h"
+
 #include "extern.h"
 #include "Global.h"
 #include "HeroAircraft.h"
@@ -28,6 +30,7 @@
 MainSDL::MainSDL(int argc, char **argv)
 	: MainToolkit(argc, argv)
 {	
+	Config	*config = Config::getInstance();
 	mouseToggle = game->mouseActive;
 	fire = 0;
 	xjoy = yjoy = xjNow = yjNow = 0;
@@ -43,7 +46,7 @@ MainSDL::MainSDL(int argc, char **argv)
 #ifdef NO_PARACHUTE
 	initOpts = initOpts|SDL_INIT_NOPARACHUTE;
 #endif
-	if(game->use_cdrom)
+	if(config->getUseCDROM())
 		initOpts = initOpts|SDL_INIT_CDROM;
 		
 	if( SDL_Init( initOpts ) < 0 ) 
@@ -95,6 +98,7 @@ MainSDL::~MainSDL()
 //----------------------------------------------------------
 bool MainSDL::run()
 {
+	Config	*config = Config::getInstance();
 	float targetAdj		= 1.0;
 	Uint32 start_time	= 0; 
 	Uint32 now_time		= 0; 
@@ -171,7 +175,7 @@ bool MainSDL::run()
 						fprintf(stdout, "init----> %3.2ffps targetAdj = %g, tmp = %g\n", game->fps, targetAdj, tmp);
 					}
 				}
-				else if( game->auto_speed && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
+				else if( config->getAutoSpeed() && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
 				{
 					//game->speedAdj = targetAdj;
 					// Everything was originally based on 50fps - attempt to adjust
@@ -249,6 +253,7 @@ bool MainSDL::checkErrors()
 //----------------------------------------------------------
 void MainSDL::setVideoMode() 
 {
+	Config *config = Config::getInstance();
 	int w;
 	int h;
 	Uint32 video_flags;
@@ -256,40 +261,15 @@ void MainSDL::setVideoMode()
 	
 	//-- Set the flags we want to use for setting the video mode
 	video_flags = SDL_OPENGL;
-	if(game->full_screen)
+	if(config->getFullScreen())
 		video_flags |= SDL_FULLSCREEN;
 	
-	switch(game->screenSize)
-	{
-		case 0:
-			w = game->screenW = 512;
-			h = game->screenH = 384;
-			break;
-		case 1:
-			w = game->screenW = 640;
-			h = game->screenH = 480;
-			break;
-		case 2:
-			w = game->screenW = 800;
-			h = game->screenH = 600;
-			break;
-		case 3:
-			w = game->screenW = 1024;
-			h = game->screenH = 768;
-			break;
-		case 4:
-			w = game->screenW = 1280;
-			h = game->screenH = 960;
-			break;
-		default:
-			w = game->screenW = 640;
-			h = game->screenH = 480;
-			break;
-	}
+	w = config->getScreenW();
+	h = config->getScreenH();
 	
 	int rs, gs, bs, ds;
 	int bpp;
-	if(game->true_color)
+	if(config->getTrueColor())
 	{
 		//-- 24 bit color
 		bpp = 24;

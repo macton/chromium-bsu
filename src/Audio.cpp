@@ -7,6 +7,7 @@
  */
 #include "Audio.h"
 
+#include "Config.h"
 #include "Global.h"
 
 #if !defined(USE_SDL) && defined(SDL_CD_STUBS)
@@ -21,6 +22,7 @@ int		SDL_CDStatus(void*)	{ return 0; }
 Audio::Audio()
 {
 	game = Global::getInstance();
+	Config	*config = Config::getInstance();
 	
     fileNames[HeroAmmo00]	= "wav/boom.wav";
 	fileNames[PowerUp]		= "wav/power.wav";
@@ -36,7 +38,7 @@ Audio::Audio()
 	musicMax = 1;
 	musicIndex = 0;
 	
-	if(game->audio_enabled == true)
+	if(config->getAudioEnabled() == true)
 	{
 		initCDROM();
 	}
@@ -102,8 +104,9 @@ static const char *trackType(int t)
 }
 void Audio::initCDROM()
 {
+	Config	*config = Config::getInstance();
 	int tmp;
-	if(game->use_cdrom)
+	if(config->getUseCDROM())
 	{
 		tmp = SDL_CDNumDrives();
 		fprintf(stderr, "%d CDROM drive(s).\n", tmp);
@@ -162,7 +165,8 @@ void Audio::initCDROM()
 //----------------------------------------------------------
 void	Audio::stopMusic()
 {
-	if(game->audio_enabled == true)
+	Config	*config = Config::getInstance();
+	if(config->getAudioEnabled() == true)
 	{
 		if(cdrom)
 			SDL_CDStop(cdrom);
@@ -175,7 +179,8 @@ void	Audio::stopMusic()
 //----------------------------------------------------------
 void	Audio::pauseGameMusic(bool status)
 {
-	if(game->audio_enabled == true)
+	Config	*config = Config::getInstance();
+	if(config->getAudioEnabled() == true)
 	{
 		if(cdrom)
 		{
@@ -199,7 +204,8 @@ void	Audio::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	Audio::setMusicMode(SoundType mode)
 {
-	if(game->audio_enabled == true)
+	Config	*config = Config::getInstance();
+	if(config->getAudioEnabled() == true)
 	{
 		int cdromStatus = 0;
 		if(cdrom)
@@ -249,7 +255,8 @@ void	Audio::setSoundVolume(float)
 //----------------------------------------------------------
 void	Audio::setMusicIndex(int index)
 {
-	if(game->audio_enabled == true)
+	Config	*config = Config::getInstance();
+	if(config->getAudioEnabled() == true)
 	{
 		bool	wasPlaying = false;
 		if(musicMax)
