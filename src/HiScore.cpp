@@ -226,18 +226,18 @@ void HiScore::insertScore(int skill, int rank, float score)
 	i = HI_SCORE_HIST-2;
 	while(i >= rank)
 	{
-		HiScore::hiScore[skill][i+1] = HiScore::hiScore[skill][i];
-		strcpy(HiScore::hiScoreName[skill][i+1], HiScore::hiScoreName[skill][i]);
-		memcpy(&(HiScore::hiScoreDate[skill][i+1]), &(HiScore::hiScoreDate[skill][i]), sizeof(time_t));
+		hiScore[skill][i+1] = hiScore[skill][i];
+		strcpy(hiScoreName[skill][i+1], hiScoreName[skill][i]);
+		memcpy(&(hiScoreDate[skill][i+1]), &(hiScoreDate[skill][i]), sizeof(time_t));
 		i--;
 	}
-	HiScore::hiScore[skill][rank] = score;
+	hiScore[skill][rank] = score;
 	char *name = getenv("USER");
 	if(name)
-		strcpy(HiScore::hiScoreName[skill][rank], name);
+		strcpy(hiScoreName[skill][rank], name);
 	else
-		strcpy(HiScore::hiScoreName[skill][rank], "player");
-	time(&HiScore::hiScoreDate[skill][rank]);
+		strcpy(hiScoreName[skill][rank], "player");
+	time(&hiScoreDate[skill][rank]);
 }
 
 /**
@@ -256,7 +256,7 @@ int HiScore::set(int skill, float score)
 		int rank = -1;
 		for(i = HI_SCORE_HIST-1; i >= 0; i--)
 		{
-			if(score > HiScore::hiScore[skill][i])
+			if(score > hiScore[skill][i])
 				rank = i;
 		}
 		if(rank > -1)
@@ -305,8 +305,8 @@ void HiScore::print(int skill)
 	fprintf(stderr, "high scores:\n");
 	for(int j = 0; j < HI_SCORE_HIST; j++)
 	{
-		tmptr = localtime(&HiScore::hiScoreDate[skill][j]);
+		tmptr = localtime(&hiScoreDate[skill][j]);
 		fprintf(stderr, "%02d/%02d/%04d %16s %d\n", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
-				HiScore::hiScoreName[skill][j], (int)(HiScore::hiScore[skill][j]));
+				hiScoreName[skill][j], (int)(hiScore[skill][j]));
 	}
 }
