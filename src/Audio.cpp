@@ -21,7 +21,6 @@ int		SDL_CDStatus(void*)	{ return 0; }
 //====================================================================
 Audio::Audio()
 {
-	game = Global::getInstance();
 	Config	*config = Config::getInstance();
 	
     fileNames[HeroAmmo00]	= "wav/boom.wav";
@@ -204,6 +203,7 @@ void	Audio::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	Audio::setMusicMode(SoundType mode)
 {
+	Global	*game = Global::getInstance();
 	Config	*config = Config::getInstance();
 	if(config->getAudioEnabled() == true)
 	{

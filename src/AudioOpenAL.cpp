@@ -364,6 +364,7 @@ void AudioOpenAL::pauseGameMusic(bool status)
 void AudioOpenAL::setMusicMode(SoundType mode)
 {
 //	fprintf(stderr, "AudioOpenAL::setMusicMode(SoundType mode)\n");
+	Global	*game = Global::getInstance();
 	Config	*config = Config::getInstance();
 	if(config->getAudioEnabled() == true)
 	{

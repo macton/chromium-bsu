@@ -78,8 +78,6 @@ protected:
 	int		musicMax;					/**< max number of user-defined songs (CD or playlist) */
 	int		musicIndex; 				/**< current track ( 0 < musicIndex < musicMax ) */
 
-protected:
-	Global	*game;
 };
 
 /**
