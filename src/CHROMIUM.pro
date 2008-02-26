@@ -39,8 +39,8 @@ isEmpty(GL_LIBS) {
 
 	
 
-INCLUDEPATH += /usr/include /usr/X11R6/include ../support/include ../support/glpng/include
-LIBDIRS		+= -L../support/glpng/lib -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
+INCLUDEPATH += /usr/include /usr/X11R6/include
+LIBDIRS		+= -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
 LIBS		+= $$LIBDIRS  -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
 
 ##-- Debug --
@@ -56,8 +56,8 @@ DEFINES 	= USE_SDL AUDIO_SDLMIXER _REENTRANT
 ## IRIX
 ##############################
 irix-n32:DEFINES		= _REENTRANT WITHOUT_AUDIO USE_GLUT
-irix-n32:INCLUDEPATH	= /u/people/mallan/include ../support/include ../support/glpng/include 
-irix-n32:LIBDIRS		= -L/u/people/mallan/lib -L/usr/X11R6/lib -L../support/glpng/lib
+irix-n32:INCLUDEPATH	= /u/people/mallan/include
+irix-n32:LIBDIRS		= -L/u/people/mallan/lib -L/usr/X11R6/lib
 irix-n32:GLUT_LIBS		= -lglpng -lglut -lGL -lGLU -lX11 -lXi -lXmu
 #irix-n32:AL_LIBS		= -lopenal -lm -ldl -lpthread
 irix-n32:AL_LIBS		= -lm -ldl -lpthread
@@ -71,7 +71,7 @@ win32-msvc:TEMPLATE		= vcapp
 #win32-msvc:DEVEL		= F:\devel
 win32-msvc:DEVEL		= G:\devel
 
-win32-msvc:INCLUDEPATH	= ..\support\include $$DEVEL\SDL\include $$DEVEL\openal\win $$DEVEL\glpng\include
+win32-msvc:INCLUDEPATH	= $$DEVEL\SDL\include $$DEVEL\openal\win $$DEVEL\glpng\include
 
 win32-msvc:GL_LIBS		= $$DEVEL\glpng\lib\glpng.lib opengl32.lib glu32.lib
 win32-msvc:AL_LIBS		= $$DEVEL\openal\win\lib\OpenAL32.lib $$DEVEL\openal\win\lib\ALut.lib 

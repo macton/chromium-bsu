@@ -16,10 +16,10 @@ CFLAGS   = -pipe -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC $(PKG_CFLAG
 CXXFLAGS = -pipe -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC $(PKG_CFLAGS) $(AL_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -w -O2 -march=i586 -mcpu=i686 -fmessage-length=0 -fPIC  -DUSE_SDL -DAUDIO_SDLMIXER -D_REENTRANT -DQT_NO_DEBUG -DQT_SHARED -DQT_TABLET_SUPPORT -DQT_THREAD_SUPPORT
 LEXFLAGS = 
 YACCFLAGS= -d
-INCPATH  = -I/usr/lib/qt3/mkspecs/default -I. -I/usr/include -I/usr/X11R6/include -I../support/include -I../support/glpng/include -I/usr/include -I$(QTDIR)/include -I/usr/include -I/usr/X11R6/include
+INCPATH  = -I/usr/lib/qt3/mkspecs/default -I. -I/usr/include -I/usr/X11R6/include -I/usr/include -I$(QTDIR)/include -I/usr/include -I/usr/X11R6/include
 LINK     = g++
 LFLAGS   = 
-LIBS     = $(SUBLIBS) -L/usr/lib/ -L$(QTDIR)/lib/ -L/usr/lib/ -L/usr/X11R6/lib/ -L../support/glpng/lib -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lqt-mt -lGLU -lGL -lXmu -lXext -lX11 -lm
+LIBS     = $(SUBLIBS) -L/usr/lib/ -L$(QTDIR)/lib/ -L/usr/lib/ -L/usr/X11R6/lib/ -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS) -lqt-mt -lGLU -lGL -lXmu -lXext -lX11 -lm
 AR       = ar cqs
 RANLIB   = 
 MOC      = $(QTDIR)/bin/moc

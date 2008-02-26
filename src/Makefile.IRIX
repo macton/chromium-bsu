@@ -11,10 +11,10 @@ CC	=	cc
 CXX	=	CC
 CFLAGS	=	-n32 -mips3 LANG:bool=ON -woff 1021,1209,1233,1314,1355,1375,1506 $(PKG_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -fullwarn -g -D_REENTRANT -DWITHOUT_AUDIO -DUSE_GLUT
 CXXFLAGS=	-n32 -mips3 LANG:bool=ON -woff 1021,1209,1233,1314,1355,1375,1506 $(PKG_CFLAGS) $(SDL_CFLAGS) $(SMPEG_CFLAGS) -fullwarn -g -D_REENTRANT -DWITHOUT_AUDIO -DUSE_GLUT
-INCPATH	=	-I/u/people/mallan/include -I../support/include -I../support/glpng/include
+INCPATH	=	-I/u/people/mallan/include
 LINK	=	CC
 LFLAGS	=	-n32
-LIBS	=	$(SUBLIBS) -L/u/people/mallan/lib -L/usr/X11R6/lib -L../support/glpng/lib -lglpng -lglut -lGL -lGLU -lX11 -lXi -lXmu -lm -ldl -lpthread
+LIBS	=	$(SUBLIBS) -L/u/people/mallan/lib -L/usr/X11R6/lib -lglpng -lglut -lGL -lGLU -lX11 -lXi -lXmu -lm -ldl -lpthread
 MOC	=	$(QTDIR)/bin/moc
 UIC	=	$(QTDIR)/bin/uic
 

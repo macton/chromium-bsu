@@ -1,21 +1,12 @@
-SUPPORT_DIRS	=	 \
-			./support/openal/ \
-			./support/glpng/src
-
 CHROMIUM_DIRS	=	\
 			./src
 
 			
-all: $(SUPPORT_DIRS) chromium
+all: chromium
 
 chromium: $(CHROMIUM_DIRS) finish
 
-support: $(SUPPORT_DIRS)
-
 $(CHROMIUM_DIRS): FORCE
-	cd $@; $(MAKE)
-
-$(SUPPORT_DIRS): FORCE
 	cd $@; $(MAKE)
 
 finish: 
@@ -28,7 +19,6 @@ finish:
 	@echo ""
 
 clean:
-	for i in $(SUPPORT_DIRS); do ( cd $$i ; $(MAKE) clean ) ; done
 	for i in $(CHROMIUM_DIRS); do ( cd $$i ; $(MAKE) clean ) ; done
 	-rm -f ./bin/*
 	-rm -f *~ core

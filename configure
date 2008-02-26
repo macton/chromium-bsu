@@ -158,8 +158,8 @@ fi
 ## set up other config.mak variables
 ######################################################################
 GL_LIBS="-lglpng -lGL -lGLU -lm"
-AL_LIBS="-L../support/openal/lib -lopenal -ldl" 
-AL_CFLAGS="-I../support/openal/linux/include -I../support/openal/include"
+AL_LIBS="-lopenal -ldl"
+AL_CFLAGS=""
 
 ## write out config.mak
 ######################################################################

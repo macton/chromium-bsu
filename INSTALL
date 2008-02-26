@@ -33,8 +33,8 @@ Install Program files
 Run the 'configure' script, then type 'make'.
 
 This will do the following:
- * configure and build OpenAL (in ./support/openal)
- * build glpng (in ./support/glpng)
+ * configure and build OpenAL
+ * build glpng
  * build Chromium B.S.U. (in ./src)
  * build the Chromium B.S.U. setup utility (in ./src-setup)
  

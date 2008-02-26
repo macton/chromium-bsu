@@ -216,7 +216,7 @@ function check_for_vorbis_libs
 		echo "" > /dev/null
 		return 1
 	else
-		VORBIS_LIBS="-L$LIBVORBISDIR $LIBVORBIS $LIBVORBISFILE"
+		VORBIS_LIBS="$LIBVORBIS $LIBVORBISFILE"
 		return 0
 	fi
 }
@@ -237,9 +237,8 @@ function print_vorbis_notes
 	print_warning "BE AWARE THAT OGG/VORBIS MAY NOT BE AUTOMATICALLY DETECTED BY OPENAL! "
 	print_warning "If the build process succeeds, Ogg/Vorbis support may still not "
 	print_warning "be available. If this is the case, you will need to go into "
-	print_warning "support/openal/linux and edit the config.h file to enable it. "
-	print_warning "After that, rebuild OpenAL, copy openal/linux/src/libopenal.a to "
-	print_warning "openal/lib, then rebuild chromium and chromium-setup. "
+	print_warning "the config.h file to enable it and then rebuild and install OpenAL. "
+	print_warning "Then build chromium and chromium-setup and you should have Vorbis support."
 	print_warning ""
 	print_warning "Please do not send me questions about how to enable Ogg/Vorbis, "
 	print_warning "you will have to figure it out yourself. Sorry. "
