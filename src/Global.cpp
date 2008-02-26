@@ -143,6 +143,7 @@ void Global::newGame()
 	explosions->clear();
 	hero->newGame();
 	hero->setLives(4);
+	game_pause = false;
 	
 //	Global::generateRandom();
 	itemAdd->loadScreenItems("");
