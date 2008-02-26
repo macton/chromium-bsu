@@ -396,6 +396,10 @@ void MainSDL::mouseButtonDown(SDL_Event *ev)
 				break;
 		}
 	}
+	else if(game->gameMode == Global::HeroDead)
+	{
+		game->menu->keyHit(MainToolkit::KeyEnter);
+	}
 	
 }
 
