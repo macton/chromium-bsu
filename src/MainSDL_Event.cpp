@@ -71,6 +71,8 @@ bool MainSDL::process(SDL_Event *event)
 		case SDL_JOYBUTTONUP:
 			joystickButtonUp(event);
 			break;
+		case SDL_QUIT:
+			return true;
 		default:
 			break;
 	}
