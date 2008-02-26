@@ -31,7 +31,8 @@
 
 #include "EnemyAircraft.h"
 
-static char dataDir[256] = "../data";
+#define DATA_DIR_SIZE 256
+static char dataDir[DATA_DIR_SIZE] = "../data";
 
 //----------------------------------------------------------
 int main(int argc, char **argv)
@@ -110,8 +111,7 @@ int main(int argc, char **argv)
 	}
 	
 #ifdef PKGDATADIR
-	strcpy(dataDir, PKGDATADIR);
-	strcat(dataDir, "/data");
+	strncpy(dataDir, PKGDATADIR, DATA_DIR_SIZE);
 #else	
 	char *chromData = getenv("CHROMIUM_DATA");
 	if(chromData)
