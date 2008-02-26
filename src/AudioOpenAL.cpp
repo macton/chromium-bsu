@@ -124,6 +124,7 @@ AudioOpenAL::AudioOpenAL()
 			audioScale[0] = 0.5;
 			audioScale[1] = 0.3;
 			audioScale[2] = 0.3;
+			alDistanceModel(AL_NONE);
 		}
 
 		if(config->swapStereo())
