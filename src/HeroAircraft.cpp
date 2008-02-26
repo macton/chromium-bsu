@@ -663,12 +663,12 @@ void HeroAircraft::checkForPowerUps(PowerUps *powerUps)
 			}
 			game->explosions->addExplo(Explosions::PowerBurst, pwrUp->pos);
 			delUp = pwrUp;
-			pwrUp = powerUps->getNext();
+			pwrUp = pwrUp->next;
 			powerUps->remove(delUp);
 		}
 		else
 		{
-			pwrUp = powerUps->getNext();
+			pwrUp = pwrUp->next;
 		}
 	}
 }
