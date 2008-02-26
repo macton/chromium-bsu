@@ -306,6 +306,8 @@ void HiScore::print(int skill)
 	for(int j = 0; j < HI_SCORE_HIST; j++)
 	{
 		tmptr = localtime(&hiScoreDate[skill][j]);
+		if (!tmptr)
+			break;
 		fprintf(stderr, "%02d/%02d/%04d %16s %d\n", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
 				hiScoreName[skill][j], (int)(hiScore[skill][j]));
 	}
