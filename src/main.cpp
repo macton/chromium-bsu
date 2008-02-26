@@ -180,6 +180,14 @@ const char* alterPathForPlatform(char* filename)
 const char* dataLoc(const char* filename, bool doCheck)
 {
 	static char buffer[256];
+	struct	stat sbuf;
+
+	if(getenv("HOME") != NULL && ((strlen(getenv("HOME"))+strlen(filename)) < 239) )
+	{
+		sprintf(buffer, "%s/.chromium-data/%s", getenv("HOME"), filename);
+		if(stat(buffer, &sbuf) == 0) return buffer;
+	}
+
 	if( (strlen(dataDir)+strlen(filename)) < 254)
 	{
         sprintf(buffer, "%s/%s", dataDir, filename);	
@@ -197,7 +205,6 @@ const char* dataLoc(const char* filename, bool doCheck)
 #ifndef _WIN32 // WIN32 users don't get error checks...
 	if(doCheck)
 	{
-		struct	stat sbuf;
 		if(stat(buffer, &sbuf) == -1) 
 		{
 			fprintf(stderr, "!! ERROR !! - ");
