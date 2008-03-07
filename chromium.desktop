@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Chromium
+Comment=Scrolling space shooter
+Comment[ro]=O navă în spațiu trebuie să împuște inamicii
+Exec=chromium
+Icon=chromium
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;
+StartupNotify=false
