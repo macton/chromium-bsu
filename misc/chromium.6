@@ -1,0 +1,101 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH chromium 6 "Aug 3 2001" 
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+chromium \- Slick Scrolling Space shooter
+.SH SYNOPSIS
+.B chromium
+[\-hfwvna] [\-\-fullscreen] [\-\-window] 
+.br 
+[\-\-vidmode <mode>]
+
+
+.SH DESCRIPTION
+This manual page documents briefly the
+.B chromium
+command.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invoke bold face and italics, 
+.\" respectively.
+\fBchromium\fP is a fast paced top down arcade style action shooter game
+you progress through the game by destroying everything that you see on
+screen. There are a variety of 'power-ups' to assist you on the way.
+.SH OPTIONS
+.B chromium
+understands the following command line options
+.TP
+.B \-h \-\-help
+lists options. 
+.TP
+.B \-f \-\-fullscreen
+runs in fullscreen mode.
+.TP
+.B \-w \-\-window
+runs in a window.
+.TP
+.B \-na \-\-noaudio
+does not initialize audio.
+.TP
+.B \-v <mode>, \-\-vidmode <mode>
+selects video mode.
+.br
+mode
+.br
+0 =  512 x  384
+.br
+1 =  640 x  480
+.br
+2 =  800 x  600
+.br
+3 = 1024 x  768
+.br
+4 = 1280 x 1024
+.TP
+.B \-nb \-\-noblend 
+disables blending. (OpenGL)
+.TP
+.B \-nt \-\-notexborder 
+do not set tex border color. (OpenGL)
+
+.SH FILES
+The following files are used by chromium.
+.TP
+.I "/usr/games/chromium"
+the chromium binary
+.TP
+.I "/usr/share/games/chromium"
+system directory containing chromium game data
+.TP
+.I "~/.chromium"
+contains various chromium user preferences.
+.TP
+.I "~/.chromium-score"
+contains the chromium user high-scores.
+.TP
+.I "~/.chromium-music"
+contains a list of music to play during the game.
+.TP
+.I "~/.chromium-data/"
+directory containing user-customized game data with the same layout and filenames as the system one.
+
+.SH SEE ALSO
+.br
+"In game procedures and flight safety"
+
+.SH AUTHOR
+This manual page was written by Peter Joseph <kneecaps@debian.org>,
+for the Debian GNU/Linux system (but may be used by others).
