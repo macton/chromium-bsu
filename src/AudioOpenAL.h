@@ -16,6 +16,7 @@
 #include <openal.h>
 #else //macintosh
 #include <AL/al.h>
+#include <AL/alut.h>
 #endif //macintosh
 
 /**
@@ -89,7 +90,7 @@ private:
 	
 	float	origCDvolume;
 	
-	void	*context_id;
+	ALCcontext	*context_id;
 	bool	initialized;
 	float	audioScale[3];
 	

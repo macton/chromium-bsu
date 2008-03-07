@@ -52,8 +52,8 @@
 	//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
 	#ifdef __linux__ 
 		#define CD_VOLUME 1
-//		#include <AL/alext.h>
-		#include <AL/alexttypes.h>
+		#include <AL/alext.h>
+//		#include <AL/alexttypes.h>
 	#endif //__linux__
 #endif //USE_SDL
 #endif
@@ -311,7 +311,7 @@ void AudioOpenAL::checkForExtensions()
 				
 	//-- check AttenuationScale extension
 	alAttenuationScale = (void (*)(ALfloat param))
-						alGetProcAddress((ALubyte *)"alAttenuationScale_LOKI");
+						alGetProcAddress("alAttenuationScale_LOKI");
 	if(alAttenuationScale == NULL) 
 		fprintf(stderr, "ATTENTION!! Could not load alAttenuationScale\n");
 	else
@@ -319,9 +319,9 @@ void AudioOpenAL::checkForExtensions()
 	
 	//-- check Audio Channel extension
 	alcGetAudioChannel = (float (*)(ALuint channel))
-						alGetProcAddress((const ALubyte *)"alcGetAudioChannel_LOKI");
+						alGetProcAddress("alcGetAudioChannel_LOKI");
 	alcSetAudioChannel = (void (*)(ALuint channel, ALfloat volume))
-						alGetProcAddress((const ALubyte *)"alcSetAudioChannel_LOKI");
+						alGetProcAddress("alcSetAudioChannel_LOKI");
 #ifdef CD_VOLUME
 	if(alcGetAudioChannel)
 		origCDvolume = alcGetAudioChannel(ALC_CHAN_CD_LOKI);
@@ -329,10 +329,10 @@ void AudioOpenAL::checkForExtensions()
 	
 	//-- check MP3 extension
 	alutLoadMP3 = (ALboolean (*)(ALuint, ALvoid *, ALint))
-		alGetProcAddress((const ALubyte *)"alutLoadMP3_LOKI");
+		alGetProcAddress("alutLoadMP3_LOKI");
 	//-- check Ogg/Vorbis extension
 	alutLoadVorbis = (ALboolean (*)(ALuint, ALvoid *, ALint))
-		alGetProcAddress((const ALubyte *)"alutLoadVorbis_LOKI");
+		alGetProcAddress("alutLoadVorbis_LOKI");
 
 #endif //_WIN32
 }
@@ -469,9 +469,10 @@ void AudioOpenAL::setMusicVolume(float vol)
 void AudioOpenAL::loadSounds()
 {
 	int i;
-	ALsizei size, freq, bits;
+	ALsizei size, freq;
 	ALenum format;
 	ALvoid *data;
+	ALboolean loop;
 
 	for(i = 0; i < NumSoundTypes; i++)
 	{
@@ -482,9 +483,9 @@ void AudioOpenAL::loadSounds()
 		else
 		{
 #ifndef _WIN32
-			alutLoadWAV(dataLoc(fileNames[i]), &data, &format, &size, &bits, &freq);
+			alutLoadWAVFile(const_cast<ALbyte*>(dataLoc(fileNames[i])), &format, &data, &size, &freq, &loop);
 			alBufferData (buffer[i], format, data, size, freq);
-			free(data);
+			alutUnloadWAV(format,data,size,freq);
 #else //_WIN32
 			char nameBuffer[256];
 			sprintf(nameBuffer, "%s", dataLoc(fileNames[i]));
@@ -844,14 +845,16 @@ bool AudioOpenAL::loadWAV(const char *filename)
 	return false;
 #else //USE_PLAYLIST
 	bool retVal;
-	ALsizei size, freq, bits;
+	ALsizei size, freq;
 	ALenum format;
 	ALvoid *data;
-	retVal = alutLoadWAV(filename, &data, &format, &size, &bits, &freq);
+	ALboolean loop;
+	alutLoadWAVFile(const_cast<ALbyte*>(filename), &format, &data, &size, &freq, &loop);
+	retVal = (alGetError() == AL_NO_ERROR);
 	if(retVal)
 	{
 		alBufferData (buffer[MusicGame], format, data, size, freq);
-		free(data);	
+		alutUnloadWAV(format,data,size,freq);
 	}
 	return retVal;
 #endif//USE_PLAYLIST
