@@ -10,6 +10,10 @@
 
 #ifdef AUDIO_SDLMIXER
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <SDL/SDL_mixer.h>
 
 #include "Audio.h"
@@ -38,6 +42,9 @@ private:
 	Mix_Chunk *sounds[NumSoundTypes];
 };
 
+#ifdef __cplusplus
+}
+#endif
 #endif // AUDIO_SDLMIXER
 
 #endif // AudioSDLMixer_h

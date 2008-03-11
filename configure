@@ -11,6 +11,9 @@ ENABLE_SDL="yes"
 ENABLE_SMPEG="yes"
 ENABLE_VORBIS="no"
 ENABLE_SETUP="yes"
+ENABLE_OPENAL="yes"
+OPENAL_FLAGS="-DOLD_OPENAL -DAUDIO_OPENAL"
+ENABLE_SDLMIXER="no"
 
 ## Where do we look for stuff?
 ###################################
@@ -62,6 +65,19 @@ else
 	SDL_LIBS="-lglut -lpthread -lXmu"
 	# can't use smpeg w/o SDL...
 	ENABLE_SMPEG="no"
+fi
+
+## Check SDL_MIXER installation
+######################################################################
+if [ $ENABLE_SDLMIXER = "yes" ]; then
+	print_message ""
+	print_message "Verify SDL_mixer install:"
+	print_message "------------------"
+	ld -lSDL_mixer && print_message "ok." || (print_message "Error: ld -lSDL_mixer returned false."; exit 1;)
+	SDL_LIBS="\`\$(SDL_CONFIG) --libs\` -lSDL_mixer"
+	SDLMIXER_FLAGS="-DAUDIO_SDLMIXER"
+	ENABLE_OPENAL="no"
+	OPENAL_FLAGS=""
 fi
 
 ## Check smpeg installation
@@ -158,8 +174,13 @@ fi
 ## set up other config.mak variables
 ######################################################################
 GL_LIBS="-lglpng -lGL -lGLU -lm"
-AL_LIBS="-lopenal -ldl"
-AL_CFLAGS=""
+if [ $ENABLE_OPENAL = "yes" ]; then
+	AL_LIBS="-lopenal -ldl"
+	AL_CFLAGS=""
+else
+	AL_LIBS=""
+	AL_CFLAGS=""
+fi;
 
 ## write out config.mak
 ######################################################################
@@ -178,6 +199,8 @@ echo "AL_LIBS      = $AL_LIBS"        >> config.mak
 echo "SDL_LIBS     = $SDL_LIBS"       >> config.mak
 echo "SMPEG_LIBS   = $SMPEG_LIBS"     >> config.mak
 echo "VORBIS_LIBS  = $VORBIS_LIBS"    >> config.mak
+echo "SDLMIXER_FLAGS = $SDLMIXER_FLAGS" >> config.mak
+echo "OPENAL_FLAGS   = $OPENAL_FLAGS"   >> config.mak
 
 
 ## done!

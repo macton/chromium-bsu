@@ -48,6 +48,18 @@ function check_command_line
 			--disable-setup )
 				ENABLE_SETUP="no"
 				;;
+			--enable-sdlmixer )
+				ENABLE_SDLMIXER="yes"
+				;;
+			--disable-sdlmixer )
+				ENABLE_SDLMIXER="no"
+				;;
+			--enable-openal )
+				ENABLE_OPENAL="yes"
+				;;
+			--disable-openal )
+				ENABLE_OPENAL="no"
+				;;
 			*)
 				print_command_line_options
 				exit 1
@@ -64,10 +76,12 @@ function print_command_line_options
 	echo "--disable-<option>    disable option"
 	echo ""
 	echo "OPTIONS:"
-	echo "sdl     enable use of SDL libarary    (default: $ENABLE_SDL)"
-	echo "smpeg   enable SMPEG for MP3 playback (default: $ENABLE_SMPEG)"
-	echo "vorbis  enable Ogg/Vorbis support     (default: $ENABLE_VORBIS)"
-	echo "setup   build chromium-setup utility  (default: $ENABLE_SETUP)"
+	echo "sdl      enable use of SDL libarary    (default: $ENABLE_SDL)"
+	echo "smpeg    enable SMPEG for MP3 playback (default: $ENABLE_SMPEG)"
+	echo "vorbis   enable Ogg/Vorbis support     (default: $ENABLE_VORBIS)"
+	echo "setup    build chromium-setup utility  (default: $ENABLE_SETUP)"
+	echo "sdlmixer Use SDL_mixer for sound       (default: $ENABLE_SDLMIXER)"
+	echo "openal   Use openal for sound          (default: $ENABLE_OPENAL)"
 	echo ""
 	echo "EXAMPLE:"
 	echo "./configure --enable-smpeg --disable-vorbis"
