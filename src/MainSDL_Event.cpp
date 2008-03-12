@@ -241,8 +241,15 @@ void MainSDL::activation(SDL_Event *event)
 }
 
 //----------------------------------------------------------
-void MainSDL::keyUp(SDL_Event *)
+void MainSDL::keyUp(SDL_Event *event)
 {
+	Global *game = Global::getInstance();
+	switch(event->key.keysym.sym)
+	{
+		case SDLK_SPACE:
+			game->hero->fireGun(false);
+			break;
+	}
 }
 
 //----------------------------------------------------------
@@ -333,9 +340,9 @@ void MainSDL::keyDownGame(SDL_Event *event)
 	    case SDLK_DOWN:
 			game->hero->moveEvent(0,  10);
 			break;
-//	    case SDLK_SPACE:
-//			game->hero->fireGun(true);
-//			break;
+	    case SDLK_SPACE:
+			game->hero->fireGun(true);
+			break;
 		default:
 			fprintf(stderr, "key '%s' pressed\n", SDL_GetKeyName(event->key.keysym.sym));
 			fprintf(stderr, "game->gameFrame = %d\n", game->gameFrame);
