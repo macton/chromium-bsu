@@ -314,6 +314,7 @@ void MainSDL::keyDownGame(SDL_Event *event)
 //			resetMouseMotion();
 //			break;
 	    case SDLK_p:
+			grabMouse(game->game_pause);
 			game->game_pause = !game->game_pause;
 			game->audio->pauseGameMusic(game->game_pause);
 			break;
