@@ -31,9 +31,6 @@
 
 #include "EnemyAircraft.h"
 
-#define DATA_DIR_SIZE 256
-static char dataDir[DATA_DIR_SIZE] = "../data";
-
 //----------------------------------------------------------
 int main(int argc, char **argv)
 {
@@ -110,29 +107,6 @@ int main(int argc, char **argv)
 		}
 	}
 	
-#ifdef PKGDATADIR
-	strncpy(dataDir, PKGDATADIR, DATA_DIR_SIZE);
-#else	
-	char *chromData = getenv("CHROMIUM_DATA");
-	if(chromData)
-		strcpy(dataDir, chromData);
-	else
-	{
-		#ifdef macintosh
-		strcpy(dataDir, "::data");	
-		#else
-		strcpy(dataDir, "../data");	
-		#endif
-		fprintf(stderr, "!!\n");
-		fprintf(stderr, "!! WARNING - CHROMIUM_DATA environment variable is not set!\n");
-		fprintf(stderr, "!!           Please read the INSTALL file and set the \n");
-		fprintf(stderr, "!!           CHROMIUM_DATA variable to the data directory.\n");
-		fprintf(stderr, "!!\n");
-		fprintf(stderr, "!! 		  (using %s)\n", dataDir);
-		fprintf(stderr, "!!\n");
-	}
-#endif
-
 	srand(time(NULL));
 	
 	game->generateRandom();
@@ -182,22 +156,35 @@ const char* dataLoc(const char* filename, bool doCheck)
 	static char buffer[256];
 	struct	stat sbuf;
 
+	if(getenv("CHROMIUM_DATA") != NULL && ((strlen(getenv("CHROMIUM_DATA"))+strlen(filename)) < 254) )
+	{
+		sprintf(buffer, "%s/%s", getenv("CHROMIUM_DATA"), filename);
+		if(stat(buffer, &sbuf) == 0) return buffer;
+	}
+
 	if(getenv("HOME") != NULL && ((strlen(getenv("HOME"))+strlen(filename)) < 239) )
 	{
 		sprintf(buffer, "%s/.chromium-data/%s", getenv("HOME"), filename);
 		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
 
-	if( (strlen(dataDir)+strlen(filename)) < 254)
+#ifdef PKGDATADIR
+	if( ((strlen(PKGDATADIR)+strlen(filename)) < 254) )
 	{
-        sprintf(buffer, "%s/%s", dataDir, filename);	
+		sprintf(buffer, "%s/%s", PKGDATADIR, filename);
+		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
-	else
+#endif
+
+#ifdef macintosh
+	#define DATADIR "::data"
+#else
+	#define DATADIR "../data"
+#endif
+
+	if( (strlen(DATADIR)+strlen(filename)) < 254)
 	{
-		fprintf(stderr, "!! ERROR !! dataLoc -- filename too long!\n");
-		fprintf(stderr, "!! dataDir  = \"%s\"\n", dataDir);
-		fprintf(stderr, "!! filename = \"%s\"\n", filename);
-		return "badFilename";
+		sprintf(buffer, "%s/%s", DATADIR, filename);
 	}
 
 	alterPathForPlatform(buffer);
