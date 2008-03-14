@@ -51,7 +51,7 @@ protected:
 private:
 	MenuSelection curSel;
 	
-	char *menuText[NumSelections];
+	const char *menuText[NumSelections];
 	
 	GLuint	listChrom;
 	GLuint	listBSU;

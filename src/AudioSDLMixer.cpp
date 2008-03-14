@@ -75,7 +75,7 @@ void	AudioSDLMixer::initSound()
  * play sound
  */
 //----------------------------------------------------------
-void	AudioSDLMixer::playSound(SoundType type, float pos[3], int)
+void	AudioSDLMixer::playSound(SoundType type, float[3], int)
 {
 	Config	*config = Config::instance();
 	if (config->audioEnabled()) 

@@ -249,6 +249,8 @@ void MainSDL::keyUp(SDL_Event *event)
 		case SDLK_SPACE:
 			game->hero->fireGun(false);
 			break;
+		default:
+			break;
 	}
 }
 

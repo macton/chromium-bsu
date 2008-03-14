@@ -57,7 +57,7 @@ typedef struct {
 	unsigned char max_height;
 } TexFont;
 
-extern char *txfErrorString(void);
+extern const char *txfErrorString(void);
 
 extern TexFont *txfLoadFont(
 			    const char *filename);
@@ -87,7 +87,7 @@ extern float txfRenderGlyph(
 
 extern GLfloat txfStringLength(
 			    TexFont * txf,
-			    char *string,
+			    const char *string,
 			    int len);
 
 extern GLfloat txfStringHeight( TexFont *txf );
@@ -97,7 +97,7 @@ extern GLfloat txfFontMaxWidth( TexFont *txf );
 
 extern float txfRenderString(
 			    TexFont * txf,
-			    char *string,
+			    const char *string,
 			    int len);
 
 extern void txfRenderFixedString(

@@ -344,7 +344,7 @@ void MainGL::drawSuccessGL()
 }
 
 //----------------------------------------------------------
-void MainGL::drawTextGL(char *string, float pulse, float scale)
+void MainGL::drawTextGL(const char *string, float pulse, float scale)
 {
 	int i, l, lines = 1;
 	float	aa, ca;

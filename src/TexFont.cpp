@@ -94,10 +94,10 @@ static TexGlyphVertexInfo *getTCVI(TexFont * txf, int c)
 	/* NOTREACHED */
 }
 
-static char *lastError;
+static const char *lastError;
 
 /*------------------------------------------------------------------*/
-char *txfErrorString(void)
+const char *txfErrorString(void)
 {
 	return lastError;
 }
@@ -534,7 +534,7 @@ float txfRenderGlyph(TexFont * txf, int c)
 }
 
 /*------------------------------------------------------------------*/
-GLfloat txfStringLength(TexFont * txf, char *string, int len)
+GLfloat txfStringLength(TexFont * txf, const char *string, int len)
 {
 	int 	i;
 	float	length = 0.0;
@@ -566,7 +566,7 @@ GLfloat txfFontMaxWidth(TexFont * txf)
 }
 
 /*------------------------------------------------------------------*/
-float txfRenderString( TexFont * txf, char *string, int len)
+float txfRenderString( TexFont * txf, const char *string, int len)
 {
 	int i;
 	float adv = 0.0f;

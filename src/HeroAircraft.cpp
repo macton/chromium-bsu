@@ -723,6 +723,7 @@ void HeroAircraft::update()
 					if(gunActive[i])
 					{
 						if(gunPause[i] < flash)
+						{
 							if(gunSwap)
 							{
 								gunFlash0[i] = (flash-pause)/flash;
@@ -733,6 +734,7 @@ void HeroAircraft::update()
 								gunFlash0[i] = 0.0;
 								gunFlash1[i] = (flash-pause)/flash;
 							}
+						}
 					}
 					else
 					{

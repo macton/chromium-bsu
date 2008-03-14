@@ -22,7 +22,7 @@ public:
 	void	drawGameGL();
 	void	drawDeadGL();
 	void	drawSuccessGL();
-	void	drawTextGL(char *string, float pulse, float scale);
+	void	drawTextGL(const char *string, float pulse, float scale);
 	void	reshapeGL( int w, int h );
 	
 	void	loadTextures();

@@ -118,7 +118,7 @@ double HiScore::getScore(int skill, int index)
 //----------------------------------------------------------
 const char *HiScore::getName(int skill, int index)
 {
-	char *retVal = "OUT_OF_RANGE";
+	const char *retVal = "OUT_OF_RANGE";
 	if(skill > 0 && skill < 10)
 		if(index >= 0 && index < HI_SCORE_HIST)
 			retVal = hiScoreName[skill][index];

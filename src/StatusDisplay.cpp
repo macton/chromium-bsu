@@ -663,7 +663,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipShipShow/300.0 );
-		char *str = "do not let -any- ships past you! each one costs you a life!";
+		const char *str = "do not let -any- ships past you! each one costs you a life!";
 		txfRenderString(game->texFont, str, strlen(str));
 		glPopMatrix();
 	}
@@ -675,7 +675,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipSuperShow/300.0 );
-		char *str = "let super shields pass by for an extra life!";
+		const char *str = "let super shields pass by for an extra life!";
 		txfRenderString(game->texFont, str, strlen(str));
 		glPopMatrix();
 	}

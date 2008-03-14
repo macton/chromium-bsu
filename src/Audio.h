@@ -72,7 +72,7 @@ protected:
 	virtual void	initSound();
 	virtual void	initCDROM();
 
-	char	*fileNames[NumSoundTypes];	/**< base filenames for sound effects */
+	const char	*fileNames[NumSoundTypes];	/**< base filenames for sound effects */
 	SDL_CD	*cdrom; 					/**< pointer to CDROM struct. Is void* if not using SDL */
 	char	musicFile[MAX_MUSIC][256];	/**< array of filenames for playlist */
 	int		musicMax;					/**< max number of user-defined songs (CD or playlist) */
