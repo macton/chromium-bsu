@@ -416,6 +416,7 @@ void	EnemyFleet::bossExplosion(EnemyAircraft *thisEnemy)
 	float scaleX,scaleY;
 	int i;
 	float ii;
+       int randval;
 	
 	for(i = 4; i > 0; i--)
 	{
@@ -423,16 +424,20 @@ void	EnemyFleet::bossExplosion(EnemyAircraft *thisEnemy)
 		b = thisEnemy->size[1]*(i*0.2);
 		p[0] = thisEnemy->pos[0]+a*FRAND;
 		p[1] = thisEnemy->pos[1]+b*FRAND;
-		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+               randval = (int)(-FRAND*8.0); 
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, randval, 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]-a*FRAND;
 		p[1] = thisEnemy->pos[1]+b*FRAND;
-		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+               randval = (int)(-FRAND*8.0); 
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, randval, 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]+a*FRAND;
 		p[1] = thisEnemy->pos[1]-b*FRAND;
-		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+               randval = (int)(-FRAND*8.0); 
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, randval, 1.5+FRAND);
 		p[0] = thisEnemy->pos[0]-a*FRAND;
 		p[1] = thisEnemy->pos[1]-b*FRAND;
-		game->explosions->addExplo(Explosions::EnemyDestroyed, p, (int)(-FRAND*8.0), 1.5+FRAND);
+               randval = (int)(-FRAND*8.0); 
+		game->explosions->addExplo(Explosions::EnemyDestroyed, p, randval, 1.5+FRAND);
 	}
 						
 	switch(thisEnemy->type)
