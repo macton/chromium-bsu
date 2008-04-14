@@ -7,7 +7,7 @@
  */
 #include "GroundSea.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <GL/glpng.h>
 
 #include "extern.h"

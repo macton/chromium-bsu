@@ -7,8 +7,8 @@
  */
 #include "EnemyFleet.h"
 
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 
 #include "compatibility.h"
 #include <GL/gl.h>

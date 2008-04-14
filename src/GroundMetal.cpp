@@ -8,7 +8,7 @@
 #include "GroundMetal.h"
 
 #include <GL/glpng.h>
-#include <math.h>
+#include <cmath>
 
 #include "extern.h"
 #include "Global.h"

@@ -8,7 +8,7 @@
 #ifndef HiScoreWidget_h
 #define HiScoreWidget_h
 
-#include <time.h>
+#include <ctime>
 
 #include <qlabel.h>
 #include <qlayout.h>

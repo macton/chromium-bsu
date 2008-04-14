@@ -7,7 +7,7 @@
  */
 #include "GroundMetalSegment.h"
 
-#include <math.h>
+#include <cmath>
 
 #include "compatibility.h"
 #include <GL/gl.h>

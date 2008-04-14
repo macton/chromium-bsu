@@ -7,7 +7,7 @@
  */
 #include "ScreenItem.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 
 int ScreenItem::itemCount = 0;

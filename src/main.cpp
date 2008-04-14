@@ -8,15 +8,15 @@
 #include "compatibility.h"
 #include <GL/gl.h>
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
 
 #ifndef _WIN32
 #include <unistd.h>
 #include <fcntl.h>
-#include <errno.h>
+#include <cerrno>
 #include <sys/stat.h>
 #endif // _WIN32
 

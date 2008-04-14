@@ -15,14 +15,14 @@
 	void	alcDestroyContext(void*) { alExit(); }
 #endif //macintosh
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstdarg>
+#include <cstring>
 
 #ifndef _WIN32
 	#include <unistd.h>
-	#include <errno.h>
+	#include <cerrno>
 	#include <fcntl.h>
 	#include <sys/stat.h>
 	#include <sys/types.h>

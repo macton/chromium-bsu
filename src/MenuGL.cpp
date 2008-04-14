@@ -7,9 +7,9 @@
  */
 #include "MenuGL.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
 
 #include "compatibility.h"
 #include <GL/gl.h>

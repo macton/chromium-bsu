@@ -8,8 +8,8 @@
 #ifndef Global_h
 #define Global_h
 
-#include <stdio.h>
-#include <time.h>
+#include <cstdio>
+#include <ctime>
 
 #include "define.h"
 #include "TexFont.h"

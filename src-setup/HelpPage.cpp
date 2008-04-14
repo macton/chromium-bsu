@@ -7,7 +7,7 @@
  */
 #include "HelpPage.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 #include <qwidget.h>
 #include <qapplication.h>

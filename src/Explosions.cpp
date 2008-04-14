@@ -7,7 +7,7 @@
  */
 #include "Explosions.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "compatibility.h"
 #include <GL/gl.h>

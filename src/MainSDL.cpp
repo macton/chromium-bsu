@@ -9,8 +9,8 @@
 
 #ifdef USE_SDL
 
-#include <stdlib.h>
-#include <math.h>
+#include <cstdlib>
+#include <cmath>
 #include <SDL/SDL.h>
 
 #include "compatibility.h"

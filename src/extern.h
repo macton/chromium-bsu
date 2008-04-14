@@ -8,7 +8,7 @@
 #ifndef extern_h
 #define extern_h
 
-#include <stdio.h>
+#include <cstdio>
 
 const char *dataLoc(const char *filename, bool doCheck = true);
 const char *alterPathForPlatform(char *filename);

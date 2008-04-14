@@ -8,8 +8,8 @@
 #ifndef HiScore_h
 #define HiScore_h
 
-#include <stdio.h>
-#include <time.h>
+#include <cstdio>
+#include <ctime>
 
 #include "define.h"
 

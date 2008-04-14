@@ -9,7 +9,7 @@
 
 #ifdef USE_GLUT
 
-#include <stdio.h>
+#include <cstdio>
 #include <unistd.h>
 
 #include <GL/glut.h>

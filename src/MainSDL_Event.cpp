@@ -9,9 +9,9 @@
 
 #ifdef USE_SDL
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 
 #include "Config.h"
 

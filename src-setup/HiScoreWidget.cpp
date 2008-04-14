@@ -1,7 +1,7 @@
 #include "HiScoreWidget.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include <qfileinfo.h>
 

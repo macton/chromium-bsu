@@ -5,12 +5,12 @@
    provided without guarantee or warrantee expressed or  implied. This
    program is -not- in the public domain. */
 #include "compatibility.h"
-#include <assert.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
+#include <cassert>
+#include <cctype>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
 #include <GL/glu.h>
 #include "TexFont.h"
 
