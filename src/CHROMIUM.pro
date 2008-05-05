@@ -38,9 +38,7 @@ isEmpty(GL_LIBS) {
 
 	
 
-INCLUDEPATH += /usr/include /usr/X11R6/include
-LIBDIRS		+= -L/usr/lib -L/usr/X11R6/lib -L/usr/local/lib
-LIBS		+= $$LIBDIRS  -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
+LIBS		+= -lSDL_mixer -lglpng $(GL_LIBS) $(AL_LIBS) $(SDL_LIBS) $(SMPEG_LIBS) $(VORBIS_LIBS)
 
 ##-- Debug --
 #CONFIG		+= warn_on debug
