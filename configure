@@ -44,8 +44,8 @@ if [ $ENABLE_SDL = "yes" ]; then
 	print_message "------------------"
 	if check_for_sdl_config; then
 		print_message "found $SDL_CONFIG"
-		SDL_LIBS="\`\$(SDL_CONFIG) --libs\`"
-		SDL_CFLAGS="\`\$(SDL_CONFIG) --cflags\` -DUSE_SDL"
+		SDL_LIBS="\$(shell \$(SDL_CONFIG) --libs)"
+		SDL_CFLAGS="\$(shell \$(SDL_CONFIG) --cflags) -DUSE_SDL"
 	else
 		print_error "ERROR - sdl-config could not be found in: $std_bin_dirs"
 		print_sdl_error
@@ -88,8 +88,8 @@ if [ $ENABLE_SMPEG = "yes" ]; then
 	print_message "--------------------"
 	if check_for_smpeg_config; then
 		print_message "  found $SMPEG_CONFIG"
-		SMPEG_LIBS="\`\$(SMPEG_CONFIG) --libs\`"
-		SMPEG_CFLAGS="\`\$(SMPEG_CONFIG) --cflags\`"
+		SMPEG_LIBS="\$(shell \$(SMPEG_CONFIG) --libs)"
+		SMPEG_CFLAGS="\$(shell \$(SMPEG_CONFIG) --cflags)"
 	else
 		print_warning "WARNING - smpeg-config could not be found in: $std_bin_dirs"
 		print_smpeg_warning
