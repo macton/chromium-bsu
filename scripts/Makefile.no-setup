@@ -7,7 +7,7 @@ all: chromium
 chromium: $(CHROMIUM_DIRS) finish
 
 $(CHROMIUM_DIRS): FORCE
-	cd $@; $(MAKE)
+	cd $@; test -f Makefile || qmake -o Makefile *.pro ; $(MAKE)
 
 finish: 
 	@echo ""
@@ -19,7 +19,7 @@ finish:
 	@echo ""
 
 clean:
-	for i in $(CHROMIUM_DIRS); do ( cd $$i ; $(MAKE) clean ) ; done
+	for i in $(CHROMIUM_DIRS); do ( cd $$i ; test -f Makefile || qmake -o Makefile *.pro ; $(MAKE) clean ) ; done
 	-rm -f ./bin/*
 	-rm -f *~ core
 	-rm -f *.bck
