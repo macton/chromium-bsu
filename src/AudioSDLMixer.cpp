@@ -43,8 +43,6 @@ AudioSDLMixer::~AudioSDLMixer()
 	{
     	for (int i = 0; i < NumSoundTypes; i++)
         	Mix_FreeChunk (sounds[i]);
-
-    	Mix_CloseAudio ();
 	}
 }
 
