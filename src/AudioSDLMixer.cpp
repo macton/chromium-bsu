@@ -11,7 +11,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include <stdarg.h>
+#include <cstdarg>
 #include <cstring>
 
 #ifndef _WIN32
