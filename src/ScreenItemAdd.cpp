@@ -33,6 +33,8 @@ ScreenItemAdd::ScreenItemAdd()
 
 ScreenItemAdd::~ScreenItemAdd()
 {
+	clear();
+	delete root;
 }
 
 //----------------------------------------------------------	
