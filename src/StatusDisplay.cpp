@@ -42,6 +42,8 @@ StatusDisplay::StatusDisplay()
 	ammoAlpha = 0.0;
 	damageAlpha = 0.0;
     shieldAlpha = 0.0;
+
+	enemyWarn = 0.0;
 		
 	tipShipShow  = 0;
 	tipSuperShow = 0;
