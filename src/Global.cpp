@@ -123,6 +123,8 @@ Global *Global::getInstance()
 //----------------------------------------------------------
 void Global::destroy()
 {
+	delete Global::toolkit;
+	Global::toolkit = 0;
 	delete Global::instance;
 	Global::instance = 0;
 }
