@@ -58,6 +58,11 @@
 #endif //USE_SDL
 #endif
 
+// Don't try to build the CD volume stuff if it isn't available
+#ifndef ALC_CHAN_CD_LOKI
+#undef CD_VOLUME
+#endif
+
 #ifdef __linux__
 #define USE_PLAYLIST 1
 #endif
