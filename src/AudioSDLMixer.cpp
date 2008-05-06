@@ -158,7 +158,7 @@ void	AudioSDLMixer::setMusicVolume(float value)
 }
 
 /**
- * set volume for music channel 
+ * set volume for sound effects channels
  */
 //----------------------------------------------------------
 void	AudioSDLMixer::setSoundVolume(float value)
