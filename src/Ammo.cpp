@@ -7,8 +7,6 @@
  */
 #include "Ammo.h"
 
-#include <cstdio>
-
 
 int ActiveAmmo::ammoCount = 0;
 
