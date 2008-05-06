@@ -91,6 +91,7 @@ PowerUps::~PowerUps()
 {
 	deleteTextures();
 	clear();
+	delete pwrUpRoot;
 }
 
 //----------------------------------------------------------
