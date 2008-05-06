@@ -10,6 +10,12 @@
 #include "Config.h"
 #include "Global.h"
 
+#include <sstream>
+#include <string>
+#include <cstdlib>
+#include <cmath>
+using namespace std;
+
 #if !defined(USE_SDL) && defined(SDL_CD_STUBS)
 void	SDL_CDPlayTracks(void*, int, int, int, int) {}
 void	SDL_CDPause(void*)	{}
@@ -237,11 +243,28 @@ void	Audio::setMusicMode(SoundType mode)
 }
 
 /**
- * NOOP
+ * set volume for music channel.
  */
 //----------------------------------------------------------
-void	Audio::setMusicVolume(float)
+void	Audio::setMusicVolume(float value)
 {
+#ifdef __linux__
+	Config	*config = Config::instance();
+	if (config->audioEnabled() && config->useCDROM())
+	{
+		// determine desired volume
+		const int MAX_CD_VOLUME = 100; // 100 percent
+		int desiredVolume = floor(MAX_CD_VOLUME * value);
+		stringstream volume;
+		volume << desiredVolume;
+
+		// set the desired volume
+		string command = "amixer set CD ";
+		command += volume.str();
+		command += "% unmute";
+		system(command.c_str());
+	}
+#endif // __linux__
 }
 
 /**

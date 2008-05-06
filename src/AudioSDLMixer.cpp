@@ -150,6 +150,7 @@ void	AudioSDLMixer::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void	AudioSDLMixer::setMusicVolume(float value)
 {
+	Audio::setMusicVolume(value);
 	Config	*config = Config::instance();
     if (config->audioEnabled())
 	{
