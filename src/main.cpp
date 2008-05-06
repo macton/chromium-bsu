@@ -124,6 +124,7 @@ int main(int argc, char **argv)
 
 	hiScore->destroy();
 	config->destroy();
+	game->destroy();
 
 	fprintf(stderr, "done.\n");
 	fprintf(stderr, " \n");
