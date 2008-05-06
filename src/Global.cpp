@@ -237,6 +237,7 @@ void Global::createGame()
 void Global::deleteGame()
 {
 //	fprintf(stderr, "begin shutdown...\n");
+	delete mainGL;
 	delete enemyFleet;
 	delete hero;
 	delete heroAmmo;
