@@ -304,10 +304,10 @@ void MenuGL::drawGL()
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
 				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
 				len = strlen(buf);
-				trans = game->ftFont->Advance(buf);
-				glTranslatef( 80-trans, 0.0, 0.0);
+				trans = 80.0 + game->ftFont->Advance("high scores") - game->ftFont->Advance(buf);
+				glTranslatef( trans, 0.0, 0.0 );
 				game->ftFont->Render(buf);
-				glTranslatef(-80, -30.0, 0.0);
+				glTranslatef( -trans, -30.0, 0.0) ;
 			}
 			glPopMatrix();
 		}
