@@ -10,7 +10,6 @@
 
 #include "compatibility.h"
 #include "GL/gl.h"
-#include "TexFont.h"
 #include "MainToolkit.h"
 
 class Global;

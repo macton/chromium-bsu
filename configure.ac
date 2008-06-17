@@ -30,11 +30,12 @@ AC_CHECK_FUNCS([atexit floor setenv sqrt strcasecmp strchr strerror strrchr])
 
 # Libraries
 
-# Need OpenGL for drawing stuff
+# Need OpenGL and GLU for drawing stuff
 AX_CHECK_GL
-
-# Need GLU for TexFont
 AX_CHECK_GLU
+
+# Need a recent version of FTGL for font rendering
+PKG_CHECK_MODULES([FTGL], [ftgl >= 2.1.3], [HAVE_FTGL=yes], [HAVE_FTGL=no])
 
 # Need SDL or GLUT for windowing
 PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
@@ -54,7 +55,11 @@ if test "x$no_gl" = xyes ; then
 fi
 
 if test "x$no_glu" = xyes ; then
-	AC_MSG_ERROR([cannot find GLU (text renderer)])
+	AC_MSG_ERROR([cannot find GLU (drawing system)])
+fi
+
+if test "x$HAVE_FTGL" != xyes ; then
+	AC_MSG_ERROR([cannot find FTGL >= 2.1.3 (text renderer)])
 fi
 
 if test "x$HAVE_SDL" = xyes ; then

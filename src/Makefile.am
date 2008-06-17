@@ -2,10 +2,10 @@ MAINTAINERCLEANFILES = Makefile.in
 
 bin_PROGRAMS = chromium
 
-chromium_CPPFLAGS = $(GL_CFLAGS) $(GLU_CFLAGS) $(GLPNG_CFLAGS) \
+chromium_CPPFLAGS = $(GL_CFLAGS) $(GLU_CFLAGS) $(FTGL_CFLAGS) $(GLPNG_CFLAGS) \
 	$(WINDOW_CFLAGS) $(AUDIO_CFLAGS)
 
-chromium_LDADD = $(GL_LIBS) $(GLU_LIBS) $(GLPNG_LIBS) \
+chromium_LDADD = $(GL_LIBS) $(GLU_LIBS) $(FTGL_LIBS) $(GLPNG_LIBS) \
 	$(WINDOW_LIBS) $(AUDIO_LIBS)
 
 chromium_SOURCES = \
@@ -86,7 +86,5 @@ chromium_SOURCES = \
 	textGeometryBSU.cpp \
 	textGeometryChromium.cpp \
 	textGeometry.h \
-	TexFont.cpp \
-	TexFont.h \
 	main.cpp \
 	main.h

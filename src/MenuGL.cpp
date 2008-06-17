@@ -21,7 +21,6 @@
 #include "define.h"
 #include "Global.h"
 #include "HiScore.h"
-#include "TexFont.h"
 #include "Ground.h"
 #include "Audio.h"
 
@@ -256,7 +255,6 @@ void MenuGL::drawGL()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		drawElectric();
 		glPopMatrix();
-		txfBindFontTexture(game->texFont);
 		glColor4f(1.0, 1.0, 1.0, 0.9);
 		float sc = 0.035;
 		for(i = 0; i < NumSelections; i++)
@@ -265,7 +263,7 @@ void MenuGL::drawGL()
 			glTranslatef(left, top+(inc*i), 10.0);
 			glRotatef(textAngle, 1.0, 0.0, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			txfRenderString(game->texFont, menuText[i], strlen(menuText[i]));
+			game->ftFont->Render(menuText[i]);
 			glPopMatrix();
 		}
 		
@@ -277,7 +275,7 @@ void MenuGL::drawGL()
 			glColor4f(1.0, 1.0, 1.0, 0.6+0.2*r);
 			glTranslatef(-18.75, -8.5, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			txfRenderString(game->texFont, "high scores", 11);
+			game->ftFont->Render("high scores");
 			glTranslatef(-100.0, -30.0, 0.0);
 			char buf[16];
 			int i,len;
@@ -306,9 +304,9 @@ void MenuGL::drawGL()
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
 				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
 				len = strlen(buf);
-				trans = txfStringLength(game->texFont, buf, len);
+				trans = game->ftFont->Advance(buf);
 				glTranslatef( 80-trans, 0.0, 0.0);
-				txfRenderString(game->texFont, buf, len);
+				game->ftFont->Render(buf);
 				glTranslatef(-80, -30.0, 0.0);
 			}
 			glPopMatrix();
@@ -335,19 +333,19 @@ void MenuGL::drawGL()
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
 			else		n = 3;
-			txfRenderString(game->texFont, "the", n);
-			glTranslatef(c-txfStringLength(game->texFont, "the", n), -38+c, 0.0);
+			game->ftFont->Render("the", n);
+			glTranslatef(c-game->ftFont->Advance("the", n), -38+c, 0.0);
 			if(c < 10)	n = (int)(c-3);
 			else		n = 7;
-			txfRenderString(game->texFont, "reptile", n);
-			glTranslatef(c-txfStringLength(game->texFont, "reptile", n), -38+c, 0.0);
+			game->ftFont->Render("reptile", n);
+			glTranslatef(c-game->ftFont->Advance("reptile", n), -38+c, 0.0);
 			if(c < 16)	n = (int)c-10;
 			else		n = 6;
-			txfRenderString(game->texFont, "labour", n);
-			glTranslatef(c-txfStringLength(game->texFont, "labour", n), -38+c, 0.0);
+			game->ftFont->Render("labour", n);
+			glTranslatef(c-game->ftFont->Advance("labour", n), -38+c, 0.0);
 			if(c < 23)	n = (int)(c-16);
 			else		n = 7;
-			txfRenderString(game->texFont, "project", n);
+			game->ftFont->Render("project", n);
 			// font height is 23
 			glPopMatrix();
 		}
@@ -365,7 +363,7 @@ void MenuGL::drawGL()
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
 			if(ti > strlen(mssgText))
 				ti = strlen(mssgText);
-			txfRenderString(game->texFont, mssgText, ti);
+			game->ftFont->Render(mssgText, ti);
 			mssgAlpha -= 0.004;
 			glColor4f(1.0, 1.0, 1.0, 1.0);
 		}
@@ -536,8 +534,7 @@ void MenuGL::drawIndicator()
 			glColor4f(1.0, 1.0, 1.0, 0.5);
 			glTranslatef(11.0, 0.0, 0.0);
 			glScalef(sc, sc, 1.0);
-			txfBindFontTexture(game->texFont);
-			txfRenderString(game->texFont, buf, strlen(buf));
+			game->ftFont->Render(buf);
 		}
 		glPopMatrix();
 		

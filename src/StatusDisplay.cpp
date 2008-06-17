@@ -22,7 +22,6 @@
 #include "extern.h"
 #include "Global.h"
 #include "Explosions.h"
-#include "TexFont.h"
 
 
 static float statPosAmmo[3] =	{-10.5,  8.00, 25.0 };
@@ -161,20 +160,18 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	glColor4f(1.0, 1.0, 1.0, 0.4);
 	glPushMatrix();
 		sprintf(scoreBuf, "%07d", (int)hero->getScore());
-		txfBindFontTexture(game->texFont);
 		glTranslatef(-9.0, -8.2, 25.0);
 		glScalef(0.025, 0.02, 1.0);
-		txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
+		game->ftFont->Render(scoreBuf);
 	glPopMatrix();
 	//-- draw fps
 	if(config->showFPS())
 	{
 		glPushMatrix();
 			sprintf(scoreBuf, "%3.1f", game->fps);
-			txfBindFontTexture(game->texFont);
 			glTranslatef(7.75, 8.0, 25.0);
 			glScalef(0.018, 0.015, 1.0);
-			txfRenderString(game->texFont, scoreBuf, strlen(scoreBuf));
+			game->ftFont->Render(scoreBuf);
 		glPopMatrix();
 	}
 	
@@ -635,16 +632,15 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		off[0] = 2.0 * sin(game->frame*0.01);
 		off[1] = 1.0 * cos(game->frame*0.011);
 		glPushMatrix();
-		txfBindFontTexture(game->texFont);
 		glTranslatef(-14.5, -3.0, 0.0);
 		glScalef(0.21, 0.21, 1.0);
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.05)) );
-		txfRenderString(game->texFont, "p a u s e d", 11);
+		game->ftFont->Render("p a u s e d");
 		glPopMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.03)) );
 		glTranslatef(off[0], off[1], 0.0);
-		txfRenderString(game->texFont, "p a u s e d", 11);
+		game->ftFont->Render("p a u s e d");
 		glPopMatrix();
 	}
 	if( game->tipShipPast == 1 && game->gameLevel == 1)
@@ -661,24 +657,22 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 	{
 		tipShipShow--;
 		glPushMatrix();
-		txfBindFontTexture(game->texFont);
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipShipShow/300.0 );
 		const char *str = "do not let -any- ships past you! each one costs you a life!";
-		txfRenderString(game->texFont, str, strlen(str));
+		game->ftFont->Render(str);
 		glPopMatrix();
 	}
 	if(	tipSuperShow > 0 )
 	{
 		tipSuperShow--;
 		glPushMatrix();
-		txfBindFontTexture(game->texFont);
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipSuperShow/300.0 );
 		const char *str = "let super shields pass by for an extra life!";
-		txfRenderString(game->texFont, str, strlen(str));
+		game->ftFont->Render(str);
 		glPopMatrix();
 	}
 }

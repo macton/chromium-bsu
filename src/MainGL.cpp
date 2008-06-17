@@ -20,7 +20,6 @@
 #include "Config.h"
 
 #include "extern.h"
-#include "TexFont.h"
 #include "Global.h"
 #include "HiScore.h"
 #include "EnemyFleet.h"
@@ -97,23 +96,21 @@ int MainGL::initGL()
 //----------------------------------------------------------
 void MainGL::loadTextures()
 {
-	GLuint	texobj;
-	game->texFont = txfLoadFont( dataLoc("fonts/space.txf") );
-	if(!game->texFont)
+	game->ftFont = new FTBufferFont("/usr/share/fonts/truetype/uralic/gothub__.ttf");
+	if(game->ftFont->Error())
 	{
+		delete game->ftFont;
 		fprintf(stderr, "\nERROR loading texture font. Check data path and try again.\n\n");
 		exit(1);
 	}
-	glGenTextures(1, &texobj);
-	txfEstablishTexture(game->texFont, texobj, GL_FALSE);
+	game->ftFont->FaceSize(24);
 }
 
 //----------------------------------------------------------
 void MainGL::deleteTextures()
 {
-	glDeleteTextures(1, &game->texFont->texobj);
-	txfUnloadFont(game->texFont);
-	game->texFont = 0;
+	delete game->ftFont;
+	game->ftFont = 0;
 }
 
 //----------------------------------------------------------
@@ -362,7 +359,7 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 		aa *= (-pulse/50.0);
 	ca = 1.0-tmp;
 
-	height = 1.5*txfStringHeight(game->texFont);
+	height = 1.5 * game->ftFont->LineHeight();
 	
 	strncpy(buffer, string, 128);
 	index[0] = buffer;
@@ -391,10 +388,9 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 
 				glPushMatrix();
 				glScalef(scale, scale*0.75, 1.0);
-				width = txfStringLength(game->texFont, index[l], strlen(index[l]));
+				width = game->ftFont->Advance(index[l]);
 				glTranslatef(-(width/2.0)-x_sin, y+y_sin, 0.0);
-				txfBindFontTexture(game->texFont);
-				txfRenderString(game->texFont, index[l], strlen(index[l]));
+				game->ftFont->Render(index[l]);
 				glPopMatrix();
 
 			}
