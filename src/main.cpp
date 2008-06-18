@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 	fprintf(stderr, "done.\n");
 	fprintf(stderr, " \n");
 	fprintf(stderr, "Download the latest version of Chromium B.S.U. at\n");
-	fprintf(stderr, "http://www.reptilelabour.com/software/chromium\n");
+	fprintf(stderr, "http://chromium-bsu.sourceforge.net/\n");
 	fprintf(stderr, " \n");
 	
 	return 0;
