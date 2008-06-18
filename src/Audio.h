@@ -8,6 +8,10 @@
 #ifndef Audio_h
 #define Audio_h
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #define NUM_EXPLO		2
 #define NUM_EXPLO_POP	6
 
