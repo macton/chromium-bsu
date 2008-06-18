@@ -1,21 +1,32 @@
 /*
  * Copyright (c) 2000 Mark B. Allan. All rights reserved.
+ * Copyright 2008 Paul Wise
  *
  * "Chromium B.S.U." is free software; you can redistribute 
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+ 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "MainGL.h"
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+#include <sys/stat.h>
 
 #include "compatibility.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glpng.h>
+
+#ifdef HAVE_FONTCONFIG
+#include <fontconfig/fontconfig.h>
+#endif
 
 #include "Config.h"
 
@@ -94,13 +105,71 @@ int MainGL::initGL()
 }
 
 //----------------------------------------------------------
+const char* MainGL::findFont()
+{
+	struct stat statbuf;
+	const char* font = NULL;
+
+	#define CHECK_FONT_PATH(path) \
+	if( !font && stat(path, &statbuf) == 0 ) \
+		font = path;
+
+	CHECK_FONT_PATH(getenv("CHROMIUM_FONT"))
+
+#ifdef FONT_PATH
+	CHECK_FONT_PATH(FONT_PATH)
+#endif
+
+#ifdef HAVE_FONTCONFIG
+	if( !font && FcInit() )
+	{
+		FcResult result;
+		FcFontSet *fs;
+		FcPattern* pat;
+		FcPattern *match;
+
+		pat = FcNameParse((FcChar8 *)"Gothic Uralic");
+		FcConfigSubstitute(0, pat, FcMatchPattern);
+
+		FcPatternDel(pat, FC_WEIGHT);
+		FcPatternAddInteger(pat, FC_WEIGHT, FC_WEIGHT_BOLD);
+
+		FcDefaultSubstitute(pat);
+		fs = FcFontSetCreate();
+		match = FcFontMatch(0, pat, &result);
+
+		if (match) FcFontSetAdd(fs, match);
+		if (pat) FcPatternDestroy(pat);
+		if(fs){
+			FcChar8* file;
+			if( FcPatternGetString (fs->fonts[0], FC_FILE, 0, &file) == FcResultMatch )
+				CHECK_FONT_PATH((const char*)file)
+			FcFontSetDestroy(fs);
+		}
+		FcFini();
+	}
+#endif
+
+	// Check a couple of common paths for Gothic Uralic/bold as a last resort
+	// Debian
+	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothub__.ttf")
+	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothu___.ttf")
+	// Mandrake
+	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHUB__.TTF")
+	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHU___.TTF")
+
+	return font;
+}
+
+//----------------------------------------------------------
 void MainGL::loadTextures()
 {
-	game->ftFont = new FTBufferFont("/usr/share/fonts/truetype/uralic/gothub__.ttf");
+	const char* font = findFont();
+	game->ftFont = new FTBufferFont(font);
 	if(game->ftFont->Error())
 	{
 		delete game->ftFont;
-		fprintf(stderr, "\nERROR loading texture font. Check data path and try again.\n\n");
+		fprintf(stderr, "\nERROR loading font\nWas looking for %s\n", font);
 		exit(1);
 	}
 	game->ftFont->FaceSize(24);

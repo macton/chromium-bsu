@@ -37,6 +37,16 @@ AX_CHECK_GLU
 # Need a recent version of FTGL for font rendering
 PKG_CHECK_MODULES([FTGL], [ftgl >= 2.1.3], [HAVE_FTGL=yes], [HAVE_FTGL=no])
 
+# Allow specifiying a hard-coded font file at build time
+AC_ARG_WITH(font-path,
+	AS_HELP_STRING([--with-font-path=file.ttf],
+	[Path to the TTF font chromium should use at runtime (bold Gothic Uralic recommended]),
+	[FONT_PATH="$withval"],
+	[FONT_PATH=""])
+
+# Need fontconfig for finding font files
+PKG_CHECK_MODULES([FONTCONFIG], [fontconfig], [HAVE_FONTCONFIG=yes], [HAVE_FONTCONFIG=no])
+
 # Need SDL or GLUT for windowing
 PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
 AX_CHECK_GLUT
@@ -60,6 +70,24 @@ fi
 
 if test "x$HAVE_FTGL" != xyes ; then
 	AC_MSG_ERROR([cannot find FTGL >= 2.1.3 (text renderer)])
+fi
+
+if test "x$FONT_PATH" != x ; then
+	FONT_CFLAGS="-DFONT_PATH=\\\"$FONT_PATH\\\""
+	AC_SUBST(FONT_CFLAGS)
+fi
+
+if test "x$HAVE_FONTCONFIG" = xyes ; then
+	AC_DEFINE(HAVE_FONTCONFIG, 1, [define to use fontconfig])
+	FONT_CFLAGS+=" $FONTCONFIG_CFLAGS"
+	AC_SUBST(FONT_CFLAGS)
+	FONT_LIBS="$FONTCONFIG_LIBS"
+	AC_SUBST(FONT_LIBS)
+	FONTCONFIG=fontconfig
+fi
+
+if  test "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
+	AC_MSG_WARN([no font path supplied and cannot find fontconfig, font searching will probably fail])
 fi
 
 if test "x$HAVE_SDL" = xyes ; then
@@ -122,6 +150,7 @@ Chromium B.S.U. ready for building!
 
   Window type: $WINDOW_TYPE
   Audio type:  $AUDIO_TYPE
+  Font path:   $FONT_PATH $FONTCONFIG
 
 Type 'make' to build.
 

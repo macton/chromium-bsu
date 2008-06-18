@@ -25,6 +25,7 @@ public:
 	void	drawTextGL(const char *string, float pulse, float scale);
 	void	reshapeGL( int w, int h );
 	
+	const char* findFont();
 	void	loadTextures();
 	void	deleteTextures();
 
