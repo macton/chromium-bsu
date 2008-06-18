@@ -33,9 +33,15 @@
 	#include <sys/types.h>
 #endif //_WIN32
 
-#include <AL/al.h>
-#include <AL/alc.h>
-#include <AL/alut.h>
+#ifdef __APPLE__
+	#include <OpenAL/al.h>
+	#include <OpenAL/alc.h>
+	#include <OpenAL/alut.h>
+#else
+	#include <AL/al.h>
+	#include <AL/alc.h>
+	#include <AL/alut.h>
+#endif
 
 #include "Config.h"
 
@@ -164,6 +170,11 @@ AudioOpenAL::~AudioOpenAL()
 
 		checkError("AudioOpenAL::~Audio()");
 
+		alDeleteSources(NUM_EXPLO_POP-1, sourceExploPop);
+		alDeleteSources(NUM_EXPLO-1, sourceExplosion);
+		alDeleteSources(NumSoundTypes, source);
+		alDeleteBuffers(NumSoundTypes, buffer);
+
 		#ifdef _WIN32
 		if(context_id)
 			alcDestroyContext((ALCcontext*)context_id);
@@ -172,6 +183,8 @@ AudioOpenAL::~AudioOpenAL()
 			alcDestroyContext(context_id);
 		#endif
 		
+		alutExit();
+
 		fprintf(stderr, "done.\n");
 	}
 }
@@ -246,11 +259,15 @@ void AudioOpenAL::initSound()
 	printExtensions(stderr,  (const char*)alGetString( AL_EXTENSIONS ));
 	fprintf(stderr, "------------------------------------------------------------\n");
 
+	alutInitWithoutContext(0, NULL);
+
 	checkForExtensions();
 	
 	alListenerfv(AL_POSITION, pos);
 	
+#if !defined(ALUT_API_MAJOR_VERSION) || ALUT_API_MAJOR_VERSION < 1
 	alGenBuffers(NumSoundTypes, buffer);
+#endif
 	alGenSources(NumSoundTypes, source);
 	
 	loadSounds();
@@ -322,6 +339,8 @@ void AudioOpenAL::checkForExtensions()
 	//-- check AttenuationScale extension
 	alAttenuationScale = (void (*)(ALfloat param))
 						alGetProcAddress("alAttenuationScale_LOKI");
+
+	alGetError(); // Don't care what the problem is
 	if(alAttenuationScale == NULL) 
 		fprintf(stderr, "ATTENTION!! Could not load alAttenuationScale\n");
 	else
@@ -492,8 +511,16 @@ void AudioOpenAL::loadSounds()
 		}
 		else
 		{
+#if defined(ALUT_API_MAJOR_VERSION) && ALUT_API_MAJOR_VERSION >= 1
+			buffer[i] = alutCreateBufferFromFile(dataLoc(fileNames[i]));
+			if( buffer[i] == AL_NONE ) checkError();
+#else
 #ifndef _WIN32
+#ifdef __APPLE__
+			alutLoadWAVFile(const_cast<ALbyte*>(dataLoc(fileNames[i])), &format, &data, &size, &freq);
+#else
 			alutLoadWAVFile(const_cast<ALbyte*>(dataLoc(fileNames[i])), &format, &data, &size, &freq, &loop);
+#endif
 			alBufferData (buffer[i], format, data, size, freq);
 			alutUnloadWAV(format,data,size,freq);
 #else //_WIN32
@@ -504,6 +531,7 @@ void AudioOpenAL::loadSounds()
 			alBufferData(buffer[i],format,data,size,freq);
 			alutUnloadWAV(format,data,size,freq);
 #endif//_WIN32
+#endif
 		}
 	}
 }
@@ -521,6 +549,11 @@ void AudioOpenAL::checkError(const char* tag)
 //	{
 //		fprintf(stderr, "ERROR!! <%s> alcGetError() = %s\n", tag, alcGetString(error) );
 //	}
+	error = alutGetError();
+	if(error != ALUT_ERROR_NO_ERROR)
+	{
+		fprintf(stderr, "ERROR!! <%s> alutGetError() = %s\n", tag, alutGetErrorString(error) );
+	}
 }
 
 /**
@@ -854,12 +887,21 @@ bool AudioOpenAL::loadWAV(const char *filename)
 	fprintf(stderr, "         PlayList support not compiled into Chromium (AudioOpenAL.cpp)\n");
 	return false;
 #else //USE_PLAYLIST
+#if defined(ALUT_API_MAJOR_VERSION) && ALUT_API_MAJOR_VERSION >= 1
+	buffer[MusicGame] = alutCreateBufferFromFile(const_cast<ALbyte*>(filename));
+	if( buffer[MusicGame] == AL_NONE ) checkError();
+	return buffer[MusicGame] != AL_NONE;
+#else
 	bool retVal;
 	ALsizei size, freq;
 	ALenum format;
 	ALvoid *data;
 	ALboolean loop;
+#ifdef __APPLE__
+	alutLoadWAVFile(const_cast<ALbyte*>(filename), &format, &data, &size, &freq);
+#else
 	alutLoadWAVFile(const_cast<ALbyte*>(filename), &format, &data, &size, &freq, &loop);
+#endif
 	retVal = (alGetError() == AL_NO_ERROR);
 	if(retVal)
 	{
@@ -867,6 +909,7 @@ bool AudioOpenAL::loadWAV(const char *filename)
 		alutUnloadWAV(format,data,size,freq);
 	}
 	return retVal;
+#endif
 #endif//USE_PLAYLIST
 }
 
