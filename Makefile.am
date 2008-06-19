@@ -5,4 +5,4 @@ EXTRA_DIST = README.vorbis README.install
 
 ACLOCAL_AMFLAGS = -I m4 --install
 
-SUBDIRS = misc src m4
+SUBDIRS = misc src m4 data

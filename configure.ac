@@ -137,6 +137,11 @@ fi
 
 AC_CONFIG_FILES([
 	Makefile
+	data/doc/Makefile
+	data/doc/images/Makefile
+	data/png/Makefile
+	data/wav/Makefile
+	data/Makefile
 	misc/Makefile
 	src/Makefile
 	m4/Makefile
