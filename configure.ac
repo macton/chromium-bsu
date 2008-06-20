@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.58])
 
-AC_INIT([Chromium B.S.U.], [0.9.12+], [http://sf.net/projects/chromium-bsu], [chromium])
+AC_INIT([Chromium B.S.U.], [0.9.12+], [http://sf.net/projects/chromium-bsu/bugs], [chromium])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_SRCDIR([src/main.cpp])
@@ -78,6 +78,7 @@ fi
 if test "x$FONT_PATH" != x ; then
 	FONT_CFLAGS="-DFONT_PATH=\\\"$FONT_PATH\\\""
 	AC_SUBST(FONT_CFLAGS)
+	FONTCONFIG=" "
 fi
 
 if test "x$HAVE_FONTCONFIG" = xyes ; then
@@ -86,7 +87,7 @@ if test "x$HAVE_FONTCONFIG" = xyes ; then
 	AC_SUBST(FONT_CFLAGS)
 	FONT_LIBS="$FONTCONFIG_LIBS"
 	AC_SUBST(FONT_LIBS)
-	FONTCONFIG=fontconfig
+	FONTCONFIG="$FONTCONFIG"fontconfig
 fi
 
 if  test "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
@@ -158,7 +159,7 @@ Chromium B.S.U. ready for building!
 
   Window type: $WINDOW_TYPE
   Audio type:  $AUDIO_TYPE
-  Font path:   $FONT_PATH $FONTCONFIG
+  Font path:   $FONT_PATH$FONTCONFIG
 
 Type 'make' to build.
 

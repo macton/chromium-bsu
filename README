@@ -1,29 +1,9 @@
 Chromium B.S.U.
 
-Please read the INSTALL file. 
+Please read the REAME.install and INSTALL files for install instructions.
 
 Chromium B.S.U. is distributed under terms of the Artistic License. See
-the LICENSE file for details.
+the COPYING file for details. The sounds are distributed under the terms
+of the MIT/Expat license. See the data/wav/license.txt file for details.
 
-Environment Variables:
-
-* CHROMIUM_SCORE - By default,  high scores are kept in the 
-                   ~/.chromium-score file. If the CHROMIUM_SCORE env
-                   var is set, Chromium will use that filename instead.
-                   (for example, if you want to compete w/ friends for
-                   high scores)
-* CHROMIUM_DATA  - directory name where data files are kept. By default, 
-                   Chromium will look for ../data.
-
---------------------------------------------------
-Chromium B.S.U. command line options
---------------------------------------------------
-   -f/--fullscreen     : run in fullscreen mode
-   -w/--window         : run in windowed mode
-   -v/--vidmode <mode> : mode 0 =  512 x  384
-                       :      1 =  640 x  480
-                       :      2 =  800 x  600
-                       :      3 = 1024 x  768
-                       :      4 = 1280 x 1024
-  -na/--noaudio        : do not initialize audio
---------------------------------------------------
+Please read the manual page, the FAQ and info pages for more information.

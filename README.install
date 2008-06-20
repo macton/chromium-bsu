@@ -1,57 +1,44 @@
 Chromium B.S.U. Installation
 ----------------------------
 
+Be sure to install the -dev or -devel packages of the prerequisites.
+
 Prerequisites
 ------------------
 
-* Hardware accelerated OpenGL/Mesa environment (GLU required)
+Graphics:        OpenGL and GLU (mesa for e.g.)
 
-	You'll need to have the OpenGL development packages installed
-	(such as mesa-devel*.rpm, etc.) 
-	
-* SDL 1.1.6 or greater. 
+Window & input:  SDL 1.1.6 or greater
+                 GLUT is an alternative
+
+Sound:           OpenAL and ALUT
+                 SDL Mixer is an alternative
+
+Image loading:   glpng
+
+Text rendering:  FTGL 2.1.3 or greater
+
+Font:            Gothic Uralic bold recommended
+                 any TrueType font is an alternative
 
 OPTIONAL
 --------
-* Qt 2.2.x - for the chromium-setup utility. This utility lets you set
-  all available options for Chromium, as well as browse for music files
-  to add to your playList.
 
-* SMPEG 0.4.2 or greater - if you want to play MP3 files for background music
+Building with fontconfig adds greater flexibility in searching for the font.
 
-* Ogg/Vorbis - if you want to play OGG files for background music
+Building with the font-path option to configure is useful for distributions:
 
+./configure --with-font-path=/usr/share/fonts/truetype/uralic/gothub__.ttf
 
-Install data files
-------------------
- Chromium B.S.U. will not work without the data files! Download and 
-untar the data files and set environment variable CHROMIUM_DATA to 
-point to that directory. 
-
-Install Program files
+Install
 ---------------------
-Run the 'configure' script, then type 'make'.
 
-This will do the following:
- * configure and build OpenAL
- * build glpng
- * build Chromium B.S.U. (in ./src)
- * build the Chromium B.S.U. setup utility (in ./src-setup)
+./configure <options> && make && sudo make install
  
- If you have Qt2 installed, make sure that your QTDIR environment variable
-is set to point to the proper directory (most distribs put Qt2 in 
-/usr/lib/qt2 or something similar). 
- If you are having problems building the setup app, just run 'configure'
-again and disable it, e.g.
-configure --disable-setup
-
 You may also want to check the FAQ:
-http://www.reptilelabour.com/software/chromium/faq.htm
 
-If you encounter any problems, I can be reached at 
-mallanmba@yahoo.com
+http://chromium-bsu.sf.net/faq.htm
 
-Cheers, 
-Mark B. Allan
+If you encounter any problems, please post a support request:
 
-
+http://sf.net/projects/chromium-bsu/support
