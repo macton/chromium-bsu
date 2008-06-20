@@ -1,10 +1,9 @@
 MAINTAINERCLEANFILES = Makefile.in
 
 bin_PROGRAMS = chromium
-bindir = $(exec_prefix)/games
 
 chromium_CPPFLAGS = $(GL_CFLAGS) $(GLU_CFLAGS) $(FTGL_CFLAGS) $(GLPNG_CFLAGS) \
-	$(WINDOW_CFLAGS) $(AUDIO_CFLAGS) $(FONT_CFLAGS)
+	$(WINDOW_CFLAGS) $(AUDIO_CFLAGS) $(FONT_CFLAGS) "-DPKGDATADIR=\"$(pkgdatadir)\""
 
 chromium_LDADD = $(GL_LIBS) $(GLU_LIBS) $(FTGL_LIBS) $(GLPNG_LIBS) \
 	$(WINDOW_LIBS) $(AUDIO_LIBS) $(FONT_LIBS)

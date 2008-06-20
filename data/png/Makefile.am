@@ -1,6 +1,6 @@
 MAINTAINERCLEANFILES = Makefile.in
 
-pngdir = $(datadir)/games/chromium/png
+pngdir = $(pkgdatadir)/png
 dist_png_DATA = \
 	check.png \
 	chrome.jpg \

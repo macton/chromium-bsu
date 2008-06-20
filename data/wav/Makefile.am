@@ -5,7 +5,7 @@ EXTRA_DIST = \
 	GAMEMUSI.MID \
 	license.txt
 
-wavdir = $(datadir)/games/chromium/wav
+wavdir = $(pkgdatadir)/wav
 dist_wav_DATA = \
 	boom.wav \
 	exploBig.wav \
