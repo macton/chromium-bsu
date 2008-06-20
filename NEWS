@@ -1,3 +1,13 @@
+Chromium 0.9.13
+ - a new release after many years of being abandoned!
+ - replaced non-free font code, sounds and music with free versions
+ - added patches accumulated in Debian, SuSE, Gentoo and the tracker
+ - depend on external libraries instead of embedding them
+ - add a manual page, freedesktop menu file and icon
+ - switch to autoconf and automake for build & install
+ - fix lots of memory leaks and other bugs
+ - compatibility with OpenAL Soft
+
 Chromium 0.9.12
  - added command line option to disable tex border color calls. A few 
    people were having trouble w/ Chromium falling back to software 
