@@ -498,10 +498,6 @@ void AudioOpenAL::setMusicVolume(float vol)
 void AudioOpenAL::loadSounds()
 {
 	int i;
-	ALsizei size, freq;
-	ALenum format;
-	ALvoid *data;
-	ALboolean loop;
 
 	for(i = 0; i < NumSoundTypes; i++)
 	{
@@ -515,6 +511,10 @@ void AudioOpenAL::loadSounds()
 			buffer[i] = alutCreateBufferFromFile(dataLoc(fileNames[i]));
 			if( buffer[i] == AL_NONE ) checkError();
 #else
+			ALsizei size, freq;
+			ALenum format;
+			ALvoid *data;
+			ALboolean loop;
 #ifndef _WIN32
 #ifdef __APPLE__
 			alutLoadWAVFile(const_cast<ALbyte*>(dataLoc(fileNames[i])), &format, &data, &size, &freq);
