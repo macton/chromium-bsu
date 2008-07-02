@@ -51,13 +51,29 @@ AC_ARG_WITH(font-path,
 PKG_CHECK_MODULES([FONTCONFIG], [fontconfig], [HAVE_FONTCONFIG=yes], [HAVE_FONTCONFIG=no])
 
 # Need SDL or GLUT for windowing
-PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
-AX_CHECK_GLUT
+AC_ARG_ENABLE(sdl, AS_HELP_STRING([--disable-sdl], [do not use SDL]))
+AC_ARG_ENABLE(glut, AS_HELP_STRING([--disable-glut], [do not use GLUT]))
+
+if test "x$enable_sdl" != xno ; then
+	PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
+fi
+
+if test "x$enable_glut" != xno ; then
+	AX_CHECK_GLUT
+fi
 
 # Need OpenAL or SDL Mixer for sound
-PKG_CHECK_MODULES([OPENAL], [openal], [HAVE_OPENAL=yes], [HAVE_OPENAL=no])
-PKG_CHECK_MODULES([FREEALUT], [freealut], [HAVE_FREEALUT=yes], [HAVE_FREEALUT=no])
-AC_CHECK_LIB([SDL_mixer], [Mix_OpenAudio], [HAVE_SDLMIXER=yes], [HAVE_SDLMIXER=no])
+AC_ARG_ENABLE(openal, AS_HELP_STRING([--disable-openal], [do not use OpenAL]))
+AC_ARG_ENABLE(sdlmixer, AS_HELP_STRING([--disable-sdlmixer], [do not use SDL_Mixer]))
+
+if test "x$enable_openal" != xno ; then
+	PKG_CHECK_MODULES([OPENAL], [openal], [HAVE_OPENAL=yes], [HAVE_OPENAL=no])
+	PKG_CHECK_MODULES([FREEALUT], [freealut], [HAVE_FREEALUT=yes], [HAVE_FREEALUT=no])
+fi
+
+if test "x$enable_sdlmixer" != xno ; then
+	AC_CHECK_LIB([SDL_mixer], [Mix_OpenAudio], [HAVE_SDLMIXER=yes], [HAVE_SDLMIXER=no])
+fi
 
 # Need glpng so we can display PNG images using OpenGL
 AC_CHECK_LIB([glpng], [pngBind],[HAVE_GLPNG=yes],[HAVE_GLPNG=no])
@@ -94,14 +110,14 @@ if  test "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
 	AC_MSG_WARN([no font path supplied and cannot find fontconfig, font searching will probably fail])
 fi
 
-if test "x$HAVE_SDL" = xyes ; then
+if test "x$HAVE_SDL" = xyes -a "x$enable_sdl" != xno ; then
 	AC_DEFINE(USE_SDL, 1, [define to use SDL])
 	WINDOW_CFLAGS="$SDL_CFLAGS"
 	AC_SUBST(WINDOW_CFLAGS)
 	WINDOW_LIBS="$SDL_LIBS"
 	AC_SUBST(WINDOW_LIBS)
 	WINDOW_TYPE=SDL
-elif test "x$no_glut" != xyes ; then
+elif test "x$no_glut" != xyes -a "x$enable_glut" != xno ; then
 	AC_DEFINE(USE_GLUT, 1, [define to use GLUT])
 	WINDOW_CFLAGS="$GLUT_CFLAGS"
 	AC_SUBST(WINDOW_CFLAGS)
@@ -112,14 +128,14 @@ else
 	AC_MSG_ERROR([cannot find SDL >= 1.1.6 or GLUT (window system)])
 fi
 
-if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes ; then
+if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes -a "x$enable_openal" != xno ; then
 	AC_DEFINE(AUDIO_OPENAL, 1, [define to use OpenAL])
 	AUDIO_CFLAGS="$OPENAL_CFLAGS $FREEALUT_CFLAGS"
 	AC_SUBST(AUDIO_CFLAGS)
 	AUDIO_LIBS="$OPENAL_LIBS $FREEALUT_LIBS"
 	AC_SUBST(AUDIO_LIBS)
 	AUDIO_TYPE=OpenAL
-elif test "x$HAVE_SDLMIXER" = xyes ; then
+elif test "x$HAVE_SDLMIXER" = xyes -a "x$enable_sdlmixer" != xno ; then
 	AC_DEFINE(AUDIO_SDLMIXER, 1, [define to use SDL Mixer])
 	AUDIO_CFLAGS=""
 	AC_SUBST(AUDIO_CFLAGS)
