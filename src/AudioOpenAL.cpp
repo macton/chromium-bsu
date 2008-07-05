@@ -182,6 +182,8 @@ AudioOpenAL::~AudioOpenAL()
 		if(context_id)
 			alcDestroyContext(context_id);
 		#endif
+
+		alcCloseDevice(dev);
 		
 		alutExit();
 
@@ -213,7 +215,6 @@ static void warning(const char *, ...)
 bool AudioOpenAL::createContext()
 {
 #ifdef _WIN32
-	ALCdevice *dev;
  	dev=alcOpenDevice((unsigned char*)"DirectSound",NULL);
 	context_id=(void*)alcCreateContext(dev,NULL);
 	alcMakeContextCurrent((ALCcontext*)context_id);

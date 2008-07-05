@@ -90,6 +90,7 @@ private:
 	
 	float	origCDvolume;
 	
+	ALCdevice	*dev;
 	ALCcontext	*context_id;
 	bool	initialized;
 	float	audioScale[3];
