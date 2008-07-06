@@ -46,6 +46,8 @@ GroundMetal::~GroundMetal()
 {
 	deleteTextures();
 	//XXX ADD clear() method
+	delete rootSeg->next->next;
+	delete rootSeg->next;
 	delete rootSeg;
 }
 

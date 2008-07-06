@@ -109,10 +109,12 @@ const char* MainGL::findFont()
 {
 	struct stat statbuf;
 	const char* font = NULL;
+	const char* path = NULL;
 
-	#define CHECK_FONT_PATH(path) \
-	if( !font && stat(path, &statbuf) == 0 ) \
-		font = path;
+	#define CHECK_FONT_PATH(filename) \
+	path = filename; \
+	if( !font && path && stat(path, &statbuf) == 0 ) \
+		font = strdup(path);
 
 	CHECK_FONT_PATH(getenv("CHROMIUM_FONT"))
 
@@ -142,8 +144,9 @@ const char* MainGL::findFont()
 		if (pat) FcPatternDestroy(pat);
 		if(fs){
 			FcChar8* file;
-			if( FcPatternGetString (fs->fonts[0], FC_FILE, 0, &file) == FcResultMatch )
+			if( FcPatternGetString (fs->fonts[0], FC_FILE, 0, &file) == FcResultMatch ){
 				CHECK_FONT_PATH((const char*)file)
+			}
 			FcFontSetDestroy(fs);
 		}
 		FcFini();
@@ -170,8 +173,10 @@ void MainGL::loadTextures()
 	{
 		delete game->ftFont;
 		fprintf(stderr, "\nERROR loading font\nWas looking for %s\n", font);
+		free((void*)font);
 		exit(1);
 	}
+	free((void*)font);
 	game->ftFont->FaceSize(24);
 }
 

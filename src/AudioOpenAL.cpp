@@ -189,6 +189,8 @@ AudioOpenAL::~AudioOpenAL()
 
 		fprintf(stderr, "done.\n");
 	}
+
+	delete soundQueue;
 }
 
 //----------------------------------------------------------
@@ -222,7 +224,6 @@ bool AudioOpenAL::createContext()
 #ifdef OLD_OPENAL
 	context_id = alcCreateContext(NULL);
 #else
-	ALCdevice *dev;
 	dev = alcOpenDevice( NULL );
 	context_id = alcCreateContext(dev, NULL);
 	alcMakeContextCurrent(context_id);
