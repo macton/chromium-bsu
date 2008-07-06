@@ -92,7 +92,7 @@ MainSDL::MainSDL(int argc, char **argv)
 	fprintf(stderr, "------------------------------------------------------------\n");
 
 	//-- Set the window manager title bar
-	SDL_WM_SetCaption( "chromium B.S.U.", "chromium B.S.U." );
+	SDL_WM_SetCaption( "Chromium B.S.U.", "Chromium B.S.U." );
 	
 	//-- Create game
 	game->createGame();
