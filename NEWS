@@ -1,3 +1,9 @@
+Chromium 0.9.13.2
+ - Allow specifying which alternative to use for SDL/GLUT & OpenAL/SDL Mixer
+ - Fix some issues with the fontconfig support
+ - Fix some memory leaks and OpenAL shutdown
+ - Fix the window title case in the SDL backend
+
 Chromium 0.9.13.1
  - Fix path issue with the FreeDesktop menu item and icon
  - Fix a compile warning with GCC and -O2
