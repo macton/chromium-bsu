@@ -8,6 +8,7 @@
 #ifndef EnemyAircraft_h
 #define EnemyAircraft_h
 
+#include "compatibility.h"
 #include <GL/gl.h>
 
 #include "ScreenItem.h"
