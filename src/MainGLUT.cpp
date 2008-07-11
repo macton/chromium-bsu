@@ -5,6 +5,10 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "MainGLUT.h"
 
 #ifdef USE_GLUT
