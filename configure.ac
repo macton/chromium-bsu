@@ -9,9 +9,6 @@ AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AM_CONFIG_HEADER([config.h])
 
-AC_SUBST([bindir], ['${exec_prefix}/games'])
-AC_SUBST([datadir], ['${datarootdir}/games'])
-
 # Programs
 AC_PROG_CXX
 
