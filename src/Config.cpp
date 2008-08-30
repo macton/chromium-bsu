@@ -59,7 +59,7 @@ Config::Config()
 	m_auto_speed	= false;
 	m_true_color	= false;
 	m_use_playList	= false;
-	m_use_cdrom		= true;
+	m_use_cdrom		= false;
 	
 	m_cdromDevice	= 0;
 	m_cdromCount	= 1;
