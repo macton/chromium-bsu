@@ -83,10 +83,120 @@ directory containing user-customized game data with the same layout and filename
 .TP
 Chromium will also look in a system directory for data.
 .SH CONFIGURATION
-use_cdrom defaults to on
+The configuration file is a plain text file. Each line contains a key,
+a single-space separator and then a numeric value (integer or floating point).
+The following keys are recognised by chromium.
+.TP
+.B use_playList
+Enable/disable playlist support. This causes chromium to open the
+~/.chromium-music file and play the files listed there.
+Disabled by default.
+Only works when using OpenAL.
+.TP
+.B use_cdrom
+Enable/disable CDROM support. This causes chromium to attempt to play any audio
+CD that might be available. This is disabled by default because the constant
+spinning up of the CD can be annoying and because CDs are less popular than
+MP3/OGG these days. Only works when compiled with SDL support.
+.TP
+.B full_screen
+Enable/disable full-screen mode. This causes chromium to fill the screen
+instead of just using a window. Disabled by default. Only works when using
+SDL support.
+.TP
+.B true_color
+Enable/disable 24-bit color. When disabled it uses 16-bit color. Disabled by
+default. Only works when using SDL support.
+.TP
+.B swap_stereo
+Enable/disable swapping sound orientation. Disabled by default. Only works when
+using OpenAL.
+.TP
+.B auto_speed
+Use an alternate speed adjustment algorithm in certain situations. Disabled by
+default. Only works when using SDL support.
+.TP
+.B show_fps
+Print the frames per second at the top right when in a game. Defaults to
+enabled.
+.TP
+.B screenSize
+Selects the screen or window size. Defaults to 800x600.
+.br
+0 =  512 x  384
+.br
+1 =  640 x  480
+.br
+2 =  800 x  600
+.br
+3 = 1024 x  768
+.br
+4 = 1280 x 1024
+.TP
+.B gfxLevel
+Selects the desired amount of graphical effects. Defaults to full effects.
+.br
+0 = minimal
+.br
+1 = medium
+.br
+2 = full
+.TP
+.B gameSkillBase
+Selects the desired skill level. Defaults to normal.
+.br
+0.2 = fish in a barrel
+.br
+0.3 = whimp
+.br
+0.4 = easy
+.br
+0.5 = normal
+.br
+0.6 = experienced
+.br
+0.7 = fun
+.br
+0.8 = insane
+.br
+0.9 = impossible
+.TP
+.B mouseSpeed
+Speed that the mouse moves the ship around. The value shown in the menu is
+1000 times the value in the configuration. Defaults to 0.03.
+.TP
+.B maxLevel
+The maximum level that may be attempted. To attempt the next level you must
+first complete the maximum level. Defaults to 1.
+.TP
+.B volSound
+Sets the volume of the sound effects. The value shown in the menu is 10 times
+the value in the configuration. Ranges from 0.0 to 1.0 and defaults to 0.9.
+.TP
+.B volMusic
+Sets the volume of the sound effects. The value shown in the menu is 10 times
+the value in the configuration. Ranges from 0.0 to 1.0 and defaults to 0.5.
+.TP
+.B viewGamma
+Sets the gamma used when loading the PNG images used for sprites. Defaults to
+1.1.
+.TP
+.B audioType
+Sets which audio backend to use. The desired backend must be compiled in for
+it to work, otherwise the other backend will be used. Defaults to OpenAL.
+.br
+0 = OpenAL
+.br
+1 = SDL Mixer
+.TP
+.B cdromCount
+A cache of number of CDROM devices present, not used.
+.TP
+.B cdromDevice
+The number of the CDROM device to use when use_cdrom is enabled. Zero-based.
+Defaults to first device (0).
 .SH SEE ALSO
 .br
 "In game procedures and flight safety"
 .SH AUTHOR
-This manual page was written by Peter Joseph <kneecaps@debian.org> and others,
-for the Debian GNU/Linux system.
+This manual page was written by Peter Joseph, Paul Wise and others.
