@@ -28,6 +28,12 @@ AC_FUNC_STAT
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS([atexit floor setenv sqrt strcasecmp strchr strerror strrchr])
 
+# Enable some special macintosh path handling
+AC_ARG_WITH(macintosh,
+	AS_HELP_STRING([--with-macintosh],[Enable some special macintosh path handling]),
+	AC_DEFINE(macintosh, 1, [define to enable some special macintosh path handling]),
+	[])
+
 # Libraries
 
 # Need OpenGL and GLU for drawing stuff
@@ -132,6 +138,16 @@ if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes -a "x$enable_openal" 
 	AUDIO_LIBS="$OPENAL_LIBS $FREEALUT_LIBS"
 	AC_SUBST(AUDIO_LIBS)
 	AUDIO_TYPE=OpenAL
+
+	# Need to check for MacOS X OpenAL differences
+	ac_save_CPPFLAGS="$CPPFLAGS"
+	ac_save_CFLAGS="$CFLAGS"
+	CPPFLAGS="${CPPFLAGS} ${OPENAL_CFLAGS} ${FREEALUT_CFLAGS}"
+	CFLAGS="${CFLAGS} ${OPENAL_CFLAGS} ${FREEALUT_CFLAGS}"
+	AC_CHECK_HEADERS(OpenAL/al.h OpenAL/alc.h ALUT/alut.h)
+	AC_CHECK_HEADERS(AL/al.h AL/alc.h AL/alut.h)
+	CPPFLAGS="${ac_save_CPPFLAGS}"
+	CFLAGS="${ac_save_CFLAGS}"
 elif test "x$HAVE_SDLMIXER" = xyes -a "x$enable_sdlmixer" != xno ; then
 	AC_DEFINE(AUDIO_SDLMIXER, 1, [define to use SDL Mixer])
 	AUDIO_CFLAGS=""

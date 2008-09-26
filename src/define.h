@@ -8,6 +8,10 @@
 #ifndef define_h
 #define define_h
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 //#define SRAND (2.0*(0.5-(rand()/(double)RAND_MAX)))
 //#define FRAND (rand()/(double)RAND_MAX)
 //#define IRAND (rand())

@@ -10,9 +10,19 @@
 #include <cstdio>
 #include <cmath>
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "compatibility.h"
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <OpenGL/gl.h>
+#include <glpng/glpng.h>
+#else
 #include <GL/gl.h>
 #include <GL/glpng.h>
+#endif
 
 #include "extern.h"
 #include "Ammo.h"

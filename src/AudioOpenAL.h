@@ -8,16 +8,25 @@
 #ifndef AudioOpenAL_h 
 #define AudioOpenAL_h
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #ifdef AUDIO_OPENAL
 
 #include "Audio.h"
 
-#ifdef macintosh
-#include <openal.h>
-#else //macintosh
+#ifdef HAVE_OPENAL_AL_H
+#include <OpenAL/al.h>
+#elif defined(HAVE_AL_AL_H)
 #include <AL/al.h>
+#endif
+
+#ifdef HAVE_ALUT_ALUT_H
+#include <ALUT/alut.h>
+#elif defined(HAVE_AL_ALUT_H)
 #include <AL/alut.h>
-#endif //macintosh
+#endif
 
 /**
  * Use OpenAL for sound effects (positional audio) as well as music

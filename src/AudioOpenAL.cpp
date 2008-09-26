@@ -33,14 +33,22 @@
 	#include <sys/types.h>
 #endif //_WIN32
 
-#ifdef __APPLE__
-	#include <OpenAL/al.h>
-	#include <OpenAL/alc.h>
-	#include <OpenAL/alut.h>
-#else
-	#include <AL/al.h>
-	#include <AL/alc.h>
-	#include <AL/alut.h>
+#ifdef HAVE_OPENAL_AL_H
+#include <OpenAL/al.h>
+#elif defined(HAVE_AL_AL_H)
+#include <AL/al.h>
+#endif
+
+#ifdef HAVE_OPENAL_ALC_H
+#include <OpenAL/alc.h>
+#elif defined(HAVE_AL_ALC_H)
+#include <AL/alc.h>
+#endif
+
+#ifdef HAVE_ALUT_ALUT_H
+#include <ALUT/alut.h>
+#elif defined(HAVE_AL_ALUT_H)
+#include <AL/alut.h>
 #endif
 
 #include "Config.h"

@@ -5,8 +5,18 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "compatibility.h"
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
+#endif
 
 // one of these days I'll get around to stripifying this data...
 //========================================================================================

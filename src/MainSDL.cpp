@@ -19,8 +19,14 @@
 #include <SDL/SDL.h>
 
 #include "compatibility.h"
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
 #include <GL/gl.h>
 #include <GL/glu.h>
+#endif
 
 #include "Config.h"
 #include "Global.h"

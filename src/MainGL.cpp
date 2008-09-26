@@ -20,9 +20,16 @@
 #include <sys/stat.h>
 
 #include "compatibility.h"
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <glpng/glpng.h>
+#else
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glpng.h>
+#endif
 
 #ifdef HAVE_FONTCONFIG
 #include <fontconfig/fontconfig.h>

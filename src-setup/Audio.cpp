@@ -5,6 +5,11 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "Audio.h"
 
 #include <cstdio>
@@ -19,9 +24,23 @@
 #include <sys/types.h>
 #endif
 
+#ifdef HAVE_OPENAL_AL_H
+#include <OpenAL/al.h>
+#elif defined(HAVE_AL_AL_H)
 #include <AL/al.h>
+#endif
+
+#ifdef HAVE_OPENAL_ALC_H
+#include <OpenAL/alc.h>
+#elif defined(HAVE_AL_ALC_H)
 #include <AL/alc.h>
+#endif
+
+#ifdef HAVE_ALUT_ALUT_H
+#include <ALUT/alut.h>
+#elif defined(HAVE_AL_ALUT_H)
 #include <AL/alut.h>
+#endif
 
 //====================================================================
 Audio::Audio()

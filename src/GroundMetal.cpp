@@ -5,9 +5,18 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "GroundMetal.h"
 
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <glpng/glpng.h>
+#else
 #include <GL/glpng.h>
+#endif
 #include <cmath>
 
 #include "extern.h"

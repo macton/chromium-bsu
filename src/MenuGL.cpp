@@ -5,6 +5,11 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "MenuGL.h"
 
 #include <cstdlib>
@@ -12,8 +17,14 @@
 #include <cmath>
 
 #include "compatibility.h"
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <OpenGL/gl.h>
+#include <glpng/glpng.h>
+#else
 #include <GL/gl.h>
 #include <GL/glpng.h>
+#endif
 
 #include "Config.h"
 

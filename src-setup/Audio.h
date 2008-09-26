@@ -8,7 +8,16 @@
 #ifndef Audio_h
 #define Audio_h
 
-#include <AL/al.h>  
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#ifdef HAVE_OPENAL_AL_H
+#include <OpenAL/al.h>
+#elif defined(HAVE_AL_AL_H)
+#include <AL/al.h>
+#endif
+
 //====================================================================
 class Audio
 {

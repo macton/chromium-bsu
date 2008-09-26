@@ -5,10 +5,20 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "GroundSea.h"
 
 #include <cstdlib>
+
+#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#include <glpng/glpng.h>
+#else
 #include <GL/glpng.h>
+#endif
 
 #include "extern.h"
 #include "Global.h"
