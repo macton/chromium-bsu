@@ -71,6 +71,9 @@ void	AudioSDLMixer::initSound()
 		Mix_ReserveChannels (1); // channel 0 is for music
 
 		atexit (Mix_CloseAudio);
+
+		setSoundVolume(config->volSound());
+		setMusicVolume(config->volMusic());
 	}
 }
 
