@@ -344,19 +344,19 @@ void MenuGL::drawGL()
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
 			else		n = 3;
-			game->ftFont->Render("the", n);
-			glTranslatef(c-game->ftFont->Advance("the", n), -38+c, 0.0);
+			if(n>0) game->ftFont->Render("the", n);
+			glTranslatef(c, -38+c, 0.0);
 			if(c < 10)	n = (int)(c-3);
 			else		n = 7;
-			game->ftFont->Render("reptile", n);
-			glTranslatef(c-game->ftFont->Advance("reptile", n), -38+c, 0.0);
+			if(n>0) game->ftFont->Render("reptile", n);
+			glTranslatef(c, -38+c, 0.0);
 			if(c < 16)	n = (int)c-10;
 			else		n = 6;
-			game->ftFont->Render("labour", n);
-			glTranslatef(c-game->ftFont->Advance("labour", n), -38+c, 0.0);
+			if(n>0) game->ftFont->Render("labour", n);
+			glTranslatef(c, -38+c, 0.0);
 			if(c < 23)	n = (int)(c-16);
 			else		n = 7;
-			game->ftFont->Render("project", n);
+			if(n>0) game->ftFont->Render("project", n);
 			// font height is 23
 			glPopMatrix();
 		}
@@ -374,7 +374,7 @@ void MenuGL::drawGL()
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
 			if(ti > strlen(mssgText))
 				ti = strlen(mssgText);
-			game->ftFont->Render(mssgText, ti);
+			if(ti) game->ftFont->Render(mssgText, ti);
 			mssgAlpha -= 0.004;
 			glColor4f(1.0, 1.0, 1.0, 1.0);
 		}
