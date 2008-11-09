@@ -79,7 +79,7 @@ if test "x$enable_sdlmixer" != xno ; then
 fi
 
 # Need glpng so we can display PNG images using OpenGL
-AC_CHECK_LIB([glpng], [pngBind],[HAVE_GLPNG=yes],[HAVE_GLPNG=no])
+AC_CHECK_LIB([glpng], [pngBind],[HAVE_GLPNG=yes],[HAVE_GLPNG=no],[$GL_LIBS])
 
 
 if test "x$no_gl" = xyes ; then
