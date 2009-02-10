@@ -86,6 +86,9 @@ public:
 
 	enum AudioType { AudioOpenAL, AudioSDL_Mixer, NumAudioTypes };
 	AudioType	audioType()	{ return m_audioType; };
+
+	enum TextType { TextGLC, TextFTGL, NumTextTypes };
+	TextType	textType()	{ return m_textType; };
 	
 private:
 	int 	 m_screenW;
@@ -121,6 +124,8 @@ private:
 	float	 m_volMusic;
 	
 	AudioType	m_audioType;
+
+	TextType	m_textType;
 
 private:
 	static Config	*m_instance;

@@ -74,6 +74,7 @@ Config::Config()
 	m_volMusic		=  0.5;
 
 	m_audioType		= AudioOpenAL;
+	m_textType		= TextGLC;
 	
 	readFile();
 }
@@ -171,6 +172,7 @@ bool Config::readFile()
 			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);	m_use_playList= (bool)tmp;  }
 			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n",    &tmp);	m_use_cdrom   = (bool)tmp;  }
 			if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n",    &tmp);	m_audioType = (AudioType)tmp; }
+			if(strncmp(configStrings[i], "textType", 8) == 0) { sscanf(configStrings[i], "textType %d\n",    &tmp);	m_textType = (TextType)tmp; }
 			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n",      &m_maxLevel);  }
 			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n",     &m_viewGamma); }
 			if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n",    &m_cdromCount); }
@@ -224,6 +226,7 @@ bool Config::saveFile()
 		fprintf(file, "volMusic %g\n",		m_volMusic);
 		fprintf(file, "viewGamma %g\n",		m_viewGamma);
 		fprintf(file, "audioType %d\n",		(int)m_audioType);
+		fprintf(file, "textType %d\n",		(int)m_textType);
 		fprintf(file, "cdromCount %d\n",	m_cdromCount);
 		fprintf(file, "cdromDevice %d\n",	m_cdromDevice);
 

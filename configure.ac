@@ -40,18 +40,39 @@ AC_ARG_WITH(macintosh,
 AX_CHECK_GL
 AX_CHECK_GLU
 
-# Need a recent version of FTGL for font rendering
-PKG_CHECK_MODULES([FTGL], [ftgl >= 2.1.3], [HAVE_FTGL=yes], [HAVE_FTGL=no])
+# Need a recent version of FTGL or GLC for text rendering
+AC_ARG_ENABLE(glc, AS_HELP_STRING([--disable-glc], [do not use GLC]))
+AC_ARG_ENABLE(ftgl, AS_HELP_STRING([--disable-ftgl], [do not use FTGL]))
+
+if test "x$enable_glc" != xno ; then
+	AC_CHECK_HEADERS([GL/glc.h], [HAVE_GL_GLC_H=yes], [HAVE_GL_GLC_H=no])
+	AC_CHECK_HEADERS([QuesoGLC/glc.h], [HAVE_QUESOGL_GLC_H=yes], [HAVE_QUESOGL_GLC_H=no])
+	AC_CHECK_LIB([GLC], [glcGenContext], [HAVE_GLC_LIB=yes], [HAVE_GLC_LIB=no])
+	AC_CHECK_LIB([glc32], [glcGenContext], [HAVE_GLC32_LIB=yes], [HAVE_GLC32_LIB=no])
+fi
+
+if test "x$enable_ftgl" != xno ; then
+	PKG_CHECK_MODULES([FTGL], [ftgl >= 2.1.3], [HAVE_FTGL=yes], [HAVE_FTGL=no])
+fi
 
 # Allow specifiying a hard-coded font file at build time
 AC_ARG_WITH(font-path,
 	AS_HELP_STRING([--with-font-path=file.ttf],
-	[Path to the TTF font chromium should use at runtime (bold Gothic Uralic recommended]),
+		[Path to the TTF font chromium should use at runtime with FTGL (bold Gothic Uralic recommended)]),
 	[FONT_PATH="$withval"],
 	[FONT_PATH=""])
 
-# Need fontconfig for finding font files
-PKG_CHECK_MODULES([FONTCONFIG], [fontconfig], [HAVE_FONTCONFIG=yes], [HAVE_FONTCONFIG=no])
+if test "x$HAVE_FTGL" = xyes -a "x$enable_ftgl" != xno ; then
+	# Need fontconfig for finding font files when using FTGL
+	PKG_CHECK_MODULES([FONTCONFIG], [fontconfig], [HAVE_FONTCONFIG=yes], [HAVE_FONTCONFIG=no])
+fi
+
+# Allow specifiying a hard-coded font name at build time
+AC_ARG_WITH(font-name,
+	AS_HELP_STRING([--with-font-name="Gothic Uralic"],
+		[Name of the font chromium should default to at runtime with GLC (bold Gothic Uralic is default)]),
+	[FONT_NAME="$withval"],
+	[FONT_NAME=""])
 
 # Need SDL or GLUT for windowing
 AC_ARG_ENABLE(sdl, AS_HELP_STRING([--disable-sdl], [do not use SDL]))
@@ -90,27 +111,53 @@ if test "x$no_glu" = xyes ; then
 	AC_MSG_ERROR([cannot find GLU (drawing system)])
 fi
 
-if test "x$HAVE_FTGL" != xyes ; then
-	AC_MSG_ERROR([cannot find FTGL >= 2.1.3 (text renderer)])
+
+if test \( "x$HAVE_GL_GLC_H" = xyes -o "x$HAVE_QUESOGLC_GLC_H" = xyes \) -a "x$HAVE_GLC_LIB" = xyes -a "x$enable_glc" != xno ; then
+	AC_DEFINE(TEXT_GLC, 1, [define to use GLC])
+	TEXT_LIBS="-lGLC"
+	AC_SUBST(TEXT_LIBS)
+	TEXT_TYPE=GLC
+elif test \( "x$HAVE_GL_GLC_H" = xyes -o "x$HAVE_QUESOGLC_GLC_H" = xyes \) -a "x$HAVE_GLC32_LIB" = xyes -a "x$enable_glc" != xno ; then
+	AC_DEFINE(TEXT_GLC, 1, [define to use GLC])
+	TEXT_LIBS="-lglc32"
+	AC_SUBST(TEXT_LIBS)
+	TEXT_TYPE=GLC
+elif test "x$HAVE_FTGL" = xyes -a "x$enable_ftgl" != xno ; then
+	AC_DEFINE(TEXT_FTGL, 1, [define to use FTGL])
+	TEXT_CFLAGS="$FTGL_CFLAGS"
+	AC_SUBST(TEXT_CFLAGS)
+	TEXT_LIBS="$FTGL_LIBS"
+	AC_SUBST(TEXT_LIBS)
+	TEXT_TYPE=FTGL
+else
+	AC_MSG_ERROR([cannot find GLC or FTGL >= 2.1.3 (text renderer)])
 fi
 
-if test "x$FONT_PATH" != x ; then
-	FONT_CFLAGS="-DFONT_PATH=\\\"$FONT_PATH\\\""
-	AC_SUBST(FONT_CFLAGS)
-	FONTCONFIG=" "
+if test "x$TEXT_TYPE" = xGLC -a "x$FONT_NAME" != x ; then
+	TEXT_CFLAGS+=" -DFONT_NAME=\"\\\"$FONT_NAME\\\"\""
+	AC_SUBST(TEXT_CFLAGS)
+	FONT="$FONT_NAME"
+elif test "x$TEXT_TYPE" = xGLC ; then
+	FONT="default (bold Gothic Uralic)"
 fi
 
-if test "x$HAVE_FONTCONFIG" = xyes ; then
+if test "x$TEXT_TYPE" = xFTGL -a "x$FONT_PATH" != x ; then
+	TEXT_CFLAGS+=" -DFONT_PATH=\"\\\"$FONT_PATH\\\"\""
+	AC_SUBST(TEXT_CFLAGS)
+	FONT="$FONT_PATH "
+fi
+
+if test "x$TEXT_TYPE" = xFTGL -a "x$HAVE_FONTCONFIG" = xyes ; then
 	AC_DEFINE(HAVE_FONTCONFIG, 1, [define to use fontconfig])
-	FONT_CFLAGS+=" $FONTCONFIG_CFLAGS"
-	AC_SUBST(FONT_CFLAGS)
-	FONT_LIBS="$FONTCONFIG_LIBS"
-	AC_SUBST(FONT_LIBS)
-	FONTCONFIG="$FONTCONFIG"fontconfig
+	TEXT_CFLAGS+=" $FONTCONFIG_CFLAGS"
+	AC_SUBST(TEXT_CFLAGS)
+	TEXT_LIBS+=" $FONTCONFIG_LIBS"
+	AC_SUBST(TEXT_LIBS)
+	FONT+="fontconfig (bold Gothic Uralic) "
 fi
 
-if  test "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
-	AC_MSG_WARN([no font path supplied and cannot find fontconfig, font searching will probably fail])
+if  test "x$TEXT_TYPE" = xFTGL -a "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
+	AC_MSG_WARN([FTGL: no font path supplied and cannot find fontconfig, font searching will probably fail])
 fi
 
 if test "x$HAVE_SDL" = xyes -a "x$enable_sdl" != xno ; then
@@ -188,7 +235,8 @@ Chromium B.S.U. ready for building!
 
   Window type: $WINDOW_TYPE
   Audio type:  $AUDIO_TYPE
-  Font path:   $FONT_PATH$FONTCONFIG
+  Text type:   $TEXT_TYPE
+  Font search: $FONT
 
 Type 'make' to build.
 

@@ -274,7 +274,7 @@ void MenuGL::drawGL()
 			glTranslatef(left, top+(inc*i), 10.0);
 			glRotatef(textAngle, 1.0, 0.0, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			game->ftFont->Render(menuText[i]);
+			game->text->Render(menuText[i]);
 			glPopMatrix();
 		}
 		
@@ -286,7 +286,7 @@ void MenuGL::drawGL()
 			glColor4f(1.0, 1.0, 1.0, 0.6+0.2*r);
 			glTranslatef(-18.75, -8.5, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			game->ftFont->Render("high scores");
+			game->text->Render("high scores");
 			glTranslatef(-100.0, -30.0, 0.0);
 			char buf[16];
 			int i,len;
@@ -315,9 +315,9 @@ void MenuGL::drawGL()
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
 				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
 				len = strlen(buf);
-				trans = 80.0 + game->ftFont->Advance("high scores") - game->ftFont->Advance(buf);
+				trans = 80.0 + game->text->Advance("high scores") - game->text->Advance(buf);
 				glTranslatef( trans, 0.0, 0.0 );
-				game->ftFont->Render(buf);
+				game->text->Render(buf);
 				glTranslatef( -trans, -30.0, 0.0) ;
 			}
 			glPopMatrix();
@@ -344,19 +344,19 @@ void MenuGL::drawGL()
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
 			else		n = 3;
-			if(n>0) game->ftFont->Render("the", n);
+			if(n>0) game->text->Render("the", n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 10)	n = (int)(c-3);
 			else		n = 7;
-			if(n>0) game->ftFont->Render("reptile", n);
+			if(n>0) game->text->Render("reptile", n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 16)	n = (int)c-10;
 			else		n = 6;
-			if(n>0) game->ftFont->Render("labour", n);
+			if(n>0) game->text->Render("labour", n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 23)	n = (int)(c-16);
 			else		n = 7;
-			if(n>0) game->ftFont->Render("project", n);
+			if(n>0) game->text->Render("project", n);
 			// font height is 23
 			glPopMatrix();
 		}
@@ -374,7 +374,7 @@ void MenuGL::drawGL()
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
 			if(ti > strlen(mssgText))
 				ti = strlen(mssgText);
-			if(ti) game->ftFont->Render(mssgText, ti);
+			if(ti) game->text->Render(mssgText, ti);
 			mssgAlpha -= 0.004;
 			glColor4f(1.0, 1.0, 1.0, 1.0);
 		}
@@ -545,7 +545,7 @@ void MenuGL::drawIndicator()
 			glColor4f(1.0, 1.0, 1.0, 0.5);
 			glTranslatef(11.0, 0.0, 0.0);
 			glScalef(sc, sc, 1.0);
-			game->ftFont->Render(buf);
+			game->text->Render(buf);
 		}
 		glPopMatrix();
 		

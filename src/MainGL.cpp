@@ -31,8 +31,11 @@
 #include <GL/glpng.h>
 #endif
 
-#ifdef HAVE_FONTCONFIG
-#include <fontconfig/fontconfig.h>
+#if defined(TEXT_GLC)
+#include "TextGLC.h"
+#endif
+#if defined(TEXT_FTGL)
+#include "TextFTGL.h"
 #endif
 
 #include "Config.h"
@@ -112,86 +115,40 @@ int MainGL::initGL()
 }
 
 //----------------------------------------------------------
-const char* MainGL::findFont()
-{
-	struct stat statbuf;
-	const char* font = NULL;
-	const char* path = NULL;
-
-	#define CHECK_FONT_PATH(filename) \
-	path = filename; \
-	if( !font && path && stat(path, &statbuf) == 0 ) \
-		font = strdup(path);
-
-	CHECK_FONT_PATH(getenv("CHROMIUM_FONT"))
-
-#ifdef FONT_PATH
-	CHECK_FONT_PATH(FONT_PATH)
-#endif
-
-#ifdef HAVE_FONTCONFIG
-	if( !font && FcInit() )
-	{
-		FcResult result;
-		FcFontSet *fs;
-		FcPattern* pat;
-		FcPattern *match;
-
-		pat = FcNameParse((FcChar8 *)"Gothic Uralic");
-		FcConfigSubstitute(0, pat, FcMatchPattern);
-
-		FcPatternDel(pat, FC_WEIGHT);
-		FcPatternAddInteger(pat, FC_WEIGHT, FC_WEIGHT_BOLD);
-
-		FcDefaultSubstitute(pat);
-		fs = FcFontSetCreate();
-		match = FcFontMatch(0, pat, &result);
-
-		if (match) FcFontSetAdd(fs, match);
-		if (pat) FcPatternDestroy(pat);
-		if(fs){
-			FcChar8* file;
-			if( FcPatternGetString (fs->fonts[0], FC_FILE, 0, &file) == FcResultMatch ){
-				CHECK_FONT_PATH((const char*)file)
-			}
-			FcFontSetDestroy(fs);
-		}
-		FcFini();
-	}
-#endif
-
-	// Check a couple of common paths for Gothic Uralic/bold as a last resort
-	// Debian
-	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothub__.ttf")
-	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothu___.ttf")
-	// Mandrake
-	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHUB__.TTF")
-	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHU___.TTF")
-
-	return font;
-}
-
-//----------------------------------------------------------
 void MainGL::loadTextures()
 {
-	const char* font = findFont();
-	game->ftFont = new FTBufferFont(font);
-	if(game->ftFont->Error())
+	try {
+#if defined(TEXT_GLC) && defined(TEXT_FTGL)
+		Config *config = Config::instance();
+		if(config->textType() == Config::TextGLC)
+			game->text = new TextGLC();
+		else
+			game->text = new TextFTGL();
+#elif defined(TEXT_GLC)
+		game->text = new TextGLC();
+#elif defined(TEXT_FTGL)
+		game->text = new TextFTGL();
+#else
+		#error "TEXT_GLC or TEXT_FTGL must be defined"
+#endif
+	}
+	catch (char* str)
 	{
-		delete game->ftFont;
-		fprintf(stderr, "\nERROR loading font\nWas looking for %s\n", font);
-		free((void*)font);
+		fprintf(stderr, "chromium: error loading font: %s\n", str);
 		exit(1);
 	}
-	free((void*)font);
-	game->ftFont->FaceSize(24);
+	catch (...)
+	{
+		fprintf(stderr, "chromium: error loading font\n");
+		exit(1);
+	}
 }
 
 //----------------------------------------------------------
 void MainGL::deleteTextures()
 {
-	delete game->ftFont;
-	game->ftFont = 0;
+	delete game->text;
+	game->text = 0;
 }
 
 //----------------------------------------------------------
@@ -440,7 +397,7 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 		aa *= (-pulse/50.0);
 	ca = 1.0-tmp;
 
-	height = 1.5 * game->ftFont->LineHeight();
+	height = 1.5 * game->text->LineHeight();
 	
 	strncpy(buffer, string, 128);
 	index[0] = buffer;
@@ -469,9 +426,9 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 
 				glPushMatrix();
 				glScalef(scale, scale*0.75, 1.0);
-				width = game->ftFont->Advance(index[l]);
+				width = game->text->Advance(index[l]);
 				glTranslatef(-(width/2.0)-x_sin, y+y_sin, 0.0);
-				game->ftFont->Render(index[l]);
+				game->text->Render(index[l]);
 				glPopMatrix();
 
 			}

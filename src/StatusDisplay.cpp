@@ -173,7 +173,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		sprintf(scoreBuf, "%07d", (int)hero->getScore());
 		glTranslatef(-9.0, -8.2, 25.0);
 		glScalef(0.025, 0.02, 1.0);
-		game->ftFont->Render(scoreBuf);
+		game->text->Render(scoreBuf);
 	glPopMatrix();
 	//-- draw fps
 	if(config->showFPS())
@@ -182,7 +182,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 			sprintf(scoreBuf, "%3.1f", game->fps);
 			glTranslatef(7.75, 8.0, 25.0);
 			glScalef(0.018, 0.015, 1.0);
-			game->ftFont->Render(scoreBuf);
+			game->text->Render(scoreBuf);
 		glPopMatrix();
 	}
 	
@@ -647,11 +647,11 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glScalef(0.21, 0.21, 1.0);
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.05)) );
-		game->ftFont->Render("p a u s e d");
+		game->text->Render("p a u s e d");
 		glPopMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.03)) );
 		glTranslatef(off[0], off[1], 0.0);
-		game->ftFont->Render("p a u s e d");
+		game->text->Render("p a u s e d");
 		glPopMatrix();
 	}
 	if( game->tipShipPast == 1 && game->gameLevel == 1)
@@ -672,7 +672,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipShipShow/300.0 );
 		const char *str = "do not let -any- ships past you! each one costs you a life!";
-		game->ftFont->Render(str);
+		game->text->Render(str);
 		glPopMatrix();
 	}
 	if(	tipSuperShow > 0 )
@@ -683,7 +683,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipSuperShow/300.0 );
 		const char *str = "let super shields pass by for an extra life!";
-		game->ftFont->Render(str);
+		game->text->Render(str);
 		glPopMatrix();
 	}
 }

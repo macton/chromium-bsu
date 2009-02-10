@@ -12,7 +12,7 @@
 #include <ctime>
 
 #include "define.h"
-#include <FTGL/ftgl.h>
+#include "Text.h"
 #include "MainToolkit.h"
 
 class HeroAircraft;
@@ -55,7 +55,7 @@ public:
 	
 	static bool 	mouseActive;
 	
-	static FTFont	*ftFont;
+	static Text	*text;
 
 	static float	fps;
 	static int		frame;

@@ -65,7 +65,9 @@ specifies the location of the user high-score file.
 specifies the location of user-customised game data with the same layout and filenames as the system one.
 .TP
 .B CHROMIUM_FONT
-specifies the location of the font used in the menu and the game.
+When using the GLC backend, this specifies the font name to be used in the menu and the game if available.
+.TP
+When using the FTGL backend, this specifies the path to the TTF font file used in the menu and the game.
 .SH FILES
 The following files are used by chromium.
 .TP
@@ -188,6 +190,14 @@ it to work, otherwise the other backend will be used. Defaults to OpenAL.
 0 = OpenAL
 .br
 1 = SDL Mixer
+.TP
+.B textType
+Sets which text backend to use. The desired backend must be compiled in for
+it to work, otherwise the other backend will be used. Defaults to GLC.
+.br
+0 = GLC
+.br
+1 = FTGL
 .TP
 .B cdromCount
 A cache of number of CDROM devices present, not used.

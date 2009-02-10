@@ -16,7 +16,8 @@ Sound:           OpenAL and ALUT
 
 Image loading:   glpng
 
-Text rendering:  FTGL 2.1.3 or greater
+Text rendering:  GLC (QuesoGLC for e.g.)
+                 FTGL 2.1.3 or greater is an alternative
 
 Font:            Gothic Uralic bold recommended
                  any TrueType font is an alternative
@@ -24,9 +25,15 @@ Font:            Gothic Uralic bold recommended
 OPTIONAL
 --------
 
-Building with fontconfig adds greater flexibility in searching for the font.
+The GLC text rendering backend supports using a different default font:
 
-Building with the font-path option to configure is useful for distributions:
+./configure --with-font-name="Gothic Uralic"
+
+The FTGL text rendering backend is less flexible in its font searching.
+
+To make it more flexible you should either build with fontconfig support or
+specify a path to the desired font, this is useful for distributions where
+the package system can then depend on the desired font:
 
 ./configure --with-font-path=/usr/share/fonts/truetype/uralic/gothub__.ttf
 

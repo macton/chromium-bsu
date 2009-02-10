@@ -10,7 +10,7 @@
 #include "HiScore.h"
 #include "Config.h"
 
-FTFont	*Global::ftFont	= 0;
+Text	*Global::text	= 0;
 
 MainToolkit *Global::toolkit = 0;
 
