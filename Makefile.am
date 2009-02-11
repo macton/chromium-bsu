@@ -18,9 +18,7 @@ MAINTAINERCLEANFILES = \
 
 EXTRA_DIST = README.install
 
-ACLOCAL_AMFLAGS = \
-        -I m4 \
-        --install
+ACLOCAL_AMFLAGS = -I m4 --install
 
 SUBDIRS = \
         misc \

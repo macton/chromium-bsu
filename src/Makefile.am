@@ -17,7 +17,7 @@ chromium_LDADD = \
 	$(TEXT_LIBS) \
 	$(GLPNG_LIBS) \
 	$(WINDOW_LIBS) \
-	$(AUDIO_LIBS) \
+	$(AUDIO_LIBS)
 
 chromium_SOURCES = \
 	Ammo.cpp \
