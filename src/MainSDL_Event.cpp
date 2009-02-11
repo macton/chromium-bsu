@@ -227,10 +227,12 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 //----------------------------------------------------------
 void MainSDL::activation(SDL_Event *event)
 {
-	return;
+	Global *game = Global::getInstance();
 //	fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
+	bool grab_mouse = game->gameMode == Global::Game && event->active.gain ? true : false;
 	if ( event->active.state & SDL_APPACTIVE ) 
 	{
+		grabMouse( grab_mouse, grab_mouse );
 //		fprintf(stderr, "app active " );
 	} 
 	else if ( event->active.state & SDL_APPMOUSEFOCUS ) 
@@ -240,6 +242,7 @@ void MainSDL::activation(SDL_Event *event)
 	} 
 	else if ( event->active.state & SDL_APPINPUTFOCUS ) 
 	{
+		grabMouse( grab_mouse, grab_mouse );
 //		fprintf(stderr, "input active" );
 	}
 //	fprintf(stderr, "focus\n" );
@@ -457,7 +460,7 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 }
 
 //----------------------------------------------------------
-void MainSDL::grabMouse(bool status)
+void MainSDL::grabMouse(bool status, bool warpmouse)
 {
 //	fprintf(stderr, "MainSDL::grabMouse(%d)\n", status);
 	Config *config = Config::instance();
@@ -467,6 +470,8 @@ void MainSDL::grabMouse(bool status)
 		SDL_ShowCursor(0);
 	else
 		SDL_ShowCursor(1);
+	if(!warpmouse)
+		return;
 	xMid = config->screenW()/2;
 	yMid = config->screenH()/2;
 	SDL_WarpMouse(xMid, yMid);

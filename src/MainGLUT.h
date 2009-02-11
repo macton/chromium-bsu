@@ -25,7 +25,7 @@ public:
 	
 	void setVideoMode();
 	
-	void grabMouse(bool);
+	void grabMouse(bool,bool=true);
 
 private:
 	static void nullFunc();

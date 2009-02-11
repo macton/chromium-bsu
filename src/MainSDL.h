@@ -27,7 +27,7 @@ public:
 	
 	void setVideoMode();
 	
-	void grabMouse(bool);
+	void grabMouse(bool,bool=true);
 
 	bool process(SDL_Event *event);
 	void joystickMove();

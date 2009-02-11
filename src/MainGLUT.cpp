@@ -89,7 +89,7 @@ bool MainGLUT::checkErrors()
 }
 
 //----------------------------------------------------------
-void MainGLUT::grabMouse(bool status)
+void MainGLUT::grabMouse(bool status, bool warpmouse)
 {
 	Config	*config = Config::instance();
 	mouseToggle = status;
@@ -98,6 +98,8 @@ void MainGLUT::grabMouse(bool status)
 		glutSetCursor(GLUT_CURSOR_NONE);
 		glutMotionFunc(MainGLUT::mouseMotion);
 		glutPassiveMotionFunc(MainGLUT::mouseMotion);
+		if(!warpmouse)
+			return;
 		xMid = config->screenW()/2;
 		yMid = config->screenH()/2;
 		glutWarpPointer(xMid, yMid);

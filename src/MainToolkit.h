@@ -25,7 +25,7 @@ public:
 	
 	virtual void setVideoMode() = 0;
 	
-	virtual void grabMouse(bool) = 0;
+	virtual void grabMouse(bool,bool=true) = 0;
 };
 
 
