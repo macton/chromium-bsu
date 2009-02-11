@@ -49,6 +49,13 @@ int main(int argc, char **argv)
 	int	tmp;
 	int	vm = 2;
 
+#ifdef ENABLE_NLS
+	setlocale(LC_ALL, "");
+        bindtextdomain("chromium-bsu", LOCALEDIR);
+        bind_textdomain_codeset("chromium-bsu", "UTF-8");
+        textdomain("chromium-bsu");
+#endif
+
 //	atexit(EnemyAircraft::printNumAllocated);
 
 #ifdef __linux__
