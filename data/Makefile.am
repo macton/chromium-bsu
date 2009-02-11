@@ -1,3 +1,6 @@
 MAINTAINERCLEANFILES = Makefile.in
 
-SUBDIRS = doc png wav
+SUBDIRS = \
+	doc \
+	png \
+	wav

@@ -2,11 +2,22 @@ MAINTAINERCLEANFILES = Makefile.in
 
 bin_PROGRAMS = chromium
 
-chromium_CPPFLAGS = $(GL_CFLAGS) $(GLU_CFLAGS) $(TEXT_CFLAGS) $(GLPNG_CFLAGS) \
-	$(WINDOW_CFLAGS) $(AUDIO_CFLAGS) "-DPKGDATADIR=\"$(pkgdatadir)\""
+chromium_CPPFLAGS = \
+	$(GL_CFLAGS) \
+	$(GLU_CFLAGS) \
+	$(TEXT_CFLAGS) \
+	$(GLPNG_CFLAGS) \
+	$(WINDOW_CFLAGS) \
+	$(AUDIO_CFLAGS) \
+	"-DPKGDATADIR=\"$(pkgdatadir)\""
 
-chromium_LDADD = $(GL_LIBS) $(GLU_LIBS) $(TEXT_LIBS) $(GLPNG_LIBS) \
-	$(WINDOW_LIBS) $(AUDIO_LIBS)
+chromium_LDADD = \
+	$(GL_LIBS) \
+	$(GLU_LIBS) \
+	$(TEXT_LIBS) \
+	$(GLPNG_LIBS) \
+	$(WINDOW_LIBS) \
+	$(AUDIO_LIBS) \
 
 chromium_SOURCES = \
 	Ammo.cpp \
