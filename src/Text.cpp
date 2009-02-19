@@ -23,14 +23,16 @@ Text::~Text()
 {
 }
 
-void Text::Render(const char* str, const int len)
+void Text::Render(const char*, const int)
 {
 }
 
-float Text::Advance(const char* str, const int len)
+float Text::Advance(const char*, const int)
 {
+	return 0;
 }
 
-float Text::LineHeight(const char* str, const int len)
+float Text::LineHeight(const char*, const int)
 {
+	return 0;
 }
