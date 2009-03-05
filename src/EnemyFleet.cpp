@@ -348,10 +348,13 @@ void	EnemyFleet::update()
 						destroyAll();
 						bossExplosion(thisEnemy);
 						
-						//--*** TRIGGER END OF LEVEL ***--//
-						game->hero->addScore(5000.0);
-						game->gameMode = Global::LevelOver;
-						game->heroSuccess = 0;
+						if( game->gameMode != Global::HeroDead )
+						{
+							//--*** TRIGGER END OF LEVEL ***--//
+							game->hero->addScore(5000.0);
+							game->gameMode = Global::LevelOver;
+							game->heroSuccess = 0;
+						}
 						break;
 					case EnemyOmni:	
 						game->hero->addScore(25.0);
