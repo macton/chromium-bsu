@@ -47,12 +47,8 @@ HiScore::HiScore()
 	readFile();
 }
 
-/**
- * save file before we go away...
- */
 HiScore::~HiScore()
 {
-	saveFile();
 }
 
 /**
@@ -262,9 +258,9 @@ int HiScore::set(int skill, float score)
 		if(rank > -1)
 		{
 			insertScore(skill, rank, score);
+			saveFile();
 			retVal = rank+1;
 		}
-		saveFile();
 	}
 			
 	return retVal;
