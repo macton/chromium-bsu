@@ -21,6 +21,10 @@
 #include <cstdlib>
 #include <cstring>
 
+#ifdef HAVE_LOCALE_H
+#include <locale.h>
+#endif
+
 #include "Audio.h"
 #include "Ground.h"
 #include "MenuGL.h"
@@ -159,6 +163,9 @@ bool Config::readFile()
 	file = fopen(configFilename, "r");
 	if(file)
 	{
+#ifdef HAVE_LOCALE_H
+		char* locale = setlocale(LC_NUMERIC,"C");
+#endif
 		i = numLines = 0;
 		while( fgets(configStrings[i], 64, file) )
 			i++;
@@ -185,6 +192,9 @@ bool Config::readFile()
 			if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n",    &m_cdromCount); }
 			if(strncmp(configStrings[i], "cdromDev", 8) == 0) { sscanf(configStrings[i], "cdromDevice %d\n",   &m_cdromDevice); }
 		}
+#ifdef HAVE_LOCALE_H
+		setlocale(LC_NUMERIC,locale);
+#endif
 	}
 	else
 	{
@@ -217,6 +227,9 @@ bool Config::saveFile()
 	file = fopen(configFilename, "w");
 	if(file)
 	{
+#ifdef HAVE_LOCALE_H
+		char* locale = setlocale(LC_NUMERIC,"C");
+#endif
 		fprintf(file, "use_playList %d\n",	(int)m_use_playList);
 		fprintf(file, "use_cdrom %d\n",		(int)m_use_cdrom);
 		fprintf(file, "full_screen %d\n", 	(int)m_full_screen);
@@ -236,6 +249,9 @@ bool Config::saveFile()
 		fprintf(file, "textType %d\n",		(int)m_textType);
 		fprintf(file, "cdromCount %d\n",	m_cdromCount);
 		fprintf(file, "cdromDevice %d\n",	m_cdromDevice);
+#ifdef HAVE_LOCALE_H
+		setlocale(LC_NUMERIC,locale);
+#endif
 
 		fclose(file);
 		fprintf(stderr, _("wrote config file (%s)\n"), configFilename);

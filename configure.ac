@@ -14,7 +14,7 @@ AC_PROG_CXX
 
 # Headers
 AC_HEADER_STDC
-AC_CHECK_HEADERS([fcntl.h stdlib.h string.h unistd.h])
+AC_CHECK_HEADERS([fcntl.h stdlib.h string.h unistd.h locale.h])
 
 # Types and compiler bits
 AC_HEADER_STDBOOL
