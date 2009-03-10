@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "compatibility.h"
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
@@ -31,6 +33,11 @@
 
 #include <sys/stat.h>
 
+#ifdef ENABLE_NLS
+	#include <locale.h>
+	#include <libintl.h>
+#endif
+
 #include "main.h"
 #include "define.h"
 #include "MainSDL.h"
@@ -51,9 +58,9 @@ int main(int argc, char **argv)
 
 #ifdef ENABLE_NLS
 	setlocale(LC_ALL, "");
-        bindtextdomain("chromium-bsu", LOCALEDIR);
-        bind_textdomain_codeset("chromium-bsu", "UTF-8");
-        textdomain("chromium-bsu");
+        bindtextdomain(PACKAGE, LOCALEDIR);
+        bind_textdomain_codeset(PACKAGE, "UTF-8");
+        textdomain(PACKAGE);
 #endif
 
 //	atexit(EnemyAircraft::printNumAllocated);
@@ -105,22 +112,22 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			fprintf(stderr, "\n");
-			fprintf(stderr, "--------------------------------------------------\n");
-			fprintf(stderr, "Chromium B.S.U. options\n");
-			fprintf(stderr, "--------------------------------------------------\n");
-			fprintf(stderr, "   -f/--fullscreen     : run in fullscreen mode\n");
-			fprintf(stderr, "   -w/--window         : run in windowed mode\n");
-			fprintf(stderr, "   -v/--vidmode <mode> : mode 0 =  512 x  384\n");
-			fprintf(stderr, "                       :      1 =  640 x  480\n");
-			fprintf(stderr, "                       :      2 =  800 x  600\n");
-			fprintf(stderr, "                       :      3 = 1024 x  768\n");
-			fprintf(stderr, "                       :      4 = 1280 x  960\n");
-			fprintf(stderr, "  -na/--noaudio        : do not initialize audio\n");
-			fprintf(stderr, "  -nb/--noblend        : disable blending (OpenGL)\n");
-			fprintf(stderr, "  -nt/--notexborder    : do not set tex border color (OpenGL)\n");
-			fprintf(stderr, "--------------------------------------------------\n");
-			fprintf(stderr, "\n");
+			fprintf(stderr, _(
+				"\n"
+				"--------------------------------------------------\n"
+				"Chromium B.S.U. options\n"
+				"--------------------------------------------------\n"
+				"   -f/--fullscreen     : run in fullscreen mode\n"
+				"   -w/--window         : run in windowed mode\n"
+				"   -v/--vidmode <mode> : mode 0 =  512 x  384\n"
+				"                       :      1 =  640 x  480\n"
+				"                       :      2 =  800 x  600\n"
+				"                       :      3 = 1024 x  768\n"
+				"                       :      4 = 1280 x  960\n"
+				"  -na/--noaudio        : do not initialize audio\n"
+				"  -nb/--noblend        : disable blending (OpenGL)\n"
+				"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
+				"--------------------------------------------------\n\n"));
 			exit(0);
 		}
 	}
@@ -144,10 +151,9 @@ int main(int argc, char **argv)
 	config->destroy();
 	game->destroy();
 
-	fprintf(stderr, "done.\n");
+	fprintf(stderr, _("done.\n"));
 	fprintf(stderr, " \n");
-	fprintf(stderr, "Download the latest version of Chromium B.S.U. at\n");
-	fprintf(stderr, "http://chromium-bsu.sourceforge.net/\n");
+	fprintf(stderr, _("Download the latest version of Chromium B.S.U. at http://chromium-bsu.sourceforge.net/\n"));
 	fprintf(stderr, " \n");
 	
 	return 0;
@@ -213,7 +219,7 @@ const char* dataLoc(const char* filename, bool doCheck)
 	{
 		if(stat(buffer, &sbuf) == -1) 
 		{
-			fprintf(stderr, "!! ERROR !! - ");
+			fprintf(stderr, _("!! ERROR !! - "));
 			perror(buffer);
 		}
 	}
@@ -237,7 +243,7 @@ void printExtensions(FILE *fstream, const char* extstr_in)
 	strcpy(extstr, extstr_in);
 	walker = extstr;
 	
-	fprintf(fstream, "Extensions :");
+	fprintf(fstream, _("Extensions :"));
 	while( (walker-extstr) < len )
 	{
 		space = strchr(walker, ' ');

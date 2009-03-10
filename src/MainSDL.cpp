@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "MainSDL.h"
 
 #ifdef USE_SDL
@@ -64,24 +66,24 @@ MainSDL::MainSDL(int argc, char **argv)
 		
 	if( SDL_Init( initOpts ) < 0 ) 
 	{
-		fprintf(stderr,"Couldn't initialize SDL: %s\n", SDL_GetError());
+		fprintf(stderr,_("Couldn't initialize SDL: %s\n"), SDL_GetError());
 		exit( 1 );
 	}
-	fprintf(stderr, "SDL initialized.\n");
+	fprintf(stderr, _("SDL initialized.\n"));
 
 #ifdef WITH_JOYSTICK
 	int nj = SDL_NumJoysticks();
 	if(nj > 0)
 	{
-		fprintf(stderr, "num joysticks = %d\n", nj);
+		fprintf(stderr, _("num joysticks = %d\n"), nj);
 		joystick = SDL_JoystickOpen(0);
-		fprintf(stderr, "   joystick 0 = %p\n", joystick);
+		fprintf(stderr, _("   joystick 0 = %p\n"), joystick);
 		if(joystick)
 			SDL_JoystickEventState(SDL_ENABLE);
 	}
 	else
 	{
-		//fprintf(stderr, "no joysticks found\n");
+		//fprintf(stderr, _("no joysticks found\n"));
 		joystick = 0;
 	}
 #else
@@ -90,12 +92,14 @@ MainSDL::MainSDL(int argc, char **argv)
 
 	setVideoMode();
 
-	fprintf(stderr, "-OpenGL-----------------------------------------------------\n");
-	fprintf(stderr, "Vendor     : %s\n", glGetString( GL_VENDOR ) );
-	fprintf(stderr, "Renderer   : %s\n", glGetString( GL_RENDERER ) );
-	fprintf(stderr, "Version    : %s\n", glGetString( GL_VERSION ) );
+	fprintf(stderr, _(
+		"-OpenGL-----------------------------------------------------\n"
+		"Vendor     : %s\n"
+		"Renderer   : %s\n"
+		"Version    : %s\n"),
+		glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION) );
 	printExtensions(stderr,  (const char*)glGetString( GL_EXTENSIONS ));
-	fprintf(stderr, "------------------------------------------------------------\n");
+	fprintf(stderr, _("------------------------------------------------------------\n"));
 
 	//-- Set the window manager title bar
 	SDL_WM_SetCaption( "Chromium B.S.U.", "Chromium B.S.U." );
@@ -179,14 +183,14 @@ bool MainSDL::run()
 					if(game->fps < 48.0 && game->gameSpeed < 1.0)
 					{
 						game->gameSpeed += 0.02;
-						fprintf(stdout, "init----> %3.2ffps gameSpeed = %g\n", game->fps, game->gameSpeed);
+						fprintf(stdout, _("init----> %3.2ffps gameSpeed = %g\n"), game->fps, game->gameSpeed);
 					}
 					else if(game->gameFrame > 20)
 					{
 						float tmp = 50.0/game->fps;
 						tmp = 0.8*targetAdj + 0.2*tmp;
 						targetAdj = floor(100.0*(tmp+0.005))/100.0;
-						fprintf(stdout, "init----> %3.2ffps targetAdj = %g, tmp = %g\n", game->fps, targetAdj, tmp);
+						fprintf(stdout, _("init----> %3.2ffps targetAdj = %g, tmp = %g\n"), game->fps, targetAdj, tmp);
 					}
 				}
 				else if( config->autoSpeed() && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
@@ -199,7 +203,7 @@ bool MainSDL::run()
 					{
 						adjCount++;
 						game->speedAdj = tmp;
-						fprintf(stdout, "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n", game->fps, targetAdj, game->speedAdj);
+						fprintf(stdout, _("adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"), game->fps, targetAdj, game->speedAdj);
 					}
 					else
 						game->speedAdj = targetAdj;
@@ -208,7 +212,7 @@ bool MainSDL::run()
 					game->speedAdj = targetAdj;
 					
 //				if( !(frames%500) )
-//					fprintf(stdout, "fps = %g speedAdj = %g\n", game->fps, game->speedAdj);
+//					fprintf(stdout, _("fps = %g speedAdj = %g\n"), game->fps, game->speedAdj);
 			}
 			
 		}
@@ -220,18 +224,20 @@ bool MainSDL::run()
 	
 	if(adjCount > 20)
 	{
-		fprintf(stderr, "%d speed adjustments required.\n", adjCount);
-		fprintf(stderr, "NOTE: The game was not able to maintain a steady 50 frames per\n");
-		fprintf(stderr, "      second. You should consider reducing your screen resolution\n");
-		fprintf(stderr, "      or lowering the graphics detail setting.\n");
-		fprintf(stderr, "      -OR-\n");
-		fprintf(stderr, "      make sure that you aren't running any system monitoring\n");
-		fprintf(stderr, "      tools (like \'top\', \'xosview\', etc.) These kinds of tools\n");
-		fprintf(stderr, "      can make it difficult to maintain a steady frame rate.\n");
+		fprintf(stderr, _(
+			"%d speed adjustments required.\n"
+			"NOTE: The game was not able to maintain a steady 50 frames per\n"
+			"      second. You should consider reducing your screen resolution\n"
+			"      or lowering the graphics detail setting.\n"
+			"      -OR-\n"
+			"      make sure that you aren't running any system monitoring\n"
+			"      tools (like \'top\', \'xosview\', etc.) These kinds of tools\n"
+			"      can make it difficult to maintain a steady frame rate.\n"),
+			adjCount);
 	}
 	
 	//-- Destroy our GL context, etc.
-	fprintf(stderr, "exit.\n");
+	fprintf(stderr, _("exit.\n"));
 	SDL_Quit();
 	
 	return false;
@@ -248,7 +254,7 @@ bool MainSDL::checkErrors()
 	gl_error = glGetError( );
 	if( gl_error != GL_NO_ERROR ) 
 	{
-		fprintf(stderr, "ERROR!!! OpenGL error: %s\n", gluErrorString(gl_error) );
+		fprintf(stderr, _("ERROR!!! OpenGL error: %s\n"), gluErrorString(gl_error) );
 		retVal = true;
 	}
 
@@ -256,7 +262,7 @@ bool MainSDL::checkErrors()
 	sdl_error = SDL_GetError( );
 	if( sdl_error[0] != '\0' ) 
 	{
-		fprintf(stderr, "ERROR!!! SDL error '%s'\n", sdl_error);
+		fprintf(stderr, _("ERROR!!! SDL error '%s'\n"), sdl_error);
 		SDL_ClearError();
 		retVal = true;
 	}
@@ -309,20 +315,20 @@ void MainSDL::setVideoMode()
 	
 	if ( (glSurface = SDL_SetVideoMode( w, h, bpp, video_flags )) == NULL ) 
 	{
-		fprintf(stderr, "Couldn't set GL mode: %s\n", SDL_GetError());
+		fprintf(stderr, _("Couldn't set GL mode: %s\n"), SDL_GetError());
 		SDL_Quit();
 		exit(1);
 	}
 	else
 	{
-		fprintf(stderr, "video mode set ");
+		fprintf(stderr, _("video mode set "));
 	}
 	
 	SDL_GL_GetAttribute( SDL_GL_RED_SIZE, 	&rs);
 	SDL_GL_GetAttribute( SDL_GL_GREEN_SIZE,	&gs);
 	SDL_GL_GetAttribute( SDL_GL_BLUE_SIZE,	&bs);
 	SDL_GL_GetAttribute( SDL_GL_DEPTH_SIZE,	&ds);
-	fprintf(stderr, "(bpp=%d RGB=%d%d%d depth=%d)\n", glSurface->format->BitsPerPixel, rs, gs, bs, ds);
+	fprintf(stderr, _("(bpp=%d RGB=%d%d%d depth=%d)\n"), glSurface->format->BitsPerPixel, rs, gs, bs, ds);
 
 	if(game->mainGL)
 		game->mainGL->initGL();

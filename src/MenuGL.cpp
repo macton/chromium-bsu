@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "MenuGL.h"
 
 #include <cstdlib>
@@ -39,12 +41,12 @@
 
 static const int NumMssg = 6;
 static char mssgHelpText[NumMssg][128] = {
-"  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !",
-"  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !",
-"  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !",
-"  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !",
-"  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !",
-"  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
+N_("  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"),
+N_("  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"),
+N_("  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"),
+N_("  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"),
+N_("  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"),
+N_("  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !")
 };
 
 //====================================================================
@@ -65,16 +67,16 @@ MenuGL::MenuGL()
 	butWidth	= butHeight*4.0;
 	butOffset	= 3.05;
 
-	menuText[NewGame]	= "n e w    g a m e";
-	menuText[GameLevel]	= "l e v e l";
-	menuText[SkillLevel]= "s k i l l";
-	menuText[Graphics]	= "g f x    d e t a i l";
-	menuText[FullScreen]= "f u l l s c r e e n";
-	menuText[ScreenSize]= "s c r e e n    s i z e";
-	menuText[Sound]		= "s o u n d    f x    v o l u m e";
-	menuText[Music]		= "m u s i c    v o l u m e";
-	menuText[MouseSpeed]= "m o u s e   s p e e d";
-	menuText[Quit]		= "q u i t";
+	menuText[NewGame]	= _("n e w    g a m e");
+	menuText[GameLevel]	= _("l e v e l");
+	menuText[SkillLevel]= _("s k i l l");
+	menuText[Graphics]	= _("g f x    d e t a i l");
+	menuText[FullScreen]= _("f u l l s c r e e n");
+	menuText[ScreenSize]= _("s c r e e n    s i z e");
+	menuText[Sound]		= _("s o u n d    f x    v o l u m e");
+	menuText[Music]		= _("m u s i c    v o l u m e");
+	menuText[MouseSpeed]= _("m o u s e   s p e e d");
+	menuText[Quit]		= _("q u i t");
 	
 	loadTextures();
 	
@@ -137,11 +139,11 @@ void MenuGL::createLists(bool thick)
 {
 	if(!thick)
 	{
-//		fprintf(stderr, "ATTENTION: Using 'thin' text to improve framerate...\n");
+//		fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
 	}
 	titleTilt	= -10.0;
 	
-//	fprintf(stderr, "MenuGL::createLists\n");
+//	fprintf(stderr, _("MenuGL::createLists\n"));
 
 	glNewList(listChrom, GL_COMPILE);
 	textGeometryChromium(thick);
@@ -156,15 +158,15 @@ static const char *skillString(int i)
 {
 	switch(i)
 	{
-		case 2: return "fish in a barrel";
-		case 3: return "whimp"; 
-		case 4: return "easy";
-		case 5: return "normal"; 
-		case 6: return "experienced"; 
-		case 7: return "fun"; 
-		case 8: return "insane"; 
-		case 9: return "impossible";
-		default:return "-";
+		case 2: return _("fish in a barrel");
+		case 3: return _("whimp");
+		case 4: return _("easy");
+		case 5: return _("normal");
+		case 6: return _("experienced");
+		case 7: return _("fun");
+		case 8: return _("insane");
+		case 9: return _("impossible");
+		default:return _("-");
 	}
 }
 
@@ -286,7 +288,7 @@ void MenuGL::drawGL()
 			glColor4f(1.0, 1.0, 1.0, 0.6+0.2*r);
 			glTranslatef(-18.75, -8.5, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
-			game->text->Render("high scores");
+			game->text->Render(_("high scores"));
 			glTranslatef(-100.0, -30.0, 0.0);
 			char buf[16];
 			int i,len;
@@ -315,7 +317,7 @@ void MenuGL::drawGL()
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
 				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
 				len = strlen(buf);
-				trans = 80.0 + game->text->Advance("high scores") - game->text->Advance(buf);
+				trans = 80.0 + game->text->Advance(_("high scores")) - game->text->Advance(buf);
 				glTranslatef( trans, 0.0, 0.0 );
 				game->text->Render(buf);
 				glTranslatef( -trans, -30.0, 0.0) ;
@@ -344,19 +346,19 @@ void MenuGL::drawGL()
 			glTranslatef(-c*1.5, c, 0.0);
 			if(c < 3)	n = (int)c;
 			else		n = 3;
-			if(n>0) game->text->Render("the", n);
+			if(n>0) game->text->Render(_("the"), n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 10)	n = (int)(c-3);
 			else		n = 7;
-			if(n>0) game->text->Render("reptile", n);
+			if(n>0) game->text->Render(_("reptile"), n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 16)	n = (int)c-10;
 			else		n = 6;
-			if(n>0) game->text->Render("labour", n);
+			if(n>0) game->text->Render(_("labour"), n);
 			glTranslatef(c, -38+c, 0.0);
 			if(c < 23)	n = (int)(c-16);
 			else		n = 7;
-			if(n>0) game->text->Render("project", n);
+			if(n>0) game->text->Render(_("project"), n);
 			// font height is 23
 			glPopMatrix();
 		}
@@ -412,12 +414,12 @@ void MenuGL::drawGL()
 	
 	if(thickText && game->fps < 30)
 	{
-		//fprintf(stderr, "ATTENTION: Using 'thin' text to improve framerate...\n");
+		//fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
 		createLists( (thickText = false) );	
 	}
 	if(!thickText && game->fps > 40)
 	{
-		//fprintf(stderr, "ATTENTION: Reverting to 'thick' text...\n");
+		//fprintf(stderr, _("ATTENTION: Reverting to 'thick' text...\n"));
 		createLists( (thickText = true) );	
 	}
 	
@@ -432,7 +434,7 @@ void MenuGL::drawGL()
 		int interval = (mssgCount++)%500;
 		if(!interval)
 		{
-			strcpy(mssgText, mssgHelpText[mssgIndex%NumMssg]);
+			strcpy(mssgText, gettext(mssgHelpText[mssgIndex%NumMssg]));
 			mssgIndex++;
 		}
 		if(interval < 150)
@@ -447,7 +449,7 @@ void MenuGL::drawIndicator()
 {
 	Config	*config = Config::instance();
 	Global	*game = Global::getInstance();
-	char	buf[32];
+	char	buf[64];
 	float	szx = 10.0;
 	float	szy = txtHeight;
 	float	level = 0.0;
@@ -468,26 +470,26 @@ void MenuGL::drawIndicator()
 			level = config->gfxLevel()/2.0;
 			switch(config->gfxLevel())
 			{
-				case 0: sprintf(buf, "low"); break;
-				case 1: sprintf(buf, "med"); break;
-				case 2: sprintf(buf, "high"); break;
+				case 0: sprintf(buf, _("low")); break;
+				case 1: sprintf(buf, _("med")); break;
+				case 2: sprintf(buf, _("high")); break;
 			}
 			break;
 		case ScreenSize: 
 			level = (float)config->screenSize()/(float)MAX_SCREEN_SIZE; 
 			switch(config->screenSize())
 			{
-				case 0: sprintf(buf, "512x384"); break;
-				case 1: sprintf(buf, "640x480"); break;
-				case 2: sprintf(buf, "800x600"); break;
-				case 3: sprintf(buf, "1024x768"); break;
-				case 4: sprintf(buf, "1280x960"); break;
+				case 0: sprintf(buf, _("512x384")); break;
+				case 1: sprintf(buf, _("640x480")); break;
+				case 2: sprintf(buf, _("800x600")); break;
+				case 3: sprintf(buf, _("1024x768")); break;
+				case 4: sprintf(buf, _("1280x960")); break;
 			}
 			break;
 		case FullScreen: 
 			level = (float)config->fullScreen(); 
-			if(config->fullScreen()) sprintf(buf, "true");
-			else sprintf(buf, "false");
+			if(config->fullScreen()) sprintf(buf, _("true"));
+			else sprintf(buf, _("false"));
 			break;
 		case Sound: 
 			level = config->volSound(); 
@@ -827,7 +829,7 @@ void MenuGL::incItem()
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
-				sprintf(mssgText, "---- you must complete level %d before you can select level %d ----", config->maxLevel(), game->gameLevel);
+				sprintf(mssgText, _("---- you must complete level %d before you can select level %d ----"), config->maxLevel(), game->gameLevel);
 				game->gameLevel = config->maxLevel();
 			}
 			else

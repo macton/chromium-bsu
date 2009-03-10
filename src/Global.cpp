@@ -5,6 +5,13 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "gettext.h"
+
 #include "Global.h"
 #include "extern.h"
 #include "HiScore.h"
@@ -104,7 +111,7 @@ Global *Global::init()
 	}
 	else
 	{
-		fprintf(stderr, "WARNING: Global::init() has already been called.\n");
+		fprintf(stderr, _("WARNING: Global::init() has already been called.\n"));
 	}
 	return Global::instance;
 }
@@ -200,7 +207,7 @@ void Global::gotoNextLevel()
 //----------------------------------------------------------
 void Global::createGame()
 {
-//	fprintf(stderr, "begin startup...");
+//	fprintf(stderr, _("begin startup..."));
 	mainGL		= new MainGL();
 	explosions	= new Explosions();
 	enemyFleet	= new EnemyFleet();
@@ -232,13 +239,13 @@ void Global::createGame()
 	newGame();
 	
 	audio->setMusicMode(Audio::MusicMenu);
-	fprintf(stderr, "...startup complete.\n");
+	fprintf(stderr, _("...startup complete.\n"));
 }
 
 //----------------------------------------------------------
 void Global::deleteGame()
 {
-//	fprintf(stderr, "begin shutdown...\n");
+//	fprintf(stderr, _("begin shutdown...\n"));
 	delete mainGL;
 	delete enemyFleet;
 	delete hero;
@@ -251,13 +258,13 @@ void Global::deleteGame()
 	delete menu;
 	delete itemAdd;
 	delete audio;
-//	fprintf(stderr, "...shutdown complete.\n");
+//	fprintf(stderr, _("...shutdown complete.\n"));
 }
 
 //----------------------------------------------------------
 void Global::deleteTextures()
 {
-	fprintf(stderr, "deleteTextures()\n");
+	fprintf(stderr, _("deleteTextures()\n"));
 //	return;
 	glFinish();
 	mainGL->deleteTextures();
@@ -276,7 +283,7 @@ void Global::deleteTextures()
 //----------------------------------------------------------
 void Global::loadTextures()
 {
-	fprintf(stderr, "Global::loadTextures()\n");
+	fprintf(stderr, _("Global::loadTextures()\n"));
 //	return;
 	glFinish();
 	mainGL->loadTextures();
@@ -338,7 +345,7 @@ void Global::generateRandom(bool r)
 	Global::randIndex = 0;
 	if(r)
 	{
-		fprintf(stderr, "randomizing.\n");
+		fprintf(stderr, _("randomizing.\n"));
 		for(int i = 0; i < 256; i++)
 		{
 			randI[i] = rand();

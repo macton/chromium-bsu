@@ -12,6 +12,8 @@
 
 #ifdef TEXT_FTGL
 
+#include "gettext.h"
+
 #include "TextFTGL.h"
 
 #include <sys/stat.h>
@@ -30,10 +32,10 @@ TextFTGL::TextFTGL()
 	ftFont = new FTBufferFont(fontFile);
 	if(ftFont->Error())
 	{
-		fprintf(stderr, "FTGL: error loading font: %s\n", fontFile);
+		fprintf(stderr, _("FTGL: error loading font: %s\n"), fontFile);
 		delete ftFont; ftFont = NULL;
 		free((void*)fontFile); fontFile = NULL;
-		throw "FTGL: error loading font";
+		throw _("FTGL: error loading font");
 	}
 	free((void*)fontFile); fontFile = NULL;
 	ftFont->FaceSize(24);
@@ -95,7 +97,12 @@ const char* TextFTGL::findFont()
 		FcPattern* pat;
 		FcPattern *match;
 
-		pat = FcNameParse((FcChar8 *)"Gothic Uralic");
+		/*
+		TRANSLATORS: If using the FTGL backend, this should be the font
+		name of a font that contains all the Unicode characters in use in
+		your translation.
+		*/
+		pat = FcNameParse((FcChar8 *)_("Gothic Uralic"));
 		FcConfigSubstitute(0, pat, FcMatchPattern);
 
 		FcPatternDel(pat, FC_WEIGHT);
@@ -120,9 +127,35 @@ const char* TextFTGL::findFont()
 
 	// Check a couple of common paths for Gothic Uralic/bold as a last resort
 	// Debian
+	/*
+	TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+	font that contains all the Unicode characters in use in	your translation.
+	If the font is available in Debian it should be the Debian path.
+	*/
+	CHECK_FONT_PATH(_("/usr/share/fonts/truetype/uralic/gothub__.ttf"))
+	/*
+	TRANSLATORS: If using the FTGL backend, this should be the path of a
+	font that contains all the Unicode characters in use in	your translation.
+	If the font is available in Debian it should be the Debian path.
+	*/
+	CHECK_FONT_PATH(_("/usr/share/fonts/truetype/uralic/gothu___.ttf"))
+	// Mandrake
+	/*
+	TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+	font that contains all the Unicode characters in use in	your translation.
+	If the font is available in Mandrake it should be the Mandrake path.
+	*/
+	CHECK_FONT_PATH(_("/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"))
+	/*
+	TRANSLATORS: If using the FTGL backend, this should be the path of a
+	font that contains all the Unicode characters in use in	your translation.
+	If the font is available in Mandrake it should be the Mandrake path.
+	*/
+	CHECK_FONT_PATH(_("/usr/share/fonts/TTF/uralic/GOTHU___.TTF"))
+
+	// Check the non-translated versions of the above
 	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothub__.ttf")
 	CHECK_FONT_PATH("/usr/share/fonts/truetype/uralic/gothu___.ttf")
-	// Mandrake
 	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHUB__.TTF")
 	CHECK_FONT_PATH("/usr/share/fonts/TTF/uralic/GOTHU___.TTF")
 

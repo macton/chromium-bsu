@@ -12,6 +12,8 @@
 
 #ifdef TEXT_GLC
 
+#include "gettext.h"
+
 #include "TextGLC.h"
 
 #include <cstdlib>
@@ -25,11 +27,18 @@ TextGLC::TextGLC() : Text()
 	context = glcGenContext();
 	glcContext(context);
 	if( GLC_NONE != glcGetError() )
-		throw "GLC: couldn't set context";
+		throw _("GLC: couldn't set context");
 
 	// Get default font
 	defaultFont = glcGenFontID();
-	glcNewFontFromFamily(defaultFont, "Gothic Uralic");
+	/*
+	TRANSLATORS: If using the GLC backend, this should be the font
+	name of a font that contains all the Unicode characters in use in
+	your translation. The GLC renderer will fall back on other fonts
+	if some characters are not available though, so choose a font
+	that your language looks good in.
+	*/
+	glcNewFontFromFamily(defaultFont, _("Gothic Uralic"));
 	glcFontFace(defaultFont, "Bold");
 	glcFont(defaultFont);
 

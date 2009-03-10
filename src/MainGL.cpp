@@ -6,10 +6,12 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
- 
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include "gettext.h"
 
 #include "MainGL.h"
 
@@ -74,7 +76,7 @@ MainGL::~MainGL()
 int MainGL::initGL()
 {
 	Config *config = Config::instance();
-//	fprintf(stderr, "initGL()\n");
+//	fprintf(stderr, _("initGL()\n"));
 	reshapeGL(config->screenW(), config->screenH());
 
 	glDisable(GL_DEPTH_TEST);
@@ -134,12 +136,12 @@ void MainGL::loadTextures()
 	}
 	catch (char* str)
 	{
-		fprintf(stderr, "chromium: error loading font: %s\n", str);
+		fprintf(stderr, _("chromium: error loading font: %s\n"), str);
 		exit(1);
 	}
 	catch (...)
 	{
-		fprintf(stderr, "chromium: error loading font\n");
+		fprintf(stderr, _("chromium: error loading font\n"));
 		exit(1);
 	}
 }
@@ -169,7 +171,7 @@ void MainGL::drawGL()
 			game->menu->drawGL();
 			break;
 		default:
-			fprintf(stderr, "!!MainGL::drawGL() HUH?\n");
+			fprintf(stderr, _("!!MainGL::drawGL() HUH?\n"));
 			break;
 	}
 }
@@ -294,20 +296,20 @@ void MainGL::drawDeadGL()
 	int		skill = config->intSkill();
 	float	heroScore = game->hero->getScore();
 	HiScore *hiScore = HiScore::getInstance();
-	char buffer[128];
+	char buffer[256];
 	if(hiScore->check(skill, heroScore) == 1)
 	{
-		sprintf(buffer, "new high score!\n\n%d", (int)heroScore);
+		sprintf(buffer, _("new high score!\n\n%d"), (int)heroScore);
 		drawTextGL(buffer, game->heroDeath, 0.15);
 	}
 	else if(hiScore->check(skill, heroScore) > 1)
 	{
-		sprintf(buffer, "n o t   b a d !\nrank : %d\n\n%d", hiScore->check(skill, heroScore), (int)heroScore);
+		sprintf(buffer, _("n o t   b a d !\nrank : %d\n\n%d"), hiScore->check(skill, heroScore), (int)heroScore);
 		drawTextGL(buffer, game->heroDeath, 0.15);	
 	}
 	else
 	{
-		drawTextGL("l o s e r", game->heroDeath, 0.25);
+		drawTextGL(_("l o s e r"), game->heroDeath, 0.25);
 	}
 }
 
@@ -364,15 +366,15 @@ void MainGL::drawSuccessGL()
 	//-- Draw stats
 	game->statusDisplay->drawGL(game->hero);
 		
-	char	buffer[256];
-	sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
+	char	buffer[512];
+	sprintf(buffer, _("congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n"), game->gameLevel);
 //	if(game->hero->getScore() > game->hiScore[config->intSkill()][0])
 //	{
-//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n", game->gameLevel);
+//		sprintf(buffer, _("congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \n"), game->gameLevel);
 //	}
 //	else
 //	{
-//		sprintf(buffer, "congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \nn e w   h i g h   s c o r e : \n %g \n", game->gameLevel, game->hero->getScore());
+//		sprintf(buffer, _("congratulations!\n \nl e v e l\n %d \nc o m p l e t e\n \nn e w   h i g h   s c o r e : \n %g \n"), game->gameLevel, game->hero->getScore());
 //	}
 	
 	drawTextGL(buffer, game->heroSuccess, 0.15);

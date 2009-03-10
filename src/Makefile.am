@@ -9,6 +9,8 @@ chromium_CPPFLAGS = \
 	$(GLPNG_CFLAGS) \
 	$(WINDOW_CFLAGS) \
 	$(AUDIO_CFLAGS) \
+	"-DPACKAGE=\"$(PACKAGE)\"" \
+	"-DLOCALEDIR=\"$(localedir)\"" \
 	"-DPKGDATADIR=\"$(pkgdatadir)\""
 
 chromium_LDADD = \
@@ -55,6 +57,7 @@ chromium_SOURCES = \
 	Explosions.cpp \
 	Explosions.h \
 	extern.h \
+	gettext.h \
 	Global.cpp \
 	Global.h \
 	Ground.cpp \

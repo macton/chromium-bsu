@@ -36,6 +36,10 @@ AC_ARG_WITH(macintosh,
 
 # Libraries
 
+# gettext for internationalisation
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.15])
+
 # Need OpenGL and GLU for drawing stuff
 AX_CHECK_GL
 AX_CHECK_GLU
@@ -225,6 +229,7 @@ AC_CONFIG_FILES([
 	misc/Makefile
 	src/Makefile
 	m4/Makefile
+	po/Makefile.in
 ])
 
 AC_OUTPUT

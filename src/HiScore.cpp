@@ -5,6 +5,13 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "gettext.h"
+
 #include "HiScore.h"
 #include "extern.h"
 
@@ -39,7 +46,7 @@ HiScore::HiScore()
 				default: hiScore[i][j] = 99.0; break;
 			}
 			//-- default player
-			sprintf(hiScoreName[i][j], "nobody");
+			sprintf(hiScoreName[i][j], _("nobody"));
 			//-- default date (01/01/2000);
 			hiScoreDate[i][j] = 946713600;
 		}
@@ -64,7 +71,7 @@ HiScore *HiScore::init()
 	}
 	else
 	{
-		fprintf(stderr, "WARNING: HiScore::init() has already been called.\n");
+		fprintf(stderr, _("WARNING: HiScore::init() has already been called.\n"));
 	}
 	return HiScore::instance;
 }
@@ -180,7 +187,7 @@ bool HiScore::saveFile()
 	}
 	else
 	{
-		fprintf(stderr, "WARNING: could not write score file (%s)\n", getFileName());
+		fprintf(stderr, _("WARNING: could not write score file (%s)\n"), getFileName());
 		retVal = false;
 	}
 	return retVal;
@@ -207,7 +214,7 @@ bool HiScore::readFile()
 	}
 	else 
 	{
-		fprintf(stderr, "WARNING: could not read score file (%s)\n", getFileName());
+		fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
 		retVal = false;
 	}
 		
@@ -298,13 +305,13 @@ int HiScore::check(int skill, float score)
 void HiScore::print(int skill)
 {
 	struct tm *tmptr; 
-	fprintf(stderr, "high scores:\n");
+	fprintf(stderr, _("high scores:\n"));
 	for(int j = 0; j < HI_SCORE_HIST; j++)
 	{
 		tmptr = localtime(&hiScoreDate[skill][j]);
 		if (!tmptr)
 			break;
-		fprintf(stderr, "%02d/%02d/%04d %16s %d\n", 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
+		fprintf(stderr, _("%02d/%02d/%04d %16s %d\n"), 1+tmptr->tm_mon, tmptr->tm_mday, 1900+tmptr->tm_year,
 				hiScoreName[skill][j], (int)(hiScore[skill][j]));
 	}
 }

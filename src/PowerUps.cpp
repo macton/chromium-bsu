@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "PowerUps.h"
 
 #include <cstdio>
@@ -138,7 +140,7 @@ void	PowerUps::clear()
 	cur = pwrUpRoot->next;
 	while(cur)
 	{
-//		fprintf(stderr, "cur = %p\n", cur);
+//		fprintf(stderr, _("cur = %p\n"), cur);
 		del = cur;
 		cur = cur->next;
 		game->itemAdd->killScreenItem(del);
@@ -176,7 +178,7 @@ void	PowerUps::remove(PowerUp *pwr)
 	}
 	game->itemAdd->killScreenItem(pwr);
 	activeCount--;
-	fprintf(stderr, "active power ups = %d\n", activeCount);
+	fprintf(stderr, _("active power ups = %d\n"), activeCount);
 //	delete pwr;
 }
 
@@ -364,7 +366,7 @@ void PowerUp::seal()
 	}
 	else
 	{
-		fprintf(stderr, "?? PowerUp::seal()");
+		fprintf(stderr, _("?? PowerUp::seal()"));
 	}
 }
 	

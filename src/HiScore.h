@@ -45,7 +45,7 @@ private:
 	static HiScore	*instance;
 	
 	double	hiScore[10][HI_SCORE_HIST];
-	char	hiScoreName[10][HI_SCORE_HIST][64];
+	char	hiScoreName[10][HI_SCORE_HIST][100];
 	time_t	hiScoreDate[10][HI_SCORE_HIST];
 
 	HiScore();

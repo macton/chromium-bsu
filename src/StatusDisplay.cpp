@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "StatusDisplay.h"
 
 #include <cstdio>
@@ -647,11 +649,11 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glScalef(0.21, 0.21, 1.0);
 		glPushMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.05)) );
-		game->text->Render("p a u s e d");
+		game->text->Render(_("p a u s e d"));
 		glPopMatrix();
 		glColor4f(1.0, 1.0, 1.0, 0.10*fabs(sin(game->frame*0.03)) );
 		glTranslatef(off[0], off[1], 0.0);
-		game->text->Render("p a u s e d");
+		game->text->Render(_("p a u s e d"));
 		glPopMatrix();
 	}
 	if( game->tipShipPast == 1 && game->gameLevel == 1)
@@ -671,7 +673,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipShipShow/300.0 );
-		const char *str = "do not let -any- ships past you! each one costs you a life!";
+		const char *str = _("do not let -any- ships past you! each one costs you a life!");
 		game->text->Render(str);
 		glPopMatrix();
 	}
@@ -682,7 +684,7 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		glTranslatef(-16, 13.0, 0.0);
 		glScalef(0.035, 0.035, 1.0);
 		glColor4f(1.0, 1.0, 1.0, tipSuperShow/300.0 );
-		const char *str = "let super shields pass by for an extra life!";
+		const char *str = _("let super shields pass by for an extra life!");
 		game->text->Render(str);
 		glPopMatrix();
 	}

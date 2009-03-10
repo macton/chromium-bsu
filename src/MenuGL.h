@@ -87,7 +87,7 @@ private:
 	float 	titleTilt;
 	
 	float	mssgAlpha;
-	char	mssgText[256];
+	char	mssgText[512];
 	int		mssgIndex;
 	int		mssgCount;
 	bool	mssgHelpOverride;

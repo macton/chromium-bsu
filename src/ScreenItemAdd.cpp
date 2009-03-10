@@ -5,6 +5,13 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "gettext.h"
+
 #include "ScreenItemAdd.h"
 
 #include <cstdio>
@@ -92,7 +99,7 @@ void ScreenItemAdd::putScreenItems()
 					game->powerUps->addPowerUp( (PowerUp*)(curItem->item) );
 					break;
 				case ScreenItem::ItemHero:
-					fprintf(stderr, "ScreenItemAdd::putScreenItems() Hero??? HUH???\n");
+					fprintf(stderr, _("ScreenItemAdd::putScreenItems() Hero??? HUH???\n"));
 					break;
 			}
 			//delItem = curItem;

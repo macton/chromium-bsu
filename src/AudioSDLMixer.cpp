@@ -12,6 +12,8 @@
 
 #ifdef AUDIO_SDLMIXER
  
+#include "gettext.h"
+
 #include "AudioSDLMixer.h"
 
 #include <cstdio>
@@ -60,7 +62,7 @@ void	AudioSDLMixer::initSound()
 	Config	*config = Config::instance();
     if ( Mix_OpenAudio (22050, AUDIO_S16, 2, 512) < 0 )
 	{
-		fprintf(stderr, "ERROR initializing audio - AudioSDLMixer::initSound()\n");
+		fprintf(stderr, _("ERROR initializing audio - AudioSDLMixer::initSound()\n"));
         config->setAudio(false);
 	}
 	else

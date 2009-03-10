@@ -5,6 +5,13 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include "gettext.h"
+
 #include "EnemyAircraft.h"
 
 #include <cstdio>
@@ -101,7 +108,7 @@ void EnemyAircraft::init(float *p, float randFact)
 //----------------------------------------------------------
 void EnemyAircraft::printNumAllocated(void)
 {
-	fprintf(stderr, "%d EnemyAircraft allocated\n", allocated);
+	fprintf(stderr, _("%d EnemyAircraft allocated\n"), allocated);
 }
 
 //----------------------------------------------------------

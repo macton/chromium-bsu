@@ -12,6 +12,8 @@
 
 #ifdef AUDIO_OPENAL
 
+#include "gettext.h"
+
 #include "AudioOpenAL.h"
 
 #ifdef macintosh
@@ -144,7 +146,7 @@ AudioOpenAL::AudioOpenAL()
 		}
 		else
 		{
-			fprintf(stderr, "alAttenuationScale == 0. Kludge it.\n");
+			fprintf(stderr, _("alAttenuationScale == 0. Kludge it.\n"));
 			audioScale[0] = 0.5;
 			audioScale[1] = 0.3;
 			audioScale[2] = 0.3;
@@ -157,14 +159,14 @@ AudioOpenAL::AudioOpenAL()
 		if(config->usePlayList() && !cdrom)
 			loadMusicList();
 	}
-//	fprintf(stderr, "AudioOpenAL::Audio done\n");
+//	fprintf(stderr, _("AudioOpenAL::Audio done\n"));
 }
 
 AudioOpenAL::~AudioOpenAL()
 {
 	if(initialized)
 	{
-		fprintf(stderr, "stopping OpenAL...");
+		fprintf(stderr, _("stopping OpenAL..."));
 	
 		#ifdef CD_VOLUME
 		if(cdrom && alcSetAudioChannel)
@@ -176,7 +178,7 @@ AudioOpenAL::~AudioOpenAL()
 		if(cdrom)
 			SDL_CDStop(cdrom);
 
-		checkError("AudioOpenAL::~Audio()");
+		checkError(_("AudioOpenAL::~Audio()"));
 
 		alDeleteSources(NUM_EXPLO_POP-1, sourceExploPop);
 		alDeleteSources(NUM_EXPLO-1, sourceExplosion);
@@ -195,7 +197,7 @@ AudioOpenAL::~AudioOpenAL()
 		
 		alutExit();
 
-		fprintf(stderr, "done.\n");
+		fprintf(stderr, _("done.\n"));
 	}
 
 	delete soundQueue;
@@ -240,10 +242,12 @@ bool AudioOpenAL::createContext()
 
 	if(!context_id)
 	{
-		fprintf(stderr, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-		fprintf(stderr, "!! ATTENTION !! - one or more errors were encountered during audio check.\n");
-		fprintf(stderr, "!!                Audio will be disabled.\n");
-		fprintf(stderr, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		fprintf(stderr, _(
+			"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+			"!! ATTENTION !! - one or more errors were encountered during audio check.\n"
+			"!!                Audio will be disabled.\n"
+			"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+		));
 	}
 	return (bool)context_id;
 }
@@ -259,15 +263,17 @@ void AudioOpenAL::initSound()
 	int i;
 	ALfloat pos[] = { 0.0, -5.0,  25.0 };
 	
-//	fprintf(stderr, "AudioOpenAL::initSound() begin...\n");
+//	fprintf(stderr, _("AudioOpenAL::initSound() begin...\n"));
 			
-	fprintf(stderr, "-OpenAL-----------------------------------------------------\n");
-	fprintf(stderr, "Vendor     : %s\n", alGetString( AL_VENDOR ) );
-	fprintf(stderr, "Renderer   : %s\n", alGetString( AL_RENDERER ) );
-	fprintf(stderr, "Version    : %s\n", alGetString( AL_VERSION ) );
-//	fprintf(stderr, "Extensions : %s\n", alGetString( AL_EXTENSIONS ) );
+	fprintf(stderr, _(
+		"-OpenAL-----------------------------------------------------\n"
+		"Vendor     : %s\n"
+		"Renderer   : %s\n"
+		"Version    : %s\n"),
+		alGetString(AL_VENDOR), alGetString(AL_RENDERER), alGetString(AL_VERSION) );
+//	fprintf(stderr, _("Extensions : %s\n"), alGetString( AL_EXTENSIONS ) );
 	printExtensions(stderr,  (const char*)alGetString( AL_EXTENSIONS ));
-	fprintf(stderr, "------------------------------------------------------------\n");
+	fprintf(stderr, _("------------------------------------------------------------\n"));
 
 	alutInitWithoutContext(0, NULL);
 
@@ -298,7 +304,7 @@ void AudioOpenAL::initSound()
 	
 	for(i = 0; i < NumSoundTypes; i++)
 	{
-		warning("Audio.cpp - init %s", fileNames[i]);
+		warning(_("Audio.cpp - init %s"), fileNames[i]);
 		alSourcefv( source[i], AL_POSITION, pos );
 		alSourcei ( source[i], AL_LOOPING, AL_FALSE);
 		alSourcei ( source[i], AL_BUFFER, buffer[i] );
@@ -311,7 +317,7 @@ void AudioOpenAL::initSound()
 	sourceExplosion[NUM_EXPLO-1] = source[Explosion];
 	for(i = 0; i < NUM_EXPLO-1; i++)
 	{
-		warning("Audio.cpp - init explosion %d", i);
+		warning(_("Audio.cpp - init explosion %d"), i);
 		alSourcefv( sourceExplosion[i], AL_POSITION, pos );
 		alSourcei ( sourceExplosion[i], AL_LOOPING, AL_FALSE);
 		alSourcei ( sourceExplosion[i], AL_BUFFER, buffer[Explosion] );
@@ -324,7 +330,7 @@ void AudioOpenAL::initSound()
 	sourceExploPop[NUM_EXPLO_POP-1] = source[ExploPop];
 	for(i = 0; i < NUM_EXPLO_POP-1; i++)
 	{
-		warning("Audio.cpp - init exploPop %d", i);
+		warning(_("Audio.cpp - init exploPop %d"), i);
 		alSourcefv( sourceExploPop[i], AL_POSITION, pos );
 		alSourcei ( sourceExploPop[i], AL_LOOPING, AL_FALSE);
 		alSourcei ( sourceExploPop[i], AL_BUFFER, buffer[ExploPop] );
@@ -337,7 +343,7 @@ void AudioOpenAL::initSound()
 	setMusicVolume(config->volMusic());
 		
 	initialized = true;
-	warning("Audio.cpp - initSound complete.", i);
+	warning(_("Audio.cpp - initSound complete."), i);
 }
 	
 //----------------------------------------------------------
@@ -352,7 +358,7 @@ void AudioOpenAL::checkForExtensions()
 
 	alGetError(); // Don't care what the problem is
 	if(alAttenuationScale == NULL) 
-		fprintf(stderr, "ATTENTION!! Could not load alAttenuationScale\n");
+		fprintf(stderr, _("ATTENTION!! Could not load alAttenuationScale\n"));
 	else
 		alAttenuationScale(6.0);
 	
@@ -417,7 +423,7 @@ void AudioOpenAL::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void AudioOpenAL::setMusicMode(SoundType mode)
 {
-//	fprintf(stderr, "AudioOpenAL::setMusicMode(SoundType mode)\n");
+//	fprintf(stderr, _("AudioOpenAL::setMusicMode(SoundType mode)\n"));
 	Global	*game = Global::getInstance();
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
@@ -453,7 +459,7 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void AudioOpenAL::setSoundVolume(float vol)
 {
-//	fprintf(stderr, "AudioOpenAL::setSoundVolume(%f)\n", vol);
+//	fprintf(stderr, _("AudioOpenAL::setSoundVolume(%f)\n"), vol);
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{
@@ -497,7 +503,7 @@ void AudioOpenAL::setMusicVolume(float vol)
 			alcSetAudioChannel(ALC_CHAN_CD_LOKI, musicVolume);
 		}
 #endif
-//		fprintf(stderr, "Music volume = %f\n", vol);
+//		fprintf(stderr, _("Music volume = %f\n"), vol);
 	}
 }
 
@@ -513,7 +519,7 @@ void AudioOpenAL::loadSounds()
 	{
 		if(!fileNames[i])
 		{
-			fprintf(stderr, "\nERROR! - sound enumerant index %d does not have valid filename!\n", i);
+			fprintf(stderr, _("\nERROR! - sound enumerant index %d does not have valid filename!\n"), i);
 		}
 		else
 		{
@@ -536,7 +542,7 @@ void AudioOpenAL::loadSounds()
 #else //_WIN32
 			char nameBuffer[256];
 			sprintf(nameBuffer, "%s", dataLoc(fileNames[i]));
-			fprintf(stderr, "alutLoadWAVFile(\"%s\",...);\n", nameBuffer);
+			fprintf(stderr, _("alutLoadWAVFile(\"%s\",...);\n"), nameBuffer);
 			alutLoadWAVFile(nameBuffer,&format,&data,&size,&freq);
 			alBufferData(buffer[i],format,data,size,freq);
 			alutUnloadWAV(format,data,size,freq);
@@ -552,17 +558,17 @@ void AudioOpenAL::checkError(const char* tag)
 	ALenum	error = alGetError();
 	if(error != AL_NO_ERROR)
 	{
-		fprintf(stderr, "ERROR!! <%s> alGetError() = %s\n", tag, alGetString(error) );
+		fprintf(stderr, _("ERROR!! <%s> alGetError() = %s\n"), tag, alGetString(error) );
 	}
 //	error = alcGetError();
 //	if(error != ALC_NO_ERROR)
 //	{
-//		fprintf(stderr, "ERROR!! <%s> alcGetError() = %s\n", tag, alcGetString(error) );
+//		fprintf(stderr, _("ERROR!! <%s> alcGetError() = %s\n"), tag, alcGetString(error) );
 //	}
 	error = alutGetError();
 	if(error != ALUT_ERROR_NO_ERROR)
 	{
-		fprintf(stderr, "ERROR!! <%s> alutGetError() = %s\n", tag, alutGetErrorString(error) );
+		fprintf(stderr, _("ERROR!! <%s> alutGetError() = %s\n"), tag, alutGetErrorString(error) );
 	}
 }
 
@@ -639,7 +645,7 @@ void AudioOpenAL::playSound(SoundType type, float *pos, int age)
 						alSourceStop(source[type]);
 						alSourcefv( source[type], AL_POSITION, p );
 						alSourcePlay(source[type]);
-//						fprintf(stderr, "play %d\n", type);
+//						fprintf(stderr, _("play %d\n"), type);
 						break;
 				}
 			}
@@ -712,8 +718,7 @@ void AudioOpenAL::loadMusicList()
 			lineCount++;
 			if(strlen(buffer) > 255)
 			{
-				fprintf(stderr, "ERROR: \"%s\", line %d\n", configFilename, lineCount);
-				fprintf(stderr, "       filename too long!\n");
+				fprintf(stderr, _("ERROR: filename too long: \"%s\", line %d\n"), configFilename, lineCount);
 			}
 			else if(strlen(buffer) > 4)
 			{
@@ -731,8 +736,7 @@ void AudioOpenAL::loadMusicList()
 						}
 						else
 						{
-							fprintf(stderr, "WARNING: \"%s\", line %d\n", configFilename, lineCount);
-							fprintf(stderr, "         MP3 support not available.\n");
+							fprintf(stderr, _("WARNING: MP3 support not available: \"%s\", line %d\n"), configFilename, lineCount);
 						}
 						break;
 					case OGG:
@@ -743,13 +747,11 @@ void AudioOpenAL::loadMusicList()
 						}
 						else
 						{
-							fprintf(stderr, "WARNING: \"%s\", line %d\n", configFilename, lineCount);
-							fprintf(stderr, "         Ogg/Vorbis support not available.\n");
+							fprintf(stderr, _("WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"), configFilename, lineCount);
 						}
 						break;
 					default:
-						fprintf(stderr, "WARNING: \"%s\", line %d\n", configFilename, lineCount);
-						fprintf(stderr, "         file type not recognized: \"%s\"\n", buffer);
+						fprintf(stderr, _("WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"), buffer, configFilename, lineCount);
 						break;
 				}
 			}
@@ -762,12 +764,12 @@ void AudioOpenAL::loadMusicList()
 	if(musicMax < 1)
 		config->setUsePlayList(false);
 	
-	fprintf(stderr, "music playlist:\n");
+	fprintf(stderr, _("music playlist:\n"));
 	for(i = 0; i < musicMax; i++)
 	{
-		fprintf(stderr, " %2d : %s\n", i+1, musicFile[i]);
+		fprintf(stderr, _(" %2d : %s\n"), i+1, musicFile[i]);
 	}
-	fprintf(stderr, "loaded %s\n", configFilename);
+	fprintf(stderr, _("loaded %s\n"), configFilename);
 }
 
 /**
@@ -792,7 +794,7 @@ void AudioOpenAL::setMusicIndex(int index)
 		bool loadSuccess = true;
 		if(config->audioEnabled())
 		{
-			checkError("AudioOpenAL::setMusicIndex -- begin");
+			checkError(_("AudioOpenAL::setMusicIndex -- begin"));
 			//-- if music is currently playing, we want to 
 			//   re-start playing after loading new song
 			ALint state = AL_INITIAL;
@@ -805,10 +807,10 @@ void AudioOpenAL::setMusicIndex(int index)
 				wasPlaying = true;
 
 			alSourceStop(source[MusicGame]);
-			checkError("AudioOpenAL::setMusicIndex -- before setting source buffer to 0");
+			checkError(_("AudioOpenAL::setMusicIndex -- before setting source buffer to 0"));
 			alSourcei(source[MusicGame], AL_BUFFER, 0);	
 //			alSourcei(source[MusicGame], AL_BUFFER, AL_NONE);	
-			checkError("AudioOpenAL::setMusicIndex -- after setting source buffer to 0");
+			checkError(_("AudioOpenAL::setMusicIndex -- after setting source buffer to 0"));
 			alDeleteBuffers(1 , &buffer[MusicGame]);
 			alGenBuffers(1, &buffer[MusicGame]);
 			switch(extensionFormat(musicFile[musicIndex]))
@@ -843,7 +845,7 @@ void AudioOpenAL::setMusicIndex(int index)
 				loadSuccess = loadWAV(dataLoc(fileNames[MusicGame]));
 			}
 		}
-		checkError("AudioOpenAL::setMusicIndex -- end");
+		checkError(_("AudioOpenAL::setMusicIndex -- end"));
 	}
 	else if(initialized)
 	{
@@ -893,8 +895,7 @@ AudioOpenAL::AudioFormat AudioOpenAL::extensionFormat(char* filename)
 bool AudioOpenAL::loadWAV(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, "WARNING: %s\n", filename);
-	fprintf(stderr, "         PlayList support not compiled into Chromium (AudioOpenAL.cpp)\n");
+	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else //USE_PLAYLIST
 #if defined(ALUT_API_MAJOR_VERSION) && ALUT_API_MAJOR_VERSION >= 1
@@ -927,8 +928,7 @@ bool AudioOpenAL::loadWAV(const char *filename)
 bool AudioOpenAL::loadMP3(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, "WARNING: %s\n", filename);
-	fprintf(stderr, "         PlayList support not compiled into Chromium (AudioOpenAL.cpp)\n");
+	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else//USE_PLAYLIST
 	FILE	*file;
@@ -945,13 +945,13 @@ bool AudioOpenAL::loadMP3(const char *filename)
 	data = malloc(size);
 	if(!data)
 	{
-		fprintf(stderr, "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n");
+		fprintf(stderr, _("ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"));
 		return false;
 	}	
 	file = fopen(filename, "rb");
 	if(!file)
 	{
-		fprintf(stderr, "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n", filename);
+		fprintf(stderr, _("ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"), filename);
 		free(data);
 		return false;
 	}	
@@ -959,7 +959,7 @@ bool AudioOpenAL::loadMP3(const char *filename)
 	fclose(file);
 	if( !(alutLoadMP3(buffer[MusicGame], data, size)) ) 
 	{
-		fprintf(stderr, "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n");
+		fprintf(stderr, _("ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"));
 		free(data);
 		return false;
 	}
@@ -972,8 +972,7 @@ bool AudioOpenAL::loadMP3(const char *filename)
 bool AudioOpenAL::loadVorbis(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, "WARNING: %s\n", filename);
-	fprintf(stderr, "         PlayList support not compiled into Chromium (AudioOpenAL.cpp)\n");
+	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else//USE_PLAYLIST
 	if(initialized)
@@ -992,13 +991,13 @@ bool AudioOpenAL::loadVorbis(const char *filename)
 		data = malloc(size);
 		if(!data)
 		{
-			fprintf(stderr, "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n");
+			fprintf(stderr, _("ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"));
 			return false;
 		}	
 		file = fopen(filename, "rb");
 		if(!file)
 		{
-			fprintf(stderr, "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n", filename);
+			fprintf(stderr, _("ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"), filename);
 			free(data);
 			return false;
 		}	
@@ -1006,7 +1005,7 @@ bool AudioOpenAL::loadVorbis(const char *filename)
 		fclose(file);
 		if( !(alutLoadVorbis(buffer[MusicGame], data, size)) ) 
 		{
-			fprintf(stderr, "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n");
+			fprintf(stderr, _("ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"));
 			free(data);
 			return false;
 		}

@@ -10,6 +10,8 @@
 #include <config.h>
 #endif
 
+#include "gettext.h"
+
 #include "Audio.h"
 
 #include "Config.h"
@@ -102,13 +104,13 @@ void	Audio::initCDROM()
 #else // USE_SDL
 static const char *trackType(int t)
 {
-	static char buf[32];
+	static char buf[64];
 	switch(t)
 	{
-		case SDL_AUDIO_TRACK:	return "audio";
-		case SDL_DATA_TRACK:	return "data";
+		case SDL_AUDIO_TRACK:	return _("audio");
+		case SDL_DATA_TRACK:	return _("data");
 		default:
-			sprintf(buf, "UNKNOWN(type=%d)", t);
+			sprintf(buf, _("UNKNOWN(type=%d)"), t);
 			return buf;
 	}
 }
@@ -119,7 +121,7 @@ void Audio::initCDROM()
 	if(config->useCDROM())
 	{
 		tmp = SDL_CDNumDrives();
-		fprintf(stderr, "%d CDROM drive(s).\n", tmp);
+		fprintf(stderr, _("%d CDROM drive(s).\n"), tmp);
 		config->setCDROMCount(tmp);
 		if(tmp > 0)
 		{
@@ -130,11 +132,11 @@ void Audio::initCDROM()
 				if(tmp)
 				{
 					musicMax = cdrom->numtracks;
-					fprintf(stderr, "Tracks: %d\n", cdrom->numtracks);
+					fprintf(stderr, _("Tracks: %d\n"), cdrom->numtracks);
 					int music = 0;
 					for(int i = 0; i < cdrom->numtracks; i++)
 					{
-						fprintf(stderr, "track %2d: %s\n", i, trackType(cdrom->track[i].type));
+						fprintf(stderr, _("track %2d: %s\n"), i, trackType(cdrom->track[i].type));
 						// SDL BUG? 'type' should only be SDL_DATA_TRACK(0x04)or SDL_AUDIO_TRACK(0x00), but 
 						// this is returning SDL_AUDIO_TRACK=0x02 and SDL_DATA_TRACK=0x06 on some copied CDRs!
 						// Orignal CDs return correct values, but CDR duplications are off by 2!
@@ -143,14 +145,14 @@ void Audio::initCDROM()
 					}
 					if(!music)
 					{		
-						fprintf(stderr, "\n Data track(s) only. CD audio not available.\n\n");
+						fprintf(stderr, _("\n Data track(s) only. CD audio not available.\n\n"));
 						SDL_CDStop(cdrom);
 						cdrom = 0;
 					}
 					else
 					{
-						fprintf(stderr, "\n use_cdrom enabled. Set to '0' in ~/.chromium to disable.\n");
-						fprintf(stderr, " Press the \'N\' key to skip to next CD track during a game.\n\n");	
+						fprintf(stderr, _("\n use_cdrom enabled. Set to '0' in ~/.chromium to disable.\n"));
+						fprintf(stderr, _(" Press the \'N\' key to skip to next CD track during a game.\n\n"));
 					}	
 				}
 				else
@@ -161,7 +163,7 @@ void Audio::initCDROM()
 			}
 			else
 			{
-				fprintf(stderr, "ERROR! Could not access CDROM device %d : %s\n", config->CDROMDevice(), SDL_GetError());
+				fprintf(stderr, _("ERROR! Could not access CDROM device %d : %s\n"), config->CDROMDevice(), SDL_GetError());
 				SDL_ClearError();
 				config->setCDROMDevice(0); 
 			}
@@ -204,8 +206,8 @@ void	Audio::pauseGameMusic(bool status)
 				SDL_CDResume(cdrom);
 			else
 			{
-				fprintf(stderr, "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n", (int)status);
-				fprintf(stderr, "CDROM status = %d\n", cdromStatus);
+				fprintf(stderr, _("CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"), (int)status);
+				fprintf(stderr, _("CDROM status = %d\n"), cdromStatus);
 			}
 		}
 	}
@@ -293,7 +295,7 @@ void	Audio::setMusicIndex(int index)
 		bool	wasPlaying = false;
 		if(musicMax)
 			musicIndex = index%musicMax;
-		fprintf(stderr, "Audio::setMusicIndex(%d)\n", musicIndex);
+		fprintf(stderr, _("Audio::setMusicIndex(%d)\n"), musicIndex);
 		
 		if(cdrom)
 		{
@@ -310,7 +312,7 @@ void	Audio::setMusicIndex(int index)
 			}
 			else
 			{
-				fprintf(stderr, "track %d is data - trying next track...\n", musicIndex);
+				fprintf(stderr, _("track %d is data - trying next track...\n"), musicIndex);
 				Audio::setMusicIndex(musicIndex+1);
 			}
 		}

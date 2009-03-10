@@ -23,7 +23,7 @@ ScreenItem::ScreenItem(ItemType t)
 ScreenItem::~ScreenItem()
 {
 	itemCount--;
-//	fprintf(stderr, "ScreenItem::itemCount = %d\n", ScreenItem::itemCount);
+//	fprintf(stderr, _("ScreenItem::itemCount = %d\n"), ScreenItem::itemCount);
 }
 
 //----------------------------------------------------------

@@ -5,9 +5,12 @@
  * it and/or use it and/or modify it under the terms of the 
  * "Artistic License" 
  */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include "gettext.h"
 
 #include "MainGLUT.h"
 
@@ -65,7 +68,7 @@ MainGLUT::~MainGLUT()
 //----------------------------------------------------------
 bool MainGLUT::run()
 {
-	fprintf(stderr, "MainGLUT::run()\n");
+	fprintf(stderr, _("MainGLUT::run()\n"));
 	glutTimerFunc(100, MainGLUT::drawGame, 0);
 	glutMainLoop();
 	return true;
@@ -81,7 +84,7 @@ bool MainGLUT::checkErrors()
 	gl_error = glGetError( );
 	if( gl_error != GL_NO_ERROR ) 
 	{
-		fprintf(stderr, "ERROR!!! OpenGL error: %s\n", gluErrorString(gl_error) );
+		fprintf(stderr, _("ERROR!!! OpenGL error: %s\n"), gluErrorString(gl_error) );
 		retVal = true;
 	}
 
@@ -219,7 +222,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 			break;
 		
 	}
-//	fprintf(stderr, "key = %d\n", (int)key);
+//	fprintf(stderr, _("key = %d\n"), (int)key);
 }
 
 //----------------------------------------------------------

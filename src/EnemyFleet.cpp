@@ -239,7 +239,7 @@ void	EnemyFleet::drawGL()
 		thisEnemy = thisEnemy->next;
 	}
 //	if(num)
-//		fprintf(stderr, "num enemies on screen = %d\n", num);
+//		fprintf(stderr, _("num enemies on screen = %d\n"), num);
 }
 
 //----------------------------------------------------------
