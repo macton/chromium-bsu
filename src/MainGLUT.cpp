@@ -17,6 +17,7 @@
 #ifdef USE_GLUT
 
 #include <cstdio>
+#include <cstdlib>
 #include <unistd.h>
 
 #include <GL/glut.h>
