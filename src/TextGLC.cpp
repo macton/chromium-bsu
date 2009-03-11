@@ -110,11 +110,11 @@ float TextGLC::LineHeight(const char* str, const int len)
 	GLfloat bbox[8] = {0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f};
 
 	if( len == -1 )
-		glcMeasureString(GL_FALSE, str);
-	else
+		glcGetMaxCharMetric(GLC_BOUNDS, bbox);
+	else {
 		glcMeasureCountedString(GL_FALSE, len, str);
-
-	glcGetStringMetric(GLC_BOUNDS, bbox);
+		glcGetStringMetric(GLC_BOUNDS, bbox);
+	}
 
 	return (bbox[7] - bbox[1]) * 24.f;
 }
