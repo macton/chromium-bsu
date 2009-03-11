@@ -51,3 +51,30 @@ http://chromium-bsu.sf.net/faq.htm
 If you encounter any problems, please post a support request:
 
 http://sf.net/projects/chromium-bsu/support
+
+Development version
+---------------------
+
+Prerequisites
+------------------
+
+Install these when building from the VCS:
+
+autoconf
+automake
+gettext
+pkg-config
+autoconf-archive
+
+Pre-build step
+------------------
+
+Run this command to recreate the build system:
+
+autoreconf --symlink --install --force
+
+Then you can build and install in the current directory:
+
+./configure --prefix $PWD/install
+make install
+export PATH=$PWD/install:$PATH
