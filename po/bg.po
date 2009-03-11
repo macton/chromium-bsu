@@ -1,0 +1,931 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+#
+# Damyan Ivanov <dmn@debian.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
+"POT-Creation-Date: 2009-03-11 23:59+0900\n"
+"PO-Revision-Date: 2009-03-11 11:31+0200\n"
+"Last-Translator: Damyan Ivanov <dmn@debian.org>\n"
+"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: src/Audio.cpp:110
+msgid "audio"
+msgstr "аудио"
+
+#: src/Audio.cpp:111
+msgid "data"
+msgstr "данни"
+
+#: src/Audio.cpp:113
+#, c-format
+msgid "UNKNOWN(type=%d)"
+msgstr "НЕПОЗНАТ(тип=%d)"
+
+#: src/Audio.cpp:124
+#, c-format
+msgid "%d CDROM drive(s).\n"
+msgstr "%d компактдискови устройства.\n"
+
+#: src/Audio.cpp:135
+#, c-format
+msgid "Tracks: %d\n"
+msgstr "Пътечки: %d\n"
+
+#: src/Audio.cpp:139
+#, c-format
+msgid "track %2d: %s\n"
+msgstr "пътечка %2d: %s\n"
+
+#: src/Audio.cpp:148
+#, c-format
+msgid ""
+"\n"
+" Data track(s) only. CD audio not available.\n"
+"\n"
+msgstr ""
+"\n"
+" Само пътечки с данни. Няма налично CD аудио.\n"
+"\n"
+
+#: src/Audio.cpp:154
+#, c-format
+msgid ""
+"\n"
+" use_cdrom enabled. Set to '0' in ~/.chromium to disable.\n"
+msgstr ""
+"\n"
+" use_cdrom е разрешено. Задайте стойност „0“ в ~/.chromium за да го "
+"забраните.\n"
+
+#: src/Audio.cpp:155
+#, c-format
+msgid ""
+" Press the 'N' key to skip to next CD track during a game.\n"
+"\n"
+msgstr ""
+" Използвайте клавиша „N“ за прескачане до следващата песен по време на "
+"игра.\n"
+"\n"
+
+#: src/Audio.cpp:166
+#, c-format
+msgid "ERROR! Could not access CDROM device %d : %s\n"
+msgstr "ГРЕШКА! Няма достъп до цомпактдисково устройство %d : %s\n"
+
+#: src/Audio.cpp:209
+#, c-format
+msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
+msgstr ""
+"Грешка при работа с компактдисковото устройство в AudioOpenAL::pauseGameMusic"
+"(%d)\n"
+
+#: src/Audio.cpp:210
+#, c-format
+msgid "CDROM status = %d\n"
+msgstr "Състояние на компактдисково устройство: %d\n"
+
+#: src/Audio.cpp:298
+#, c-format
+msgid "Audio::setMusicIndex(%d)\n"
+msgstr "Audio::setMusicIndex(%d)\n"
+
+#: src/Audio.cpp:315
+#, c-format
+msgid "track %d is data - trying next track...\n"
+msgstr "пътечка №%d съдържа данни, опит със следващата...\n"
+
+#: src/AudioOpenAL.cpp:149
+#, c-format
+msgid "alAttenuationScale == 0. Kludge it.\n"
+msgstr "alAttenuationScale == 0. Хакване.\n"
+
+#: src/AudioOpenAL.cpp:169
+#, c-format
+msgid "stopping OpenAL..."
+msgstr "спиране на OpenAL..."
+
+#: src/AudioOpenAL.cpp:181
+msgid "AudioOpenAL::~Audio()"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:200 src/main.cpp:154
+#, c-format
+msgid "done.\n"
+msgstr "готово.\n"
+
+#: src/AudioOpenAL.cpp:246
+#, c-format
+msgid ""
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+"!! ATTENTION !! - one or more errors were encountered during audio check.\n"
+"!!                Audio will be disabled.\n"
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+msgstr ""
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+"!! ВНИМАНИЕ !! — възникнаха грешки при проверка на звуковата сустема.\n"
+"!!               Звуците ще бъдат забранени.\n"
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+
+#: src/AudioOpenAL.cpp:269
+#, c-format
+msgid ""
+"-OpenAL-----------------------------------------------------\n"
+"Vendor     : %s\n"
+"Renderer   : %s\n"
+"Version    : %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:276 src/MainSDL.cpp:102
+#, c-format
+msgid "------------------------------------------------------------\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:307
+#, c-format
+msgid "Audio.cpp - init %s"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:320
+#, c-format
+msgid "Audio.cpp - init explosion %d"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:333
+#, c-format
+msgid "Audio.cpp - init exploPop %d"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:346
+msgid "Audio.cpp - initSound complete."
+msgstr ""
+
+#: src/AudioOpenAL.cpp:361
+#, c-format
+msgid "ATTENTION!! Could not load alAttenuationScale\n"
+msgstr "ВНМАНИЕ!! Неуспех при зареждане на alAttenuationScale\n"
+
+#: src/AudioOpenAL.cpp:522
+#, c-format
+msgid ""
+"\n"
+"ERROR! - sound enumerant index %d does not have valid filename!\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:545
+#, c-format
+msgid "alutLoadWAVFile(\"%s\",...);\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:561
+#, c-format
+msgid "ERROR!! <%s> alGetError() = %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:571
+#, c-format
+msgid "ERROR!! <%s> alutGetError() = %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:721
+#, c-format
+msgid "ERROR: filename too long: \"%s\", line %d\n"
+msgstr "ГРЕШКА: името на файла е твърде дълго: „%s“, ред %d\n"
+
+#: src/AudioOpenAL.cpp:739
+#, c-format
+msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
+msgstr "ВНИМАНИЕ: не е налична поддръжка на MP3: „%s“, ред %d\n"
+
+#: src/AudioOpenAL.cpp:750
+#, c-format
+msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
+msgstr "ВНИМАНИЕ: не е налична поддръжка на Ogg/Vorbis: „%s“, ред %d\n"
+
+#: src/AudioOpenAL.cpp:754
+#, c-format
+msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
+msgstr "ВНИМАНИЕ: типа на файла не е разпознат: „%s“: „%s“, ред %d\n"
+
+#: src/AudioOpenAL.cpp:767
+#, c-format
+msgid "music playlist:\n"
+msgstr "списък с музика:\n"
+
+#: src/AudioOpenAL.cpp:770
+#, c-format
+msgid " %2d : %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:772
+#, c-format
+msgid "loaded %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:797
+msgid "AudioOpenAL::setMusicIndex -- begin"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:810
+msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:813
+msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:848
+msgid "AudioOpenAL::setMusicIndex -- end"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:898 src/AudioOpenAL.cpp:931 src/AudioOpenAL.cpp:975
+#, c-format
+msgid ""
+"WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:948
+#, c-format
+msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:954
+#, c-format
+msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:962
+#, c-format
+msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:994
+#, c-format
+msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:1000
+#, c-format
+msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
+msgstr ""
+
+#: src/AudioOpenAL.cpp:1008
+#, c-format
+msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
+msgstr ""
+
+#: src/AudioSDLMixer.cpp:65
+#, c-format
+msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
+msgstr ""
+
+#: src/Config.cpp:114
+#, c-format
+msgid "WARNING: Config::init() has already been called.\n"
+msgstr ""
+
+#: src/Config.cpp:201
+#, c-format
+msgid "WARNING: could not read config file (%s)\n"
+msgstr "ВНИМАНИЕ: неуспех при четене на файла с настройки (%s)\n"
+
+#: src/Config.cpp:257
+#, c-format
+msgid "wrote config file (%s)\n"
+msgstr ""
+
+#: src/Config.cpp:262
+#, c-format
+msgid "WARNING: could not write config file (%s)\n"
+msgstr ""
+
+#: src/EnemyAircraft.cpp:111
+#, c-format
+msgid "%d EnemyAircraft allocated\n"
+msgstr ""
+
+#: src/Global.cpp:114
+#, c-format
+msgid "WARNING: Global::init() has already been called.\n"
+msgstr ""
+
+#: src/Global.cpp:242
+#, c-format
+msgid "...startup complete.\n"
+msgstr "...стартирането е завършено.\n"
+
+#: src/Global.cpp:267
+#, c-format
+msgid "deleteTextures()\n"
+msgstr ""
+
+#: src/Global.cpp:286
+#, c-format
+msgid "Global::loadTextures()\n"
+msgstr ""
+
+#: src/Global.cpp:348
+#, c-format
+msgid "randomizing.\n"
+msgstr ""
+
+#: src/HeroAmmo.cpp:191
+#, c-format
+msgid "%p <--%p--> %p\n"
+msgstr ""
+
+#: src/HiScore.cpp:49
+#, c-format
+msgid "nobody"
+msgstr "никой"
+
+#: src/HiScore.cpp:74
+#, c-format
+msgid "WARNING: HiScore::init() has already been called.\n"
+msgstr ""
+
+#: src/HiScore.cpp:190
+#, c-format
+msgid "WARNING: could not write score file (%s)\n"
+msgstr ""
+
+#: src/HiScore.cpp:217
+#, c-format
+msgid "WARNING: could not read score file (%s)\n"
+msgstr ""
+
+#: src/HiScore.cpp:308
+#, c-format
+msgid "high scores:\n"
+msgstr "рекорди:\n"
+
+#: src/HiScore.cpp:314
+#, c-format
+msgid "%02d/%02d/%04d %16s %d\n"
+msgstr ""
+
+#: src/main.cpp:116
+#, c-format
+msgid ""
+"\n"
+"--------------------------------------------------\n"
+"Chromium B.S.U. options\n"
+"--------------------------------------------------\n"
+"   -f/--fullscreen     : run in fullscreen mode\n"
+"   -w/--window         : run in windowed mode\n"
+"   -v/--vidmode <mode> : mode 0 =  512 x  384\n"
+"                       :      1 =  640 x  480\n"
+"                       :      2 =  800 x  600\n"
+"                       :      3 = 1024 x  768\n"
+"                       :      4 = 1280 x  960\n"
+"  -na/--noaudio        : do not initialize audio\n"
+"  -nb/--noblend        : disable blending (OpenGL)\n"
+"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
+"--------------------------------------------------\n"
+"\n"
+msgstr ""
+"\n"
+"--------------------------------------------------\n"
+"Опции за Chromium B.S.U.\n"
+"--------------------------------------------------\n"
+"   -f/--fullscreen     : използване на целия екран\n"
+"   -w/--window         : използване на прозорец\n"
+"   -v/--vidmode <mode> : видео режим 0 =  512 x  384\n"
+"                       :             1 =  640 x  480\n"
+"                       :             2 =  800 x  600\n"
+"                       :             3 = 1024 x  768\n"
+"                       :             4 = 1280 x  960\n"
+"  -na/--noaudio        : без звук\n"
+"  -nb/--noblend        : без преливане (OpenGL)\n"
+"  -nt/--notexborder    : без цвят за контур на текста (OpenGL)\n"
+"--------------------------------------------------\n"
+"\n"
+
+#: src/main.cpp:156
+#, c-format
+msgid ""
+"Download the latest version of Chromium B.S.U. at http://chromium-bsu."
+"sourceforge.net/\n"
+msgstr ""
+"Изтеглете последната версия на Chromium B.S.U. от http://chromium-bsu."
+"sourceforge.net/\n"
+
+#: src/main.cpp:222
+#, c-format
+msgid "!! ERROR !! - "
+msgstr "!! ГРЕШКА !! — "
+
+#: src/main.cpp:246
+#, c-format
+msgid "Extensions :"
+msgstr "Разширения :"
+
+#: src/MainGL.cpp:139
+#, c-format
+msgid "chromium: error loading font: %s\n"
+msgstr "chromium: грешка при зареждане на шрифт: %s\n"
+
+#: src/MainGL.cpp:144
+#, c-format
+msgid "chromium: error loading font\n"
+msgstr "chromium: грешка при зареждане на шрифт\n"
+
+#: src/MainGL.cpp:174
+#, c-format
+msgid "!!MainGL::drawGL() HUH?\n"
+msgstr ""
+
+#: src/MainGL.cpp:302
+#, c-format
+msgid ""
+"new high score!\n"
+"\n"
+"%d"
+msgstr ""
+"нов рекорд!\n"
+"\n"
+"%d"
+
+#: src/MainGL.cpp:307
+#, c-format
+msgid ""
+"n o t   b a d !\n"
+"rank : %d\n"
+"\n"
+"%d"
+msgstr ""
+"н е   е   з л е !\n"
+"класиране : %d\n"
+"\n"
+"%d"
+
+#: src/MainGL.cpp:312
+msgid "l o s e r"
+msgstr "с л а б а к"
+
+#: src/MainGL.cpp:370
+#, c-format
+msgid ""
+"congratulations!\n"
+" \n"
+"l e v e l\n"
+" %d \n"
+"c o m p l e t e\n"
+" \n"
+msgstr ""
+"поздравления!\n"
+" \n"
+"н и в о\n"
+" %d \n"
+"п р и к л ю ч е н о\n"
+" \n"
+
+#: src/MainGLUT.cpp:72
+#, c-format
+msgid "MainGLUT::run()\n"
+msgstr ""
+
+#: src/MainGLUT.cpp:88 src/MainSDL.cpp:257
+#, c-format
+msgid "ERROR!!! OpenGL error: %s\n"
+msgstr ""
+
+#: src/MainSDL.cpp:69
+#, c-format
+msgid "Couldn't initialize SDL: %s\n"
+msgstr ""
+
+#: src/MainSDL.cpp:72
+#, c-format
+msgid "SDL initialized.\n"
+msgstr ""
+
+#: src/MainSDL.cpp:78
+#, c-format
+msgid "num joysticks = %d\n"
+msgstr ""
+
+#: src/MainSDL.cpp:80
+#, c-format
+msgid "   joystick 0 = %p\n"
+msgstr ""
+
+#: src/MainSDL.cpp:96
+#, c-format
+msgid ""
+"-OpenGL-----------------------------------------------------\n"
+"Vendor     : %s\n"
+"Renderer   : %s\n"
+"Version    : %s\n"
+msgstr ""
+
+#: src/MainSDL.cpp:186
+#, c-format
+msgid "init----> %3.2ffps gameSpeed = %g\n"
+msgstr ""
+
+#: src/MainSDL.cpp:193
+#, c-format
+msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
+msgstr ""
+
+#: src/MainSDL.cpp:206
+#, c-format
+msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
+msgstr ""
+
+#: src/MainSDL.cpp:228
+#, c-format
+msgid ""
+"%d speed adjustments required.\n"
+"NOTE: The game was not able to maintain a steady 50 frames per\n"
+"      second. You should consider reducing your screen resolution\n"
+"      or lowering the graphics detail setting.\n"
+"      -OR-\n"
+"      make sure that you aren't running any system monitoring\n"
+"      tools (like 'top', 'xosview', etc.) These kinds of tools\n"
+"      can make it difficult to maintain a steady frame rate.\n"
+msgstr ""
+"%d необходима е корекция на скоростта.\n"
+"ЗАБЕЛЕЖКА: Играта не успя да поддържа 50 кадъра в секунда\n"
+"      Опитайте да намалите разделителната способност или \n"
+"      да намалите детайлите.\n"
+"      —ИЛИ—\n"
+"      проверете дали не използвате инструменти за следене\n"
+"      на натоварването (като „top“, „xosview“, и т.н.).\n"
+"      Понякога те могат да попречат на достигането на стабилна\n"
+"      скорост на видеото.\n"
+
+#: src/MainSDL.cpp:240
+#, c-format
+msgid "exit.\n"
+msgstr "изход.\n"
+
+#: src/MainSDL.cpp:265
+#, c-format
+msgid "ERROR!!! SDL error '%s'\n"
+msgstr ""
+
+#: src/MainSDL.cpp:318
+#, c-format
+msgid "Couldn't set GL mode: %s\n"
+msgstr ""
+
+#: src/MainSDL.cpp:324
+#, c-format
+msgid "video mode set "
+msgstr ""
+
+#: src/MainSDL.cpp:331
+#, c-format
+msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:40
+#, c-format
+msgid "%-5d SDL_ACTIVEEVENT  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:41
+#, c-format
+msgid "%-5d SDL_KEYDOWN  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:42
+#, c-format
+msgid "%-5d SDL_KEYUP  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:43
+#, c-format
+msgid "%-5d SDL_MOUSEMOTION  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:44
+#, c-format
+msgid "%-5d SDL_MOUSEBUTTONDOWN  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:45
+#, c-format
+msgid "%-5d SDL_MOUSEBUTTONUP  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:46
+#, c-format
+msgid "%-5d SDL_JOYBUTTONDOWN  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:47
+#, c-format
+msgid "%-5d SDL_JOYBUTTONUP  \n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:212
+#, c-format
+msgid "MainSDL::getEvent HUH?\n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:222
+#, c-format
+msgid ""
+"buffer = \"%s\n"
+"\""
+msgstr ""
+
+#: src/MainSDL_Event.cpp:360
+#, c-format
+msgid "key '%s' pressed\n"
+msgstr ""
+
+#: src/MainSDL_Event.cpp:361
+#, c-format
+msgid "game->gameFrame = %d\n"
+msgstr ""
+
+#: src/MenuGL.cpp:44
+msgid ""
+"  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o "
+"u !"
+msgstr ""
+"  н е   п о з в о л я в а й т е   н а   в р а г о в е т е   д а   п р е м и "
+"н а т !"
+
+#: src/MenuGL.cpp:45
+msgid ""
+"  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   "
+"l i f e !"
+msgstr ""
+"  в с е к и   п р е м и н а л   в р а г   с т р у в а   е д и н   ж и в о т !"
+
+#: src/MenuGL.cpp:46
+msgid ""
+"  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
+"i n t s !"
+msgstr ""
+"  п р е м и н а л и т е   п о д о б р е н и я   н о с я т   т о ч к и !"
+
+#: src/MenuGL.cpp:47
+msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
+msgstr ""
+"  б л ъ с к а й т е   с е   в ъ в   в р а г о в е т е   з а   д а   г и   у "
+"н и щ о ж и т е !"
+
+#: src/MenuGL.cpp:48
+msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
+msgstr ""
+"  д в о й н о   д я с н о   щ р а к в а н е   з а   с а м о р а з р у ш е н "
+"и е !"
+
+#: src/MenuGL.cpp:49
+msgid ""
+"  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i "
+"t i o n !"
+msgstr ""
+"  с а м о р а з р у ш е н и е т о   с ъ х р а н я в а   м у н и ц и и т е !"
+
+#: src/MenuGL.cpp:70
+msgid "n e w    g a m e"
+msgstr "н о в а    и г р а"
+
+#: src/MenuGL.cpp:71
+msgid "l e v e l"
+msgstr "н и в о"
+
+#: src/MenuGL.cpp:72
+msgid "s k i l l"
+msgstr "т р у д н о с т"
+
+#: src/MenuGL.cpp:73
+msgid "g f x    d e t a i l"
+msgstr "д е т а й н о с т   н а   г р а ф и к а т а"
+
+#: src/MenuGL.cpp:74
+msgid "f u l l s c r e e n"
+msgstr "ц я л   е к р а н"
+
+#: src/MenuGL.cpp:75
+msgid "s c r e e n    s i z e"
+msgstr "р а з м е р   н а   и г р а л н о т о   п о л е"
+
+#: src/MenuGL.cpp:76
+msgid "s o u n d    f x    v o l u m e"
+msgstr "с и л а   н а   з в у к о в и т е   е ф е к т и"
+
+#: src/MenuGL.cpp:77
+msgid "m u s i c    v o l u m e"
+msgstr "с и л а   н а   ф о н о в а т а   м у з и к а"
+
+#: src/MenuGL.cpp:78
+msgid "m o u s e   s p e e d"
+msgstr "с к о р о с т   н а   м и ш к а т а"
+
+#: src/MenuGL.cpp:79
+msgid "q u i t"
+msgstr "и з х о д"
+
+#: src/MenuGL.cpp:161
+msgid "fish in a barrel"
+msgstr "със затворени очи"
+
+#: src/MenuGL.cpp:162
+msgid "whimp"
+msgstr "за пеленачета"
+
+#: src/MenuGL.cpp:163
+msgid "easy"
+msgstr "лесно"
+
+#: src/MenuGL.cpp:164
+msgid "normal"
+msgstr "нормално"
+
+#: src/MenuGL.cpp:165
+msgid "experienced"
+msgstr "за опитни"
+
+#: src/MenuGL.cpp:166
+msgid "fun"
+msgstr "купон"
+
+#: src/MenuGL.cpp:167
+msgid "insane"
+msgstr "лудост"
+
+#: src/MenuGL.cpp:168
+msgid "impossible"
+msgstr "невъзможно"
+
+#: src/MenuGL.cpp:169
+msgid "-"
+msgstr ""
+
+#: src/MenuGL.cpp:291 src/MenuGL.cpp:320
+msgid "high scores"
+msgstr "рекорди"
+
+#: src/MenuGL.cpp:349
+msgid "the"
+msgstr ""
+
+#: src/MenuGL.cpp:353
+msgid "reptile"
+msgstr ""
+
+#: src/MenuGL.cpp:357
+msgid "labour"
+msgstr ""
+
+#: src/MenuGL.cpp:361
+msgid "project"
+msgstr ""
+
+#: src/MenuGL.cpp:473
+#, c-format
+msgid "low"
+msgstr "ниска"
+
+#: src/MenuGL.cpp:474
+#, c-format
+msgid "med"
+msgstr "средна"
+
+#: src/MenuGL.cpp:475
+#, c-format
+msgid "high"
+msgstr "висока"
+
+#: src/MenuGL.cpp:482
+#, c-format
+msgid "512x384"
+msgstr ""
+
+#: src/MenuGL.cpp:483
+#, c-format
+msgid "640x480"
+msgstr ""
+
+#: src/MenuGL.cpp:484
+#, c-format
+msgid "800x600"
+msgstr ""
+
+#: src/MenuGL.cpp:485
+#, c-format
+msgid "1024x768"
+msgstr ""
+
+#: src/MenuGL.cpp:486
+#, c-format
+msgid "1280x960"
+msgstr ""
+
+#: src/MenuGL.cpp:491
+#, c-format
+msgid "true"
+msgstr "да"
+
+#: src/MenuGL.cpp:492
+#, c-format
+msgid "false"
+msgstr "не"
+
+#: src/MenuGL.cpp:832
+#, c-format
+msgid "---- you must complete level %d before you can select level %d ----"
+msgstr ""
+"---- трпбва да преминете ниво %d преди да можете да изберете ниво %d ----"
+
+#: src/PowerUps.cpp:181
+#, c-format
+msgid "active power ups = %d\n"
+msgstr "активни подобрения = %d\n"
+
+#: src/PowerUps.cpp:369
+#, c-format
+msgid "?? PowerUp::seal()"
+msgstr ""
+
+#: src/ScreenItemAdd.cpp:102
+#, c-format
+msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
+msgstr ""
+
+#: src/StatusDisplay.cpp:652 src/StatusDisplay.cpp:656
+msgid "p a u s e d"
+msgstr "п а у з а"
+
+#: src/StatusDisplay.cpp:676
+msgid "do not let -any- ships past you! each one costs you a life!"
+msgstr ""
+"не позволявайте на НИКАКВИ кораби да преминат! всеки преминал кораб струва "
+"един живот!"
+
+#: src/StatusDisplay.cpp:687
+msgid "let super shields pass by for an extra life!"
+msgstr "пропуснатите супер щитове носят по един живот!"
+
+#: src/TextFTGL.cpp:35
+#, c-format
+msgid "FTGL: error loading font: %s\n"
+msgstr ""
+
+#: src/TextFTGL.cpp:38
+msgid "FTGL: error loading font"
+msgstr ""
+
+#. TRANSLATORS: If using the FTGL backend, this should be the font
+#. name of a font that contains all the Unicode characters in use in
+#. your translation.
+#.
+#. TRANSLATORS: If using the GLC backend, this should be the font
+#. name of a font that contains all the Unicode characters in use in
+#. your translation. The GLC renderer will fall back on other fonts
+#. if some characters are not available though, so choose a font
+#. that your language looks good in.
+#.
+#: src/TextFTGL.cpp:105 src/TextGLC.cpp:41
+msgid "Gothic Uralic"
+msgstr "Gothic Uralic"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Debian it should be the Debian path.
+#.
+#: src/TextFTGL.cpp:135
+msgid "/usr/share/fonts/truetype/uralic/gothub__.ttf"
+msgstr "/usr/share/fonts/truetype/uralic/gothub__.ttf"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Debian it should be the Debian path.
+#.
+#: src/TextFTGL.cpp:141
+msgid "/usr/share/fonts/truetype/uralic/gothu___.ttf"
+msgstr "/usr/share/fonts/truetype/uralic/gothu___.ttf"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Mandrake it should be the Mandrake path.
+#.
+#: src/TextFTGL.cpp:148
+msgid "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
+msgstr "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Mandrake it should be the Mandrake path.
+#.
+#: src/TextFTGL.cpp:154
+msgid "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
+msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
+
+#: src/TextGLC.cpp:30
+msgid "GLC: couldn't set context"
+msgstr ""
