@@ -373,9 +373,9 @@ void MenuGL::drawGL()
 			sc = 0.042;
 			glTranslatef(-19.5, -14.0, 0.0);
 			glScalef(sc, sc*0.75, 1.0);
+			size_t len = mbstowcs(NULL,mssgText,0);
 			unsigned int	ti = (unsigned int)(112.0*mssgAlpha);
-			if(ti > strlen(mssgText))
-				ti = strlen(mssgText);
+			if(ti > len) ti = len;
 			if(ti) game->text->Render(mssgText, ti);
 			mssgAlpha -= 0.004;
 			glColor4f(1.0, 1.0, 1.0, 1.0);
