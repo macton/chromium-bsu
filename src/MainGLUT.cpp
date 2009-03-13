@@ -223,6 +223,9 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 			break;
 		
 	}
+	// Emulate a quit key
+	if( game->game_quit )
+		keyboardASCII('q',0,0);
 //	fprintf(stderr, _("key = %d\n"), (int)key);
 }
 
