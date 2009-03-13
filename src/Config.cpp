@@ -71,6 +71,7 @@ Config::Config()
 	m_true_color	= false;
 	m_use_playList	= false;
 	m_use_cdrom		= false;
+	m_debug		= false;
 	
 	m_cdromDevice	= 0;
 	m_cdromCount	= 1;
@@ -185,6 +186,7 @@ bool Config::readFile()
 			if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n",     &tmp);	m_show_fps    = (bool)tmp;  }
 			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);	m_use_playList= (bool)tmp;  }
 			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n",    &tmp);	m_use_cdrom   = (bool)tmp;  }
+			if(strncmp(configStrings[i], "debug",    5) == 0) { sscanf(configStrings[i], "debug %d\n",        &tmp);	m_debug       = (bool)tmp;  }
 			if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n",    &tmp);	m_audioType = (AudioType)tmp; }
 			if(strncmp(configStrings[i], "textType", 8) == 0) { sscanf(configStrings[i], "textType %d\n",    &tmp);	m_textType = (TextType)tmp; }
 			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n",      &m_maxLevel);  }
@@ -198,7 +200,7 @@ bool Config::readFile()
 	}
 	else
 	{
-		fprintf(stderr, _("WARNING: could not read config file (%s)\n"), configFilename);
+		if( m_debug ) fprintf(stderr, _("WARNING: could not read config file (%s)\n"), configFilename);
 		retVal = false;
 	}
 	
@@ -232,6 +234,7 @@ bool Config::saveFile()
 #endif
 		fprintf(file, "use_playList %d\n",	(int)m_use_playList);
 		fprintf(file, "use_cdrom %d\n",		(int)m_use_cdrom);
+		fprintf(file, "debug %d\n",		(int)m_debug);
 		fprintf(file, "full_screen %d\n", 	(int)m_full_screen);
 		fprintf(file, "true_color %d\n", 	(int)m_true_color);
 		fprintf(file, "swap_stereo %d\n",	(int)m_swap_stereo);
@@ -254,7 +257,7 @@ bool Config::saveFile()
 #endif
 
 		fclose(file);
-		fprintf(stderr, _("wrote config file (%s)\n"), configFilename);
+		if( m_debug ) fprintf(stderr, _("wrote config file (%s)\n"), configFilename);
 		retVal = true;
 	}
 	else

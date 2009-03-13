@@ -76,7 +76,7 @@ MainGL::~MainGL()
 int MainGL::initGL()
 {
 	Config *config = Config::instance();
-//	fprintf(stderr, _("initGL()\n"));
+	if( config->debug() ) fprintf(stderr, _("initGL()\n"));
 	reshapeGL(config->screenW(), config->screenH());
 
 	glDisable(GL_DEPTH_TEST);

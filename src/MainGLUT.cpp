@@ -69,7 +69,8 @@ MainGLUT::~MainGLUT()
 //----------------------------------------------------------
 bool MainGLUT::run()
 {
-	fprintf(stderr, _("MainGLUT::run()\n"));
+	Config	*config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("MainGLUT::run()\n"));
 	glutTimerFunc(100, MainGLUT::drawGame, 0);
 	glutMainLoop();
 	return true;
@@ -226,7 +227,7 @@ void MainGLUT::keyboardASCII(unsigned char key, int, int)
 	// Emulate a quit key
 	if( game->game_quit )
 		keyboardASCII('q',0,0);
-//	fprintf(stderr, _("key = %d\n"), (int)key);
+	if( config->debug() ) fprintf(stderr, _("key = %d\n"), (int)key);
 }
 
 //----------------------------------------------------------

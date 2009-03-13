@@ -140,7 +140,6 @@ void	PowerUps::clear()
 	cur = pwrUpRoot->next;
 	while(cur)
 	{
-//		fprintf(stderr, _("cur = %p\n"), cur);
 		del = cur;
 		cur = cur->next;
 		game->itemAdd->killScreenItem(del);
@@ -171,6 +170,8 @@ PowerUp	*PowerUps::getNext()
 //----------------------------------------------------------
 void	PowerUps::remove(PowerUp *pwr)
 {
+	Config	*config = Config::instance();
+
 	if(pwr)
 	{
 		currentPwrUp = pwr->back;
@@ -178,7 +179,7 @@ void	PowerUps::remove(PowerUp *pwr)
 	}
 	game->itemAdd->killScreenItem(pwr);
 	activeCount--;
-	fprintf(stderr, _("active power ups = %d\n"), activeCount);
+	if( config->debug() ) fprintf(stderr, _("active power ups = %d\n"), activeCount);
 //	delete pwr;
 }
 

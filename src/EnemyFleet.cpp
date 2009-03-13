@@ -24,10 +24,12 @@
 #include <GL/glpng.h>
 #endif
 
+#include "gettext.h"
 #include "extern.h"
 #include "Ammo.h"
 #include "Audio.h"
 #include "Global.h"
+#include "Config.h"
 #include "Explosions.h"
 #include "EnemyAmmo.h"
 #include "HeroAircraft.h"
@@ -111,10 +113,10 @@ void	EnemyFleet::drawGL()
 	glColor4f(1.0, 1.0, 1.0, 1.0);
 	
 	thisEnemy = squadRoot->next;
-//	int num = 0;
+	int num = 0;
 	while(thisEnemy)
 	{
-//		num++;
+		num++;
 		p = thisEnemy->pos;
 		szx = thisEnemy->size[0];
 		szy = thisEnemy->size[1];
@@ -238,8 +240,9 @@ void	EnemyFleet::drawGL()
 		}
 		thisEnemy = thisEnemy->next;
 	}
-//	if(num)
-//		fprintf(stderr, _("num enemies on screen = %d\n"), num);
+	Config* config = Config::instance();
+	if(config->debug() && num)
+		fprintf(stderr, _("num enemies on screen = %d\n"), num);
 }
 
 //----------------------------------------------------------

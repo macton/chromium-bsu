@@ -146,7 +146,7 @@ AudioOpenAL::AudioOpenAL()
 		}
 		else
 		{
-			fprintf(stderr, _("alAttenuationScale == 0. Kludge it.\n"));
+			if( config->debug() ) fprintf(stderr, _("alAttenuationScale == 0. Kludge it.\n"));
 			audioScale[0] = 0.5;
 			audioScale[1] = 0.3;
 			audioScale[2] = 0.3;
@@ -159,14 +159,15 @@ AudioOpenAL::AudioOpenAL()
 		if(config->usePlayList() && !cdrom)
 			loadMusicList();
 	}
-//	fprintf(stderr, _("AudioOpenAL::Audio done\n"));
+	if( config->debug() ) fprintf(stderr, _("AudioOpenAL::Audio done\n"));
 }
 
 AudioOpenAL::~AudioOpenAL()
 {
 	if(initialized)
 	{
-		fprintf(stderr, _("stopping OpenAL..."));
+		Config	*config = Config::instance();
+		if( config->debug() ) fprintf(stderr, _("stopping OpenAL..."));
 	
 		#ifdef CD_VOLUME
 		if(cdrom && alcSetAudioChannel)
@@ -197,7 +198,7 @@ AudioOpenAL::~AudioOpenAL()
 		
 		alutExit();
 
-		fprintf(stderr, _("done.\n"));
+		if( config->debug() ) fprintf(stderr, _("done.\n"));
 	}
 
 	delete soundQueue;
@@ -263,17 +264,18 @@ void AudioOpenAL::initSound()
 	int i;
 	ALfloat pos[] = { 0.0, -5.0,  25.0 };
 	
-//	fprintf(stderr, _("AudioOpenAL::initSound() begin...\n"));
+	if( config->debug() ) fprintf(stderr, _("AudioOpenAL::initSound() begin...\n"));
 			
-	fprintf(stderr, _(
-		"-OpenAL-----------------------------------------------------\n"
-		"Vendor     : %s\n"
-		"Renderer   : %s\n"
-		"Version    : %s\n"),
-		alGetString(AL_VENDOR), alGetString(AL_RENDERER), alGetString(AL_VERSION) );
-//	fprintf(stderr, _("Extensions : %s\n"), alGetString( AL_EXTENSIONS ) );
-	printExtensions(stderr,  (const char*)alGetString( AL_EXTENSIONS ));
-	fprintf(stderr, _("------------------------------------------------------------\n"));
+	if( config->debug() ) {
+		fprintf(stderr, _(
+			"-OpenAL-----------------------------------------------------\n"
+			"Vendor     : %s\n"
+			"Renderer   : %s\n"
+			"Version    : %s\n"),
+			alGetString(AL_VENDOR), alGetString(AL_RENDERER), alGetString(AL_VERSION) );
+		printExtensions(stderr,  (const char*)alGetString( AL_EXTENSIONS ));
+		fprintf(stderr, _("------------------------------------------------------------\n"));
+	}
 
 	alutInitWithoutContext(0, NULL);
 
@@ -357,9 +359,7 @@ void AudioOpenAL::checkForExtensions()
 						alGetProcAddress("alAttenuationScale_LOKI");
 
 	alGetError(); // Don't care what the problem is
-	if(alAttenuationScale == NULL) 
-		fprintf(stderr, _("ATTENTION!! Could not load alAttenuationScale\n"));
-	else
+	if(alAttenuationScale != NULL)
 		alAttenuationScale(6.0);
 	
 	//-- check Audio Channel extension
@@ -423,9 +423,9 @@ void AudioOpenAL::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void AudioOpenAL::setMusicMode(SoundType mode)
 {
-//	fprintf(stderr, _("AudioOpenAL::setMusicMode(SoundType mode)\n"));
 	Global	*game = Global::getInstance();
 	Config	*config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("AudioOpenAL::setMusicMode(SoundType mode)\n"));
 	if(config->audioEnabled() == true)
 	{
 		Audio::setMusicMode(mode);
@@ -459,8 +459,8 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 //----------------------------------------------------------
 void AudioOpenAL::setSoundVolume(float vol)
 {
-//	fprintf(stderr, _("AudioOpenAL::setSoundVolume(%f)\n"), vol);
 	Config	*config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("AudioOpenAL::setSoundVolume(%f)\n"), vol);
 	if(config->audioEnabled() == true)
 	{
 		int i;
@@ -503,7 +503,7 @@ void AudioOpenAL::setMusicVolume(float vol)
 			alcSetAudioChannel(ALC_CHAN_CD_LOKI, musicVolume);
 		}
 #endif
-//		fprintf(stderr, _("Music volume = %f\n"), vol);
+		if( config->debug() ) fprintf(stderr, _("Music volume = %f\n"), vol);
 	}
 }
 
@@ -542,7 +542,7 @@ void AudioOpenAL::loadSounds()
 #else //_WIN32
 			char nameBuffer[256];
 			sprintf(nameBuffer, "%s", dataLoc(fileNames[i]));
-			fprintf(stderr, _("alutLoadWAVFile(\"%s\",...);\n"), nameBuffer);
+			if( config->debug() ) fprintf(stderr, _("alutLoadWAVFile(\"%s\",...);\n"), nameBuffer);
 			alutLoadWAVFile(nameBuffer,&format,&data,&size,&freq);
 			alBufferData(buffer[i],format,data,size,freq);
 			alutUnloadWAV(format,data,size,freq);
@@ -560,11 +560,11 @@ void AudioOpenAL::checkError(const char* tag)
 	{
 		fprintf(stderr, _("ERROR!! <%s> alGetError() = %s\n"), tag, alGetString(error) );
 	}
-//	error = alcGetError();
-//	if(error != ALC_NO_ERROR)
-//	{
-//		fprintf(stderr, _("ERROR!! <%s> alcGetError() = %s\n"), tag, alcGetString(error) );
-//	}
+	ALCenum error2 = alcGetError(dev);
+	if(error2 != ALC_NO_ERROR)
+	{
+		fprintf(stderr, _("ERROR!! <%s> alcGetError() = %s\n"), tag, alcGetString(dev, error2) );
+	}
 	error = alutGetError();
 	if(error != ALUT_ERROR_NO_ERROR)
 	{

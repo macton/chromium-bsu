@@ -63,8 +63,6 @@ int main(int argc, char **argv)
         textdomain(PACKAGE);
 #endif
 
-//	atexit(EnemyAircraft::printNumAllocated);
-
 #ifdef __linux__
 	// by default, disable SDL's use of DGA mouse. If SDL_VIDEO_X11_DGAMOUSE is
 	// set however, use default value.
@@ -110,6 +108,10 @@ int main(int argc, char **argv)
 		{
 			config->setTexBorder(false);
 		}
+		else if( strcmp(argv[i], "--debug") == 0)
+		{
+			config->setDebug(true);
+		}
 		else
 		{
 			fprintf(stderr, _(
@@ -132,6 +134,8 @@ int main(int argc, char **argv)
 		}
 	}
 	
+	if( config->debug() ) atexit(EnemyAircraft::printNumAllocated);
+
 	srand(time(NULL));
 	
 	game->generateRandom();
@@ -144,17 +148,17 @@ int main(int argc, char **argv)
 #error "USE_SDL or USE_GLUT must be defined"
 #endif
 		
-	hiScore->print(config->intSkill());
+	if( config->debug() ) hiScore->print(config->intSkill());
 	game->toolkit->run();
 
 	hiScore->destroy();
 	config->destroy();
 	game->destroy();
 
-	fprintf(stderr, _("done.\n"));
-	fprintf(stderr, " \n");
+	if( config->debug() ) fprintf(stderr, _("done.\n"));
+	fprintf(stderr, "\n");
 	fprintf(stderr, _("Download the latest version of Chromium B.S.U. at http://chromium-bsu.sourceforge.net/\n"));
-	fprintf(stderr, " \n");
+	fprintf(stderr, "\n");
 	
 	return 0;
 }

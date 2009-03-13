@@ -69,21 +69,21 @@ MainSDL::MainSDL(int argc, char **argv)
 		fprintf(stderr,_("Couldn't initialize SDL: %s\n"), SDL_GetError());
 		exit( 1 );
 	}
-	fprintf(stderr, _("SDL initialized.\n"));
+	if( config->debug() ) fprintf(stderr, _("SDL initialized.\n"));
 
 #ifdef WITH_JOYSTICK
 	int nj = SDL_NumJoysticks();
 	if(nj > 0)
 	{
-		fprintf(stderr, _("num joysticks = %d\n"), nj);
+		if( config->debug() ) fprintf(stderr, _("num joysticks = %d\n"), nj);
 		joystick = SDL_JoystickOpen(0);
-		fprintf(stderr, _("   joystick 0 = %p\n"), joystick);
+		if( config->debug() ) fprintf(stderr, _("   joystick 0 = %p\n"), joystick);
 		if(joystick)
 			SDL_JoystickEventState(SDL_ENABLE);
 	}
 	else
 	{
-		//fprintf(stderr, _("no joysticks found\n"));
+		if( config->debug() ) fprintf(stderr, _("no joysticks found\n"));
 		joystick = 0;
 	}
 #else
@@ -92,14 +92,17 @@ MainSDL::MainSDL(int argc, char **argv)
 
 	setVideoMode();
 
-	fprintf(stderr, _(
-		"-OpenGL-----------------------------------------------------\n"
-		"Vendor     : %s\n"
-		"Renderer   : %s\n"
-		"Version    : %s\n"),
-		glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION) );
-	printExtensions(stderr,  (const char*)glGetString( GL_EXTENSIONS ));
-	fprintf(stderr, _("------------------------------------------------------------\n"));
+	if( config->debug() )
+	{
+		fprintf(stderr, _(
+			"-OpenGL-----------------------------------------------------\n"
+			"Vendor     : %s\n"
+			"Renderer   : %s\n"
+			"Version    : %s\n"),
+			glGetString(GL_VENDOR), glGetString(GL_RENDERER), glGetString(GL_VERSION) );
+		printExtensions(stderr,  (const char*)glGetString( GL_EXTENSIONS ));
+		fprintf(stderr, _("------------------------------------------------------------\n"));
+	}
 
 	//-- Set the window manager title bar
 	SDL_WM_SetCaption( "Chromium B.S.U.", "Chromium B.S.U." );
@@ -183,14 +186,14 @@ bool MainSDL::run()
 					if(game->fps < 48.0 && game->gameSpeed < 1.0)
 					{
 						game->gameSpeed += 0.02;
-						fprintf(stdout, _("init----> %3.2ffps gameSpeed = %g\n"), game->fps, game->gameSpeed);
+						if( config->debug() ) fprintf(stdout, _("init----> %3.2ffps gameSpeed = %g\n"), game->fps, game->gameSpeed);
 					}
 					else if(game->gameFrame > 20)
 					{
 						float tmp = 50.0/game->fps;
 						tmp = 0.8*targetAdj + 0.2*tmp;
 						targetAdj = floor(100.0*(tmp+0.005))/100.0;
-						fprintf(stdout, _("init----> %3.2ffps targetAdj = %g, tmp = %g\n"), game->fps, targetAdj, tmp);
+						if( config->debug() ) fprintf(stdout, _("init----> %3.2ffps targetAdj = %g, tmp = %g\n"), game->fps, targetAdj, tmp);
 					}
 				}
 				else if( config->autoSpeed() && (game->fps > 30.0 && game->fps < 100.0))  // discount any wacky fps from pausing
@@ -203,7 +206,7 @@ bool MainSDL::run()
 					{
 						adjCount++;
 						game->speedAdj = tmp;
-						fprintf(stdout, _("adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"), game->fps, targetAdj, game->speedAdj);
+						if( config->debug() ) fprintf(stdout, _("adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"), game->fps, targetAdj, game->speedAdj);
 					}
 					else
 						game->speedAdj = targetAdj;
@@ -212,7 +215,7 @@ bool MainSDL::run()
 					game->speedAdj = targetAdj;
 					
 //				if( !(frames%500) )
-//					fprintf(stdout, _("fps = %g speedAdj = %g\n"), game->fps, game->speedAdj);
+//					if( config->debug() ) fprintf(stdout, _("fps = %g speedAdj = %g\n"), game->fps, game->speedAdj);
 			}
 			
 		}
@@ -237,7 +240,7 @@ bool MainSDL::run()
 	}
 	
 	//-- Destroy our GL context, etc.
-	fprintf(stderr, _("exit.\n"));
+	if( config->debug() ) fprintf(stderr, _("exit.\n"));
 	SDL_Quit();
 	
 	return false;
@@ -321,14 +324,14 @@ void MainSDL::setVideoMode()
 	}
 	else
 	{
-		fprintf(stderr, _("video mode set "));
+		if( config->debug() ) fprintf(stderr, _("video mode set "));
 	}
 	
 	SDL_GL_GetAttribute( SDL_GL_RED_SIZE, 	&rs);
 	SDL_GL_GetAttribute( SDL_GL_GREEN_SIZE,	&gs);
 	SDL_GL_GetAttribute( SDL_GL_BLUE_SIZE,	&bs);
 	SDL_GL_GetAttribute( SDL_GL_DEPTH_SIZE,	&ds);
-	fprintf(stderr, _("(bpp=%d RGB=%d%d%d depth=%d)\n"), glSurface->format->BitsPerPixel, rs, gs, bs, ds);
+	if( config->debug() ) fprintf(stderr, _("(bpp=%d RGB=%d%d%d depth=%d)\n"), glSurface->format->BitsPerPixel, rs, gs, bs, ds);
 
 	if(game->mainGL)
 		game->mainGL->initGL();

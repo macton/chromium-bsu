@@ -15,6 +15,8 @@
 #include "HiScore.h"
 #include "extern.h"
 
+#include "Config.h"
+
 #include "HeroAircraft.h"
 
 //====================================================================
@@ -214,7 +216,8 @@ bool HiScore::readFile()
 	}
 	else 
 	{
-		fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
+		Config* config = Config::instance();
+		if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
 		retVal = false;
 	}
 		

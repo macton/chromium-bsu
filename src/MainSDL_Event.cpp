@@ -230,24 +230,25 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 void MainSDL::activation(SDL_Event *event)
 {
 	Global *game = Global::getInstance();
-//	fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
+	Config* config = Config::instance();
+	if( config->debug() ) fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
 	bool grab_mouse = game->gameMode == Global::Game && event->active.gain ? true : false;
 	if ( event->active.state & SDL_APPACTIVE ) 
 	{
 		grabMouse( grab_mouse, grab_mouse );
-//		fprintf(stderr, "app active " );
+		if( config->debug() ) fprintf(stderr, "app active " );
 	} 
 	else if ( event->active.state & SDL_APPMOUSEFOCUS ) 
 	{
-//		fprintf(stderr, _("mouse active") );
+		if( config->debug() ) fprintf(stderr, _("mouse active") );
 		SDL_GetMouseState(&xLast, &yLast);
 	} 
 	else if ( event->active.state & SDL_APPINPUTFOCUS ) 
 	{
 		grabMouse( grab_mouse, grab_mouse );
-//		fprintf(stderr, "input active" );
+		if( config->debug() ) fprintf(stderr, "input active" );
 	}
-//	fprintf(stderr, _("focus\n") );
+	if( config->debug() ) fprintf(stderr, _("focus\n") );
 }
 
 //----------------------------------------------------------
@@ -327,6 +328,7 @@ void MainSDL::keyDown(SDL_Event *event)
 void MainSDL::keyDownGame(SDL_Event *event)
 {
 	Global	*game = Global::getInstance();
+	Config *config = Config::instance();
 	switch(event->key.keysym.sym)
 	{
 //	    case SDLK_RETURN:
@@ -357,8 +359,11 @@ void MainSDL::keyDownGame(SDL_Event *event)
 			game->hero->fireGun(true);
 			break;
 		default:
-			fprintf(stderr, _("key '%s' pressed\n"), SDL_GetKeyName(event->key.keysym.sym));
-			fprintf(stderr, _("game->gameFrame = %d\n"), game->gameFrame);
+			if( config->debug() )
+			{
+				fprintf(stderr, _("key '%s' pressed\n"), SDL_GetKeyName(event->key.keysym.sym));
+				fprintf(stderr, _("game->gameFrame = %d\n"), game->gameFrame);
+			}
 			break;
 	}
 }
@@ -464,8 +469,8 @@ void MainSDL::mouseButtonUp(SDL_Event *ev)
 //----------------------------------------------------------
 void MainSDL::grabMouse(bool status, bool warpmouse)
 {
-//	fprintf(stderr, _("MainSDL::grabMouse(%d)\n"), status);
 	Config *config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("MainSDL::grabMouse(%d)\n"), status);
 	
 	mouseToggle = status;
 	if(status)
@@ -485,7 +490,7 @@ void MainSDL::grabMouse(bool status, bool warpmouse)
 void MainSDL::joystickMotion(SDL_Event *)
 {
 //	static int c = 0;
-//	fprintf(stderr, _("joy %05d : axis(%d), value(%d)\n"), c++, event->jaxis.axis, event->jaxis.value);
+//	if( config->debug() ) fprintf(stderr, _("joy %05d : axis(%d), value(%d)\n"), c++, event->jaxis.axis, event->jaxis.value);
 //	int xNow;
 //	int yNow;
 //	int xDiff;

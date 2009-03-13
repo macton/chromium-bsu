@@ -50,6 +50,7 @@ public:
 	bool	trueColor()			{	return  m_true_color;	}
 	bool	usePlayList()		{	return  m_use_playList;	}
 	bool	useCDROM()			{	return  m_use_cdrom;		}
+	bool	debug()			{	return  m_debug;		}
 	void	setFullScreen(bool s)		{	m_full_screen = s;	}
 	void	setBlend(bool s)			{	m_blend_enabled = s;}
 	void	setTexBorder(bool s)		{	m_tex_border = s;	}
@@ -60,6 +61,7 @@ public:
 	void	setTrueColor(bool s)		{	m_true_color = s;	}
 	void	setUsePlayList(bool s)		{	m_use_playList = s;	}
 	void	setUseCDROM(bool s)			{	m_use_cdrom = s;	}
+	void	setDebug(bool s)			{	m_debug = s;	}
 	
 	int		CDROMDevice()			{   return m_cdromDevice;	}
 	int		CDROMCount()			{   return m_cdromCount;	}
@@ -111,6 +113,7 @@ private:
 	bool	 m_true_color;
 	bool	 m_use_playList;
 	bool	 m_use_cdrom;
+	bool	 m_debug;
 	
 	int 	 m_gfxLevel;
 	int 	 m_maxLevel;

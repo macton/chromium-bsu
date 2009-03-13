@@ -121,7 +121,7 @@ void Audio::initCDROM()
 	if(config->useCDROM())
 	{
 		tmp = SDL_CDNumDrives();
-		fprintf(stderr, _("%d CDROM drive(s).\n"), tmp);
+		if( config->debug() ) fprintf(stderr, _("%d CDROM drive(s).\n"), tmp);
 		config->setCDROMCount(tmp);
 		if(tmp > 0)
 		{
@@ -132,11 +132,11 @@ void Audio::initCDROM()
 				if(tmp)
 				{
 					musicMax = cdrom->numtracks;
-					fprintf(stderr, _("Tracks: %d\n"), cdrom->numtracks);
+					if( config->debug() ) fprintf(stderr, _("Tracks: %d\n"), cdrom->numtracks);
 					int music = 0;
 					for(int i = 0; i < cdrom->numtracks; i++)
 					{
-						fprintf(stderr, _("track %2d: %s\n"), i, trackType(cdrom->track[i].type));
+						if( config->debug() ) fprintf(stderr, _("track %2d: %s\n"), i, trackType(cdrom->track[i].type));
 						// SDL BUG? 'type' should only be SDL_DATA_TRACK(0x04)or SDL_AUDIO_TRACK(0x00), but 
 						// this is returning SDL_AUDIO_TRACK=0x02 and SDL_DATA_TRACK=0x06 on some copied CDRs!
 						// Orignal CDs return correct values, but CDR duplications are off by 2!
@@ -145,7 +145,7 @@ void Audio::initCDROM()
 					}
 					if(!music)
 					{		
-						fprintf(stderr, _("\n Data track(s) only. CD audio not available.\n\n"));
+						if( config->debug() ) fprintf(stderr, _("\n Data track(s) only. CD audio not available.\n\n"));
 						SDL_CDStop(cdrom);
 						cdrom = 0;
 					}
@@ -163,7 +163,7 @@ void Audio::initCDROM()
 			}
 			else
 			{
-				fprintf(stderr, _("ERROR! Could not access CDROM device %d : %s\n"), config->CDROMDevice(), SDL_GetError());
+				if( config->debug() ) fprintf(stderr, _("ERROR! Could not access CDROM device %d : %s\n"), config->CDROMDevice(), SDL_GetError());
 				SDL_ClearError();
 				config->setCDROMDevice(0); 
 			}
@@ -295,7 +295,7 @@ void	Audio::setMusicIndex(int index)
 		bool	wasPlaying = false;
 		if(musicMax)
 			musicIndex = index%musicMax;
-		fprintf(stderr, _("Audio::setMusicIndex(%d)\n"), musicIndex);
+		if( config->debug() ) fprintf(stderr, _("Audio::setMusicIndex(%d)\n"), musicIndex);
 		
 		if(cdrom)
 		{
@@ -312,7 +312,7 @@ void	Audio::setMusicIndex(int index)
 			}
 			else
 			{
-				fprintf(stderr, _("track %d is data - trying next track...\n"), musicIndex);
+				if( config->debug() ) fprintf(stderr, _("track %d is data - trying next track...\n"), musicIndex);
 				Audio::setMusicIndex(musicIndex+1);
 			}
 		}

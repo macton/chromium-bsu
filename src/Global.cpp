@@ -207,7 +207,8 @@ void Global::gotoNextLevel()
 //----------------------------------------------------------
 void Global::createGame()
 {
-//	fprintf(stderr, _("begin startup..."));
+	Config *config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("begin startup..."));
 	mainGL		= new MainGL();
 	explosions	= new Explosions();
 	enemyFleet	= new EnemyFleet();
@@ -221,7 +222,6 @@ void Global::createGame()
 	itemAdd		= new ScreenItemAdd();
 
 #if defined(AUDIO_OPENAL) && defined(AUDIO_SDLMIXER) 
-	Config *config = Config::instance();
 	if(config->audioType() == Config::AudioOpenAL)
 		audio = new AudioOpenAL();
 	else
@@ -239,13 +239,14 @@ void Global::createGame()
 	newGame();
 	
 	audio->setMusicMode(Audio::MusicMenu);
-	fprintf(stderr, _("...startup complete.\n"));
+	if( config->debug() ) fprintf(stderr, _("...startup complete.\n"));
 }
 
 //----------------------------------------------------------
 void Global::deleteGame()
 {
-//	fprintf(stderr, _("begin shutdown...\n"));
+	Config *config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("begin shutdown...\n"));
 	delete mainGL;
 	delete enemyFleet;
 	delete hero;
@@ -258,13 +259,14 @@ void Global::deleteGame()
 	delete menu;
 	delete itemAdd;
 	delete audio;
-//	fprintf(stderr, _("...shutdown complete.\n"));
+	if( config->debug() ) fprintf(stderr, _("...shutdown complete.\n"));
 }
 
 //----------------------------------------------------------
 void Global::deleteTextures()
 {
-	fprintf(stderr, _("deleteTextures()\n"));
+	Config *config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("deleteTextures()\n"));
 //	return;
 	glFinish();
 	mainGL->deleteTextures();
@@ -283,7 +285,8 @@ void Global::deleteTextures()
 //----------------------------------------------------------
 void Global::loadTextures()
 {
-	fprintf(stderr, _("Global::loadTextures()\n"));
+	Config *config = Config::instance();
+	if( config->debug() ) fprintf(stderr, _("Global::loadTextures()\n"));
 //	return;
 	glFinish();
 	mainGL->loadTextures();
@@ -342,10 +345,11 @@ int		Global::randIndex = 0;
 //----------------------------------------------------------
 void Global::generateRandom(bool r)
 {
+	Config *config = Config::instance();
 	Global::randIndex = 0;
 	if(r)
 	{
-		fprintf(stderr, _("randomizing.\n"));
+		if( config->debug() ) fprintf(stderr, _("randomizing.\n"));
 		for(int i = 0; i < 256; i++)
 		{
 			randI[i] = rand();

@@ -6,6 +6,7 @@ chromium \- slick scrolling space shooter
 [\-fwv] [\-na] [\-nb] [\-nt]
 [\-\-fullscreen] [\-\-window] [\-\-vidmode <mode>]
 [\-\-noaudio] [\-\-noblend] [\-\-notexborder]
+[\-\-debug]
 .SH DESCRIPTION
 \fBchromium\fP is a fast paced top down arcade style action shooter game.
 You progress through the game by destroying everything that you see on
@@ -55,6 +56,9 @@ disables blending. (OpenGL)
 .TP
 .B \-nt \-\-notexborder 
 do not set tex border color. (OpenGL)
+.TP
+.B \-\-debug
+enable the display of debug information.
 .SH ENVIRONMENT
 The following environment variables are used by chromium.
 .TP
@@ -205,6 +209,10 @@ A cache of number of CDROM devices present, not used.
 .B cdromDevice
 The number of the CDROM device to use when use_cdrom is enabled. Zero-based.
 Defaults to first device (0).
+.TP
+.B debug
+Enable/disable debug information. This causes chromium to print debug
+information to the terminal. This is disabled by default.
 .SH SEE ALSO
 .br
 "In game procedures and flight safety"

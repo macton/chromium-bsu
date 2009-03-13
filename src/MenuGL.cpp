@@ -137,13 +137,15 @@ void MenuGL::deleteTextures()
 //----------------------------------------------------------
 void MenuGL::createLists(bool thick)
 {
+	Config* config = Config::instance();
+
 	if(!thick)
 	{
-//		fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
+		if( config->debug() ) fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
 	}
 	titleTilt	= -10.0;
 	
-//	fprintf(stderr, _("MenuGL::createLists\n"));
+	if( config->debug() ) fprintf(stderr, _("MenuGL::createLists\n"));
 
 	glNewList(listChrom, GL_COMPILE);
 	textGeometryChromium(thick);
@@ -414,12 +416,12 @@ void MenuGL::drawGL()
 	
 	if(thickText && game->fps < 30)
 	{
-		//fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
+		if( config->debug() ) fprintf(stderr, _("ATTENTION: Using 'thin' text to improve framerate...\n"));
 		createLists( (thickText = false) );	
 	}
 	if(!thickText && game->fps > 40)
 	{
-		//fprintf(stderr, _("ATTENTION: Reverting to 'thick' text...\n"));
+		if( config->debug() ) fprintf(stderr, _("ATTENTION: Reverting to 'thick' text...\n"));
 		createLists( (thickText = true) );	
 	}
 	
@@ -820,7 +822,7 @@ void MenuGL::incItem()
 			break;
 		case SkillLevel:
 			config->setGameSkillBase(config->gameSkillBase()+0.1);
-			hiScore->print(config->intSkill());
+			if( config->debug() ) hiScore->print(config->intSkill());
 			game->newGame();
 			break;
 		case GameLevel:
@@ -885,7 +887,7 @@ void MenuGL::decItem()
 			break;
 		case SkillLevel:
 			config->setGameSkillBase(config->gameSkillBase()-0.1);
-			hiScore->print(config->intSkill());
+			if( config->debug() ) hiScore->print(config->intSkill());
 			game->newGame();
 			break;
 		case GameLevel:
