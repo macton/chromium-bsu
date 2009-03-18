@@ -77,4 +77,4 @@ SUBDIRS = \
 	data
 
 dist-hook:
-	svn2cl --authors svn2cl-authors.txt --include-rev --output $(distdir)/ChangeLog https://chromium-bsu.svn.sourceforge.net/svnroot/chromium-bsu/chromium-bsu/trunk
+	LC_ALL=C git log --pretty --numstat --summary $(VERSION) | git2cl > $(distdir)/ChangeLog
