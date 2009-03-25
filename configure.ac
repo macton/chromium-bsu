@@ -80,10 +80,15 @@ AC_ARG_WITH(font-name,
 
 # Need SDL or GLUT for windowing
 AC_ARG_ENABLE(sdl, AS_HELP_STRING([--disable-sdl], [do not use SDL]))
+AC_ARG_ENABLE(sdlimage, AS_HELP_STRING([--disable-sdlimage], [do not use SDL_image]))
 AC_ARG_ENABLE(glut, AS_HELP_STRING([--disable-glut], [do not use GLUT]))
 
 if test "x$enable_sdl" != xno ; then
 	PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
+fi
+
+if test "x$enable_sdlimage" != xno ; then
+	AC_CHECK_LIB([SDL_image], [IMG_Load],[HAVE_SDLIMAGE=yes],[HAVE_SDLIMAGE=no])
 fi
 
 if test "x$enable_glut" != xno ; then
@@ -182,6 +187,16 @@ else
 	AC_MSG_ERROR([cannot find SDL >= 1.1.6 or GLUT (window system)])
 fi
 
+if test "x$HAVE_SDLIMAGE" = xyes -a "x$WINDOW_TYPE" = xSDL -a "x$enable_sdlimage" != xno; then
+	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
+	WINDOW_LIBS+=-lSDL_image
+	AC_SUBST(WINDOW_LIBS)
+	WINDOW_ICON=yes
+else
+	AC_MSG_WARN([cannot find SDL_image, window icon will not be set])
+	WINDOW_ICON=no
+fi
+
 if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes -a "x$enable_openal" != xno ; then
 	AC_DEFINE(AUDIO_OPENAL, 1, [define to use OpenAL])
 	AUDIO_CFLAGS="$OPENAL_CFLAGS $FREEALUT_CFLAGS"
@@ -239,6 +254,7 @@ echo "
 Chromium B.S.U. ready for building!
 
   Window type: $WINDOW_TYPE
+  Window icon: $WINDOW_ICON
   Audio type:  $AUDIO_TYPE
   Text type:   $TEXT_TYPE
   Font search: $FONT

@@ -20,6 +20,10 @@
 #include <cmath>
 #include <SDL/SDL.h>
 
+#ifdef ENABLE_WINDOW_ICON
+#include <SDL/SDL_image.h>
+#endif
+
 #include "compatibility.h"
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
@@ -88,6 +92,22 @@ MainSDL::MainSDL(int argc, char **argv)
 	}
 #else
 	joystick = 0;
+#endif
+
+#ifdef ENABLE_WINDOW_ICON
+	//-- Set the window manager icon
+#ifdef _WIN32
+	// On Windows SDL can only do 32x32 icons
+	#define ICON "png/icon32.png"
+#else
+	// Elsewhere SDL can do any size icons
+	#define ICON "png/icon64.png"
+#endif
+	SDL_Surface *icon = IMG_Load(dataLoc(ICON));
+	if (icon) {
+		SDL_WM_SetIcon(icon, NULL);
+		SDL_FreeSurface(icon);
+	}
 #endif
 
 	setVideoMode();
