@@ -141,67 +141,106 @@ void Config::destroy()
 	Config::m_instance = 0;
 }
 
-/**
- * just a quickie
- */ 
-//----------------------------------------------------------
-bool Config::readFile()
+const char* Config::getFileName()
 {
-	int		i;
-	int		numLines;
-	bool	retVal = true;
-	char	configFilename[256];
-	FILE	*file;
-	int		tmp;
+	static char	configFilename[256];
 	const char *homeDir = getenv("HOME");
-	char	configStrings[32][64];
 
 	if(!homeDir)
 		homeDir = "./";
 
 	sprintf(configFilename, "%s/%s", homeDir, CONFIG_FILE);
 	alterPathForPlatform(configFilename);
+	return configFilename;
+}
+
+const char* Config::getOldFileName()
+{
+	static char	configFilename[256];
+	const char *homeDir = getenv("HOME");
+
+	if(!homeDir)
+		homeDir = "./";
+
+	sprintf(configFilename, "%s/.chromium"CONFIG_EXT, homeDir);
+	alterPathForPlatform(configFilename);
+	return configFilename;
+}
+
+void Config::readValues(FILE* file)
+{
+	char configStrings[32][64];
+	int numLines;
+	int tmp;
+	int i;
+#ifdef HAVE_LOCALE_H
+	char* locale = setlocale(LC_NUMERIC,"C");
+#endif
+	i = numLines = 0;
+	while( fgets(configStrings[i], 64, file) )
+		i++;
+	numLines = i;
+	for(i = 0; i < numLines; i++)
+	{
+		if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n",    &m_screenSize); }
+		if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n",    &m_mouseSpeed); }
+		if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &m_gameSkillBase); }
+		if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n",      &m_gfxLevel);   }
+		if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n",      &m_volSound);   }
+		if(strncmp(configStrings[i], "volMusic", 8) == 0) { sscanf(configStrings[i], "volMusic %f\n",      &m_volMusic);   }
+		if(strncmp(configStrings[i], "full_scr", 8) == 0) { sscanf(configStrings[i], "full_screen %d\n",  &tmp);	m_full_screen = (bool)tmp; }
+		if(strncmp(configStrings[i], "true_col", 8) == 0) { sscanf(configStrings[i], "true_color %d\n",   &tmp);	m_true_color  = (bool)tmp; }
+		if(strncmp(configStrings[i], "swap_ste", 8) == 0) { sscanf(configStrings[i], "swap_stereo %d\n",  &tmp);	m_swap_stereo = (bool)tmp;  }
+		if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n",   &tmp);	m_auto_speed  = (bool)tmp;  }
+		if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n",     &tmp);	m_show_fps    = (bool)tmp;  }
+		if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);	m_use_playList= (bool)tmp;  }
+		if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n",    &tmp);	m_use_cdrom   = (bool)tmp;  }
+		if(strncmp(configStrings[i], "debug",    5) == 0) { sscanf(configStrings[i], "debug %d\n",        &tmp);	m_debug       = (bool)tmp;  }
+		if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n",    &tmp);	m_audioType = (AudioType)tmp; }
+		if(strncmp(configStrings[i], "textType", 8) == 0) { sscanf(configStrings[i], "textType %d\n",    &tmp);	m_textType = (TextType)tmp; }
+		if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n",      &m_maxLevel);  }
+		if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n",     &m_viewGamma); }
+		if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n",    &m_cdromCount); }
+		if(strncmp(configStrings[i], "cdromDev", 8) == 0) { sscanf(configStrings[i], "cdromDevice %d\n",   &m_cdromDevice); }
+	}
+#ifdef HAVE_LOCALE_H
+	setlocale(LC_NUMERIC,locale);
+#endif
+}
+
+/**
+ * just a quickie
+ */ 
+//----------------------------------------------------------
+bool Config::readFile()
+{
+	bool	retVal = true;
+	FILE	*file;
+	const char* configFilename = getFileName();
 	file = fopen(configFilename, "r");
 	if(file)
 	{
-#ifdef HAVE_LOCALE_H
-		char* locale = setlocale(LC_NUMERIC,"C");
-#endif
-		i = numLines = 0;
-		while( fgets(configStrings[i], 64, file) )
-			i++;
-		numLines = i;
-		for(i = 0; i < numLines; i++)
-		{
-			if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n",    &m_screenSize); }
-			if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n",    &m_mouseSpeed); }
-			if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &m_gameSkillBase); }
-			if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n",      &m_gfxLevel);   }
-			if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n",      &m_volSound);   }
-			if(strncmp(configStrings[i], "volMusic", 8) == 0) { sscanf(configStrings[i], "volMusic %f\n",      &m_volMusic);   }
-			if(strncmp(configStrings[i], "full_scr", 8) == 0) { sscanf(configStrings[i], "full_screen %d\n",  &tmp);	m_full_screen = (bool)tmp; }
-			if(strncmp(configStrings[i], "true_col", 8) == 0) { sscanf(configStrings[i], "true_color %d\n",   &tmp);	m_true_color  = (bool)tmp; }
-			if(strncmp(configStrings[i], "swap_ste", 8) == 0) { sscanf(configStrings[i], "swap_stereo %d\n",  &tmp);	m_swap_stereo = (bool)tmp;  }
-			if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n",   &tmp);	m_auto_speed  = (bool)tmp;  }
-			if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n",     &tmp);	m_show_fps    = (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);	m_use_playList= (bool)tmp;  }
-			if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n",    &tmp);	m_use_cdrom   = (bool)tmp;  }
-			if(strncmp(configStrings[i], "debug",    5) == 0) { sscanf(configStrings[i], "debug %d\n",        &tmp);	m_debug       = (bool)tmp;  }
-			if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n",    &tmp);	m_audioType = (AudioType)tmp; }
-			if(strncmp(configStrings[i], "textType", 8) == 0) { sscanf(configStrings[i], "textType %d\n",    &tmp);	m_textType = (TextType)tmp; }
-			if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n",      &m_maxLevel);  }
-			if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n",     &m_viewGamma); }
-			if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n",    &m_cdromCount); }
-			if(strncmp(configStrings[i], "cdromDev", 8) == 0) { sscanf(configStrings[i], "cdromDevice %d\n",   &m_cdromDevice); }
-		}
-#ifdef HAVE_LOCALE_H
-		setlocale(LC_NUMERIC,locale);
-#endif
+		readValues(file);
+		fclose(file);
 	}
 	else
 	{
-		if( m_debug ) fprintf(stderr, _("WARNING: could not read config file (%s)\n"), configFilename);
-		retVal = false;
+		configFilename = getOldFileName();
+		file = fopen(configFilename, "r");
+		if(file)
+		{
+			readValues(file);
+			fclose(file);
+
+			// Try to save the new file and delete the old one if successful
+			if( saveFile() )
+				remove(configFilename);
+		}
+		else
+		{
+			if( m_debug ) fprintf(stderr, _("WARNING: could not read config file (%s)\n"), configFilename);
+			retVal = false;
+		}
 	}
 	
 	//-- update all screen size variables

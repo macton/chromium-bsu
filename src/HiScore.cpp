@@ -170,6 +170,22 @@ const char *HiScore::getFileName()
 }
 
 /**
+ * Prints the name of the old score file
+ * @returns name of oldscore file
+ */
+//----------------------------------------------------------
+const char *HiScore::getOldFileName()
+{
+	static char	configFilename[256];
+	const char *homeDir = getenv("HOME");
+	if(!homeDir)
+		homeDir = "./";
+	sprintf(configFilename, "%s/.chromium-score"CONFIG_EXT, homeDir);
+	alterPathForPlatform(configFilename);
+	return configFilename;
+}
+
+/**
  * Save high score file. 
  * @returns success
  */
@@ -206,7 +222,8 @@ bool HiScore::readFile()
 	bool retVal = true;
 	FILE	*file;
 
-	file = fopen(getFileName(), "r");
+	const char* fileName = getFileName();
+	file = fopen(fileName, "r");
 	if(file)
 	{
 		fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
@@ -214,11 +231,27 @@ bool HiScore::readFile()
 		fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
 		fclose(file);
 	}
-	else 
+	else
 	{
-		Config* config = Config::instance();
-		if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
-		retVal = false;
+		fileName = getOldFileName();
+		file = fopen(fileName, "r");
+		if(file)
+		{
+			fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
+			fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
+			fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+			fclose(file);
+
+			// Try to save the new file and delete the old one if successful
+			if( saveFile() )
+				remove(fileName);
+		}
+		else 
+		{
+			Config* config = Config::instance();
+			if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
+			retVal = false;
+		}
 	}
 		
 	return retVal;

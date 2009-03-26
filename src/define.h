@@ -33,10 +33,12 @@
 #define HERO_SHIELDS 500.0 
 
 #ifdef macintosh
+#define CONFIG_EXT			".cfg"
 #define CONFIG_FILE			PACKAGE".cfg"
 #define CONFIG_SCORE_FILE	PACKAGE"-score.cfg"
 #define CONFIG_MUSIC_FILE	PACKAGE"-music.cfg"
 #else
+#define CONFIG_EXT
 #define CONFIG_FILE			"."PACKAGE
 #define CONFIG_SCORE_FILE	"."PACKAGE"-score"
 #define CONFIG_MUSIC_FILE	"."PACKAGE"-music"
