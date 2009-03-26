@@ -190,7 +190,7 @@ const char* dataLoc(const char* filename, bool doCheck)
 
 	if(getenv("HOME") != NULL && ((strlen(getenv("HOME"))+strlen(filename)) < 239) )
 	{
-		sprintf(buffer, "%s/.chromium-data/%s", getenv("HOME"), filename);
+		sprintf(buffer, "%s/."PACKAGE"-data/%s", getenv("HOME"), filename);
 		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
 

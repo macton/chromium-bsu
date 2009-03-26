@@ -151,7 +151,7 @@ void Audio::initCDROM()
 					}
 					else
 					{
-						fprintf(stderr, _("\n use_cdrom enabled. Set to '0' in ~/.chromium to disable.\n"));
+						fprintf(stderr, _("\n use_cdrom enabled. Set to '0' in the configuration file to disable.\n"));
 						fprintf(stderr, _(" Press the \'N\' key to skip to next CD track during a game.\n\n"));
 					}	
 				}

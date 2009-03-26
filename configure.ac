@@ -62,7 +62,7 @@ fi
 # Allow specifiying a hard-coded font file at build time
 AC_ARG_WITH(font-path,
 	AS_HELP_STRING([--with-font-path=file.ttf],
-		[Path to the TTF font chromium should use at runtime with FTGL (bold Gothic Uralic recommended)]),
+		[Path to the TTF font to use at runtime with FTGL (bold Gothic Uralic recommended)]),
 	[FONT_PATH="$withval"],
 	[FONT_PATH=""])
 
@@ -74,7 +74,7 @@ fi
 # Allow specifiying a hard-coded font name at build time
 AC_ARG_WITH(font-name,
 	AS_HELP_STRING([--with-font-name="Gothic Uralic"],
-		[Name of the font chromium should default to at runtime with GLC (bold Gothic Uralic is default)]),
+		[Name of the font to default to at runtime with GLC (bold Gothic Uralic is default)]),
 	[FONT_NAME="$withval"],
 	[FONT_NAME=""])
 

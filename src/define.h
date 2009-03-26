@@ -33,13 +33,13 @@
 #define HERO_SHIELDS 500.0 
 
 #ifdef macintosh
-#define CONFIG_FILE			"chromium.cfg"
-#define CONFIG_SCORE_FILE	"chromium-score.cfg"
-#define CONFIG_MUSIC_FILE	"chromium-music.cfg"
+#define CONFIG_FILE			PACKAGE".cfg"
+#define CONFIG_SCORE_FILE	PACKAGE"-score.cfg"
+#define CONFIG_MUSIC_FILE	PACKAGE"-music.cfg"
 #else
-#define CONFIG_FILE			".chromium"
-#define CONFIG_SCORE_FILE	".chromium-score"
-#define CONFIG_MUSIC_FILE	".chromium-music"
+#define CONFIG_FILE			"."PACKAGE
+#define CONFIG_SCORE_FILE	"."PACKAGE"-score"
+#define CONFIG_MUSIC_FILE	"."PACKAGE"-music"
 #endif //macintosh
 
 #define HI_SCORE_HIST 5
@@ -47,9 +47,9 @@
 #define MAX_BUFF 256
 
 #ifdef PKGBINDIR
-#define CHROMIUM_EXEC PKGBINDIR"/chromium"
+#define CHROMIUM_EXEC PKGBINDIR"/"PACKAGE
 #else 
-#define CHROMIUM_EXEC "./chromium"
+#define CHROMIUM_EXEC "./"PACKAGE
 #endif //PKGBINDIR
 
 #ifdef PKGDATADIR

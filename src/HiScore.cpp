@@ -146,7 +146,7 @@ time_t HiScore::getDate(int skill, int index)
 
 /**
  * If CHROMIUM_SCORE environment variable is set, that
- * filename will be used. Otherwise, ~/.chromium-score.
+ * filename will be used. Otherwise, the default score file.
  * @returns name of score file
  */
 //----------------------------------------------------------
