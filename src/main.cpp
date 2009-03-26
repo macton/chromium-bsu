@@ -182,9 +182,9 @@ const char* dataLoc(const char* filename, bool doCheck)
 	static char buffer[256];
 	struct	stat sbuf;
 
-	if(getenv("CHROMIUM_DATA") != NULL && ((strlen(getenv("CHROMIUM_DATA"))+strlen(filename)) < 254) )
+	if(getenv("CHROMIUM_BSU_DATA") != NULL && ((strlen(getenv("CHROMIUM_BSU_DATA"))+strlen(filename)) < 254) )
 	{
-		sprintf(buffer, "%s/%s", getenv("CHROMIUM_DATA"), filename);
+		sprintf(buffer, "%s/%s", getenv("CHROMIUM_BSU_DATA"), filename);
 		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
 

@@ -145,7 +145,7 @@ time_t HiScore::getDate(int skill, int index)
 }
 
 /**
- * If CHROMIUM_SCORE environment variable is set, that
+ * If CHROMIUM_BSU_SCORE environment variable is set, that
  * filename will be used. Otherwise, the default score file.
  * @returns name of score file
  */
@@ -153,7 +153,7 @@ time_t HiScore::getDate(int skill, int index)
 const char *HiScore::getFileName()
 {
 	static char	configFilename[256];
-	const char *envFile = getenv("CHROMIUM_SCORE");
+	const char *envFile = getenv("CHROMIUM_BSU_SCORE");
 	if(envFile && strlen(envFile) < 256)
 	{
 		strcpy(configFilename, envFile);

@@ -1,14 +1,14 @@
-.TH chromium 6 "Aug 3 2001"
+.TH chromium-bsu 6 "Aug 3 2001"
 .SH NAME
-chromium \- slick scrolling space shooter
+chromium-bsu \- slick scrolling space shooter
 .SH SYNOPSIS
-.B chromium
+.B chromium-bsu
 [\-fwv] [\-na] [\-nb] [\-nt]
 [\-\-fullscreen] [\-\-window] [\-\-vidmode <mode>]
 [\-\-noaudio] [\-\-noblend] [\-\-notexborder]
 [\-\-debug]
 .SH DESCRIPTION
-\fBchromium\fP is a fast paced top down arcade style action shooter game.
+\fBchromium-bsu\fP is a fast paced top down arcade style action shooter game.
 You progress through the game by destroying everything that you see on
 screen. There are a variety of 'power-ups' to assist you on the way.
 There is a big boss to destroy at the end of each level and there are
@@ -61,29 +61,29 @@ enable the display of debug information.
 .SH ENVIRONMENT
 The following environment variables are used.
 .TP
-.B CHROMIUM_SCORE
+.B CHROMIUM_BSU_SCORE
 specifies the location of the user high-score file.
 .TP
-.B CHROMIUM_DATA
+.B CHROMIUM_BSU_DATA
 specifies the location of user-customised game data with the same layout and filenames as the system one.
 .TP
-.B CHROMIUM_FONT
+.B CHROMIUM_BSU_FONT
 When using the GLC backend, this specifies the font name to be used in the menu and the game if available.
 .TP
 When using the FTGL backend, this specifies the path to the TTF font file used in the menu and the game.
 .SH FILES
 The following files are used.
 .TP
-.I "~/.chromium"
+.I "~/.chromium-bsu"
 contains various user preferences.
 .TP
-.I "~/.chromium-score"
+.I "~/.chromium-bsu-score"
 contains the user high-scores.
 .TP
-.I "~/.chromium-music"
+.I "~/.chromium-bsu-music"
 contains a list of music to play during the game.
 .TP
-.I "~/.chromium-data/"
+.I "~/.chromium-bsu-data/"
 directory containing user-customized game data with the same layout and filenames as the system one.
 .TP
 The game will also look in a system directory for data.
@@ -94,7 +94,7 @@ The following keys are recognised by the game.
 .TP
 .B use_playList
 Enable/disable playlist support. This causes the game to open the
-~/.chromium-music file and play the files listed there.
+~/.chromium-bsu-music file and play the files listed there.
 Disabled by default.
 Only works when using OpenAL.
 .TP
