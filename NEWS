@@ -1,3 +1,17 @@
+Chromium B.S.U. 0.9.14
+ - Migrate from chromium to chromium-bsu (and similar)
+ - Add new GLC text rendering backend allowing i18n
+ - Add German, Bulgarian & Spanish translations
+ - Don't save high scores without a new score
+ - Fix race condition, when losing your last
+   life & killing the boss, finish the game
+ - Allow using Pause as well as p to pause
+ - Restore sound & music volume at startup
+ - Fix the last few text rendering issues
+ - Release the mouse when losing focus
+ - Add a ChangeLog generated from git
+ - Add a window icon using SDL_image
+
 Chromium 0.9.13.3
  - Improve portability to Gentoo, Windows, MacOS X
  - Fix linking the GLUT window type
