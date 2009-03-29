@@ -156,9 +156,6 @@ int main(int argc, char **argv)
 	game->destroy();
 
 	if( config->debug() ) fprintf(stderr, _("done.\n"));
-	fprintf(stderr, "\n");
-	fprintf(stderr, _("Download the latest version of Chromium B.S.U. at http://chromium-bsu.sourceforge.net/\n"));
-	fprintf(stderr, "\n");
 	
 	return 0;
 }
@@ -185,15 +182,15 @@ const char* dataLoc(const char* filename, bool doCheck)
 	static char buffer[256];
 	struct	stat sbuf;
 
-	if(getenv("CHROMIUM_DATA") != NULL && ((strlen(getenv("CHROMIUM_DATA"))+strlen(filename)) < 254) )
+	if(getenv("CHROMIUM_BSU_DATA") != NULL && ((strlen(getenv("CHROMIUM_BSU_DATA"))+strlen(filename)) < 254) )
 	{
-		sprintf(buffer, "%s/%s", getenv("CHROMIUM_DATA"), filename);
+		sprintf(buffer, "%s/%s", getenv("CHROMIUM_BSU_DATA"), filename);
 		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
 
 	if(getenv("HOME") != NULL && ((strlen(getenv("HOME"))+strlen(filename)) < 239) )
 	{
-		sprintf(buffer, "%s/.chromium-data/%s", getenv("HOME"), filename);
+		sprintf(buffer, "%s/."PACKAGE"-data/%s", getenv("HOME"), filename);
 		if(stat(buffer, &sbuf) == 0) return buffer;
 	}
 

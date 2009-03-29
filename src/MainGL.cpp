@@ -136,12 +136,12 @@ void MainGL::loadTextures()
 	}
 	catch (char* str)
 	{
-		fprintf(stderr, _("chromium: error loading font: %s\n"), str);
+		fprintf(stderr, _("error loading font: %s\n"), str);
 		exit(1);
 	}
 	catch (...)
 	{
-		fprintf(stderr, _("chromium: error loading font\n"));
+		fprintf(stderr, _("error loading font\n"));
 		exit(1);
 	}
 }

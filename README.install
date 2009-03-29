@@ -25,7 +25,7 @@ Font:            Gothic Uralic bold recommended
 OPTIONAL
 --------
 
-Building with SDL_image allows chromium to set a window icon when using SDL.
+Building with SDL_image allows the game to set a window icon when using SDL.
 
 If you would like a translated interface you should build with gettext & GLC.
 

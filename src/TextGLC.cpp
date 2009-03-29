@@ -52,9 +52,9 @@ TextGLC::TextGLC() : Text()
 #endif
 
 	// Get user-specified font
-	if( NULL != getenv("CHROMIUM_FONT") ){
+	if( NULL != getenv("CHROMIUM_BSU_FONT") ){
 		userFont = glcGenFontID();
-		glcNewFontFromFamily(userFont, getenv("CHROMIUM_FONT"));
+		glcNewFontFromFamily(userFont, getenv("CHROMIUM_BSU_FONT"));
 		glcFont(userFont);
 	} else {
 		userFont = 0;

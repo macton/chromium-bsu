@@ -1,14 +1,14 @@
-.TH chromium 6 "Aug 3 2001"
+.TH chromium-bsu 6 "Aug 3 2001"
 .SH NAME
-chromium \- slick scrolling space shooter
+chromium-bsu \- slick scrolling space shooter
 .SH SYNOPSIS
-.B chromium
+.B chromium-bsu
 [\-fwv] [\-na] [\-nb] [\-nt]
 [\-\-fullscreen] [\-\-window] [\-\-vidmode <mode>]
 [\-\-noaudio] [\-\-noblend] [\-\-notexborder]
 [\-\-debug]
 .SH DESCRIPTION
-\fBchromium\fP is a fast paced top down arcade style action shooter game.
+\fBchromium-bsu\fP is a fast paced top down arcade style action shooter game.
 You progress through the game by destroying everything that you see on
 screen. There are a variety of 'power-ups' to assist you on the way.
 There is a big boss to destroy at the end of each level and there are
@@ -24,8 +24,7 @@ Self-destruct to preserve your ammunition!
 .SH OPTIONS
 When run with arguments that are not understood, usage information is shown.
 .TP
-.B chromium
-understands the following command line options
+The game understands the following command line options
 .TP
 .B \-f \-\-fullscreen
 runs in fullscreen mode.
@@ -60,53 +59,53 @@ do not set tex border color. (OpenGL)
 .B \-\-debug
 enable the display of debug information.
 .SH ENVIRONMENT
-The following environment variables are used by chromium.
+The following environment variables are used.
 .TP
-.B CHROMIUM_SCORE
+.B CHROMIUM_BSU_SCORE
 specifies the location of the user high-score file.
 .TP
-.B CHROMIUM_DATA
+.B CHROMIUM_BSU_DATA
 specifies the location of user-customised game data with the same layout and filenames as the system one.
 .TP
-.B CHROMIUM_FONT
+.B CHROMIUM_BSU_FONT
 When using the GLC backend, this specifies the font name to be used in the menu and the game if available.
 .TP
 When using the FTGL backend, this specifies the path to the TTF font file used in the menu and the game.
 .SH FILES
-The following files are used by chromium.
+The following files are used.
 .TP
-.I "~/.chromium"
-contains various chromium user preferences.
+.I "~/.chromium-bsu"
+contains various user preferences.
 .TP
-.I "~/.chromium-score"
-contains the chromium user high-scores.
+.I "~/.chromium-bsu-score"
+contains the user high-scores.
 .TP
-.I "~/.chromium-music"
+.I "~/.chromium-bsu-music"
 contains a list of music to play during the game.
 .TP
-.I "~/.chromium-data/"
+.I "~/.chromium-bsu-data/"
 directory containing user-customized game data with the same layout and filenames as the system one.
 .TP
-Chromium will also look in a system directory for data.
+The game will also look in a system directory for data.
 .SH CONFIGURATION
 The configuration file is a plain text file. Each line contains a key,
 a single-space separator and then a numeric value (integer or floating point).
-The following keys are recognised by chromium.
+The following keys are recognised by the game.
 .TP
 .B use_playList
-Enable/disable playlist support. This causes chromium to open the
-~/.chromium-music file and play the files listed there.
+Enable/disable playlist support. This causes the game to open the
+~/.chromium-bsu-music file and play the files listed there.
 Disabled by default.
 Only works when using OpenAL.
 .TP
 .B use_cdrom
-Enable/disable CDROM support. This causes chromium to attempt to play any audio
+Enable/disable CDROM support. This causes the game to attempt to play any audio
 CD that might be available. This is disabled by default because the constant
 spinning up of the CD can be annoying and because CDs are less popular than
 MP3/OGG these days. Only works when compiled with SDL support.
 .TP
 .B full_screen
-Enable/disable full-screen mode. This causes chromium to fill the screen
+Enable/disable full-screen mode. This causes the game to fill the screen
 instead of just using a window. Disabled by default. Only works when using
 SDL support.
 .TP
@@ -211,7 +210,7 @@ The number of the CDROM device to use when use_cdrom is enabled. Zero-based.
 Defaults to first device (0).
 .TP
 .B debug
-Enable/disable debug information. This causes chromium to print debug
+Enable/disable debug information. This causes the game to print debug
 information to the terminal. This is disabled by default.
 .SH SEE ALSO
 .br

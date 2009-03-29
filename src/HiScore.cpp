@@ -145,15 +145,15 @@ time_t HiScore::getDate(int skill, int index)
 }
 
 /**
- * If CHROMIUM_SCORE environment variable is set, that
- * filename will be used. Otherwise, ~/.chromium-score.
+ * If CHROMIUM_BSU_SCORE environment variable is set, that
+ * filename will be used. Otherwise, the default score file.
  * @returns name of score file
  */
 //----------------------------------------------------------
 const char *HiScore::getFileName()
 {
 	static char	configFilename[256];
-	const char *envFile = getenv("CHROMIUM_SCORE");
+	const char *envFile = getenv("CHROMIUM_BSU_SCORE");
 	if(envFile && strlen(envFile) < 256)
 	{
 		strcpy(configFilename, envFile);
@@ -166,6 +166,22 @@ const char *HiScore::getFileName()
 		sprintf(configFilename, "%s/%s", homeDir, CONFIG_SCORE_FILE);
 		alterPathForPlatform(configFilename);
 	}
+	return configFilename;
+}
+
+/**
+ * Prints the name of the old score file
+ * @returns name of oldscore file
+ */
+//----------------------------------------------------------
+const char *HiScore::getOldFileName()
+{
+	static char	configFilename[256];
+	const char *homeDir = getenv("HOME");
+	if(!homeDir)
+		homeDir = "./";
+	sprintf(configFilename, "%s/.chromium-score"CONFIG_EXT, homeDir);
+	alterPathForPlatform(configFilename);
 	return configFilename;
 }
 
@@ -206,7 +222,8 @@ bool HiScore::readFile()
 	bool retVal = true;
 	FILE	*file;
 
-	file = fopen(getFileName(), "r");
+	const char* fileName = getFileName();
+	file = fopen(fileName, "r");
 	if(file)
 	{
 		fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
@@ -214,11 +231,27 @@ bool HiScore::readFile()
 		fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
 		fclose(file);
 	}
-	else 
+	else
 	{
-		Config* config = Config::instance();
-		if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
-		retVal = false;
+		fileName = getOldFileName();
+		file = fopen(fileName, "r");
+		if(file)
+		{
+			fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
+			fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
+			fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+			fclose(file);
+
+			// Try to save the new file and delete the old one if successful
+			if( saveFile() )
+				remove(fileName);
+		}
+		else 
+		{
+			Config* config = Config::instance();
+			if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
+			retVal = false;
+		}
 	}
 		
 	return retVal;

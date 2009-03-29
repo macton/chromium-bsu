@@ -81,7 +81,7 @@ const char* TextFTGL::findFont()
 	}
 
 	// Get user-specified font path
-	CHECK_FONT_PATH(getenv("CHROMIUM_FONT"))
+	CHECK_FONT_PATH(getenv("CHROMIUM_BSU_FONT"))
 
 #ifdef FONT_PATH
 	// Get distro-specified font path

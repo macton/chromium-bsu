@@ -10,6 +10,8 @@
 
 #include "compatibility.h"
 
+#include <cstdio>
+
 /**
  * contains data obtained from config file. Singleton.
  */
@@ -23,6 +25,10 @@ public:
 	static Config	*instance();
 	static void		destroy();
 	
+        
+	const char	*getFileName();
+	const char	*getOldFileName();
+	void	readValues(FILE* file);
 	bool	readFile();
 	bool	saveFile();
 	

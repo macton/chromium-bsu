@@ -32,6 +32,7 @@ public:
 	time_t		getDate(int skill, int index);
 	
 	const char	*getFileName();
+	const char	*getOldFileName();
 	bool		readFile();
 	bool		saveFile();
 	int			set(int skill, float score);

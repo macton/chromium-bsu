@@ -707,6 +707,15 @@ void AudioOpenAL::loadMusicList()
 	sprintf(configFilename, "%s/%s", homeDir, CONFIG_MUSIC_FILE);
 	alterPathForPlatform(configFilename);
 	file = fopen(configFilename, "r");
+	if(!file)
+	{
+		char	configFilename[256];
+		sprintf(configOldFilename, "%s/.chromium-music"CONFIG_EXT, homeDir);
+		alterPathForPlatform(configOldFilename);
+		rename(configOldFilename,configFilename)
+		file = fopen(configFilename, "r");
+	}
+
 	if(file)
 	{	
 		while( fgets(buffer, 1024, file) )
@@ -895,7 +904,7 @@ AudioOpenAL::AudioFormat AudioOpenAL::extensionFormat(char* filename)
 bool AudioOpenAL::loadWAV(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
+	fprintf(stderr, _("WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else //USE_PLAYLIST
 #if defined(ALUT_API_MAJOR_VERSION) && ALUT_API_MAJOR_VERSION >= 1
@@ -928,7 +937,7 @@ bool AudioOpenAL::loadWAV(const char *filename)
 bool AudioOpenAL::loadMP3(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
+	fprintf(stderr, _("WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else//USE_PLAYLIST
 	FILE	*file;
@@ -972,7 +981,7 @@ bool AudioOpenAL::loadMP3(const char *filename)
 bool AudioOpenAL::loadVorbis(const char *filename)
 {
 #ifndef USE_PLAYLIST
-	fprintf(stderr, _("WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"), filename);
+	fprintf(stderr, _("WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"), filename);
 	return false;
 #else//USE_PLAYLIST
 	if(initialized)

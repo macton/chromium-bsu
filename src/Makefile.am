@@ -1,8 +1,8 @@
 MAINTAINERCLEANFILES = Makefile.in
 
-bin_PROGRAMS = chromium
+bin_PROGRAMS = chromium-bsu
 
-chromium_CPPFLAGS = \
+chromium_bsu_CPPFLAGS = \
 	$(GL_CFLAGS) \
 	$(GLU_CFLAGS) \
 	$(TEXT_CFLAGS) \
@@ -13,7 +13,7 @@ chromium_CPPFLAGS = \
 	"-DLOCALEDIR=\"$(localedir)\"" \
 	"-DPKGDATADIR=\"$(pkgdatadir)\""
 
-chromium_LDADD = \
+chromium_bsu_LDADD = \
 	$(GL_LIBS) \
 	$(GLU_LIBS) \
 	$(TEXT_LIBS) \
@@ -21,7 +21,7 @@ chromium_LDADD = \
 	$(WINDOW_LIBS) \
 	$(AUDIO_LIBS)
 
-chromium_SOURCES = \
+chromium_bsu_SOURCES = \
 	Ammo.cpp \
 	Ammo.h \
 	Audio.cpp \
