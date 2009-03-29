@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2009-03-28 03:31-0400\n"
+"POT-Creation-Date: 2009-03-29 02:37-0400\n"
 "PO-Revision-Date: 2009-03-28 10:32-0500\n"
-"Last-Translator: George Echeverri <George_E@South-FL-PC.com>\n"
+"Last-Translator: Alwyn Malachi Berkeley <malachix@malachix.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +57,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-" use_cdrom enabled. Set to '0' in ~/.chromium to disable.\n"
+" use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
 "\n"
 " El uso de cdrom es permitido (use_cdrom). fijar '0' en ~/.chromium a la "
@@ -104,9 +104,9 @@ msgid "alAttenuationScale == 0. Kludge it.\n"
 msgstr "alAttenuationScale == 0. Fijación.\n"
 
 #: src/AudioOpenAL.cpp:162
-#, fuzzy, c-format
+#, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr "AudioOpenAL::~Audio()"
+msgstr "AudioOpenAL::~Audio() terminado"
 
 #: src/AudioOpenAL.cpp:170
 #, c-format
@@ -133,7 +133,7 @@ msgstr ""
 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 "!! Atención !! - Uno o mas errores fueron encontrados durante verificación\n"
 "!!               del audio.\n"
-"!!                El audio sera apagado.\n"
+"!!               El audio sera apagado.\n"
 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 
 #: src/AudioOpenAL.cpp:267
@@ -152,7 +152,7 @@ msgstr ""
 "-OpenAL-----------------------------------------------------\n"
 "Vendedor   : %s\n"
 "Renderer   : %s\n"
-"Versin    : %s\n"
+"Versión    : %s\n"
 
 #: src/AudioOpenAL.cpp:277 src/MainSDL.cpp:124
 #, c-format
@@ -179,14 +179,14 @@ msgid "Audio.cpp - initSound complete."
 msgstr "Audio.cpp - initSound completo."
 
 #: src/AudioOpenAL.cpp:428
-#, fuzzy, c-format
+#, c-format
 msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
-msgstr "Audio::setMusicIndex(%d)\n"
+msgstr "\n"
 
 #: src/AudioOpenAL.cpp:463
-#, fuzzy, c-format
+#, c-format
 msgid "AudioOpenAL::setSoundVolume(%f)\n"
-msgstr "Audio::setMusicIndex(%d)\n"
+msgstr "\n"
 
 #: src/AudioOpenAL.cpp:506
 #, c-format
@@ -222,91 +222,90 @@ msgstr "ERROR!! <%s> alcGetError() = %s\n"
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "ERROR!! <%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:721
+#: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "ERROR: nombre de archivo a largo: \"%s\", línea %d\n"
 
-#: src/AudioOpenAL.cpp:739
+#: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "ADVERTENCIA: soporte MP3 no disponible: \"%s\", línea %d\n"
 
-#: src/AudioOpenAL.cpp:750
+#: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "ADVERTENCIA: Ogg/Vorbis no disponible: \"%s\", línea %d\n"
 
-#: src/AudioOpenAL.cpp:754
+#: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "ADVERTENCIA: Tipo de archivo no reconocido: \"%s\": \"%s\", línea %d\n"
 
-#: src/AudioOpenAL.cpp:767
+#: src/AudioOpenAL.cpp:776
 #, c-format
 msgid "music playlist:\n"
 msgstr "lista de música:\n"
 
-#: src/AudioOpenAL.cpp:770
+#: src/AudioOpenAL.cpp:779
 #, c-format
 msgid " %2d : %s\n"
 msgstr " %2d : %s\n"
 
-#: src/AudioOpenAL.cpp:772
+#: src/AudioOpenAL.cpp:781
 #, c-format
 msgid "loaded %s\n"
 msgstr "%s cargado\n"
 
-#: src/AudioOpenAL.cpp:797
+#: src/AudioOpenAL.cpp:806
 msgid "AudioOpenAL::setMusicIndex -- begin"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:810
+#: src/AudioOpenAL.cpp:819
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:813
+#: src/AudioOpenAL.cpp:822
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:848
+#: src/AudioOpenAL.cpp:857
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:898 src/AudioOpenAL.cpp:931 src/AudioOpenAL.cpp:975
+#: src/AudioOpenAL.cpp:907 src/AudioOpenAL.cpp:940 src/AudioOpenAL.cpp:984
 #, c-format
-msgid ""
-"WARNING: PlayList support not compiled into Chromium (AudioOpenAL.cpp): %s\n"
+msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr ""
 "ADVERTENCIA: soporte de la lista de música no es compilada en Chromium "
 "(AudioOpenAL.cpp): %s\n"
 
-#: src/AudioOpenAL.cpp:948
+#: src/AudioOpenAL.cpp:957
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
 msgstr "ERROR: no pudo asignar memoria en AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:954
+#: src/AudioOpenAL.cpp:963
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "ERROR: No pudo abrir \"%s\" en AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:962
+#: src/AudioOpenAL.cpp:971
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:994
+#: src/AudioOpenAL.cpp:1003
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
 msgstr "ERROR: no pudo asignar memoria en AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1000
+#: src/AudioOpenAL.cpp:1009
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "ERROR: No pudo abrir \"%s\" en AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1008
+#: src/AudioOpenAL.cpp:1017
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
 msgstr ""
@@ -321,17 +320,17 @@ msgstr "ERROR inicializando el audio - AudioSDLMixer::initSound()\n"
 msgid "WARNING: Config::init() has already been called.\n"
 msgstr "ADVERTENCIA: Config::init() ya ha sido llamado.\n"
 
-#: src/Config.cpp:203
+#: src/Config.cpp:241
 #, c-format
 msgid "WARNING: could not read config file (%s)\n"
 msgstr "ADVERTENCIA: no pudo leer el archivo de configuración (%s)\n"
 
-#: src/Config.cpp:260
+#: src/Config.cpp:299
 #, c-format
 msgid "wrote config file (%s)\n"
 msgstr "escribio archivo de configuración(%s)\n"
 
-#: src/Config.cpp:265
+#: src/Config.cpp:304
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
 msgstr "ADVERTENCIA: no pudo escribir archivo de configuración (%s)\n"
@@ -411,22 +410,22 @@ msgstr "nadie"
 msgid "WARNING: HiScore::init() has already been called.\n"
 msgstr "ADVERTENCIA: HiScore::init() ya ha sido llamado.\n"
 
-#: src/HiScore.cpp:192
+#: src/HiScore.cpp:208
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
 msgstr "ADVERTENCIA: no pudo escribir archivo del resultado(%s)\n"
 
-#: src/HiScore.cpp:220
+#: src/HiScore.cpp:252
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
 msgstr "ADVERTENCIA: no pudo leer archivo del resultado(%s)\n"
 
-#: src/HiScore.cpp:311
+#: src/HiScore.cpp:344
 #, c-format
 msgid "high scores:\n"
 msgstr "cuentas altas:\n"
 
-#: src/HiScore.cpp:317
+#: src/HiScore.cpp:350
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
@@ -468,24 +467,15 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:160
-#, c-format
-msgid ""
-"Download the latest version of Chromium B.S.U. at http://chromium-bsu."
-"sourceforge.net/\n"
-msgstr ""
-"descarga de la versin ms reciente de Chromium B.S.U. a http://chromium-bsu."
-"sourceforge.net/\n"
-
-#: src/main.cpp:226
+#: src/main.cpp:223
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! ERROR !! - "
 
-#: src/main.cpp:250
+#: src/main.cpp:247
 #, c-format
 msgid "Extensions :"
-msgstr "extensiones:"
+msgstr "Extensiones:"
 
 #: src/MainGL.cpp:79
 #, c-format
@@ -493,14 +483,14 @@ msgid "initGL()\n"
 msgstr ""
 
 #: src/MainGL.cpp:139
-#, c-format
-msgid "chromium: error loading font: %s\n"
-msgstr "chromium: error cargando texto: %s\n"
+#, fuzzy, c-format
+msgid "error loading font: %s\n"
+msgstr "FTGL: error cargando texto: %s\n"
 
 #: src/MainGL.cpp:144
-#, c-format
-msgid "chromium: error loading font\n"
-msgstr "chromium: error cargando texto\n"
+#, fuzzy, c-format
+msgid "error loading font\n"
+msgstr "FTGL: error cargando texto"
 
 #: src/MainGL.cpp:174
 #, c-format
@@ -547,7 +537,7 @@ msgid ""
 msgstr ""
 "felicidades!\n"
 " \n"
-"N i v e l\n"
+"n i v e l\n"
 " %d \n"
 "t e r m i n a d o\n"
 " \n"
@@ -634,15 +624,14 @@ msgid ""
 msgstr ""
 "%d ajustes de la velocidad requeridos.\n"
 "NOTA:\n"
-"      el juego no fue capaz de mantener 50 cuadros constantes por\n"
+"      El juego no fue capaz de mantener 50 cuadros constantes por\n"
 "      segundo.  Usted debe considerar la posibilidad de reducir la\n"
 "      resolución de la pantalla o bajarle la opcion de los\n"
 "      detalles gráficos.\n"
 "      -O-\n"
 "      Compruebe que no este ejecutando ninguna herramienta de monitoreo\n"
-"      del sistema (ejemplos 'top', 'xosview', etc.) laufen. Estos\n"
-"      tipos de herramientas pueden hacer difícil mantener un imagen "
-"constante       .\n"
+"      del sistema (ejemplos 'top', 'xosview', etc.). Estos tipos de\n"
+"      herramientas pueden hacer difícil mantener un imagen constante.\n"
 
 #: src/MainSDL.cpp:263
 #, c-format
@@ -777,8 +766,8 @@ msgstr ""
 #: src/MenuGL.cpp:48
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
 msgstr ""
-" t o c e  e l  b o t o n  d e r e c h o  d e l  r a t o n  d o s  v e c e sp "
-"a r a  a u t o d e s t r u i r s e"
+" t o c e  e l  b o t o n  d e r e c h o  d e l  r a t o n  d o s  v e c e s"
+"  pa r a  a u t o d e s t r u i r s e"
 
 #: src/MenuGL.cpp:49
 msgid ""
@@ -786,168 +775,177 @@ msgid ""
 "t i o n !"
 msgstr "  d e s t r u y a t e  p a r a  p r e s e r v a r  m u n i c i ó n ! "
 
-#: src/MenuGL.cpp:70
+#: src/MenuGL.cpp:50
+#, fuzzy
+msgid ""
+"  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
+"sf.net/"
+msgstr ""
+"descarga de la versión más reciente de Chromium B.S.U. a http://chromium-bsu."
+"sourceforge.net/\n"
+
+#: src/MenuGL.cpp:71
 msgid "n e w    g a m e"
 msgstr "n u e v o  j u e g o"
 
-#: src/MenuGL.cpp:71
+#: src/MenuGL.cpp:72
 msgid "l e v e l"
 msgstr "n i v e l"
 
-#: src/MenuGL.cpp:72
+#: src/MenuGL.cpp:73
 msgid "s k i l l"
 msgstr "a p t i t u d"
 
-#: src/MenuGL.cpp:73
+#: src/MenuGL.cpp:74
 msgid "g f x    d e t a i l"
 msgstr "d e t a l l e  g r á f i c o"
 
-#: src/MenuGL.cpp:74
+#: src/MenuGL.cpp:75
 msgid "f u l l s c r e e n"
 msgstr "p a n t a l l a  e n t e r a"
 
-#: src/MenuGL.cpp:75
+#: src/MenuGL.cpp:76
 msgid "s c r e e n    s i z e"
 msgstr "t a m a ñ o  de  p a n t a l l a"
 
-#: src/MenuGL.cpp:76
+#: src/MenuGL.cpp:77
 msgid "s o u n d    f x    v o l u m e"
 msgstr "v o l u m e n  d e  e f f e c t o s  e s p e c i a l e s"
 
-#: src/MenuGL.cpp:77
+#: src/MenuGL.cpp:78
 msgid "m u s i c    v o l u m e"
 msgstr "v o l u m e n  d e  m ú s i c a"
 
-#: src/MenuGL.cpp:78
+#: src/MenuGL.cpp:79
 msgid "m o u s e   s p e e d"
 msgstr "v e l o c i d a d  de  r a t ó n"
 
-#: src/MenuGL.cpp:79
+#: src/MenuGL.cpp:80
 msgid "q u i t"
 msgstr "s a l i r"
 
-#: src/MenuGL.cpp:144 src/MenuGL.cpp:419
+#: src/MenuGL.cpp:145 src/MenuGL.cpp:420
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
 msgstr ""
 
-#: src/MenuGL.cpp:148
+#: src/MenuGL.cpp:149
 #, c-format
 msgid "MenuGL::createLists\n"
 msgstr ""
 
-#: src/MenuGL.cpp:163
+#: src/MenuGL.cpp:164
 msgid "fish in a barrel"
 msgstr "pescados en un barril"
 
-#: src/MenuGL.cpp:164
+#: src/MenuGL.cpp:165
 msgid "whimp"
 msgstr "whimp"
 
-#: src/MenuGL.cpp:165
+#: src/MenuGL.cpp:166
 msgid "easy"
 msgstr "facil"
 
-#: src/MenuGL.cpp:166
+#: src/MenuGL.cpp:167
 msgid "normal"
 msgstr "normal"
 
-#: src/MenuGL.cpp:167
+#: src/MenuGL.cpp:168
 msgid "experienced"
 msgstr "experimentado"
 
-#: src/MenuGL.cpp:168
+#: src/MenuGL.cpp:169
 msgid "fun"
 msgstr "diversión"
 
-#: src/MenuGL.cpp:169
+#: src/MenuGL.cpp:170
 msgid "insane"
 msgstr "loco"
 
-#: src/MenuGL.cpp:170
+#: src/MenuGL.cpp:171
 msgid "impossible"
 msgstr "imposible"
 
-#: src/MenuGL.cpp:171
+#: src/MenuGL.cpp:172
 msgid "-"
 msgstr "-"
 
-#: src/MenuGL.cpp:293 src/MenuGL.cpp:322
+#: src/MenuGL.cpp:294 src/MenuGL.cpp:323
 msgid "high scores"
 msgstr "cuentas altas"
 
-#: src/MenuGL.cpp:351
+#: src/MenuGL.cpp:352
 msgid "the"
 msgstr "the"
 
-#: src/MenuGL.cpp:355
+#: src/MenuGL.cpp:356
 msgid "reptile"
 msgstr "reptile"
 
-#: src/MenuGL.cpp:359
+#: src/MenuGL.cpp:360
 msgid "labour"
 msgstr "labour"
 
-#: src/MenuGL.cpp:363
+#: src/MenuGL.cpp:364
 msgid "project"
 msgstr "project"
 
-#: src/MenuGL.cpp:424
+#: src/MenuGL.cpp:425
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
 msgstr ""
 
-#: src/MenuGL.cpp:475
+#: src/MenuGL.cpp:476
 #, c-format
 msgid "low"
 msgstr "bajo"
 
-#: src/MenuGL.cpp:476
+#: src/MenuGL.cpp:477
 #, c-format
 msgid "med"
 msgstr "mediano"
 
-#: src/MenuGL.cpp:477
+#: src/MenuGL.cpp:478
 #, c-format
 msgid "high"
 msgstr "alto"
 
-#: src/MenuGL.cpp:484
+#: src/MenuGL.cpp:485
 #, c-format
 msgid "512x384"
 msgstr "512x384"
 
-#: src/MenuGL.cpp:485
+#: src/MenuGL.cpp:486
 #, c-format
 msgid "640x480"
 msgstr "640x480"
 
-#: src/MenuGL.cpp:486
+#: src/MenuGL.cpp:487
 #, c-format
 msgid "800x600"
 msgstr "800x600"
 
-#: src/MenuGL.cpp:487
+#: src/MenuGL.cpp:488
 #, c-format
 msgid "1024x768"
 msgstr "1024x768"
 
-#: src/MenuGL.cpp:488
+#: src/MenuGL.cpp:489
 #, c-format
 msgid "1280x960"
 msgstr "1280x960"
 
-#: src/MenuGL.cpp:493
+#: src/MenuGL.cpp:494
 #, c-format
 msgid "true"
 msgstr "cierto"
 
-#: src/MenuGL.cpp:494
+#: src/MenuGL.cpp:495
 #, c-format
 msgid "false"
 msgstr "falso"
 
-#: src/MenuGL.cpp:834
+#: src/MenuGL.cpp:835
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr ""
@@ -1039,3 +1037,9 @@ msgstr "/usr/share/fonts/TTF/uralic/GOTHUB___.TTF"
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
 msgstr "GLC: no pudo establecer contexto"
+
+#~ msgid "chromium: error loading font: %s\n"
+#~ msgstr "chromium: error cargando texto: %s\n"
+
+#~ msgid "chromium: error loading font\n"
+#~ msgstr "chromium: error cargando texto\n"
