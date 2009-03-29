@@ -39,14 +39,15 @@
 
 #include "textGeometry.h"
 
-static const int NumMssg = 6;
+static const int NumMssg = 7;
 static char mssgHelpText[NumMssg][128] = {
 N_("  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"),
 N_("  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"),
 N_("  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"),
 N_("  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"),
 N_("  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"),
-N_("  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !")
+N_("  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"),
+N_("  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"),
 };
 
 //====================================================================

@@ -156,9 +156,6 @@ int main(int argc, char **argv)
 	game->destroy();
 
 	if( config->debug() ) fprintf(stderr, _("done.\n"));
-	fprintf(stderr, "\n");
-	fprintf(stderr, _("Download the latest version of Chromium B.S.U. at http://chromium-bsu.sourceforge.net/\n"));
-	fprintf(stderr, "\n");
 	
 	return 0;
 }
