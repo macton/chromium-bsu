@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2009-03-29 02:37-0400\n"
-"PO-Revision-Date: 2009-03-28 10:32-0500\n"
+"POT-Creation-Date: 2009-03-30 16:29+0800\n"
+"PO-Revision-Date: 2009-03-30 00:20-0500\n"
 "Last-Translator: Alwyn Malachi Berkeley <malachix@malachix.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "Datos"
 #: src/Audio.cpp:113
 #, c-format
 msgid "UNKNOWN(type=%d)"
-msgstr "DESCONOCIDO(Tipo=%d)"
+msgstr "DESCONOCIDO(tipo=%d)"
 
 #: src/Audio.cpp:124
 #, c-format
@@ -60,8 +60,8 @@ msgid ""
 " use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
 "\n"
-" El uso de cdrom es permitido (use_cdrom). fijar '0' en ~/.chromium a la "
-"neutralización.\n"
+" use_cdrom es permitido. Ponga '0' en el archivo de configuración para "
+"desactivar.\n"
 
 #: src/Audio.cpp:155
 #, c-format
@@ -106,7 +106,7 @@ msgstr "alAttenuationScale == 0. Fijación.\n"
 #: src/AudioOpenAL.cpp:162
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr "AudioOpenAL::~Audio() terminado"
+msgstr "AudioOpenAL::~Audio() terminado\n"
 
 #: src/AudioOpenAL.cpp:170
 #, c-format
@@ -181,12 +181,12 @@ msgstr "Audio.cpp - initSound completo."
 #: src/AudioOpenAL.cpp:428
 #, c-format
 msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
-msgstr "\n"
+msgstr "AudioOpenAL::setMusicMode(SoundType mode)\n"
 
 #: src/AudioOpenAL.cpp:463
 #, c-format
 msgid "AudioOpenAL::setSoundVolume(%f)\n"
-msgstr "\n"
+msgstr "AudioOpenAL::setSoundVolume(%f)\n"
 
 #: src/AudioOpenAL.cpp:506
 #, c-format
@@ -277,8 +277,8 @@ msgstr ""
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr ""
-"ADVERTENCIA: soporte de la lista de música no es compilada en Chromium "
-"(AudioOpenAL.cpp): %s\n"
+"ADVERTENCIA: soporte de la lista de música no es compilada en (AudioOpenAL."
+"cpp): %s\n"
 
 #: src/AudioOpenAL.cpp:957
 #, c-format
@@ -371,9 +371,9 @@ msgid "begin shutdown...\n"
 msgstr ""
 
 #: src/Global.cpp:262
-#, fuzzy, c-format
+#, c-format
 msgid "...shutdown complete.\n"
-msgstr "...cierre completo.\n"
+msgstr "...cierre completa.\n"
 
 #: src/Global.cpp:269
 #, c-format
@@ -483,14 +483,14 @@ msgid "initGL()\n"
 msgstr ""
 
 #: src/MainGL.cpp:139
-#, fuzzy, c-format
+#, c-format
 msgid "error loading font: %s\n"
-msgstr "FTGL: error cargando texto: %s\n"
+msgstr "error al cargar el texto: %s\n"
 
 #: src/MainGL.cpp:144
-#, fuzzy, c-format
+#, c-format
 msgid "error loading font\n"
-msgstr "FTGL: error cargando texto"
+msgstr "error al cargar el texto\n"
 
 #: src/MainGL.cpp:174
 #, c-format
@@ -575,7 +575,7 @@ msgstr "número de joysticks = %d\n"
 #: src/MainSDL.cpp:84
 #, c-format
 msgid "   joystick 0 = %p\n"
-msgstr "   Joystick 0 = %p\n"
+msgstr "   joystick 0 = %p\n"
 
 #: src/MainSDL.cpp:90
 #, c-format
@@ -591,7 +591,7 @@ msgid ""
 "Version    : %s\n"
 msgstr ""
 "-OpenGL-----------------------------------------------------\n"
-"Vendedor : %s\n"
+"Vendedor   : %s\n"
 "Renderer   : %s\n"
 "Versión    : %s\n"
 
@@ -611,7 +611,7 @@ msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 
 #: src/MainSDL.cpp:251
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d speed adjustments required.\n"
 "NOTE: The game was not able to maintain a steady 50 frames per\n"
@@ -626,12 +626,12 @@ msgstr ""
 "NOTA:\n"
 "      El juego no fue capaz de mantener 50 cuadros constantes por\n"
 "      segundo.  Usted debe considerar la posibilidad de reducir la\n"
-"      resolución de la pantalla o bajarle la opcion de los\n"
+"      resolución de la pantalla o bajarle la opción de los\n"
 "      detalles gráficos.\n"
 "      -O-\n"
-"      Compruebe que no este ejecutando ninguna herramienta de monitoreo\n"
-"      del sistema (ejemplos 'top', 'xosview', etc.). Estos tipos de\n"
-"      herramientas pueden hacer difícil mantener un imagen constante.\n"
+"      No ejecute ningún herramienta de monitoreo del sistema\n"
+"      (ejemplos 'top', 'xosview', etc.) Estos tipos de herramientas\n"
+"      pueden hacer difícil mantener un imagen constante.\n"
 
 #: src/MainSDL.cpp:263
 #, c-format
@@ -755,8 +755,8 @@ msgid ""
 "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
 "i n t s !"
 msgstr ""
-"  p e r m i t a  p o w e r - u p s  p a s a r  p a r a  g a n a r  p u n t o s"
-"  g r a n d e s"
+"  p e r m i t a  p o w e r - u p s  p a s a r  p a r a  g a n a r  p u n t o "
+"s  g r a n d e s"
 
 #: src/MenuGL.cpp:47
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
@@ -766,8 +766,8 @@ msgstr ""
 #: src/MenuGL.cpp:48
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
 msgstr ""
-" t o c e  e l  b o t o n  d e r e c h o  d e l  r a t o n  d o s  v e c e s"
-"  pa r a  a u t o d e s t r u i r s e"
+" t o c e  e l  b o t o n  d e r e c h o  d e l  r a t ó n  d o s  v e c e s  "
+"p a r a  a u t o d e s t r u i r s e"
 
 #: src/MenuGL.cpp:49
 msgid ""
@@ -776,13 +776,12 @@ msgid ""
 msgstr "  d e s t r u y a t e  p a r a  p r e s e r v a r  m u n i c i ó n ! "
 
 #: src/MenuGL.cpp:50
-#, fuzzy
 msgid ""
 "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
 "sf.net/"
 msgstr ""
-"descarga de la versión más reciente de Chromium B.S.U. a http://chromium-bsu."
-"sourceforge.net/\n"
+"  d e s c a r g a   d e   C h r o m i u m  B. S. U.   a   http://chromium-"
+"bsu.sf.net/"
 
 #: src/MenuGL.cpp:71
 msgid "n e w    g a m e"
