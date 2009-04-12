@@ -11,6 +11,7 @@ AM_CONFIG_HEADER([config.h])
 
 # Programs
 AC_PROG_CXX
+PKG_PROG_PKG_CONFIG
 
 # Headers
 AC_HEADER_STDC
