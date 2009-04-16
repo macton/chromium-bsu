@@ -110,7 +110,12 @@ MainSDL::MainSDL(int argc, char **argv)
 	}
 #endif
 
-	setVideoMode();
+	if( !setVideoMode() )
+	{
+		fprintf(stderr, _("Couldn't set video mode: %s\n"), SDL_GetError());
+		SDL_Quit();
+		exit(1);
+	}
 
 	if( config->debug() )
 	{
@@ -294,7 +299,7 @@ bool MainSDL::checkErrors()
 }
 
 //----------------------------------------------------------
-void MainSDL::setVideoMode() 
+bool MainSDL::setVideoMode()
 {
 	Global	*game = Global::getInstance();
 	Config	*config = Config::instance();
@@ -339,8 +344,7 @@ void MainSDL::setVideoMode()
 	if ( (glSurface = SDL_SetVideoMode( w, h, bpp, video_flags )) == NULL ) 
 	{
 		fprintf(stderr, _("Couldn't set GL mode: %s\n"), SDL_GetError());
-		SDL_Quit();
-		exit(1);
+		return false;
 	}
 	else
 	{
@@ -355,6 +359,8 @@ void MainSDL::setVideoMode()
 
 	if(game->mainGL)
 		game->mainGL->initGL();
+
+	return true;
 }
 
 #endif // USE_SDL

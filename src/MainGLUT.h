@@ -23,7 +23,7 @@ public:
 	bool run();
 	bool checkErrors();
 	
-	void setVideoMode();
+	bool setVideoMode();
 	
 	void grabMouse(bool,bool=true);
 

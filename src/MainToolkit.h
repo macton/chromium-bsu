@@ -23,7 +23,7 @@ public:
 	virtual bool run() = 0;
 	virtual bool checkErrors() = 0;
 	
-	virtual void setVideoMode() = 0;
+	virtual bool setVideoMode() = 0;
 	
 	virtual void grabMouse(bool,bool=true) = 0;
 };

@@ -793,7 +793,16 @@ void MenuGL::activateItem()
 		case FullScreen:
 			config->setFullScreen(!config->fullScreen());
 			game->deleteTextures();
-			game->toolkit->setVideoMode();
+			if( !game->toolkit->setVideoMode() )
+			{
+				mssgHelpOverride = true;
+				mssgAlpha = 1.1;
+				if( config->fullScreen() )
+					sprintf(mssgText, _("---- error setting full screen mode ----"));
+				else
+					sprintf(mssgText, _("---- error setting window mode ----"));
+				config->setFullScreen(!config->fullScreen());
+			}
 			game->loadTextures();
 			break;
 		case Sound:
@@ -844,7 +853,13 @@ void MenuGL::incItem()
 		case ScreenSize:
 			config->setScreenSize(config->screenSize()+1);
 			game->deleteTextures();
-			game->toolkit->setVideoMode();
+			if( !game->toolkit->setVideoMode() )
+			{
+				mssgHelpOverride = true;
+				mssgAlpha = 1.1;
+				sprintf(mssgText, _("---- error setting screen size ----"));
+				config->setScreenSize(config->screenSize()-1);
+			}
 			game->loadTextures();
 			break;
 		case FullScreen:
@@ -852,7 +867,13 @@ void MenuGL::incItem()
 			{
 				config->setFullScreen(true);
 				game->deleteTextures();
-				game->toolkit->setVideoMode();
+				if( !game->toolkit->setVideoMode() )
+				{
+					mssgHelpOverride = true;
+					mssgAlpha = 1.1;
+					sprintf(mssgText, _("---- error setting full screen mode ----"));
+					config->setFullScreen(false);
+				}
 				game->loadTextures();
 			}
 			break;
@@ -903,7 +924,13 @@ void MenuGL::decItem()
 		case ScreenSize:
 			config->setScreenSize(config->screenSize()-1);
 			game->deleteTextures();
-			game->toolkit->setVideoMode();
+			if( !game->toolkit->setVideoMode() )
+			{
+				mssgHelpOverride = true;
+				mssgAlpha = 1.1;
+				sprintf(mssgText, _("---- error setting screen size ----"));
+				config->setScreenSize(config->screenSize()+1);
+			}
 			game->loadTextures();
 			break;
 		case FullScreen:
@@ -911,7 +938,13 @@ void MenuGL::decItem()
 			{
 				config->setFullScreen(false);
 				game->deleteTextures();
-				game->toolkit->setVideoMode();
+				if( !game->toolkit->setVideoMode() )
+				{
+					mssgHelpOverride = true;
+					mssgAlpha = 1.1;
+					sprintf(mssgText, _("---- error setting full screen mode ----"));
+					config->setFullScreen(true);
+				}
 				game->loadTextures();
 			}
 			break;
