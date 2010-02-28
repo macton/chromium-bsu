@@ -306,6 +306,19 @@ void MainSDL::keyDown(SDL_Event *event)
 		default:
 			if(game->gameMode == Global::Game)
 				keyDownGame(event);
+			else if(game->gameMode == Global::LevelOver)
+			{
+				game->gotoNextLevel();
+				game->gameMode = Global::Game;
+				game->audio->setMusicMode(Audio::MusicGame);
+			}
+			else if(game->gameMode == Global::HeroDead)
+			{
+				game->gameMode = Global::Game;
+				game->newGame();
+				game->toolkit->grabMouse(true);
+				game->audio->setMusicMode(Audio::MusicGame);
+			}
 			else
 			{
 				MainToolkit::Key key;
