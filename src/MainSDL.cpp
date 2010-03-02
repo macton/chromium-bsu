@@ -343,7 +343,7 @@ bool MainSDL::setVideoMode()
 	
 	if ( (glSurface = SDL_SetVideoMode( w, h, bpp, video_flags )) == NULL ) 
 	{
-		fprintf(stderr, _("Couldn't set GL mode: %s\n"), SDL_GetError());
+		fprintf(stderr, _("Couldn't set video mode: %s\n"), SDL_GetError());
 		return false;
 	}
 	else

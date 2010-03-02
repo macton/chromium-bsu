@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2009-03-30 16:29+0800\n"
+"POT-Creation-Date: 2010-03-02 15:42+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Evgeni Golov <sargentd@die-welt.net>\n"
 "Language-Team: \n"
@@ -149,7 +149,7 @@ msgstr ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 
-#: src/AudioOpenAL.cpp:277 src/MainSDL.cpp:124
+#: src/AudioOpenAL.cpp:277 src/MainSDL.cpp:129
 #, c-format
 msgid "------------------------------------------------------------\n"
 msgstr "------------------------------------------------------------\n"
@@ -352,8 +352,8 @@ msgstr "WARNUNG: Global::init() wurde bereits ausgeführt.\n"
 
 #: src/Global.cpp:211
 #, c-format
-msgid "begin startup..."
-msgstr ""
+msgid "Starting up..."
+msgstr "Starte..."
 
 #: src/Global.cpp:242
 #, c-format
@@ -362,8 +362,8 @@ msgstr "...Start vollständig.\n"
 
 #: src/Global.cpp:249
 #, c-format
-msgid "begin shutdown...\n"
-msgstr ""
+msgid "Shutting down...\n"
+msgstr "Beende...\n"
 
 #: src/Global.cpp:262
 #, c-format
@@ -382,8 +382,8 @@ msgstr "Global::loadTextures()\n"
 
 #: src/Global.cpp:352
 #, c-format
-msgid "randomizing.\n"
-msgstr "randomiziere.\n"
+msgid "Generating random sequences\n"
+msgstr "Generiere zufällige Sequenzen\n"
 
 #: src/HeroAmmo.cpp:169
 #, c-format
@@ -398,7 +398,7 @@ msgstr "%p <--%p--> %p\n"
 #: src/HiScore.cpp:51
 #, c-format
 msgid "nobody"
-msgstr "niemand"
+msgstr "Niemand"
 
 #: src/HiScore.cpp:76
 #, c-format
@@ -542,12 +542,12 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:89 src/MainSDL.cpp:280
+#: src/MainGLUT.cpp:89 src/MainSDL.cpp:285
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "FEHLER!!! OpenGL Fehler: %s\n"
 
-#: src/MainGLUT.cpp:230
+#: src/MainGLUT.cpp:232
 #, c-format
 msgid "key = %d\n"
 msgstr "Taste = %d\n"
@@ -577,7 +577,12 @@ msgstr "   Joystick 0 = %p\n"
 msgid "no joysticks found\n"
 msgstr "Keine Joysticks gefunden\n"
 
-#: src/MainSDL.cpp:118
+#: src/MainSDL.cpp:115 src/MainSDL.cpp:346
+#, c-format
+msgid "Couldn't set video mode: %s\n"
+msgstr "Konnte Video Modus nicht setzen: %s\n"
+
+#: src/MainSDL.cpp:123
 #, c-format
 msgid ""
 "-OpenGL-----------------------------------------------------\n"
@@ -590,22 +595,22 @@ msgstr ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 
-#: src/MainSDL.cpp:209
+#: src/MainSDL.cpp:214
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr "init----> %3.2ffps gameSpeed = %g\n"
 
-#: src/MainSDL.cpp:216
+#: src/MainSDL.cpp:221
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 
-#: src/MainSDL.cpp:229
+#: src/MainSDL.cpp:234
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 
-#: src/MainSDL.cpp:251
+#: src/MainSDL.cpp:256
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -627,27 +632,22 @@ msgstr ""
 "      Programme (wie 'top', 'xosview', etc.) laufen. Solche\n"
 "      Programme verhindern oft eine stabile Frame Rate.\n"
 
-#: src/MainSDL.cpp:263
+#: src/MainSDL.cpp:268
 #, c-format
 msgid "exit.\n"
 msgstr "beendet.\n"
 
-#: src/MainSDL.cpp:288
+#: src/MainSDL.cpp:293
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "FEHLER!!! SDL Fehler '%s'\n"
 
-#: src/MainSDL.cpp:341
-#, c-format
-msgid "Couldn't set GL mode: %s\n"
-msgstr "Konnte GL Modus nicht setzen: %s\n"
-
-#: src/MainSDL.cpp:347
+#: src/MainSDL.cpp:351
 #, c-format
 msgid "video mode set "
 msgstr "Video Modus gesetzt"
 
-#: src/MainSDL.cpp:354
+#: src/MainSDL.cpp:358
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
@@ -716,17 +716,17 @@ msgstr "Maus aktiv"
 msgid "focus\n"
 msgstr "Fokus\n"
 
-#: src/MainSDL_Event.cpp:364
+#: src/MainSDL_Event.cpp:377
 #, c-format
 msgid "key '%s' pressed\n"
 msgstr "Taste '%s' gedrückt\n"
 
-#: src/MainSDL_Event.cpp:365
+#: src/MainSDL_Event.cpp:378
 #, c-format
 msgid "game->gameFrame = %d\n"
 msgstr "game->gameFrame = %d\n"
 
-#: src/MainSDL_Event.cpp:473
+#: src/MainSDL_Event.cpp:486
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
@@ -944,10 +944,25 @@ msgstr "wahr"
 msgid "false"
 msgstr "falsch"
 
-#: src/MenuGL.cpp:835
+#: src/MenuGL.cpp:801 src/MenuGL.cpp:874 src/MenuGL.cpp:945
+#, c-format
+msgid "---- error setting full screen mode ----"
+msgstr "---- Fehler bei Nutzung des Vollbildmodus ----"
+
+#: src/MenuGL.cpp:803
+#, c-format
+msgid "---- error setting window mode ----"
+msgstr "---- Fehler bei Nutzung des Fenstermodus ----"
+
+#: src/MenuGL.cpp:844
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- du musst Level %d fertig haben um Level %d auszuwählen ----"
+
+#: src/MenuGL.cpp:860 src/MenuGL.cpp:931
+#, c-format
+msgid "---- error setting screen size ----"
+msgstr "---- Fehler beim setzen der Auflösung ----"
 
 #: src/PowerUps.cpp:182
 #, c-format
@@ -970,7 +985,7 @@ msgstr "p a u s i e r t"
 
 #: src/StatusDisplay.cpp:676
 msgid "do not let -any- ships past you! each one costs you a life!"
-msgstr "Lass -keine- Schiffe an dir vorbei! Jeder kostet dich ein Leben!"
+msgstr "Lass -keine- Schiffe an dir vorbei! Jedes kostet dich ein Leben!"
 
 #: src/StatusDisplay.cpp:687
 msgid "let super shields pass by for an extra life!"

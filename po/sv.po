@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2010-03-02 14:53+0800\n"
+"POT-Creation-Date: 2010-03-02 15:42+0800\n"
 "PO-Revision-Date: 2010-03-01 23:14+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: src/Global.cpp:211
 #, c-format
-msgid "begin startup..."
+msgid "Starting up..."
 msgstr ""
 
 #: src/Global.cpp:242
@@ -344,7 +344,7 @@ msgstr ""
 
 #: src/Global.cpp:249
 #, c-format
-msgid "begin shutdown...\n"
+msgid "Shutting down...\n"
 msgstr ""
 
 #: src/Global.cpp:262
@@ -364,7 +364,7 @@ msgstr "Global::loadTextures()\n"
 
 #: src/Global.cpp:352
 #, c-format
-msgid "randomizing.\n"
+msgid "Generating random sequences\n"
 msgstr ""
 
 #: src/HeroAmmo.cpp:169
@@ -534,7 +534,7 @@ msgstr "   styrspak 0 = %p\n"
 msgid "no joysticks found\n"
 msgstr "inga styrspakar hittades\n"
 
-#: src/MainSDL.cpp:115
+#: src/MainSDL.cpp:115 src/MainSDL.cpp:346
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr ""
@@ -584,11 +584,6 @@ msgstr ""
 #: src/MainSDL.cpp:293
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
-msgstr ""
-
-#: src/MainSDL.cpp:346
-#, c-format
-msgid "Couldn't set GL mode: %s\n"
 msgstr ""
 
 #: src/MainSDL.cpp:351

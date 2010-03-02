@@ -208,7 +208,7 @@ void Global::gotoNextLevel()
 void Global::createGame()
 {
 	Config *config = Config::instance();
-	if( config->debug() ) fprintf(stderr, _("begin startup..."));
+	if( config->debug() ) fprintf(stderr, _("Starting up..."));
 	mainGL		= new MainGL();
 	explosions	= new Explosions();
 	enemyFleet	= new EnemyFleet();
@@ -246,7 +246,7 @@ void Global::createGame()
 void Global::deleteGame()
 {
 	Config *config = Config::instance();
-	if( config->debug() ) fprintf(stderr, _("begin shutdown...\n"));
+	if( config->debug() ) fprintf(stderr, _("Shutting down...\n"));
 	delete mainGL;
 	delete enemyFleet;
 	delete hero;
@@ -349,7 +349,7 @@ void Global::generateRandom(bool r)
 	Global::randIndex = 0;
 	if(r)
 	{
-		if( config->debug() ) fprintf(stderr, _("randomizing.\n"));
+		if( config->debug() ) fprintf(stderr, _("Generating random sequences\n"));
 		for(int i = 0; i < 256; i++)
 		{
 			randI[i] = rand();
