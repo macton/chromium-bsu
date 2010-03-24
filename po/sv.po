@@ -48,6 +48,9 @@ msgid ""
 " Data track(s) only. CD audio not available.\n"
 "\n"
 msgstr ""
+"\n"
+" Endast dataspår. CD-ljud ej tillgängligt. \n"
+"\n"
 
 #: src/Audio.cpp:154
 #, c-format
@@ -62,21 +65,23 @@ msgid ""
 " Press the 'N' key to skip to next CD track during a game.\n"
 "\n"
 msgstr ""
+"Tryck 'N' för att skippa till nästa CD-spår under spelets gång. \n"
+"\n"
 
 #: src/Audio.cpp:166
 #, c-format
 msgid "ERROR! Could not access CDROM device %d : %s\n"
-msgstr ""
+msgstr "FEL! Kunde inte komma åt CDROM-enheten %d : %s\n"
 
 #: src/Audio.cpp:209
 #, c-format
 msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
-msgstr ""
+msgstr "CDROM-fel i AudioOpenAL::pauseGameMusic(%d)\n"
 
 #: src/Audio.cpp:210
 #, c-format
 msgid "CDROM status = %d\n"
-msgstr ""
+msgstr "CDROM-status = %d\n"
 
 #: src/Audio.cpp:298
 #, c-format
@@ -86,7 +91,7 @@ msgstr ""
 #: src/Audio.cpp:315
 #, c-format
 msgid "track %d is data - trying next track...\n"
-msgstr ""
+msgstr "Spår %d är data - testar nästa spår... \n"
 
 #: src/AudioOpenAL.cpp:149
 #, c-format
@@ -101,7 +106,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:170
 #, c-format
 msgid "stopping OpenAL..."
-msgstr ""
+msgstr "Stoppar OpenAL..."
 
 #: src/AudioOpenAL.cpp:182
 msgid "AudioOpenAL::~Audio()"
@@ -110,7 +115,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:201 src/main.cpp:158
 #, c-format
 msgid "done.\n"
-msgstr ""
+msgstr "klar.\n"
 
 #: src/AudioOpenAL.cpp:247
 #, c-format
@@ -676,55 +681,32 @@ msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
 
 #: src/MenuGL.cpp:44
-msgid ""
-"  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o "
-"u !"
-msgstr ""
-" l å t   i n t e   - n å g o n -   f i e n d e   k o m m a   f ö r b i   d i "
-"g !"
+msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
+msgstr " l å t   i n t e   - n å g o n -   f i e n d e   k o m m a   f ö r b i   d i g !"
 
 #: src/MenuGL.cpp:45
-msgid ""
-"  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   "
-"l i f e !"
-msgstr ""
-" v a r j e   f i e n d e   s o m   k o m m e r   f ö r b i   k o s t a r   d "
-"i g   e t t   l i v !"
+msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
+msgstr " v a r j e   f i e n d e   s o m   k o m m e r   f ö r b i   k o s t a r   d i g   e t t   l i v !"
 
 #: src/MenuGL.cpp:46
-msgid ""
-"  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
-"i n t s !"
-msgstr ""
-" l å t   p o w e r - u p s   g å   f ö r b i   d i g   f ö r   h ö g r e   p "
-"o ä n g !"
+msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
+msgstr " l å t   p o w e r - u p s   g å   f ö r b i   d i g   f ö r   h ö g r e   p o ä n g !"
 
 #: src/MenuGL.cpp:47
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr ""
-" k r a s c h a   i n   i   f i e n d e r   f ö r   a t t   f ö r s t ö r a   "
-"d e m !"
+msgstr " k r a s c h a   i n   i   f i e n d e r   f ö r   a t t   f ö r s t ö r a   d e m !"
 
 #: src/MenuGL.cpp:48
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
-msgstr ""
-" h ö g e r k l i c k a   t v å   g å n g e r   f ö r   a t t   f ö r s t ö r "
-"a   d i g   s j ä l v !"
+msgstr " h ö g e r k l i c k a   t v å   g å n g e r   f ö r   a t t   f ö r s t ö r a   d i g   s j ä l v !"
 
 #: src/MenuGL.cpp:49
-msgid ""
-"  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i "
-"t i o n !"
-msgstr ""
-" f ö r s t ö r   d i g   s j ä l v   f ö r   a t t   s p a r a   d i n   a m "
-"m u n i t i o n !"
+msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
+msgstr " f ö r s t ö r   d i g   s j ä l v   f ö r   a t t   s p a r a   d i n   a m m u n i t i o n !"
 
 #: src/MenuGL.cpp:50
-msgid ""
-"  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
-"sf.net/"
-msgstr ""
-"  h ä m t a   C h r o m i u m   B. S. U.   p å   http://chromium-bsu.sf.net/"
+msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
+msgstr "  h ä m t a   C h r o m i u m   B. S. U.   p å   http://chromium-bsu.sf.net/"
 
 #: src/MenuGL.cpp:71
 msgid "n e w    g a m e"
