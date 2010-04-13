@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium BSU\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2010-03-02 15:42+0800\n"
-"PO-Revision-Date: 2010-04-06 15:41+0200\n"
+"PO-Revision-Date: 2010-04-13 16:56+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1\n"
 
 #: src/Audio.cpp:110
 msgid "audio"
@@ -100,6 +100,7 @@ msgid "track %d is data - trying next track...\n"
 msgstr "La piste %d contient des données - lecture de la prochaine piste ...\n"
 
 #: src/AudioOpenAL.cpp:149
+#, fuzzy, c-format
 #, c-format
 msgid "alAttenuationScale == 0. Kludge it.\n"
 msgstr "alAttenuationScale == 0. Kludge it.\n"
@@ -199,6 +200,8 @@ msgid ""
 "\n"
 "ERROR! - sound enumerant index %d does not have valid filename!\n"
 msgstr ""
+"\n"
+"ERROR! - sound enumerant index %d does not have valid filename!\n"
 
 #: src/AudioOpenAL.cpp:545
 #, c-format
@@ -265,8 +268,7 @@ msgstr "AudioOpenAL::setMusicIndex -- avant d'initialiser le tampon source à 0"
 
 #: src/AudioOpenAL.cpp:822
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
-msgstr ""
-"AudioOpenAL::setMusicIndex -- après avoir initialisé le tampon source à 0"
+msgstr "AudioOpenAL::setMusicIndex -- après avoir initialisé le tampon source à 0"
 
 #: src/AudioOpenAL.cpp:857
 msgid "AudioOpenAL::setMusicIndex -- end"
@@ -291,7 +293,7 @@ msgstr "ERREUR: Impossible d'ouvir \"%s\" dans AudioOpenAL::loadMP3\n"
 #: src/AudioOpenAL.cpp:971
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
-msgstr "ERREUR: echec de alutLoadMP3() dans AudioOpenAL::loadMP3\n"
+msgstr "ERREUR: échec de alutLoadMP3() dans AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:1003
 #, c-format
@@ -318,7 +320,7 @@ msgstr ""
 #: src/Config.cpp:115
 #, c-format
 msgid "WARNING: Config::init() has already been called.\n"
-msgstr "AVERTISSEMENT : Config::init() a déjà été appellé.\n"
+msgstr "AVERTISSEMENT : Config::init() a déjà été appelé.\n"
 
 #: src/Config.cpp:241
 #, c-format
@@ -348,22 +350,22 @@ msgstr "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 #: src/EnemyFleet.cpp:245
 #, c-format
 msgid "num enemies on screen = %d\n"
-msgstr "nombre d'énemies à l'écran = %d\n"
+msgstr "nombre d'ennemis à l'écran = %d\n"
 
 #: src/Global.cpp:114
 #, c-format
 msgid "WARNING: Global::init() has already been called.\n"
-msgstr "AVERTISSEMENT : Global::init() a déjà été appellé.\n"
+msgstr "AVERTISSEMENT : Global::init() a déjà été appelé.\n"
 
 #: src/Global.cpp:211
 #, c-format
 msgid "Starting up..."
-msgstr "Démarage..."
+msgstr "Démarrage..."
 
 #: src/Global.cpp:242
 #, c-format
 msgid "...startup complete.\n"
-msgstr "...démarage effectué.\n"
+msgstr "...démarrage effectué.\n"
 
 #: src/Global.cpp:249
 #, c-format
@@ -408,22 +410,22 @@ msgstr "personne"
 #: src/HiScore.cpp:76
 #, c-format
 msgid "WARNING: HiScore::init() has already been called.\n"
-msgstr ""
+msgstr "AVERTISSEMENT : HiScore::init() a déjà été exécuté.\n"
 
 #: src/HiScore.cpp:208
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
-msgstr ""
+msgstr "AVERTISSEMENT : impossible d'écrire sur le fichier des scores (%s)\n"
 
 #: src/HiScore.cpp:252
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
-msgstr ""
+msgstr "AVERISSEMENT : impossible de lire de fichier des scores (%s)\n"
 
 #: src/HiScore.cpp:344
 #, c-format
 msgid "high scores:\n"
-msgstr ""
+msgstr "meilleurs scores :\n"
 
 #: src/HiScore.cpp:350
 #, c-format
@@ -455,7 +457,7 @@ msgstr ""
 "Chromium B.S.U. options\n"
 "--------------------------------------------------\n"
 "   -f/--fullscreen     : mode plein écran\n"
-"   -w/--window         : mode fenétré\n"
+"   -w/--window         : mode fenêtré\n"
 "   -v/--vidmode <mode> : mode 0 =  512 x  384\n"
 "                       :      1 =  640 x  480\n"
 "                       :      2 =  800 x  600\n"
@@ -504,6 +506,9 @@ msgid ""
 "\n"
 "%d"
 msgstr ""
+"nouveau meilleur score !\n"
+"\n"
+"%d"
 
 #: src/MainGL.cpp:307
 #, c-format
@@ -520,7 +525,7 @@ msgstr ""
 
 #: src/MainGL.cpp:312
 msgid "l o s e r"
-msgstr ""
+msgstr "p e r d a n t"
 
 #: src/MainGL.cpp:370
 #, c-format
@@ -542,7 +547,7 @@ msgstr ""
 #: src/MainGLUT.cpp:73
 #, c-format
 msgid "MainGLUT::run()\n"
-msgstr ""
+msgstr "MainGLUT::run()\n"
 
 #: src/MainGLUT.cpp:89 src/MainSDL.cpp:285
 #, c-format
@@ -552,7 +557,7 @@ msgstr "ERREUR!!! Erreur OpenGL : %s\n"
 #: src/MainGLUT.cpp:232
 #, c-format
 msgid "key = %d\n"
-msgstr ""
+msgstr "touche = %d\n"
 
 #: src/MainSDL.cpp:73
 #, c-format
@@ -582,7 +587,7 @@ msgstr "aucun joysticks trouvé\n"
 #: src/MainSDL.cpp:115 src/MainSDL.cpp:346
 #, c-format
 msgid "Couldn't set video mode: %s\n"
-msgstr ""
+msgstr "Impossible n'initialiser le mode vidéo : %s\n"
 
 #: src/MainSDL.cpp:123
 #, c-format
@@ -624,6 +629,14 @@ msgid ""
 "      tools (like 'top', 'xosview', etc.) These kinds of tools\n"
 "      can make it difficult to maintain a steady frame rate.\n"
 msgstr ""
+"%d ajustement de vitesse requis.\n"
+"NOTE: le jeu n'a pas été capable de maintenir 50 frames par\n"
+"      secondes. Vous devriez peut-être baisser la résolution\n"
+"      ou diminuer les détails.\n"
+"      -OU-\n"
+"      assurez vous qu'aucun outil de surveillance du système'\n"
+"      (comme 'top', 'xosview', etc.) n'est en cours d'exécution.\n"
+"      Elles rendent difficile de maintenir un bon taux de frames.\n"
 
 #: src/MainSDL.cpp:268
 #, c-format
@@ -638,7 +651,7 @@ msgstr "ERREUR!!! SDL erreur '%s'\n"
 #: src/MainSDL.cpp:351
 #, c-format
 msgid "video mode set "
-msgstr ""
+msgstr "mode vidéo initialisé "
 
 #: src/MainSDL.cpp:358
 #, c-format
@@ -712,7 +725,7 @@ msgstr "focus\n"
 #: src/MainSDL_Event.cpp:377
 #, c-format
 msgid "key '%s' pressed\n"
-msgstr ""
+msgstr "touche '%s' préssée\n"
 
 #: src/MainSDL_Event.cpp:378
 #, c-format
@@ -729,42 +742,51 @@ msgid ""
 "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o "
 "u !"
 msgstr ""
+"  n e   l a i s s e z   p a s s e z   -a u c u n-   e n n e m i !"
 
 #: src/MenuGL.cpp:45
 msgid ""
 "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   "
 "l i f e !"
-msgstr ""
+msgstr " c h a q u e   e n e m i   q u i   p a s s e   v o u s   c o u t e   "
+"u n e   v i e   !"
 
 #: src/MenuGL.cpp:46
 msgid ""
 "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
 "i n t s !"
-msgstr ""
+msgstr "  l a i s s e r   p a s s e r   l e s   p o w e r - u p   p o u r   "
+"f a i r e   l e   p l e i n   d e   p o i n t s !"
 
 #: src/MenuGL.cpp:47
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr ""
+msgstr "  c r a s h e r   v o u s   d a n s   l e s   e n ne m i s   p o u r   "
+"l e s   d e t r u i r e !"
 
 #: src/MenuGL.cpp:48
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
 msgstr ""
+"  d o u b l e - c l i q u e z   d r o i t   p o u r   v o u s   "
+"a u t o - d e t r u i r e !"
 
 #: src/MenuGL.cpp:49
 msgid ""
 "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i "
 "t i o n !"
-msgstr ""
+msgstr "  a u t o - d e t r u i s e z   v o u s   p o u r   p r é s e r v e r   "
+"v o s   m u n i t i o n s"
 
 #: src/MenuGL.cpp:50
 msgid ""
 "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
 "sf.net/"
 msgstr ""
+"  t é l e c h a r g e r   C h r o m i u m   B. S. U.   d e p u i s"
+"   http://chromium-bsu.sf.net/"
 
 #: src/MenuGL.cpp:71
 msgid "n e w    g a m e"
-msgstr ""
+msgstr "n o u v e l l e    p a r t i e"
 
 #: src/MenuGL.cpp:72
 msgid "l e v e l"
@@ -772,7 +794,7 @@ msgstr "n i v e a u"
 
 #: src/MenuGL.cpp:73
 msgid "s k i l l"
-msgstr ""
+msgstr "e x p é r i e n c e"
 
 #: src/MenuGL.cpp:74
 msgid "g f x    d e t a i l"
@@ -788,7 +810,7 @@ msgstr "t a i l l e    d e    l' é c r a n"
 
 #: src/MenuGL.cpp:77
 msgid "s o u n d    f x    v o l u m e"
-msgstr ""
+msgstr "v o l u m e   f x"
 
 #: src/MenuGL.cpp:78
 msgid "m u s i c    v o l u m e"
@@ -796,7 +818,7 @@ msgstr "v o l u m e    m u s i q u e"
 
 #: src/MenuGL.cpp:79
 msgid "m o u s e   s p e e d"
-msgstr ""
+msgstr "v i t e s s e   s o u r i s"
 
 #: src/MenuGL.cpp:80
 msgid "q u i t"
@@ -805,20 +827,20 @@ msgstr "q u i t t e r"
 #: src/MenuGL.cpp:145 src/MenuGL.cpp:420
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
-msgstr ""
+msgstr "ATTENTION : utilisé du texte 'thin' pour améliorer le taux de frame...\n"
 
 #: src/MenuGL.cpp:149
 #, c-format
 msgid "MenuGL::createLists\n"
-msgstr ""
+msgstr "MenuGL::createLists\n"
 
 #: src/MenuGL.cpp:164
 msgid "fish in a barrel"
-msgstr ""
+msgstr "poisson dans un bocal"
 
 #: src/MenuGL.cpp:165
 msgid "whimp"
-msgstr ""
+msgstr "poule mouillée"
 
 #: src/MenuGL.cpp:166
 msgid "easy"
@@ -850,43 +872,43 @@ msgstr "-"
 
 #: src/MenuGL.cpp:294 src/MenuGL.cpp:323
 msgid "high scores"
-msgstr ""
+msgstr "meilleurs scores"
 
 #: src/MenuGL.cpp:352
 msgid "the"
-msgstr ""
+msgstr "the"
 
 #: src/MenuGL.cpp:356
 msgid "reptile"
-msgstr ""
+msgstr "reptile"
 
 #: src/MenuGL.cpp:360
 msgid "labour"
-msgstr ""
+msgstr "labour"
 
 #: src/MenuGL.cpp:364
 msgid "project"
-msgstr ""
+msgstr "project"
 
 #: src/MenuGL.cpp:425
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
-msgstr ""
+msgstr "ATTENTION : Retour à du texte 'thick'...\n"
 
 #: src/MenuGL.cpp:476
 #, c-format
 msgid "low"
-msgstr ""
+msgstr "bas"
 
 #: src/MenuGL.cpp:477
 #, c-format
 msgid "med"
-msgstr ""
+msgstr "med"
 
 #: src/MenuGL.cpp:478
 #, c-format
 msgid "high"
-msgstr ""
+msgstr "haut"
 
 #: src/MenuGL.cpp:485
 #, c-format
@@ -926,27 +948,27 @@ msgstr "faux"
 #: src/MenuGL.cpp:801 src/MenuGL.cpp:874 src/MenuGL.cpp:945
 #, c-format
 msgid "---- error setting full screen mode ----"
-msgstr ""
+msgstr "---- erreur au passage en mode plein écran ----"
 
 #: src/MenuGL.cpp:803
 #, c-format
 msgid "---- error setting window mode ----"
-msgstr ""
+msgstr "---- erreur à l'initialisation du mode de fenêtrage ----"
 
 #: src/MenuGL.cpp:844
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr ""
+msgstr "---- vous devez finir le niveau %d avant de pouvoir sélectionner %d ----"
 
 #: src/MenuGL.cpp:860 src/MenuGL.cpp:931
 #, c-format
 msgid "---- error setting screen size ----"
-msgstr ""
+msgstr "---- erreur à l'initialisation de la taille de l'écran ----"
 
 #: src/PowerUps.cpp:182
 #, c-format
 msgid "active power ups = %d\n"
-msgstr ""
+msgstr "power-up actifs = %d\n"
 
 #: src/PowerUps.cpp:370
 #, c-format
@@ -956,7 +978,7 @@ msgstr "?? PowerUp::seal()"
 #: src/ScreenItemAdd.cpp:102
 #, c-format
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
-msgstr ""
+msgstr "ScreenItemAdd::putScreenItems() Héros??? HEIN???\n"
 
 #: src/StatusDisplay.cpp:652 src/StatusDisplay.cpp:656
 msgid "p a u s e d"
@@ -968,16 +990,16 @@ msgstr "ne laissez passer -aucun- vaisseau! chacun vous coutera une vie !"
 
 #: src/StatusDisplay.cpp:687
 msgid "let super shields pass by for an extra life!"
-msgstr ""
+msgstr "laissez les super armures passer pour gagner une vie supplémentaire"
 
 #: src/TextFTGL.cpp:35
 #, c-format
 msgid "FTGL: error loading font: %s\n"
-msgstr ""
+msgstr "FTGL: erreur au chargement des polices : %s\n"
 
 #: src/TextFTGL.cpp:38
 msgid "FTGL: error loading font"
-msgstr ""
+msgstr "FTGL: erreur au chargement des polices"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the font
 #. name of a font that contains all the Unicode characters in use in
@@ -991,7 +1013,7 @@ msgstr ""
 #.
 #: src/TextFTGL.cpp:105 src/TextGLC.cpp:41
 msgid "Gothic Uralic"
-msgstr ""
+msgstr "Gothic Uralic"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -999,7 +1021,7 @@ msgstr ""
 #.
 #: src/TextFTGL.cpp:135
 msgid "/usr/share/fonts/truetype/uralic/gothub__.ttf"
-msgstr ""
+msgstr "/usr/share/fonts/truetype/uralic/gothub__.ttf"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1007,7 +1029,7 @@ msgstr ""
 #.
 #: src/TextFTGL.cpp:141
 msgid "/usr/share/fonts/truetype/uralic/gothu___.ttf"
-msgstr ""
+msgstr "/usr/share/fonts/truetype/uralic/gothu___.ttf"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1015,7 +1037,7 @@ msgstr ""
 #.
 #: src/TextFTGL.cpp:148
 msgid "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
-msgstr ""
+msgstr "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1023,8 +1045,8 @@ msgstr ""
 #.
 #: src/TextFTGL.cpp:154
 msgid "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
-msgstr ""
+msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
 
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
-msgstr ""
+msgstr "GLC: couldn't set context"
