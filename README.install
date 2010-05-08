@@ -15,6 +15,7 @@ Sound:           OpenAL and ALUT
                  SDL Mixer is an alternative
 
 Image loading:   glpng
+                 SDL_image is an alternative but has rendering issues
 
 Text rendering:  GLC (QuesoGLC for e.g.)
                  FTGL 2.1.3 or greater is an alternative

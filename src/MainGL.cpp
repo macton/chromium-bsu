@@ -26,11 +26,15 @@
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#if IMAGE_GLPNG
 #include <glpng/glpng.h>
+#endif
 #else
 #include <GL/gl.h>
 #include <GL/glu.h>
+#if IMAGE_GLPNG
 #include <GL/glpng.h>
+#endif
 #endif
 
 #if defined(TEXT_GLC)
@@ -111,7 +115,9 @@ int MainGL::initGL()
 	glLineWidth(1.0);
 	glClearColor( 0.0, 0.0, 0.0, 1.0 );
 	
+#ifdef IMAGE_GLPNG
 	pngSetViewingGamma(config->viewGamma());
+#endif
 	
 	return 0;
 }

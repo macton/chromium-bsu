@@ -17,15 +17,14 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "extern.h"
 #include "Global.h"
 #include "HeroAircraft.h"
+#include "Image.h"
 
 //====================================================================
 Explosions::Explosions()
@@ -162,27 +161,26 @@ Explosions::~Explosions()
 //----------------------------------------------------------
 void	Explosions::loadTextures()
 {
-	pngInfo tmpInfo;
-	tex[EnemyDestroyed]	= pngBind(dataLoc("png/enemyExplo.png"),		PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_LINEAR);
+	tex[EnemyDestroyed]	= Image::load(dataLoc("png/enemyExplo.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_LINEAR);
 	tex[EnemyDamage]	= tex[EnemyDestroyed];
-	tex[EnemyAmmo00]	= pngBind(dataLoc("png/enemyAmmoExplo00.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR,  GL_LINEAR);
-	tex[EnemyAmmo01]	= pngBind(dataLoc("png/enemyAmmoExplo01.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_LINEAR);
-	tex[EnemyAmmo02]	= pngBind(dataLoc("png/enemyAmmoExplo02.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR,  GL_LINEAR);
-	tex[EnemyAmmo03]	= pngBind(dataLoc("png/enemyAmmoExplo03.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR,  GL_LINEAR);
-	tex[EnemyAmmo04]	= pngBind(dataLoc("png/enemyAmmoExplo04.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR,  GL_LINEAR);
-	tex[HeroDestroyed]	= pngBind(dataLoc("png/enemyExplo.png"),		PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_LINEAR);
+	tex[EnemyAmmo00]	= Image::load(dataLoc("png/enemyAmmoExplo00.png"));
+	tex[EnemyAmmo01]	= Image::load(dataLoc("png/enemyAmmoExplo01.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_LINEAR);
+	tex[EnemyAmmo02]	= Image::load(dataLoc("png/enemyAmmoExplo02.png"));
+	tex[EnemyAmmo03]	= Image::load(dataLoc("png/enemyAmmoExplo03.png"));
+	tex[EnemyAmmo04]	= Image::load(dataLoc("png/enemyAmmoExplo04.png"));
+	tex[HeroDestroyed]	= Image::load(dataLoc("png/enemyExplo.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_LINEAR);
 	tex[HeroDamage]		= tex[HeroDestroyed];
-	tex[HeroAmmo00]		= pngBind(dataLoc("png/heroAmmoExplo00.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_NEAREST);
-	tex[HeroAmmo01]		= pngBind(dataLoc("png/heroAmmoExplo01.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_LINEAR);
-	tex[HeroAmmo02]		= pngBind(dataLoc("png/heroAmmoExplo02.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_NEAREST, GL_LINEAR);
-	tex[HeroShields]	= pngBind(dataLoc("png/heroShields.png"),		PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-//	tex[HeroShields]	= pngBind(dataLoc("png/heroShields.png"),		PNG_NOMIPMAPS, PNG_BLEND1, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	tex[PowerBurst]		= pngBind(dataLoc("png/powerUpTex.png"),		PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	tex[AddLife]		= pngBind(dataLoc("png/life.png"),				PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[HeroAmmo00]		= Image::load(dataLoc("png/heroAmmoExplo00.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_NEAREST);
+	tex[HeroAmmo01]		= Image::load(dataLoc("png/heroAmmoExplo01.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_LINEAR);
+	tex[HeroAmmo02]		= Image::load(dataLoc("png/heroAmmoExplo02.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_CLAMP, GL_NEAREST, GL_LINEAR);
+	tex[HeroShields]	= Image::load(dataLoc("png/heroShields.png"), IMG_NOMIPMAPS, IMG_BLEND3, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+//	tex[HeroShields]	= Image::load(dataLoc("png/heroShields.png"), IMG_NOMIPMAPS, IMG_BLEND1, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[PowerBurst]		= Image::load(dataLoc("png/powerUpTex.png"), IMG_NOMIPMAPS, IMG_BLEND3, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[AddLife]		= Image::load(dataLoc("png/life.png"));
 	tex[LoseLife]		= tex[AddLife];
 	tex[ScoreLife]		= tex[AddLife];
-	tex[Electric]		= pngBind(dataLoc("png/electric.png"),			PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
-	tex[Glitter]		= pngBind(dataLoc("png/glitter.png"),			PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[Electric]		= Image::load(dataLoc("png/electric.png"), IMG_NOMIPMAPS, IMG_BLEND3, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+	tex[Glitter]		= Image::load(dataLoc("png/glitter.png"));
 }
 
 //----------------------------------------------------------

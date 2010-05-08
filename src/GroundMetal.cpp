@@ -12,17 +12,13 @@
 
 #include "GroundMetal.h"
 
-#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
-#include <glpng/glpng.h>
-#else
-#include <GL/glpng.h>
-#endif
 #include <cmath>
 
 #include "extern.h"
 #include "Global.h"
 #include "Config.h"
 #include "GroundMetalSegment.h"
+#include "Image.h"
 
 //==============================================================================
 GroundMetal::GroundMetal()
@@ -64,31 +60,31 @@ GroundMetal::~GroundMetal()
 void GroundMetal::loadTextures()
 {
 	Config	*config = Config::instance();
-	pngInfo tmpInfo;
 	float tbc[4] = { 0.2, 0.2, 0.2, 1.0 };
+#ifdef GL_CLAMP_TO_EDGE
+	GLenum clamp = GL_CLAMP_TO_EDGE;
+#else
 	GLenum clamp = GL_REPEAT;
-#ifdef GL_VERSION_1_2__FOO
-	clamp = GL_CLAMP_TO_EDGE;
 #endif
 
 	switch(variation)
 	{
 		case 0:
-			tex[Base] = pngBind(dataLoc("png/gndMetalBase00.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, clamp, GL_LINEAR, GL_LINEAR);
+			tex[Base] = Image::load(dataLoc("png/gndMetalBase00.png"), IMG_NOMIPMAPS, IMG_ALPHA, clamp, GL_LINEAR, GL_LINEAR);
 			break;
 		case 1:
-			tex[Base] = pngBind(dataLoc("png/gndMetalBase01.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, clamp, GL_LINEAR, GL_LINEAR);
+			tex[Base] = Image::load(dataLoc("png/gndMetalBase01.png"), IMG_NOMIPMAPS, IMG_ALPHA, clamp, GL_LINEAR, GL_LINEAR);
 			break;
 		case 2:
-			tex[Base] = pngBind(dataLoc("png/gndMetalBase02.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, clamp, GL_LINEAR, GL_LINEAR);
+			tex[Base] = Image::load(dataLoc("png/gndMetalBase02.png"), IMG_NOMIPMAPS, IMG_ALPHA, clamp, GL_LINEAR, GL_LINEAR);
 			break;
 		default:
-			tex[Base] = pngBind(dataLoc("png/gndMetalBase00.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, clamp, GL_LINEAR, GL_LINEAR);
+			tex[Base] = Image::load(dataLoc("png/gndMetalBase00.png"), IMG_NOMIPMAPS, IMG_ALPHA, clamp, GL_LINEAR, GL_LINEAR);
 			break;
 	}
 	if(config->texBorder())
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, tbc);
-	tex[Blip] = pngBind(dataLoc("png/gndMetalBlip.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+	tex[Blip] = Image::load(dataLoc("png/gndMetalBlip.png"), IMG_NOMIPMAPS, IMG_ALPHA, GL_REPEAT, GL_LINEAR, GL_LINEAR);
 }
 
 //----------------------------------------------------------

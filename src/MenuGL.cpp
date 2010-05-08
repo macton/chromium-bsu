@@ -22,10 +22,8 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "Config.h"
@@ -36,6 +34,7 @@
 #include "HiScore.h"
 #include "Ground.h"
 #include "Audio.h"
+#include "Image.h"
 
 #include "textGeometry.h"
 
@@ -101,16 +100,15 @@ MenuGL::~MenuGL()
 //----------------------------------------------------------
 void MenuGL::loadTextures()
 {
-	pngInfo tmpInfo;
-	elecTex   = pngBind(dataLoc("png/electric.png"),  PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	backTex   = pngBind(dataLoc("png/menu_back.png"), PNG_NOMIPMAPS, PNG_SOLID, &tmpInfo, GL_REPEAT, GL_LINEAR, GL_LINEAR);
-//	csrTex    = pngBind(dataLoc("png/cursor.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	csrTex    = pngBind(dataLoc("png/heroAmmoFlash00.png"),PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	updwnTex  = pngBind(dataLoc("png/menu_updown.png"),    PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	elecTex   = Image::load(dataLoc("png/electric.png"), IMG_NOMIPMAPS, IMG_BLEND3, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	backTex   = Image::load(dataLoc("png/menu_back.png"), IMG_NOMIPMAPS, IMG_SOLID, GL_REPEAT, GL_LINEAR, GL_LINEAR);
+//	csrTex    = Image::load(dataLoc("png/cursor.png"));
+	csrTex    = Image::load(dataLoc("png/heroAmmoFlash00.png"));
+	updwnTex  = Image::load(dataLoc("png/menu_updown.png"));
 	//-- Environment map
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
-	envTex = pngBind(dataLoc("png/reflect.png"), PNG_BUILDMIPMAPS, PNG_SOLID, &tmpInfo, GL_CLAMP, GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);
+	envTex = Image::load(dataLoc("png/reflect.png"), IMG_BUILDMIPMAPS, IMG_SOLID, GL_CLAMP, GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);
 
 	listChrom = glGenLists(1);
 	listBSU = glGenLists(1);

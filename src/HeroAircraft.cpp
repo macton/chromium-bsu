@@ -20,10 +20,8 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "Config.h"
@@ -38,6 +36,7 @@
 #include "PowerUps.h"
 #include "Audio.h"
 #include "StatusDisplay.h"
+#include "Image.h"
 
 //====================================================================
 HeroAircraft::HeroAircraft()
@@ -77,9 +76,8 @@ HeroAircraft::~HeroAircraft()
 //----------------------------------------------------------
 void HeroAircraft::loadTextures()
 {
-	pngInfo tmpInfo;
-	heroTex      = pngBind(dataLoc("png/hero.png"),      PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	bombTex      = pngBind(dataLoc("png/superBomb.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	heroTex = Image::load(dataLoc("png/hero.png"));
+	bombTex = Image::load(dataLoc("png/superBomb.png"));
 }
 
 //----------------------------------------------------------

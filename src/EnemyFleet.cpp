@@ -18,10 +18,8 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "gettext.h"
@@ -35,6 +33,7 @@
 #include "HeroAircraft.h"
 #include "ScreenItemAdd.h"
 #include "StatusDisplay.h"
+#include "Image.h"
 
 //====================================================================
 EnemyFleet::EnemyFleet()
@@ -60,16 +59,15 @@ EnemyFleet::~EnemyFleet()
 void	EnemyFleet::loadTextures()
 {
 	char	filename[256];
-	pngInfo tmpInfo;
 	for(int i = 0; i < NumEnemyTypes; i++)
 	{
 		sprintf(filename, "png/enemy%02d.png", i);
-		shipTex[i] = pngBind(dataLoc(filename), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+		shipTex[i] = Image::load(dataLoc(filename));
 		extraTex[i] = 0;
 	}
-	extraTex[EnemyStraight]	= pngBind(dataLoc("png/enemyAmmo00.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	extraTex[EnemyOmni]		= pngBind(dataLoc("png/enemy01-extra.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	extraTex[EnemyTank]		= pngBind(dataLoc("png/enemy03-extra.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	extraTex[EnemyStraight]	= Image::load(dataLoc("png/enemyAmmo00.png"));
+	extraTex[EnemyOmni]		= Image::load(dataLoc("png/enemy01-extra.png"));
+	extraTex[EnemyTank]		= Image::load(dataLoc("png/enemy03-extra.png"));
 	extraTex[EnemyBoss00]	= extraTex[EnemyTank];
 	extraTex[EnemyBoss01]	= extraTex[EnemyStraight];
 }

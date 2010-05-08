@@ -20,10 +20,8 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "Config.h"
@@ -33,6 +31,7 @@
 #include "Explosions.h"
 #include "EnemyFleet.h"
 #include "EnemyAircraft.h"
+#include "Image.h"
 
 #include "HeroAircraft.h"
 
@@ -103,11 +102,10 @@ EnemyAmmo::~EnemyAmmo()
 void EnemyAmmo::loadTextures()
 {
 	char filename[256];
-	pngInfo tmpInfo;
 	for(int i = 0; i < NUM_ENEMY_AMMO_TYPES; i++)
 	{
 		sprintf(filename, "png/enemyAmmo%02d.png", i);
-		ammoTex[i] = pngBind(dataLoc(filename), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+		ammoTex[i] = Image::load(dataLoc(filename));
 	}
 	
 }

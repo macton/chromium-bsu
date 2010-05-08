@@ -14,15 +14,10 @@
 
 #include <cstdlib>
 
-#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
-#include <glpng/glpng.h>
-#else
-#include <GL/glpng.h>
-#endif
-
 #include "extern.h"
 #include "Global.h"
 #include "GroundSeaSegment.h"
+#include "Image.h"
 
 
 float GroundSea::vert[4][3] = { {  20.5,  15.5,  0.0 },
@@ -38,8 +33,7 @@ GroundSea::GroundSea()
 	pos[1] =  0.0;
 	pos[2] =  0.0;
 	
-	pngInfo tmpInfo;
-	tex[Base] = pngBind(dataLoc("png/gndBaseSea.png"), PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[Base] = Image::load(dataLoc("png/gndBaseSea.png"));
 
 	size = 21.0;
 	float s[2] = { size, size };

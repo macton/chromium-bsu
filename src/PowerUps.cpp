@@ -22,10 +22,8 @@
 
 #ifdef HAVE_APPLE_OPENGL_FRAMEWORK
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
-#include <GL/glpng.h>
 #endif
 
 #include "Config.h"
@@ -37,6 +35,7 @@
 #include "EnemyAircraft.h"
 #include "HeroAircraft.h"
 #include "ScreenItemAdd.h"
+#include "Image.h"
 
 
 //====================================================================
@@ -110,12 +109,11 @@ PowerUps::~PowerUps()
 //----------------------------------------------------------
 void	PowerUps::loadTextures()
 {
-	pngInfo tmpInfo;
-	pwrTex			= pngBind(dataLoc("png/powerUpTex.png"),	PNG_NOMIPMAPS, PNG_BLEND3, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
-	tex[Shields]	= pngBind(dataLoc("png/powerUpShield.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	pwrTex			= Image::load(dataLoc("png/powerUpTex.png"), IMG_NOMIPMAPS, IMG_BLEND3, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[Shields]	= Image::load(dataLoc("png/powerUpShield.png"));
 	tex[SuperShields] = tex[Shields];
 	tex[Repair]		= tex[Shields];
-	tex[HeroAmmo00]	= pngBind(dataLoc("png/powerUpAmmo.png"),	PNG_NOMIPMAPS, PNG_ALPHA, &tmpInfo, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+	tex[HeroAmmo00]	= Image::load(dataLoc("png/powerUpAmmo.png"));
 	tex[HeroAmmo01]	= tex[HeroAmmo00];
 	tex[HeroAmmo02]	= tex[HeroAmmo00];
 }

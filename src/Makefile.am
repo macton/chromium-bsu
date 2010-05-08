@@ -6,7 +6,7 @@ chromium_bsu_CPPFLAGS = \
 	$(GL_CFLAGS) \
 	$(GLU_CFLAGS) \
 	$(TEXT_CFLAGS) \
-	$(GLPNG_CFLAGS) \
+	$(IMAGE_CFLAGS) \
 	$(WINDOW_CFLAGS) \
 	$(AUDIO_CFLAGS) \
 	"-DPACKAGE=\"$(PACKAGE)\"" \
@@ -17,7 +17,7 @@ chromium_bsu_LDADD = \
 	$(GL_LIBS) \
 	$(GLU_LIBS) \
 	$(TEXT_LIBS) \
-	$(GLPNG_LIBS) \
+	$(IMAGE_LIBS) \
 	$(WINDOW_LIBS) \
 	$(AUDIO_LIBS)
 
@@ -78,6 +78,8 @@ chromium_bsu_SOURCES = \
 	HeroAmmo.h \
 	HiScore.cpp \
 	HiScore.h \
+	Image.cpp \
+	Image.h \
 	MainGL.cpp \
 	MainGL.h \
 	MainGLUT.cpp \
