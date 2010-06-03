@@ -59,12 +59,12 @@ void TextFTGL::Render(const char* str, const int len)
 
 float TextFTGL::Advance(const char* str, const int len)
 {
-	ftFont->Advance(str, len);
+	return ftFont->Advance(str, len);
 }
 
 float TextFTGL::LineHeight(const char* str, const int len)
 {
-	ftFont->LineHeight();
+	return ftFont->LineHeight();
 }
 
 const char* TextFTGL::findFont()
