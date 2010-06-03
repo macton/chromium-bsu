@@ -95,7 +95,7 @@ Chromium 0.9.9
  - wrote a 'configure' script (not autoconf) that attempts to determine what
    components are available for OpenAL support
  - audio tweaks.
- - integrated patches from Torbjörn Andersson and improved the pause mode. 
+ - integrated patches from TorbjÃ¶rn Andersson and improved the pause mode.
  - changed capitalization of dirs in data for consistency.
 
 Chromium 0.9.8
