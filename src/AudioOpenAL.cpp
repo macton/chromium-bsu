@@ -908,7 +908,7 @@ bool AudioOpenAL::loadWAV(const char *filename)
 	return false;
 #else //USE_PLAYLIST
 #if defined(ALUT_API_MAJOR_VERSION) && ALUT_API_MAJOR_VERSION >= 1
-	buffer[MusicGame] = alutCreateBufferFromFile(const_cast<ALbyte*>(filename));
+	buffer[MusicGame] = alutCreateBufferFromFile(filename);
 	if( buffer[MusicGame] == AL_NONE ) checkError();
 	return buffer[MusicGame] != AL_NONE;
 #else
