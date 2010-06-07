@@ -155,8 +155,6 @@ int main(int argc, char **argv)
 	config->destroy();
 	game->destroy();
 
-	if( config->debug() ) fprintf(stderr, _("done.\n"));
-	
 	return 0;
 }
 
