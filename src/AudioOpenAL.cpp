@@ -186,6 +186,8 @@ AudioOpenAL::~AudioOpenAL()
 		alDeleteSources(NumSoundTypes, source);
 		alDeleteBuffers(NumSoundTypes, buffer);
 
+		alcMakeContextCurrent(NULL);
+
 		#ifdef _WIN32
 		if(context_id)
 			alcDestroyContext((ALCcontext*)context_id);
