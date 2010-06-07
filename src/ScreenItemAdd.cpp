@@ -41,6 +41,11 @@ ScreenItemAdd::ScreenItemAdd()
 ScreenItemAdd::~ScreenItemAdd()
 {
 	clear();
+	for(int i = 0; i < NumEnemyTypes; i++)
+	{
+		delete deadPool[i];
+		deadPool[i] = NULL;
+	}
 	delete root;
 }
 
