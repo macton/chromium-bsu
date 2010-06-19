@@ -76,6 +76,12 @@ TextGLC::~TextGLC()
 
 	glcContext(0);
 	if(context) glcDeleteContext(context);
+
+	// WORKAROUND: 2987891
+	// This function also resets the GLC error state and 
+	// calling it prevents glcContext from inheriting any
+	// errors from the previous version of the GLC context
+	glcGetError();
 }
 
 void TextGLC::Render(const char* str, const int len)
