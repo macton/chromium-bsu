@@ -3,7 +3,7 @@
  *
  * "Chromium B.S.U." is free software; you can redistribute 
  * it and/or use it and/or modify it under the terms of the 
- * "Artistic License" 
+ * "Clarified Artistic License"
  */
 #ifndef HeroAmmo_h
 #define HeroAmmo_h
