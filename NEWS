@@ -1,3 +1,12 @@
+Chromium B.S.U. 0.9.14.1
+ - Add new Swedish translation
+ - Add SDL_image texture loading backend
+ - Relicense to Clarified Artistic License for Fedora
+ - Fix keyboard handling at the end of level
+ - Fix build failures with new compilers
+ - Fix some issues found by valgrind
+ - Translation updates
+
 Chromium B.S.U. 0.9.14
  - Migrate from chromium to chromium-bsu (and similar)
  - Add new GLC text rendering backend allowing i18n
