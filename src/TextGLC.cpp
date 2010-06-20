@@ -39,14 +39,16 @@ TextGLC::TextGLC() : Text()
 	that your language looks good in.
 	*/
 	glcNewFontFromFamily(defaultFont, _("Gothic Uralic"));
-	glcFontFace(defaultFont, "Bold");
-	glcFont(defaultFont);
+	if( GLC_NONE == glcGetError() ) {
+		glcFontFace(defaultFont, "Bold");
+		glcFont(defaultFont);
+	}
 
 #ifdef FONT_NAME
 	// Get distributor-specified font
 	distroFont = glcGenFontID();
 	glcNewFontFromFamily(distroFont, FONT_NAME);
-	glcFont(distroFont);
+	if( GLC_NONE == glcGetError() )	glcFont(distroFont);
 #else
 	distroFont = 0;
 #endif
@@ -55,7 +57,7 @@ TextGLC::TextGLC() : Text()
 	if( NULL != getenv("CHROMIUM_BSU_FONT") ){
 		userFont = glcGenFontID();
 		glcNewFontFromFamily(userFont, getenv("CHROMIUM_BSU_FONT"));
-		glcFont(userFont);
+		if( GLC_NONE == glcGetError() ) glcFont(userFont);
 	} else {
 		userFont = 0;
 	}
@@ -70,18 +72,12 @@ TextGLC::TextGLC() : Text()
 TextGLC::~TextGLC()
 {
 	glcFont(0);
-	if(defaultFont) glcDeleteFont(defaultFont);
-	if(distroFont) glcDeleteFont(distroFont);
-	if(userFont) glcDeleteFont(userFont);
+	if(defaultFont){ glcDeleteFont(defaultFont); defaultFont = 0; }
+	if(distroFont){ glcDeleteFont(distroFont); distroFont = 0; }
+	if(userFont){ glcDeleteFont(userFont); userFont = 0; }
 
 	glcContext(0);
-	if(context) glcDeleteContext(context);
-
-	// WORKAROUND: 2987891
-	// This function also resets the GLC error state and 
-	// calling it prevents glcContext from inheriting any
-	// errors from the previous version of the GLC context
-	glcGetError();
+	if(context){ glcDeleteContext(context); context = 0; }
 }
 
 void TextGLC::Render(const char* str, const int len)
