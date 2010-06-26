@@ -19,7 +19,7 @@
 
 #elif IMAGE_GLPNG
 
-#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_OPENGL_GL_H)
 #include <OpenGL/gl.h>
 #include <glpng/glpng.h>
 #else

@@ -23,7 +23,7 @@
 
 #include "compatibility.h"
 
-#ifdef HAVE_APPLE_OPENGL_FRAMEWORK
+#if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || (defined(HAVE_OPENGL_GL_H) && defined(HAVE_OPENGL_GLU_H))
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #if IMAGE_GLPNG
