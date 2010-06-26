@@ -113,7 +113,9 @@ if test "x$enable_sdlimage" != xno ; then
 fi
 
 if test "x$enable_glpng" != xno ; then
-	AC_CHECK_LIB([glpng], [pngBind], [HAVE_GLPNG=yes], [HAVE_GLPNG=no], [$GL_LIBS])
+	AC_CHECK_HEADERS([GL/glpng.h], [HAVE_GL_GLPNG_H=yes], [HAVE_GL_GLPNG_H=no])
+	AC_CHECK_HEADERS([glpng/glpng.h], [HAVE_GLPNG_GLPNG_H=yes], [HAVE_GLPNG_GLPNG_H=no])
+	AC_CHECK_LIB([glpng], [pngBind], [HAVE_GLPNG_LIB=yes], [HAVE_GLPNG_LIB=no], [$GL_LIBS])
 fi
 
 
@@ -220,7 +222,7 @@ else
 	AC_MSG_ERROR([cannot find OpenAL & ALUT or SDL Mixer (sound)])
 fi
 
-if test "x$HAVE_GLPNG" = xyes -a "x$enable_glpng" != no ; then
+if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x$HAVE_GLPNG_LIB" = xyes -a "x$enable_glpng" != no ; then
 	AC_DEFINE(IMAGE_GLPNG, 1, [define to use glpng])
 	IMAGE_CFLAGS=""
 	AC_SUBST(IMAGE_CFLAGS)

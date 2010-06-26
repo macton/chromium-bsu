@@ -21,9 +21,13 @@
 
 #if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_OPENGL_GL_H)
 #include <OpenGL/gl.h>
-#include <glpng/glpng.h>
 #else
 #include <GL/gl.h>
+#endif
+
+#if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_GLPNG_GLPNG_H)
+#include <glpng/glpng.h>
+#else
 #include <GL/glpng.h>
 #endif
 
