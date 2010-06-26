@@ -20,7 +20,11 @@
 #include <cstdlib>
 #include <unistd.h>
 
+#ifdef HAVE_GLUT_GLUT_H
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 
 #include "Config.h"
 #include "HiScore.h"
