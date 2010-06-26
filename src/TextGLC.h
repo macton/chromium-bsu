@@ -9,7 +9,7 @@
 #define TextGLC_h
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include <chromium-bsu-config.h>
 #endif
 
 #ifdef TEXT_GLC

@@ -3,6 +3,8 @@ MAINTAINERCLEANFILES = \
 	Makefile.in \
 	config.h.in \
 	config.h.in~ \
+	chromium-bsu-config.h.in \
+	chromium-bsu-config.h.in~ \
 	config.sub \
 	config.guess \
 	aclocal.m4 \

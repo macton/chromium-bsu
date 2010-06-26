@@ -9,7 +9,7 @@
 #define Audio_h
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include <chromium-bsu-config.h>
 #endif
 
 #define NUM_EXPLO		2

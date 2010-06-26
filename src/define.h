@@ -9,7 +9,7 @@
 #define define_h
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include <chromium-bsu-config.h>
 #endif
 
 //#define SRAND (2.0*(0.5-(rand()/(double)RAND_MAX)))
