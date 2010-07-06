@@ -19,7 +19,8 @@ chromium_bsu_LDADD = \
 	$(TEXT_LIBS) \
 	$(IMAGE_LIBS) \
 	$(WINDOW_LIBS) \
-	$(AUDIO_LIBS)
+	$(AUDIO_LIBS) \
+	$(INTLLIBS)
 
 chromium_bsu_SOURCES = \
 	Ammo.cpp \
