@@ -150,7 +150,7 @@ else
 fi
 
 if test "x$TEXT_TYPE" = xGLC -a "x$FONT_NAME" != x ; then
-	TEXT_CFLAGS+=" -DFONT_NAME=\"\\\"$FONT_NAME\\\"\""
+	TEXT_CFLAGS="$TEXT_CFLAGS -DFONT_NAME=\"\\\"$FONT_NAME\\\"\""
 	AC_SUBST(TEXT_CFLAGS)
 	FONT="$FONT_NAME"
 elif test "x$TEXT_TYPE" = xGLC ; then
@@ -158,18 +158,18 @@ elif test "x$TEXT_TYPE" = xGLC ; then
 fi
 
 if test "x$TEXT_TYPE" = xFTGL -a "x$FONT_PATH" != x ; then
-	TEXT_CFLAGS+=" -DFONT_PATH=\"\\\"$FONT_PATH\\\"\""
+	TEXT_CFLAGS="$TEXT_CFLAGS -DFONT_PATH=\"\\\"$FONT_PATH\\\"\""
 	AC_SUBST(TEXT_CFLAGS)
 	FONT="$FONT_PATH "
 fi
 
 if test "x$TEXT_TYPE" = xFTGL -a "x$HAVE_FONTCONFIG" = xyes ; then
 	AC_DEFINE(HAVE_FONTCONFIG, 1, [define to use fontconfig])
-	TEXT_CFLAGS+=" $FONTCONFIG_CFLAGS"
+	TEXT_CFLAGS="$TEXT_CFLAGS $FONTCONFIG_CFLAGS"
 	AC_SUBST(TEXT_CFLAGS)
-	TEXT_LIBS+=" $FONTCONFIG_LIBS"
+	TEXT_LIBS="$TEXT_LIBS $FONTCONFIG_LIBS"
 	AC_SUBST(TEXT_LIBS)
-	FONT+="fontconfig (bold Gothic Uralic) "
+	FONT="$FONT fontconfig (bold Gothic Uralic) "
 fi
 
 if  test "x$TEXT_TYPE" = xFTGL -a "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" = x ; then
@@ -230,7 +230,7 @@ if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x
 	AC_SUBST(IMAGE_LIBS)
 	IMAGE_TYPE=glpng
 	if test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
-		IMAGE_LIBS+=" -lSDL_image"
+		IMAGE_LIBS="$IMAGE_LIBS -lSDL_image"
 		AC_SUBST(IMAGE_LIBS)
 		AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
 		WINDOW_ICON=yes
