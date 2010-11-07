@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2010-06-07 16:25+0800\n"
+"POT-Creation-Date: 2010-11-07 10:06+0800\n"
 "PO-Revision-Date: 2009-03-30 09:42+0300\n"
 "Last-Translator: Damyan Ivanov <dmn@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,8 +62,7 @@ msgid ""
 " use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
 "\n"
-" use_cdrom е разрешено. Задайте стойност „0“ в конфигурационния фаил за да "
-"го забраните.\n"
+" use_cdrom е разрешено. Задайте стойност „0“ в конфигурационния фаил за да го забраните.\n"
 
 #: src/Audio.cpp:155
 #, c-format
@@ -70,8 +70,7 @@ msgid ""
 " Press the 'N' key to skip to next CD track during a game.\n"
 "\n"
 msgstr ""
-" Използвайте клавиша „N“ за прескачане до следващата песен по време на "
-"игра.\n"
+" Използвайте клавиша „N“ за прескачане до следващата песен по време на игра.\n"
 "\n"
 
 #: src/Audio.cpp:166
@@ -82,9 +81,7 @@ msgstr "ГРЕШКА! Няма достъп до цомпактдисково у
 #: src/Audio.cpp:209
 #, c-format
 msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
-msgstr ""
-"Грешка при работа с компактдисковото устройство в AudioOpenAL::pauseGameMusic"
-"(%d)\n"
+msgstr "Грешка при работа с компактдисковото устройство в AudioOpenAL::pauseGameMusic(%d)\n"
 
 #: src/Audio.cpp:210
 #, c-format
@@ -394,32 +391,37 @@ msgstr ""
 msgid "%p <--%p--> %p\n"
 msgstr ""
 
-#: src/HiScore.cpp:51
+#: src/HiScore.cpp:58
 #, c-format
 msgid "nobody"
 msgstr "никой"
 
-#: src/HiScore.cpp:76
+#: src/HiScore.cpp:83
 #, c-format
 msgid "WARNING: HiScore::init() has already been called.\n"
 msgstr ""
 
-#: src/HiScore.cpp:208
+#: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
 msgstr ""
 
-#: src/HiScore.cpp:252
+#: src/HiScore.cpp:328
+#, fuzzy, c-format
+msgid "WARNING: empty score file (%s)\n"
+msgstr "ВНИМАНИЕ: неуспех при четене на файла с настройки (%s)\n"
+
+#: src/HiScore.cpp:350
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
 msgstr ""
 
-#: src/HiScore.cpp:344
+#: src/HiScore.cpp:442
 #, c-format
 msgid "high scores:\n"
 msgstr "рекорди:\n"
 
-#: src/HiScore.cpp:350
+#: src/HiScore.cpp:448
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr ""
@@ -471,27 +473,27 @@ msgstr "!! ГРЕШКА !! — "
 msgid "Extensions :"
 msgstr "Разширения :"
 
-#: src/MainGL.cpp:84
+#: src/MainGL.cpp:86
 #, c-format
 msgid "initGL()\n"
 msgstr ""
 
-#: src/MainGL.cpp:146
+#: src/MainGL.cpp:148
 #, c-format
 msgid "error loading font: %s\n"
 msgstr ""
 
-#: src/MainGL.cpp:151
+#: src/MainGL.cpp:153
 #, c-format
 msgid "error loading font\n"
 msgstr ""
 
-#: src/MainGL.cpp:181
+#: src/MainGL.cpp:183
 #, c-format
 msgid "!!MainGL::drawGL() HUH?\n"
 msgstr ""
 
-#: src/MainGL.cpp:309
+#: src/MainGL.cpp:311
 #, c-format
 msgid ""
 "new high score!\n"
@@ -502,7 +504,7 @@ msgstr ""
 "\n"
 "%d"
 
-#: src/MainGL.cpp:314
+#: src/MainGL.cpp:316
 #, c-format
 msgid ""
 "n o t   b a d !\n"
@@ -515,11 +517,11 @@ msgstr ""
 "\n"
 "%d"
 
-#: src/MainGL.cpp:319
+#: src/MainGL.cpp:321
 msgid "l o s e r"
 msgstr "с л а б а к"
 
-#: src/MainGL.cpp:377
+#: src/MainGL.cpp:379
 #, c-format
 msgid ""
 "congratulations!\n"
@@ -536,17 +538,17 @@ msgstr ""
 "п р и к л ю ч е н о\n"
 " \n"
 
-#: src/MainGLUT.cpp:73
+#: src/MainGLUT.cpp:77
 #, c-format
 msgid "MainGLUT::run()\n"
 msgstr ""
 
-#: src/MainGLUT.cpp:89 src/MainSDL.cpp:285
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:285
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr ""
 
-#: src/MainGLUT.cpp:232
+#: src/MainGLUT.cpp:236
 #, c-format
 msgid "key = %d\n"
 msgstr ""
@@ -725,53 +727,32 @@ msgid "MainSDL::grabMouse(%d)\n"
 msgstr ""
 
 #: src/MenuGL.cpp:43
-msgid ""
-"  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o "
-"u !"
-msgstr ""
-"  н е   п о з в о л я в а й т е   н а   в р а г о в е т е   д а   п р е м и "
-"н а т !"
+msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
+msgstr "  н е   п о з в о л я в а й т е   н а   в р а г о в е т е   д а   п р е м и н а т !"
 
 #: src/MenuGL.cpp:44
-msgid ""
-"  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   "
-"l i f e !"
-msgstr ""
-"  в с е к и   п р е м и н а л   в р а г   с т р у в а   е д и н   ж и в о т !"
+msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
+msgstr "  в с е к и   п р е м и н а л   в р а г   с т р у в а   е д и н   ж и в о т !"
 
 #: src/MenuGL.cpp:45
-msgid ""
-"  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
-"i n t s !"
-msgstr ""
-"  п р е м и н а л и т е   п о д о б р е н и я   н о с я т   т о ч к и !"
+msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
+msgstr "  п р е м и н а л и т е   п о д о б р е н и я   н о с я т   т о ч к и !"
 
 #: src/MenuGL.cpp:46
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr ""
-"  б л ъ с к а й т е   с е   в ъ в   в р а г о в е т е   з а   д а   г и   у "
-"н и щ о ж и т е !"
+msgstr "  б л ъ с к а й т е   с е   в ъ в   в р а г о в е т е   з а   д а   г и   у н и щ о ж и т е !"
 
 #: src/MenuGL.cpp:47
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
-msgstr ""
-"  д в о й н о   д я с н о   щ р а к в а н е   з а   с а м о р а з р у ш е н "
-"и е !"
+msgstr "  д в о й н о   д я с н о   щ р а к в а н е   з а   с а м о р а з р у ш е н и е !"
 
 #: src/MenuGL.cpp:48
-msgid ""
-"  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i "
-"t i o n !"
-msgstr ""
-"  с а м о р а з р у ш е н и е т о   с ъ х р а н я в а   м у н и ц и и т е !"
+msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
+msgstr "  с а м о р а з р у ш е н и е т о   с ъ х р а н я в а   м у н и ц и и т е !"
 
 #: src/MenuGL.cpp:49
-msgid ""
-"  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
-"sf.net/"
-msgstr ""
-"  и з т е г л е т е   C h r o m i u m   B. S. U.   о т   http://chromium-bsu."
-"sf.net/"
+msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
+msgstr "  и з т е г л е т е   C h r o m i u m   B. S. U.   о т   http://chromium-bsu.sf.net/"
 
 #: src/MenuGL.cpp:70
 msgid "n e w    g a m e"
@@ -947,8 +928,7 @@ msgstr ""
 #: src/MenuGL.cpp:842
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr ""
-"---- трпбва да преминете ниво %d преди да можете да изберете ниво %d ----"
+msgstr "---- трпбва да преминете ниво %d преди да можете да изберете ниво %d ----"
 
 #: src/MenuGL.cpp:858 src/MenuGL.cpp:929
 #, c-format
@@ -976,9 +956,7 @@ msgstr "п а у з а"
 
 #: src/StatusDisplay.cpp:675
 msgid "do not let -any- ships past you! each one costs you a life!"
-msgstr ""
-"не позволявайте на НИКАКВИ кораби да преминат! всеки преминал кораб струва "
-"един живот!"
+msgstr "не позволявайте на НИКАКВИ кораби да преминат! всеки преминал кораб струва един живот!"
 
 #: src/StatusDisplay.cpp:686
 msgid "let super shields pass by for an extra life!"

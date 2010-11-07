@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium BSU\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2010-06-07 16:25+0800\n"
+"POT-Creation-Date: 2010-11-07 10:06+0800\n"
 "PO-Revision-Date: 2010-04-13 16:56+0200\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,8 +63,7 @@ msgid ""
 " use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
 "\n"
-" use_cdrom activée. Initialiser à '0' dans le fichier de configuration pour "
-"désactiver.\n"
+" use_cdrom activée. Initialiser à '0' dans le fichier de configuration pour désactiver.\n"
 
 #: src/Audio.cpp:155
 #, c-format
@@ -71,8 +71,7 @@ msgid ""
 " Press the 'N' key to skip to next CD track during a game.\n"
 "\n"
 msgstr ""
-"Appuyer sur la touche « N » pour sauter la prochaine piste du CD pendant le "
-"jeu.\n"
+"Appuyer sur la touche « N » pour sauter la prochaine piste du CD pendant le jeu.\n"
 "\n"
 
 #: src/Audio.cpp:166
@@ -268,8 +267,7 @@ msgstr "AudioOpenAL::setMusicIndex -- avant d'initialiser le tampon source à 0"
 
 #: src/AudioOpenAL.cpp:824
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
-msgstr ""
-"AudioOpenAL::setMusicIndex -- après avoir initialisé le tampon source à 0"
+msgstr "AudioOpenAL::setMusicIndex -- après avoir initialisé le tampon source à 0"
 
 #: src/AudioOpenAL.cpp:859
 msgid "AudioOpenAL::setMusicIndex -- end"
@@ -278,8 +276,7 @@ msgstr "AudioOpenAL::setMusicIndex -- fin"
 #: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
-msgstr ""
-"AVERTISSEMENT : PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
+msgstr "AVERTISSEMENT : PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 
 #: src/AudioOpenAL.cpp:959
 #, c-format
@@ -299,8 +296,7 @@ msgstr "ERREUR: échec de alutLoadMP3() dans AudioOpenAL::loadMP3\n"
 #: src/AudioOpenAL.cpp:1005
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
-msgstr ""
-"ERREUR: Impossible d'allouer de la mémoire dans AudioOpenAL::loadVorbis\n"
+msgstr "ERREUR: Impossible d'allouer de la mémoire dans AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1011
 #, c-format
@@ -315,8 +311,7 @@ msgstr "ERREUR: echec de alutLoadVorbis() dans AudioOpenAL::loadVorbis\n"
 #: src/AudioSDLMixer.cpp:65
 #, c-format
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
-msgstr ""
-"ERREUR lors de l'initialisation de l'audio - AudioSDLMixer::initSound()\n"
+msgstr "ERREUR lors de l'initialisation de l'audio - AudioSDLMixer::initSound()\n"
 
 #: src/Config.cpp:115
 #, c-format
@@ -403,32 +398,37 @@ msgstr "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
 msgid "%p <--%p--> %p\n"
 msgstr "%p <--%p--> %p\n"
 
-#: src/HiScore.cpp:51
+#: src/HiScore.cpp:58
 #, c-format
 msgid "nobody"
 msgstr "personne"
 
-#: src/HiScore.cpp:76
+#: src/HiScore.cpp:83
 #, c-format
 msgid "WARNING: HiScore::init() has already been called.\n"
 msgstr "AVERTISSEMENT : HiScore::init() a déjà été exécuté.\n"
 
-#: src/HiScore.cpp:208
+#: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
 msgstr "AVERTISSEMENT : impossible d'écrire sur le fichier des scores (%s)\n"
 
-#: src/HiScore.cpp:252
+#: src/HiScore.cpp:328
+#, fuzzy, c-format
+msgid "WARNING: empty score file (%s)\n"
+msgstr "AVERISSEMENT : impossible de lire de fichier des scores (%s)\n"
+
+#: src/HiScore.cpp:350
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
 msgstr "AVERISSEMENT : impossible de lire de fichier des scores (%s)\n"
 
-#: src/HiScore.cpp:344
+#: src/HiScore.cpp:442
 #, c-format
 msgid "high scores:\n"
 msgstr "meilleurs scores :\n"
 
-#: src/HiScore.cpp:350
+#: src/HiScore.cpp:448
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
@@ -480,27 +480,27 @@ msgstr "!! ERREUR !! - "
 msgid "Extensions :"
 msgstr "Extensions :"
 
-#: src/MainGL.cpp:84
+#: src/MainGL.cpp:86
 #, c-format
 msgid "initGL()\n"
 msgstr "initGL()\n"
 
-#: src/MainGL.cpp:146
+#: src/MainGL.cpp:148
 #, c-format
 msgid "error loading font: %s\n"
 msgstr "erreur pendant le chargement des polices : %s\n"
 
-#: src/MainGL.cpp:151
+#: src/MainGL.cpp:153
 #, c-format
 msgid "error loading font\n"
 msgstr "erreur pendant le chargement des polices\n"
 
-#: src/MainGL.cpp:181
+#: src/MainGL.cpp:183
 #, c-format
 msgid "!!MainGL::drawGL() HUH?\n"
 msgstr "!!MainGL::drawGL() HEIN?\n"
 
-#: src/MainGL.cpp:309
+#: src/MainGL.cpp:311
 #, c-format
 msgid ""
 "new high score!\n"
@@ -511,7 +511,7 @@ msgstr ""
 "\n"
 "%d"
 
-#: src/MainGL.cpp:314
+#: src/MainGL.cpp:316
 #, c-format
 msgid ""
 "n o t   b a d !\n"
@@ -524,11 +524,11 @@ msgstr ""
 "\n"
 "%d"
 
-#: src/MainGL.cpp:319
+#: src/MainGL.cpp:321
 msgid "l o s e r"
 msgstr "p e r d a n t"
 
-#: src/MainGL.cpp:377
+#: src/MainGL.cpp:379
 #, c-format
 msgid ""
 "congratulations!\n"
@@ -545,17 +545,17 @@ msgstr ""
 "c o m p l e t\n"
 " \n"
 
-#: src/MainGLUT.cpp:73
+#: src/MainGLUT.cpp:77
 #, c-format
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:89 src/MainSDL.cpp:285
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:285
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "ERREUR!!! Erreur OpenGL : %s\n"
 
-#: src/MainGLUT.cpp:232
+#: src/MainGLUT.cpp:236
 #, c-format
 msgid "key = %d\n"
 msgstr "touche = %d\n"
@@ -739,54 +739,32 @@ msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
 
 #: src/MenuGL.cpp:43
-msgid ""
-"  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o "
-"u !"
+msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
 msgstr "  n e   l a i s s e z   p a s s e z   -a u c u n-   e n n e m i !"
 
 #: src/MenuGL.cpp:44
-msgid ""
-"  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   "
-"l i f e !"
-msgstr ""
-" c h a q u e   e n e m i   q u i   p a s s e   v o u s   c o u t e   u n e   "
-"v i e   !"
+msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
+msgstr " c h a q u e   e n e m i   q u i   p a s s e   v o u s   c o u t e   u n e   v i e   !"
 
 #: src/MenuGL.cpp:45
-msgid ""
-"  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o "
-"i n t s !"
-msgstr ""
-"  l a i s s e r   p a s s e r   l e s   p o w e r - u p   p o u r   f a i r "
-"e   l e   p l e i n   d e   p o i n t s !"
+msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
+msgstr "  l a i s s e r   p a s s e r   l e s   p o w e r - u p   p o u r   f a i r e   l e   p l e i n   d e   p o i n t s !"
 
 #: src/MenuGL.cpp:46
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr ""
-"  c r a s h e r   v o u s   d a n s   l e s   e n ne m i s   p o u r   l e "
-"s   d e t r u i r e !"
+msgstr "  c r a s h e r   v o u s   d a n s   l e s   e n ne m i s   p o u r   l e s   d e t r u i r e !"
 
 #: src/MenuGL.cpp:47
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
-msgstr ""
-"  d o u b l e - c l i q u e z   d r o i t   p o u r   v o u s   a u t o - d "
-"e t r u i r e !"
+msgstr "  d o u b l e - c l i q u e z   d r o i t   p o u r   v o u s   a u t o - d e t r u i r e !"
 
 #: src/MenuGL.cpp:48
-msgid ""
-"  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i "
-"t i o n !"
-msgstr ""
-"  a u t o - d e t r u i s e z   v o u s   p o u r   p r é s e r v e r   v o "
-"s   m u n i t i o n s"
+msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
+msgstr "  a u t o - d e t r u i s e z   v o u s   p o u r   p r é s e r v e r   v o s   m u n i t i o n s"
 
 #: src/MenuGL.cpp:49
-msgid ""
-"  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu."
-"sf.net/"
-msgstr ""
-"  t é l e c h a r g e r   C h r o m i u m   B. S. U.   d e p u i s   http://"
-"chromium-bsu.sf.net/"
+msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
+msgstr "  t é l e c h a r g e r   C h r o m i u m   B. S. U.   d e p u i s   http://chromium-bsu.sf.net/"
 
 #: src/MenuGL.cpp:70
 msgid "n e w    g a m e"
@@ -831,8 +809,7 @@ msgstr "q u i t t e r"
 #: src/MenuGL.cpp:143 src/MenuGL.cpp:418
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
-msgstr ""
-"ATTENTION : utilisé du texte 'thin' pour améliorer le taux de frame...\n"
+msgstr "ATTENTION : utilisé du texte 'thin' pour améliorer le taux de frame...\n"
 
 #: src/MenuGL.cpp:147
 #, c-format
@@ -963,8 +940,7 @@ msgstr "---- erreur à l'initialisation du mode de fenêtrage ----"
 #: src/MenuGL.cpp:842
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr ""
-"---- vous devez finir le niveau %d avant de pouvoir sélectionner %d ----"
+msgstr "---- vous devez finir le niveau %d avant de pouvoir sélectionner %d ----"
 
 #: src/MenuGL.cpp:858 src/MenuGL.cpp:929
 #, c-format
