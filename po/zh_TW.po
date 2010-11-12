@@ -415,9 +415,9 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "警告：無法寫入分數檔案 (%s)\n"
 
 #: src/HiScore.cpp:328
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "警告：無法讀取分數檔案 (%s)\n"
+msgstr "警告：空的分數檔案 (%s)\n"
 
 #: src/HiScore.cpp:350
 #, c-format
