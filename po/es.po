@@ -415,9 +415,9 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "ADVERTENCIA: no se pudo escribir el archivo de puntuacion(%s)\n"
 
 #: src/HiScore.cpp:328
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "ADVERTENCIA: no se pudo leer el archivo del resultado(%s)\n"
+msgstr "ADVERTENCIA: archivo de resultados vacío (%s)\n"
 
 #: src/HiScore.cpp:350
 #, c-format
