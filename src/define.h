@@ -22,8 +22,8 @@
 #define AMMO_REFILL 150
 #define HERO_Z	25.0f
 
-#define MIN_SCREEN_SIZE 0 // 4 == 512x384
-#define MAX_SCREEN_SIZE 4 // 4 == 1280x960
+#define MIN_SCREEN_SIZE 0 // 512x384
+#define MAX_SCREEN_SIZE 4 // 1280x960
 
 #define NUM_ENEMY_AMMO_TYPES 5
 #define NUM_HERO_AMMO_TYPES 3
