@@ -46,18 +46,4 @@
 
 #define HI_SCORE_HIST 5
 
-#define MAX_BUFF 256
-
-#ifdef PKGBINDIR
-#define CHROMIUM_EXEC PKGBINDIR"/"PACKAGE
-#else 
-#define CHROMIUM_EXEC "./"PACKAGE
-#endif //PKGBINDIR
-
-#ifdef PKGDATADIR
-#define CHROMIUM_DATA_DIR PKGDATADIR"/data"
-#else
-#define CHROMIUM_DATA_DIR "../data"
-#endif //PKGDATADIR
-
 #endif // define_h
