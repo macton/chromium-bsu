@@ -809,7 +809,7 @@ msgid "fish in a barrel"
 msgstr "със затворени очи"
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
+msgid "wimp"
 msgstr "за пеленачета"
 
 #: src/MenuGL.cpp:164

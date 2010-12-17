@@ -160,7 +160,7 @@ static const char *skillString(int i)
 	switch(i)
 	{
 		case 2: return _("fish in a barrel");
-		case 3: return _("whimp");
+		case 3: return _("wimp");
 		case 4: return _("easy");
 		case 5: return _("normal");
 		case 6: return _("experienced");

@@ -822,8 +822,8 @@ msgid "fish in a barrel"
 msgstr "大桶中的魚"
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
-msgstr "whimp"
+msgid "wimp"
+msgstr "wimp"
 
 #: src/MenuGL.cpp:164
 msgid "easy"

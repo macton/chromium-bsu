@@ -820,7 +820,7 @@ msgid "fish in a barrel"
 msgstr "pesce in un barile"
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
+msgid "wimp"
 msgstr "gemito"
 
 #: src/MenuGL.cpp:164

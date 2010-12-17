@@ -816,7 +816,7 @@ msgid "fish in a barrel"
 msgstr "Fisch im Faß"
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
+msgid "wimp"
 msgstr "Feigling"
 
 #: src/MenuGL.cpp:164

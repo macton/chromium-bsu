@@ -821,7 +821,7 @@ msgid "fish in a barrel"
 msgstr "poisson dans un bocal"
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
+msgid "wimp"
 msgstr "poule mouillée"
 
 #: src/MenuGL.cpp:164

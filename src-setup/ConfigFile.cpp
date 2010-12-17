@@ -59,7 +59,7 @@ ConfigFile::ConfigFile(QWidget *parent, const char* name)
 	//----
 	configSelect[Skill]->setText("Skill Level");
 	configSelect[Skill]->insertItem("fish in a barrel");
-	configSelect[Skill]->insertItem("whimp");
+	configSelect[Skill]->insertItem("wimp");
 	configSelect[Skill]->insertItem("easy");
 	configSelect[Skill]->insertItem("normal");
 	configSelect[Skill]->insertItem("experienced");

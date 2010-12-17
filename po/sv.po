@@ -769,7 +769,7 @@ msgid "fish in a barrel"
 msgstr ""
 
 #: src/MenuGL.cpp:163
-msgid "whimp"
+msgid "wimp"
 msgstr "kyckling"
 
 #: src/MenuGL.cpp:164
