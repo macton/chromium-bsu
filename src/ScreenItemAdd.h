@@ -39,6 +39,7 @@ private:
 	void loadLevel1();
 	void loadLevel2();
 	void loadLevel3();
+	void loadLevel4();
 
 	void addStraightWave(int o, int duration, float density = 1.0);
 	void addOmniWave(int o, int duration, float density = 1.0);

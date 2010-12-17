@@ -148,6 +148,9 @@ bool ScreenItemAdd::loadScreenItems(const char*)
 		case 2:
 			loadLevel3();
 			break;
+		case 3:
+			loadLevel4();
+			break;
 		default:
 			loadLevel1();
 			break;
@@ -514,6 +517,74 @@ void ScreenItemAdd::loadLevel3()
 }
 
 //----------------------------------------------------------	
+void ScreenItemAdd::loadLevel4()
+{
+	int i;
+	int	numIterations = 12000;
+	
+	clearDeadPool();
+	//-- Enemies
+	float	r;
+	float	d;
+	int		waveDuration = 500;	
+	i = 600;
+	addStraightWave(1, i, 0.4);
+	while(i < numIterations-1000)
+	{
+		if(i < 1500)
+			d = (i+250.0)/2000.0;
+		else
+			d = 1.0;
+		r = FRAND;
+		if      (r < 0.15)	addStraightArrowWave(i, waveDuration, d);
+		else if (r < 0.25)	addOmniArrowWave(i, waveDuration, d);
+		else if (r > 0.60)	addStraightWave(i, waveDuration, d);
+		else
+		{
+			if     (r < 0.25) 	addGnatWave			(i, waveDuration);
+			else if(r < 0.35)	addStraightArrowWave(i, waveDuration);
+			else if(r < 0.50)	addOmniArrowWave	(i, waveDuration);
+			else if(r < 0.80)	addOmniWave			(i, waveDuration);
+			else				addStraightWave		(i, waveDuration);
+		}
+
+		i += waveDuration;
+		waveDuration = (int)(600.0*game->gameSkill) + (int)(100*SRAND);
+		i += 50 + (int)(50*FRAND);
+	}
+
+	EnemyWave	gnatWave(EnemyGnat);
+	gnatWave.setInOut(3000, 5000);
+	gnatWave.setPos(FRAND*4.0, 10.0);
+	gnatWave.setFrequency(150, 140);
+	gnatWave.setXRand(5.0);
+	addWave(gnatWave);
+	
+	gnatWave.setInOut(8000, 11000);
+	addWave(gnatWave);
+
+	//-- ray gun enemy starts halfway through...
+	EnemyWave	rayWave(EnemyRayGun);
+	rayWave.setXRand(8.0);
+	rayWave.setFrequency(60, 5);	
+	rayWave.setFrequency(2000, 1000);
+	rayWave.setInOut(numIterations/2, i-1000);
+	addWave(rayWave);
+	
+	//-- Boss
+	EnemyWave	bossWave(EnemyBoss00);
+	bossWave.setInOut(i+75, i+1000);	
+	bossWave.setPos(0.0, 15.0);
+	bossWave.setXRand(4.0);
+	bossWave.setFrequency(5000, 0);
+	addWave(bossWave);
+		
+	//-- Ammunition and PowerUps
+	addAmmunition(0, numIterations+9000);
+	addPowerUps(0, numIterations+9000);
+}
+
+//----------------------------------------------------------
 void ScreenItemAdd::addStraightWave(int o, int duration, float density)
 {
 	float freq = 1.0/density;
