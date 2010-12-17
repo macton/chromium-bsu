@@ -477,15 +477,8 @@ void MenuGL::drawIndicator()
 			}
 			break;
 		case ScreenSize: 
-			level = (float)config->screenSize()/(float)MAX_SCREEN_SIZE; 
-			switch(config->screenSize())
-			{
-				case 0: sprintf(buf, _("512x384")); break;
-				case 1: sprintf(buf, _("640x480")); break;
-				case 2: sprintf(buf, _("800x600")); break;
-				case 3: sprintf(buf, _("1024x768")); break;
-				case 4: sprintf(buf, _("1280x960")); break;
-			}
+			level = (float)config->approxScreenSize()/(float)MAX_SCREEN_SIZE;
+			sprintf(buf, _("%dx%d"), config->screenW(), config->screenH());
 			break;
 		case FullScreen: 
 			level = (float)config->fullScreen(); 
@@ -849,14 +842,14 @@ void MenuGL::incItem()
 			config->setGfxLevel(config->gfxLevel()+1);
 			break;
 		case ScreenSize:
-			config->setScreenSize(config->screenSize()+1);
+			config->setScreenSize(config->approxScreenSize()+1);
 			game->deleteTextures();
 			if( !game->toolkit->setVideoMode() )
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
 				sprintf(mssgText, _("---- error setting screen size ----"));
-				config->setScreenSize(config->screenSize()-1);
+				config->setScreenSize(config->approxScreenSize()-1);
 			}
 			game->loadTextures();
 			break;
@@ -920,14 +913,14 @@ void MenuGL::decItem()
 			config->setGfxLevel(config->gfxLevel()-1);
 			break;
 		case ScreenSize:
-			config->setScreenSize(config->screenSize()-1);
+			config->setScreenSize(config->approxScreenSize()-1);
 			game->deleteTextures();
 			if( !game->toolkit->setVideoMode() )
 			{
 				mssgHelpOverride = true;
 				mssgAlpha = 1.1;
 				sprintf(mssgText, _("---- error setting screen size ----"));
-				config->setScreenSize(config->screenSize()+1);
+				config->setScreenSize(config->approxScreenSize()+1);
 			}
 			game->loadTextures();
 			break;

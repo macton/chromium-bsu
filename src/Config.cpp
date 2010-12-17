@@ -56,7 +56,6 @@ Config::Config()
 	m_screenNear	=  10.0;
 	m_screenFar		=  70.0;
 	m_full_screen	=  false;
-	m_screenSize	=  2;
 	m_screenBound[0] = 11.0;
 	m_screenBound[1] =  9.0;
 	m_zTrans		= -56.5;
@@ -182,7 +181,9 @@ void Config::readValues(FILE* file)
 	numLines = i;
 	for(i = 0; i < numLines; i++)
 	{
-		if(strncmp(configStrings[i], "screenSi", 8) == 0) { sscanf(configStrings[i], "screenSize %d\n",    &m_screenSize); }
+		if(strncmp(configStrings[i], "screenSi", 8) == 0) { int screenSize; sscanf(configStrings[i], "screenSize %d\n", &screenSize); setScreenSize(screenSize); }
+		if(strncmp(configStrings[i], "screenWi", 8) == 0) { sscanf(configStrings[i], "screenWidth %d\n",   &m_screenW); }
+		if(strncmp(configStrings[i], "screenHe", 8) == 0) { sscanf(configStrings[i], "screenHeight %d\n",  &m_screenH); }
 		if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n",    &m_mouseSpeed); }
 		if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &m_gameSkillBase); }
 		if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n",      &m_gfxLevel);   }
@@ -243,9 +244,6 @@ bool Config::readFile()
 		}
 	}
 	
-	//-- update all screen size variables
-	setScreenSize(m_screenSize);
-	
 	return retVal;
 }
 
@@ -279,7 +277,8 @@ bool Config::saveFile()
 		fprintf(file, "swap_stereo %d\n",	(int)m_swap_stereo);
 		fprintf(file, "auto_speed %d\n",	(int)m_auto_speed);
 		fprintf(file, "show_fps %d\n",		(int)m_show_fps);
-		fprintf(file, "screenSize %d\n",	m_screenSize);
+		fprintf(file, "screenWidth %d\n",	m_screenW);
+		fprintf(file, "screenHeight %d\n",	m_screenH);
 		fprintf(file, "gfxLevel %d\n",		m_gfxLevel);
 		fprintf(file, "gameSkillBase %g\n",	m_gameSkillBase);
 		fprintf(file, "mouseSpeed %g\n",	m_mouseSpeed);
@@ -315,12 +314,11 @@ bool Config::saveFile()
 //----------------------------------------------------------
 void Config::setScreenSize(int m)
 {
-	m_screenSize = m;
-	if(m_screenSize > MAX_SCREEN_SIZE)
-		m_screenSize = MAX_SCREEN_SIZE;
-	if(m_screenSize < MIN_SCREEN_SIZE)
-		m_screenSize = MIN_SCREEN_SIZE;
-	switch(m_screenSize)
+	if(m > MAX_SCREEN_SIZE)
+		m = MAX_SCREEN_SIZE;
+	if(m < MIN_SCREEN_SIZE)
+		m = MIN_SCREEN_SIZE;
+	switch(m)
 	{
 		case 0:
 			m_screenW = 512;
@@ -343,7 +341,6 @@ void Config::setScreenSize(int m)
 			m_screenH = 960;
 			break;
 		default:
-			m_screenSize = 1;
 			m_screenW = 640;
 			m_screenH = 480;
 			break;
@@ -351,3 +348,15 @@ void Config::setScreenSize(int m)
 	m_screenA = (float)m_screenW/(float)m_screenH;
 }
 
+int Config::approxScreenSize()
+{
+	if( m_screenW >= 1280 && m_screenH >= 960 )
+		return 4;
+	if( m_screenW >= 1024 && m_screenH >= 768 )
+		return 3;
+	if( m_screenW >= 800 && m_screenH >= 600 )
+		return 2;
+	if( m_screenW >= 640 && m_screenH >= 480 )
+		return 1;
+	return 0;
+}

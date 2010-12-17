@@ -34,8 +34,9 @@ public:
 	
 	
 	void	setScreenSize(int m);
+	void	setScreenSize(int w, int h);
+	int	approxScreenSize();
 
-	int		screenSize()		{	return m_screenSize;	}
 	int		screenW()			{	return m_screenW;		}
 	int		screenH()			{	return m_screenH;		}
 	float	screenA()			{	return m_screenA;		}
@@ -106,7 +107,6 @@ private:
 	float	 m_screenNear;
 	float	 m_screenFar;
 	bool	 m_full_screen;
-	int 	 m_screenSize;
 	float	 m_screenBound[2];
 	float	 m_zTrans;
 	

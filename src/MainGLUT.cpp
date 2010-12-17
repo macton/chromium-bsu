@@ -127,7 +127,6 @@ void MainGLUT::grabMouse(bool status, bool warpmouse)
 bool MainGLUT::setVideoMode()
 {
 	Config	*config = Config::instance();
-	config->setScreenSize(config->screenSize()); //  set screenW & screenH for new screenSize
 	glutReshapeWindow(config->screenW(), config->screenH());
 	config->setFullScreen(false);
 	// GLUT doesn't have a way to return resize errors
