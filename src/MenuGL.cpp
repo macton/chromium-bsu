@@ -165,8 +165,8 @@ static const char *skillString(int i)
 		case 5: return _("normal");
 		case 6: return _("experienced");
 		case 7: return _("fun");
-		case 8: return _("insane");
-		case 9: return _("impossible");
+		case 8: return _("hardcore");
+		case 9: return _("insane");
 		default:return _("-");
 	}
 }
