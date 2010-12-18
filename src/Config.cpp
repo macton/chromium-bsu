@@ -269,6 +269,9 @@ bool Config::saveFile()
 #ifdef HAVE_LOCALE_H
 		char* locale = setlocale(LC_NUMERIC,"C");
 #endif
+		fprintf(file, "# Chromium B.S.U. configuration file\n");
+		fprintf(file, "# Please read the documentation for more info\n");
+		fprintf(file, "# Only modifications to option values are preserved.\n");
 		fprintf(file, "use_playList %d\n",	(int)m_use_playList);
 		fprintf(file, "use_cdrom %d\n",		(int)m_use_cdrom);
 		fprintf(file, "debug %d\n",		(int)m_debug);
