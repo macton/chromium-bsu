@@ -171,6 +171,15 @@ const char* alterPathForPlatform(char* filename)
 		walker++;
 	}
 #endif
+#ifdef _WIN32
+	char    *walker = filename;
+	while( *walker )
+	{
+		if(*walker == '/' )
+			*walker =  '\\';
+		walker++;
+	}
+#endif
 	return filename;
 }
 
