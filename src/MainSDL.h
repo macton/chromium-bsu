@@ -31,6 +31,7 @@ public:
 
 	bool process(SDL_Event *event);
 	void joystickMove();
+	void keyMove();
 	
 private:
 	void activation(SDL_Event *event);
@@ -57,6 +58,7 @@ private:
 	float	xjNow,yjNow;
 	
 	int	adjCount;
+	float	key_speed_x, key_speed_y;
 };
 
 #endif // USE_SDL

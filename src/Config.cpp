@@ -78,7 +78,7 @@ Config::Config()
 	m_maxLevel		= 1;
 	m_gfxLevel		= 2;
 
-	m_mouseSpeed	=  0.03;
+	m_movementSpeed	=  0.03;
 	m_gameSkillBase	=  0.5;
 	m_viewGamma		=  1.1;
 	m_volSound		=  0.9;
@@ -184,7 +184,8 @@ void Config::readValues(FILE* file)
 		if(strncmp(configStrings[i], "screenSi", 8) == 0) { int screenSize; sscanf(configStrings[i], "screenSize %d\n", &screenSize); setScreenSize(screenSize); }
 		if(strncmp(configStrings[i], "screenWi", 8) == 0) { sscanf(configStrings[i], "screenWidth %d\n",   &m_screenW); }
 		if(strncmp(configStrings[i], "screenHe", 8) == 0) { sscanf(configStrings[i], "screenHeight %d\n",  &m_screenH); }
-		if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n",    &m_mouseSpeed); }
+		if(strncmp(configStrings[i], "mouseSpe", 8) == 0) { sscanf(configStrings[i], "mouseSpeed %f\n",    &m_movementSpeed); }
+		if(strncmp(configStrings[i], "movement", 8) == 0) { sscanf(configStrings[i], "movementSpeed %f\n", &m_movementSpeed); }
 		if(strncmp(configStrings[i], "gameSkil", 8) == 0) { sscanf(configStrings[i], "gameSkillBase %f\n", &m_gameSkillBase); }
 		if(strncmp(configStrings[i], "gfxLevel", 8) == 0) { sscanf(configStrings[i], "gfxLevel %d\n",      &m_gfxLevel);   }
 		if(strncmp(configStrings[i], "volSound", 8) == 0) { sscanf(configStrings[i], "volSound %f\n",      &m_volSound);   }
@@ -284,7 +285,7 @@ bool Config::saveFile()
 		fprintf(file, "screenHeight %d\n",	m_screenH);
 		fprintf(file, "gfxLevel %d\n",		m_gfxLevel);
 		fprintf(file, "gameSkillBase %g\n",	m_gameSkillBase);
-		fprintf(file, "mouseSpeed %g\n",	m_mouseSpeed);
+		fprintf(file, "movementSpeed %g\n",	m_movementSpeed);
 		fprintf(file, "maxLevel %d\n",		m_maxLevel);
 		fprintf(file, "volSound %g\n",		m_volSound);
 		fprintf(file, "volMusic %g\n",		m_volMusic);

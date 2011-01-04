@@ -75,7 +75,7 @@ MenuGL::MenuGL()
 	menuText[ScreenSize]= _("s c r e e n    s i z e");
 	menuText[Sound]		= _("s o u n d    f x    v o l u m e");
 	menuText[Music]		= _("m u s i c    v o l u m e");
-	menuText[MouseSpeed]= _("m o u s e   s p e e d");
+	menuText[MovementSpeed]= _("m o v e m e n t   s p e e d");
 	menuText[Quit]		= _("q u i t");
 	
 	loadTextures();
@@ -493,8 +493,8 @@ void MenuGL::drawIndicator()
 			level = config->volMusic(); 
 			sprintf(buf, "%d", (int)((level+0.05)*10.0));	 
 			break;
-		case MouseSpeed: 
-			level = config->mouseSpeed()*10.0; 
+		case MovementSpeed:
+			level = config->movementSpeed()*10.0;
 			sprintf(buf, "%d", (int)((level+0.005)*100.0));	 
 			break;
 		default: 
@@ -800,7 +800,7 @@ void MenuGL::activateItem()
 			break;
 		case Music:
 			break;
-		case MouseSpeed:
+		case MovementSpeed:
 			break;
 		case Quit:
 			game->game_quit = true;
@@ -877,8 +877,8 @@ void MenuGL::incItem()
 			config->setVolMusic(config->volMusic()+0.05);
 			game->audio->setMusicVolume(config->volMusic());
 			break;
-		case MouseSpeed:
-			config->setMouseSpeed(config->mouseSpeed()+0.005);
+		case MovementSpeed:
+			config->setMovementSpeed(config->movementSpeed()+0.005);
 			break;
 		case Quit:
 			activateItem();
@@ -948,8 +948,8 @@ void MenuGL::decItem()
 			config->setVolMusic(config->volMusic()-0.05);
 			game->audio->setMusicVolume(config->volMusic());
 			break;
-		case MouseSpeed:
-			config->setMouseSpeed(config->mouseSpeed()-0.005);
+		case MovementSpeed:
+			config->setMovementSpeed(config->movementSpeed()-0.005);
 			break;
 		case Quit:
 			break;

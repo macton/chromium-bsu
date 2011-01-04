@@ -324,11 +324,12 @@ void MainSDL::keyDown(SDL_Event *event)
 				MainToolkit::Key key;
 				switch(event->key.keysym.sym)
 				{
-					case SDLK_UP:		key = MainToolkit::KeyUp;		break;
-					case SDLK_DOWN:		key = MainToolkit::KeyDown;		break;
-					case SDLK_LEFT:		key = MainToolkit::KeyLeft;		break;
-					case SDLK_RIGHT:	key = MainToolkit::KeyRight;	break;
-					case SDLK_RETURN:	key = MainToolkit::KeyEnter;	break;
+					case SDLK_KP9: case SDLK_KP7: case SDLK_KP8: case SDLK_UP:		key = MainToolkit::KeyUp;		break;
+					case SDLK_KP1: case SDLK_KP3: case SDLK_KP2: case SDLK_DOWN:		key = MainToolkit::KeyDown;		break;
+					case SDLK_KP4: case SDLK_LEFT:		key = MainToolkit::KeyLeft;		break;
+					case SDLK_KP6: case SDLK_RIGHT:	key = MainToolkit::KeyRight;	break;
+					case SDLK_KP_ENTER: case SDLK_RETURN:	key = MainToolkit::KeyEnter;	break;
+					case SDLK_KP5: return;
 					default: key = MainToolkit::KeyEnter;	break;
 				}
 				game->menu->keyHit(key);
@@ -344,9 +345,14 @@ void MainSDL::keyDownGame(SDL_Event *event)
 	Config *config = Config::instance();
 	switch(event->key.keysym.sym)
 	{
-//	    case SDLK_RETURN:
-//			resetMouseMotion();
-//			break;
+		case SDLK_KP_PLUS:
+		case SDLK_QUOTE:
+				game->hero->nextItem();
+			break;
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+				game->hero->useItem();
+			break;
 	    case SDLK_PAUSE:
 	    case SDLK_p:
 			grabMouse(game->game_pause);
@@ -356,17 +362,37 @@ void MainSDL::keyDownGame(SDL_Event *event)
 	    case SDLK_n:
 			game->audio->nextMusicIndex();
 			break;
+	    case SDLK_KP7:
+			key_speed_x -= 5.0;
+			key_speed_y -= 5.0;
+			break;
+	    case SDLK_KP9:
+			key_speed_x += 5.0;
+			key_speed_y -= 5.0;
+			break;
+	    case SDLK_KP3:
+			key_speed_x += 5.0;
+			key_speed_y += 5.0;
+			break;
+	    case SDLK_KP1:
+			key_speed_x -= 5.0;
+			key_speed_y += 5.0;
+			break;
+	    case SDLK_KP4:
 	    case SDLK_LEFT:
-			game->hero->moveEvent(-10, 0);
+			key_speed_x -= 5.0;
 			break;
+	    case SDLK_KP6:
 	    case SDLK_RIGHT:
-			game->hero->moveEvent( 10, 0);
+			key_speed_x += 5.0;
 			break;
+	    case SDLK_KP8:
 	    case SDLK_UP:
-			game->hero->moveEvent(0, -10);
+			key_speed_y -= 5.0;
 			break;
+	    case SDLK_KP2:
 	    case SDLK_DOWN:
-			game->hero->moveEvent(0,  10);
+			key_speed_y += 5.0;
 			break;
 	    case SDLK_SPACE:
 			game->hero->fireGun(true);
@@ -378,6 +404,28 @@ void MainSDL::keyDownGame(SDL_Event *event)
 				fprintf(stderr, _("game->gameFrame = %d\n"), game->gameFrame);
 			}
 			break;
+	}
+}
+
+//----------------------------------------------------------
+void MainSDL::keyMove()
+{
+	Global	*game = Global::getInstance();
+	if(game->gameMode == Global::Game){
+		Uint8 *keystate = SDL_GetKeyState(NULL);
+		if( keystate[SDLK_LEFT]  || keystate[SDLK_KP4] ) key_speed_x -= 2.0 + abs(key_speed_x)*0.4;
+		if( keystate[SDLK_RIGHT] || keystate[SDLK_KP6] ) key_speed_x += 2.0 + abs(key_speed_x)*0.4;
+		if( keystate[SDLK_UP]    || keystate[SDLK_KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
+		if( keystate[SDLK_DOWN]  || keystate[SDLK_KP2] ) key_speed_y += 2.0 + abs(key_speed_y)*0.4;
+		if( keystate[SDLK_KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP9] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP3] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		//float s = (1.0-game->speedAdj)+(game->speedAdj*0.7);
+		float s = 0.7;
+		key_speed_x *= s;
+		key_speed_y *= s;
+		game->hero->moveEvent(key_speed_x,key_speed_y);
 	}
 }
 

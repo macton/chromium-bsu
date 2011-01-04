@@ -80,12 +80,12 @@ public:
 	void	setGfxLevel(int a)	{	m_gfxLevel = a; if(m_gfxLevel < 0) m_gfxLevel = 0; if(m_gfxLevel > 2) m_gfxLevel = 2; }
 	void	setMaxLevel(int a)	{	m_maxLevel = a; if(m_maxLevel > 10) m_maxLevel = 10;	}
 	
-	float	mouseSpeed()		{	return m_mouseSpeed;		}
+	float	movementSpeed()		{	return m_movementSpeed;		}
 	float	gameSkillBase()		{	return m_gameSkillBase;	}
 	float	viewGamma()			{	return m_viewGamma;		}
 	float	volSound()			{	return m_volSound;		}
 	float	volMusic()			{	return m_volMusic;		}
-	void	setMouseSpeed(float f)		{	m_mouseSpeed = f;	if(m_mouseSpeed < 0.01) m_mouseSpeed = 0.01; if(m_mouseSpeed > 0.1) m_mouseSpeed = 0.1;	}
+	void	setMovementSpeed(float f)		{	m_movementSpeed = f;	if(m_movementSpeed < 0.01) m_movementSpeed = 0.01; if(m_movementSpeed > 0.1) m_movementSpeed = 0.1;	}
 	void	setGameSkillBase(float f)	{	m_gameSkillBase = f;	if(m_gameSkillBase > 0.9) m_gameSkillBase = 0.9; if(m_gameSkillBase < 0.2) m_gameSkillBase = 0.2;}
 	void	setViewGamma(float f)		{	m_viewGamma = f;		}
 	void	setVolSound(float f)		{	m_volSound = f;	if(m_volSound < 0.0) m_volSound = 0.0; if(m_volSound > 1.0) m_volSound = 1.0;	}
@@ -126,7 +126,7 @@ private:
 	int		 m_cdromDevice;
 	int		 m_cdromCount;
 
-	float	 m_mouseSpeed;
+	float	 m_movementSpeed;
 	float	 m_gameSkillBase;
 	float	 m_viewGamma;
 	float	 m_volSound;

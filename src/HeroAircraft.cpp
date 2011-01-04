@@ -295,8 +295,8 @@ void HeroAircraft::moveEvent(int x, int y)
 	Config	*config = Config::instance();
 	if(game->gameMode != Global::HeroDead && !game->game_pause)
 	{
-		pos[0] +=  x*config->mouseSpeed();
-		pos[1] += -y*config->mouseSpeed();
+		pos[0] +=  x*config->movementSpeed();
+		pos[1] += -y*config->movementSpeed();
 		if		(pos[0] < bound[0][0])	pos[0] = bound[0][0];
 		else if	(pos[0] > bound[0][1])	pos[0] = bound[0][1];
 		if		(pos[1] < bound[1][0])	pos[1] = bound[1][0];

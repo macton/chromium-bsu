@@ -30,7 +30,7 @@ class MenuGL
 public:
 	enum MenuSelection {	NewGame, GameLevel, SkillLevel, Graphics, 
 							FullScreen, ScreenSize, Sound, 
-							Music, MouseSpeed, Quit, 
+							Music, MovementSpeed, Quit,
 							NumSelections };
 	
 	MenuGL();

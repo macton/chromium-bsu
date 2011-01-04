@@ -54,6 +54,7 @@ MainSDL::MainSDL(int argc, char **argv)
 	fire = 0;
 	xjoy = yjoy = xjNow = yjNow = 0;
 	adjCount = 0;
+	key_speed_x, key_speed_y = 0;
 	
 	Uint32 initOpts;
 	
@@ -149,6 +150,7 @@ bool MainSDL::run()
 	Uint32 start_time	= 0; 
 	Uint32 now_time		= 0; 
 	Uint32 last_time	= 0;
+	key_speed_x  = key_speed_y = 0.0;
 	int done = 0;
 	int frames;
 
@@ -192,6 +194,7 @@ bool MainSDL::run()
 			done = this->process(&event);
 		}
 		this->joystickMove();
+		this->keyMove();
 		++frames;
 		
 		game->frame++;
