@@ -232,7 +232,7 @@ void MainSDL::activation(SDL_Event *event)
 	Global *game = Global::getInstance();
 	Config* config = Config::instance();
 	if( config->debug() ) fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
-	bool grab_mouse = game->gameMode == Global::Game && event->active.gain ? true : false;
+	bool grab_mouse = game->gameMode == Global::Game && !game->game_pause && event->active.gain ? true : false;
 	if ( event->active.state & SDL_APPACTIVE ) 
 	{
 		grabMouse( grab_mouse, grab_mouse );
@@ -289,7 +289,7 @@ void MainSDL::keyDown(SDL_Event *event)
 			{
 				game->gameMode = Global::Game;
 				game->audio->setMusicMode(Audio::MusicGame);
-				grabMouse(true);
+				grabMouse(!game->game_pause);
 			}
 			else
 			{
