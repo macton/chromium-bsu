@@ -7,7 +7,7 @@ AC_INIT([Chromium B.S.U.], [0.9.14.1], [http://sf.net/projects/chromium-bsu/bugs
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_SRCDIR([src/main.cpp])
-AM_CONFIG_HEADER([chromium-bsu-config.h])
+AC_CONFIG_HEADERS([chromium-bsu-config.h])
 
 # Programs
 AC_PROG_CXX
