@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2010-11-07 10:06+0800\n"
+"POT-Creation-Date: 2011-02-07 11:58+0800\n"
 "PO-Revision-Date: 2009-03-30 09:42+0300\n"
 "Last-Translator: Damyan Ivanov <dmn@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -149,7 +149,7 @@ msgid ""
 "Version    : %s\n"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:129
+#: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:130
 #, c-format
 msgid "------------------------------------------------------------\n"
 msgstr ""
@@ -306,22 +306,22 @@ msgstr ""
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
 msgstr ""
 
-#: src/Config.cpp:115
+#: src/Config.cpp:114
 #, c-format
 msgid "WARNING: Config::init() has already been called.\n"
 msgstr ""
 
-#: src/Config.cpp:241
+#: src/Config.cpp:243
 #, c-format
 msgid "WARNING: could not read config file (%s)\n"
 msgstr "ВНИМАНИЕ: неуспех при четене на файла с настройки (%s)\n"
 
-#: src/Config.cpp:299
+#: src/Config.cpp:302
 #, c-format
 msgid "wrote config file (%s)\n"
 msgstr ""
 
-#: src/Config.cpp:304
+#: src/Config.cpp:307
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
 msgstr ""
@@ -463,12 +463,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:221
+#: src/main.cpp:230
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! ГРЕШКА !! — "
 
-#: src/main.cpp:245
+#: src/main.cpp:254
 #, c-format
 msgid "Extensions :"
 msgstr "Разширения :"
@@ -543,47 +543,47 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr ""
 
-#: src/MainGLUT.cpp:93 src/MainSDL.cpp:285
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:288
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr ""
 
-#: src/MainGLUT.cpp:236
+#: src/MainGLUT.cpp:235
 #, c-format
 msgid "key = %d\n"
 msgstr ""
 
-#: src/MainSDL.cpp:73
+#: src/MainSDL.cpp:74
 #, c-format
 msgid "Couldn't initialize SDL: %s\n"
 msgstr ""
 
-#: src/MainSDL.cpp:76
+#: src/MainSDL.cpp:77
 #, c-format
 msgid "SDL initialized.\n"
 msgstr ""
 
-#: src/MainSDL.cpp:82
+#: src/MainSDL.cpp:83
 #, c-format
 msgid "num joysticks = %d\n"
 msgstr ""
 
-#: src/MainSDL.cpp:84
+#: src/MainSDL.cpp:85
 #, c-format
 msgid "   joystick 0 = %p\n"
 msgstr ""
 
-#: src/MainSDL.cpp:90
+#: src/MainSDL.cpp:91
 #, c-format
 msgid "no joysticks found\n"
 msgstr ""
 
-#: src/MainSDL.cpp:115 src/MainSDL.cpp:346
+#: src/MainSDL.cpp:116 src/MainSDL.cpp:349
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr ""
 
-#: src/MainSDL.cpp:123
+#: src/MainSDL.cpp:124
 #, c-format
 msgid ""
 "-OpenGL-----------------------------------------------------\n"
@@ -592,22 +592,22 @@ msgid ""
 "Version    : %s\n"
 msgstr ""
 
-#: src/MainSDL.cpp:214
+#: src/MainSDL.cpp:217
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:221
+#: src/MainSDL.cpp:224
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:234
+#: src/MainSDL.cpp:237
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:256
+#: src/MainSDL.cpp:259
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -629,22 +629,22 @@ msgstr ""
 "      Понякога те могат да попречат на достигането на стабилна\n"
 "      скорост на видеото.\n"
 
-#: src/MainSDL.cpp:268
+#: src/MainSDL.cpp:271
 #, c-format
 msgid "exit.\n"
 msgstr "изход.\n"
 
-#: src/MainSDL.cpp:293
+#: src/MainSDL.cpp:296
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr ""
 
-#: src/MainSDL.cpp:351
+#: src/MainSDL.cpp:354
 #, c-format
 msgid "video mode set "
 msgstr ""
 
-#: src/MainSDL.cpp:358
+#: src/MainSDL.cpp:361
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr ""
@@ -711,17 +711,17 @@ msgstr ""
 msgid "focus\n"
 msgstr ""
 
-#: src/MainSDL_Event.cpp:377
+#: src/MainSDL_Event.cpp:403
 #, c-format
 msgid "key '%s' pressed\n"
 msgstr ""
 
-#: src/MainSDL_Event.cpp:378
+#: src/MainSDL_Event.cpp:404
 #, c-format
 msgid "game->gameFrame = %d\n"
 msgstr ""
 
-#: src/MainSDL_Event.cpp:486
+#: src/MainSDL_Event.cpp:534
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr ""
@@ -787,7 +787,8 @@ msgid "m u s i c    v o l u m e"
 msgstr "с и л а   н а   ф о н о в а т а   м у з и к а"
 
 #: src/MenuGL.cpp:78
-msgid "m o u s e   s p e e d"
+#, fuzzy
+msgid "m o v e m e n t   s p e e d"
 msgstr "с к о р о с т   н а   м и ш к а т а"
 
 #: src/MenuGL.cpp:79
@@ -880,57 +881,37 @@ msgstr "средна"
 msgid "high"
 msgstr "висока"
 
-#: src/MenuGL.cpp:483
+#: src/MenuGL.cpp:481
 #, c-format
-msgid "512x384"
-msgstr ""
-
-#: src/MenuGL.cpp:484
-#, c-format
-msgid "640x480"
+msgid "%dx%d"
 msgstr ""
 
 #: src/MenuGL.cpp:485
 #, c-format
-msgid "800x600"
-msgstr ""
-
-#: src/MenuGL.cpp:486
-#, c-format
-msgid "1024x768"
-msgstr ""
-
-#: src/MenuGL.cpp:487
-#, c-format
-msgid "1280x960"
-msgstr ""
-
-#: src/MenuGL.cpp:492
-#, c-format
 msgid "true"
 msgstr "да"
 
-#: src/MenuGL.cpp:493
+#: src/MenuGL.cpp:486
 #, c-format
 msgid "false"
 msgstr "не"
 
-#: src/MenuGL.cpp:799 src/MenuGL.cpp:872 src/MenuGL.cpp:943
+#: src/MenuGL.cpp:792 src/MenuGL.cpp:865 src/MenuGL.cpp:936
 #, c-format
 msgid "---- error setting full screen mode ----"
 msgstr ""
 
-#: src/MenuGL.cpp:801
+#: src/MenuGL.cpp:794
 #, c-format
 msgid "---- error setting window mode ----"
 msgstr ""
 
-#: src/MenuGL.cpp:842
+#: src/MenuGL.cpp:835
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- трпбва да преминете ниво %d преди да можете да изберете ниво %d ----"
 
-#: src/MenuGL.cpp:858 src/MenuGL.cpp:929
+#: src/MenuGL.cpp:851 src/MenuGL.cpp:922
 #, c-format
 msgid "---- error setting screen size ----"
 msgstr ""
