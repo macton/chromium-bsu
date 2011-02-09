@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
+# Damyan Ivanov <dmn@debian.org>, 2009, 2011.
 #
-# Damyan Ivanov <dmn@debian.org>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2011-02-07 11:58+0800\n"
-"PO-Revision-Date: 2009-03-30 09:42+0300\n"
+"POT-Creation-Date: 2011-02-09 09:26+0800\n"
+"PO-Revision-Date: 2011-02-07 15:20+0200\n"
 "Last-Translator: Damyan Ivanov <dmn@debian.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: src/Audio.cpp:110
 msgid "audio"
@@ -106,7 +107,7 @@ msgstr "alAttenuationScale == 0. Хакване.\n"
 #: src/AudioOpenAL.cpp:162
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr ""
+msgstr "AudioOpenAL::Audio приключи\n"
 
 #: src/AudioOpenAL.cpp:170
 #, c-format
@@ -115,7 +116,7 @@ msgstr "спиране на OpenAL..."
 
 #: src/AudioOpenAL.cpp:182
 msgid "AudioOpenAL::~Audio()"
-msgstr ""
+msgstr "AudioOpenAL::~Audio()"
 
 #: src/AudioOpenAL.cpp:203
 #, c-format
@@ -138,7 +139,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:269
 #, c-format
 msgid "AudioOpenAL::initSound() begin...\n"
-msgstr ""
+msgstr "начало на AudioOpenAL::initSound()...\n"
 
 #: src/AudioOpenAL.cpp:273
 #, c-format
@@ -148,45 +149,49 @@ msgid ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 msgstr ""
+"-OpenAL-----------------------------------------------------\n"
+"Доставчик  : %s\n"
+"Превръщане : %s\n"
+"Версия     : %s\n"
 
 #: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:130
 #, c-format
 msgid "------------------------------------------------------------\n"
-msgstr ""
+msgstr "------------------------------------------------------------\n"
 
 #: src/AudioOpenAL.cpp:311
 #, c-format
 msgid "Audio.cpp - init %s"
-msgstr ""
+msgstr "Audio.cpp - инициализиране %s"
 
 #: src/AudioOpenAL.cpp:324
 #, c-format
 msgid "Audio.cpp - init explosion %d"
-msgstr ""
+msgstr "Audio.cpp - инициализиране на експолозия %d"
 
 #: src/AudioOpenAL.cpp:337
 #, c-format
 msgid "Audio.cpp - init exploPop %d"
-msgstr ""
+msgstr "Audio.cpp - инициализиране на exploPop %d"
 
 #: src/AudioOpenAL.cpp:350
 msgid "Audio.cpp - initSound complete."
-msgstr ""
+msgstr "Audio.cpp - initSound завърши."
 
 #: src/AudioOpenAL.cpp:430
 #, c-format
 msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
-msgstr ""
+msgstr "AudioOpenAL::setMusicMode(SoundType mode)\n"
 
 #: src/AudioOpenAL.cpp:465
 #, c-format
 msgid "AudioOpenAL::setSoundVolume(%f)\n"
-msgstr ""
+msgstr "AudioOpenAL::setSoundVolume(%f)\n"
 
 #: src/AudioOpenAL.cpp:508
 #, c-format
 msgid "Music volume = %f\n"
-msgstr ""
+msgstr "Сила на музиката = %f\n"
 
 #: src/AudioOpenAL.cpp:524
 #, c-format
@@ -194,26 +199,28 @@ msgid ""
 "\n"
 "ERROR! - sound enumerant index %d does not have valid filename!\n"
 msgstr ""
+"\n"
+"ГРЕШКА! - звуковият елемент с номер %d няма валидно име на файл!\n"
 
 #: src/AudioOpenAL.cpp:547
 #, c-format
 msgid "alutLoadWAVFile(\"%s\",...);\n"
-msgstr ""
+msgstr "alutLoadWAVFile(\"%s\",...);\n"
 
 #: src/AudioOpenAL.cpp:563
 #, c-format
 msgid "ERROR!! <%s> alGetError() = %s\n"
-msgstr ""
+msgstr "ГРЕШКА!! <%s> alGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:568
 #, c-format
 msgid "ERROR!! <%s> alcGetError() = %s\n"
-msgstr ""
+msgstr "ГРЕШКА!! <%s> alcGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:573
 #, c-format
 msgid "ERROR!! <%s> alutGetError() = %s\n"
-msgstr ""
+msgstr "ГРЕШКА!! <%s> alutGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:732
 #, c-format
@@ -243,73 +250,73 @@ msgstr "списък с музика:\n"
 #: src/AudioOpenAL.cpp:781
 #, c-format
 msgid " %2d : %s\n"
-msgstr ""
+msgstr " %2d : %s\n"
 
 #: src/AudioOpenAL.cpp:783
 #, c-format
 msgid "loaded %s\n"
-msgstr ""
+msgstr "зареди се %s\n"
 
 #: src/AudioOpenAL.cpp:808
 msgid "AudioOpenAL::setMusicIndex -- begin"
-msgstr ""
+msgstr "AudioOpenAL::setMusicIndex -- начало"
 
 #: src/AudioOpenAL.cpp:821
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
-msgstr ""
+msgstr "AudioOpenAL::setMusicIndex -- преди установяване на буфера-източник на 0"
 
 #: src/AudioOpenAL.cpp:824
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
-msgstr ""
+msgstr "AudioOpenAL::setMusicIndex -- след установяване на буфера-източник на 0"
 
 #: src/AudioOpenAL.cpp:859
 msgid "AudioOpenAL::setMusicIndex -- end"
-msgstr ""
+msgstr "AudioOpenAL::setMusicIndex -- край"
 
 #: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: не е включена поддръжка на списъци за изпълнение (AudioOpenAL.cpp): %s\n"
 
 #: src/AudioOpenAL.cpp:959
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
-msgstr ""
+msgstr "ГРЕШКА: Не може да се задели памет в AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:965
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
-msgstr ""
+msgstr "ГРЕШКА: Не може да се отвори „%s“ в AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:973
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
-msgstr ""
+msgstr "ГРЕШКА: alutLoadMP3() пропадна в AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:1005
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
-msgstr ""
+msgstr "ГРЕШКА: Не може да се задели памет в AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1011
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
-msgstr ""
+msgstr "ГРЕШКА: Не може да се отвори „%s“ в AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1019
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
-msgstr ""
+msgstr "ГРЕШКА: alutLoadVorbis() пропадна в AudioOpenAL::loadVorbis\n"
 
 #: src/AudioSDLMixer.cpp:65
 #, c-format
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
-msgstr ""
+msgstr "ГРЕШКА при инициализиране на звука - AudioSDLMixer::initSound()\n"
 
 #: src/Config.cpp:114
 #, c-format
 msgid "WARNING: Config::init() has already been called.\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: Config::init() веше е извикана.\n"
 
 #: src/Config.cpp:243
 #, c-format
@@ -319,37 +326,37 @@ msgstr "ВНИМАНИЕ: неуспех при четене на файла с 
 #: src/Config.cpp:302
 #, c-format
 msgid "wrote config file (%s)\n"
-msgstr ""
+msgstr "файлът с настройки (%s) е записан\n"
 
 #: src/Config.cpp:307
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: неуспех при запазване на файла с настройки (%s)\n"
 
 #: src/EnemyAircraft.cpp:111
 #, c-format
 msgid "%d EnemyAircraft allocated\n"
-msgstr ""
+msgstr "заделени %d EnemyAircraft\n"
 
 #: src/EnemyAircraft_Straight.cpp:103
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
-msgstr ""
+msgstr "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 
 #: src/EnemyFleet.cpp:243
 #, c-format
 msgid "num enemies on screen = %d\n"
-msgstr ""
+msgstr "брой врагове на екрана = %d\n"
 
 #: src/Global.cpp:114
 #, c-format
 msgid "WARNING: Global::init() has already been called.\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: Global::init() веше е извикана.\n"
 
 #: src/Global.cpp:211
 #, c-format
 msgid "Starting up..."
-msgstr ""
+msgstr "Стартиране…"
 
 #: src/Global.cpp:242
 #, c-format
@@ -359,37 +366,37 @@ msgstr "...стартирането е завършено.\n"
 #: src/Global.cpp:249
 #, c-format
 msgid "Shutting down...\n"
-msgstr ""
+msgstr "Изключване…\n"
 
 #: src/Global.cpp:262
 #, c-format
 msgid "...shutdown complete.\n"
-msgstr ""
+msgstr "...изключването завърши.\n"
 
 #: src/Global.cpp:269
 #, c-format
 msgid "deleteTextures()\n"
-msgstr ""
+msgstr "deleteTextures()\n"
 
 #: src/Global.cpp:289
 #, c-format
 msgid "Global::loadTextures()\n"
-msgstr ""
+msgstr "Global::loadTextures()\n"
 
 #: src/Global.cpp:352
 #, c-format
 msgid "Generating random sequences\n"
-msgstr ""
+msgstr "Генериране на случайни числа\n"
 
 #: src/HeroAmmo.cpp:167
 #, c-format
 msgid "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
-msgstr ""
+msgstr "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
 
 #: src/HeroAmmo.cpp:190
 #, c-format
 msgid "%p <--%p--> %p\n"
-msgstr ""
+msgstr "%p <--%p--> %p\n"
 
 #: src/HiScore.cpp:58
 #, c-format
@@ -399,32 +406,32 @@ msgstr "никой"
 #: src/HiScore.cpp:83
 #, c-format
 msgid "WARNING: HiScore::init() has already been called.\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: HiScore::init() веше е извикана.\n"
 
 #: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: неуспех при запазване на файла с постижения (%s)\n"
 
 #: src/HiScore.cpp:328
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "ВНИМАНИЕ: неуспех при четене на файла с настройки (%s)\n"
+msgstr "ВНИМАНИЕ: празен файл с постижения (%s)\n"
 
 #: src/HiScore.cpp:350
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: неуспех при четене на файла с постижения (%s)\n"
 
 #: src/HiScore.cpp:442
 #, c-format
 msgid "high scores:\n"
-msgstr "рекорди:\n"
+msgstr "постижения:\n"
 
 #: src/HiScore.cpp:448
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
-msgstr ""
+msgstr "%02d/%02d/%04d %16s %d\n"
 
 #: src/main.cpp:118
 #, c-format
@@ -476,22 +483,22 @@ msgstr "Разширения :"
 #: src/MainGL.cpp:86
 #, c-format
 msgid "initGL()\n"
-msgstr ""
+msgstr "initGL()\n"
 
 #: src/MainGL.cpp:148
 #, c-format
 msgid "error loading font: %s\n"
-msgstr ""
+msgstr "грешка при зареждане на шрифт: %s\n"
 
 #: src/MainGL.cpp:153
 #, c-format
 msgid "error loading font\n"
-msgstr ""
+msgstr "грешка при зареждане на шрифт\n"
 
 #: src/MainGL.cpp:183
 #, c-format
 msgid "!!MainGL::drawGL() HUH?\n"
-msgstr ""
+msgstr "!!MainGL::drawGL() Ъ?\n"
 
 #: src/MainGL.cpp:311
 #, c-format
@@ -541,47 +548,47 @@ msgstr ""
 #: src/MainGLUT.cpp:77
 #, c-format
 msgid "MainGLUT::run()\n"
-msgstr ""
+msgstr "MainGLUT::run()\n"
 
 #: src/MainGLUT.cpp:93 src/MainSDL.cpp:288
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
-msgstr ""
+msgstr "ГРЕШКА!!! грешка в OpenGL: %s\n"
 
 #: src/MainGLUT.cpp:235
 #, c-format
 msgid "key = %d\n"
-msgstr ""
+msgstr "ключ = %d\n"
 
 #: src/MainSDL.cpp:74
 #, c-format
 msgid "Couldn't initialize SDL: %s\n"
-msgstr ""
+msgstr "Неуспех при инициализиране на SDL: %s\n"
 
 #: src/MainSDL.cpp:77
 #, c-format
 msgid "SDL initialized.\n"
-msgstr ""
+msgstr "SDL е инициализирана.\n"
 
 #: src/MainSDL.cpp:83
 #, c-format
 msgid "num joysticks = %d\n"
-msgstr ""
+msgstr "брой джойстици = %d\n"
 
 #: src/MainSDL.cpp:85
 #, c-format
 msgid "   joystick 0 = %p\n"
-msgstr ""
+msgstr "   джойстик 0 = %p\n"
 
 #: src/MainSDL.cpp:91
 #, c-format
 msgid "no joysticks found\n"
-msgstr ""
+msgstr "не са открити джойстици\n"
 
 #: src/MainSDL.cpp:116 src/MainSDL.cpp:349
 #, c-format
 msgid "Couldn't set video mode: %s\n"
-msgstr ""
+msgstr "Неуспех при установяване на видео-режима: %s\n"
 
 #: src/MainSDL.cpp:124
 #, c-format
@@ -591,21 +598,25 @@ msgid ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 msgstr ""
+"-OpenGL-----------------------------------------------------\n"
+"Доставчик  : %s\n"
+"Превръщане : %s\n"
+"Версия     : %s\n"
 
 #: src/MainSDL.cpp:217
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
-msgstr ""
+msgstr "init----> %3.2ffps gameSpeed = %g\n"
 
 #: src/MainSDL.cpp:224
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
-msgstr ""
+msgstr "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 
 #: src/MainSDL.cpp:237
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
-msgstr ""
+msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 
 #: src/MainSDL.cpp:259
 #, c-format
@@ -637,62 +648,62 @@ msgstr "изход.\n"
 #: src/MainSDL.cpp:296
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
-msgstr ""
+msgstr "ГРЕШКА!!! грешка в SDL: %s\n"
 
 #: src/MainSDL.cpp:354
 #, c-format
 msgid "video mode set "
-msgstr ""
+msgstr "видео-режимът е установен"
 
 #: src/MainSDL.cpp:361
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
-msgstr ""
+msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
 
 #: src/MainSDL_Event.cpp:40
 #, c-format
 msgid "%-5d SDL_ACTIVEEVENT  \n"
-msgstr ""
+msgstr "%-5d SDL_ACTIVEEVENT  \n"
 
 #: src/MainSDL_Event.cpp:41
 #, c-format
 msgid "%-5d SDL_KEYDOWN  \n"
-msgstr ""
+msgstr "%-5d SDL_KEYDOWN  \n"
 
 #: src/MainSDL_Event.cpp:42
 #, c-format
 msgid "%-5d SDL_KEYUP  \n"
-msgstr ""
+msgstr "%-5d SDL_KEYUP  \n"
 
 #: src/MainSDL_Event.cpp:43
 #, c-format
 msgid "%-5d SDL_MOUSEMOTION  \n"
-msgstr ""
+msgstr "%-5d SDL_MOUSEMOTION  \n"
 
 #: src/MainSDL_Event.cpp:44
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONDOWN  \n"
-msgstr ""
+msgstr "%-5d SDL_MOUSEBUTTONDOWN  \n"
 
 #: src/MainSDL_Event.cpp:45
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONUP  \n"
-msgstr ""
+msgstr "%-5d SDL_MOUSEBUTTONUP  \n"
 
 #: src/MainSDL_Event.cpp:46
 #, c-format
 msgid "%-5d SDL_JOYBUTTONDOWN  \n"
-msgstr ""
+msgstr "%-5d SDL_JOYBUTTONDOWN  \n"
 
 #: src/MainSDL_Event.cpp:47
 #, c-format
 msgid "%-5d SDL_JOYBUTTONUP  \n"
-msgstr ""
+msgstr "%-5d SDL_JOYBUTTONUP  \n"
 
 #: src/MainSDL_Event.cpp:212
 #, c-format
 msgid "MainSDL::getEvent HUH?\n"
-msgstr ""
+msgstr "MainSDL::getEvent Ъ?\n"
 
 #: src/MainSDL_Event.cpp:222
 #, c-format
@@ -700,31 +711,33 @@ msgid ""
 "buffer = \"%s\n"
 "\""
 msgstr ""
+"буфер = \"%s\n"
+"\""
 
 #: src/MainSDL_Event.cpp:243
 #, c-format
 msgid "mouse active"
-msgstr ""
+msgstr "мишката е активна"
 
 #: src/MainSDL_Event.cpp:251
 #, c-format
 msgid "focus\n"
-msgstr ""
+msgstr "фокус\n"
 
 #: src/MainSDL_Event.cpp:403
 #, c-format
 msgid "key '%s' pressed\n"
-msgstr ""
+msgstr "натиснат е клавиша „%s“\n"
 
 #: src/MainSDL_Event.cpp:404
 #, c-format
 msgid "game->gameFrame = %d\n"
-msgstr ""
+msgstr "game->gameFrame = %d\n"
 
 #: src/MainSDL_Event.cpp:534
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
-msgstr ""
+msgstr "MainSDL::grabMouse(%d)\n"
 
 #: src/MenuGL.cpp:43
 msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
@@ -787,9 +800,8 @@ msgid "m u s i c    v o l u m e"
 msgstr "с и л а   н а   ф о н о в а т а   м у з и к а"
 
 #: src/MenuGL.cpp:78
-#, fuzzy
 msgid "m o v e m e n t   s p e e d"
-msgstr "с к о р о с т   н а   м и ш к а т а"
+msgstr "с к о р о с т   н а   д в и ж е н и е"
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
@@ -798,12 +810,12 @@ msgstr "и з х о д"
 #: src/MenuGL.cpp:143 src/MenuGL.cpp:418
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: Използва се „тънък“ текст за подобряване на скоростта…\n"
 
 #: src/MenuGL.cpp:147
 #, c-format
 msgid "MenuGL::createLists\n"
-msgstr ""
+msgstr "MenuGL::createLists\n"
 
 #: src/MenuGL.cpp:162
 msgid "fish in a barrel"
@@ -839,7 +851,7 @@ msgstr "невъзможно"
 
 #: src/MenuGL.cpp:170
 msgid "-"
-msgstr ""
+msgstr "-"
 
 #: src/MenuGL.cpp:292 src/MenuGL.cpp:321
 msgid "high scores"
@@ -847,24 +859,24 @@ msgstr "рекорди"
 
 #: src/MenuGL.cpp:350
 msgid "the"
-msgstr ""
+msgstr "проектът"
 
 #: src/MenuGL.cpp:354
 msgid "reptile"
-msgstr ""
+msgstr "за интегриране"
 
 #: src/MenuGL.cpp:358
 msgid "labour"
-msgstr ""
+msgstr "на"
 
 #: src/MenuGL.cpp:362
 msgid "project"
-msgstr ""
+msgstr "влечугите"
 
 #: src/MenuGL.cpp:423
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
-msgstr ""
+msgstr "ВНИМАНИЕ: Връщане към „дебел“ текст…\n"
 
 #: src/MenuGL.cpp:474
 #, c-format
@@ -884,7 +896,7 @@ msgstr "висока"
 #: src/MenuGL.cpp:481
 #, c-format
 msgid "%dx%d"
-msgstr ""
+msgstr "%dx%d"
 
 #: src/MenuGL.cpp:485
 #, c-format
@@ -899,22 +911,22 @@ msgstr "не"
 #: src/MenuGL.cpp:792 src/MenuGL.cpp:865 src/MenuGL.cpp:936
 #, c-format
 msgid "---- error setting full screen mode ----"
-msgstr ""
+msgstr "---- грешка при установяване на режим „цял екран“ ----"
 
 #: src/MenuGL.cpp:794
 #, c-format
 msgid "---- error setting window mode ----"
-msgstr ""
+msgstr "---- грешка при установяване на режим „прозорец“ ----"
 
 #: src/MenuGL.cpp:835
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr "---- трпбва да преминете ниво %d преди да можете да изберете ниво %d ----"
+msgstr "---- трябва да преминете ниво %d преди да можете да изберете ниво %d ----"
 
 #: src/MenuGL.cpp:851 src/MenuGL.cpp:922
 #, c-format
 msgid "---- error setting screen size ----"
-msgstr ""
+msgstr "---- грешка при настройване на размера на екрана ----"
 
 #: src/PowerUps.cpp:180
 #, c-format
@@ -924,12 +936,12 @@ msgstr "активни подобрения = %d\n"
 #: src/PowerUps.cpp:368
 #, c-format
 msgid "?? PowerUp::seal()"
-msgstr ""
+msgstr "?? PowerUp::seal()"
 
 #: src/ScreenItemAdd.cpp:107
 #, c-format
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
-msgstr ""
+msgstr "ScreenItemAdd::putScreenItems() Герой??? Ъ???\n"
 
 #: src/StatusDisplay.cpp:651 src/StatusDisplay.cpp:655
 msgid "p a u s e d"
@@ -946,11 +958,11 @@ msgstr "пропуснатите супер щитове носят по еди�
 #: src/TextFTGL.cpp:35
 #, c-format
 msgid "FTGL: error loading font: %s\n"
-msgstr ""
+msgstr "FTGL: грешка при зареждане на шрифт: %s\n"
 
 #: src/TextFTGL.cpp:38
 msgid "FTGL: error loading font"
-msgstr ""
+msgstr "FTGL: грешка при зареждане на шрифт"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the font
 #. name of a font that contains all the Unicode characters in use in
@@ -1000,4 +1012,4 @@ msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
 
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
-msgstr ""
+msgstr "GLC: неуспех при установяване на контекст"
