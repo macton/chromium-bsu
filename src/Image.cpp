@@ -82,7 +82,6 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 
 		if( tmp )
 		{
-			Uint16 pitch = tmp->pitch;
 			Uint8 bpp = tmp->format->BytesPerPixel;
 			int w = tmp->w, h = tmp->w;
 			Uint32 a;
