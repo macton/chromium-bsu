@@ -54,7 +54,7 @@ MainSDL::MainSDL(int argc, char **argv)
 	fire = 0;
 	xjoy = yjoy = xjNow = yjNow = 0;
 	adjCount = 0;
-	key_speed_x, key_speed_y = 0;
+	key_speed_x = key_speed_y = 0;
 	
 	Uint32 initOpts;
 	
