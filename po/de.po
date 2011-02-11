@@ -408,9 +408,9 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "WARNUNG: konnte Punktzahldatei nicht schreiben (%s)\n"
 
 #: src/HiScore.cpp:328
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
+msgstr "WARNUNG: leere Punktzahldatei (%s)\n"
 
 #: src/HiScore.cpp:350
 #, c-format
@@ -794,9 +794,8 @@ msgid "m u s i c    v o l u m e"
 msgstr "M u s i k   L a u t s t ä r k e"
 
 #: src/MenuGL.cpp:78
-#, fuzzy
 msgid "m o v e m e n t   s p e e d"
-msgstr "M a u s   G e s c h w i n d i g k e i t"
+msgstr "B e w e g u n g s   G e s c h w i n d i g k e i t"
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
@@ -891,7 +890,7 @@ msgstr "hoch"
 #: src/MenuGL.cpp:481
 #, c-format
 msgid "%dx%d"
-msgstr ""
+msgstr "%dx%d"
 
 #: src/MenuGL.cpp:485
 #, c-format
