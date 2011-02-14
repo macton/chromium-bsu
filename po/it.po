@@ -3,7 +3,7 @@
 # Valter Mura <valtermura@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
 "POT-Creation-Date: 2011-02-07 11:58+0800\n"
 "PO-Revision-Date: 2010-10-08 17:02+0200\n"
