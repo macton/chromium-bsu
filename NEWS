@@ -1,3 +1,12 @@
+Chromium B.S.U. 0.9.15
+ - Fix some MacOS X portability issues
+ - Fix mouse grabbing and pause issue
+ - Change high scores to a text file
+ - Add Italian, Traditional Chinese translations
+ - Add support for playing on a keyboard
+ - Add new fourth level
+ - Translation updates
+
 Chromium B.S.U. 0.9.14.1
  - Add new Swedish translation
  - Add SDL_image texture loading backend
