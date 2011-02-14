@@ -769,6 +769,8 @@ void AudioOpenAL::loadMusicList()
 			if(musicMax+1 >= MAX_MUSIC) // limited music array size.
 				break;
 		}
+		fclose(file);
+		file = NULL;
 	}
 	else
 		config->setUsePlayList(false);
