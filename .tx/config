@@ -1,0 +1,8 @@
+[chromium-bsu.chromium-bsupot]
+file_filter = po/<lang>.po
+source_file = po/chromium-bsu.pot
+source_lang = en
+
+[main]
+host = http://www.transifex.net
+
