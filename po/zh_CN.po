@@ -1,0 +1,1029 @@
+# Traditional Chinese translation of the Chromium BSU package.
+# This file is put in the public domain.
+# This file is distributed under the same license as the chromium-bsu package.
+# Emmanuel Trillaud <etrillaud@gmail.com>, 2010.
+# Wei-Lun Chao <chaoweilun@gmail.com>, 2010.
+# Long Si-Tai-Zi <longsitaizi@gmail.com>,2011
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: chromium-bsu\n"
+"Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
+"POT-Creation-Date: 2011-02-10 19:48+0800\n"
+"PO-Revision-Date: 2011-03-07 14:36+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified) <longsitaizi@gmail.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/Audio.cpp:110
+msgid "audio"
+msgstr "音频"
+
+#: src/Audio.cpp:111
+msgid "data"
+msgstr "资料"
+
+#: src/Audio.cpp:113
+#, c-format
+msgid "UNKNOWN(type=%d)"
+msgstr "不明(型态=%d)"
+
+#: src/Audio.cpp:124
+#, c-format
+msgid "%d CDROM drive(s).\n"
+msgstr "%d 光驱。\n"
+
+#: src/Audio.cpp:135
+#, c-format
+msgid "Tracks: %d\n"
+msgstr "轨段：%d\n"
+
+#: src/Audio.cpp:139
+#, c-format
+msgid "track %2d: %s\n"
+msgstr "轨段 %2d：%s\n"
+
+#: src/Audio.cpp:148
+#, c-format
+msgid ""
+"\n"
+" Data track(s) only. CD audio not available.\n"
+"\n"
+msgstr ""
+"\n"
+"只有资料轨段。CD 音频无法使用。\n"
+"\n"
+
+#: src/Audio.cpp:154
+#, c-format
+msgid ""
+"\n"
+" use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
+msgstr ""
+"\n"
+"use_cdrom 已启用。在组态文件中设置为「0」以停用。\n"
+
+#: src/Audio.cpp:155
+#, c-format
+msgid ""
+" Press the 'N' key to skip to next CD track during a game.\n"
+"\n"
+msgstr ""
+" 在游戏期间按下「N」键以跳到下一个 CD 轨段。\n"
+"\n"
+
+#: src/Audio.cpp:166
+#, c-format
+msgid "ERROR! Could not access CDROM device %d : %s\n"
+msgstr "错误！无法存取 CDROM 裝置 %d：%s\n"
+
+#: src/Audio.cpp:209
+#, c-format
+msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
+msgstr "CDROM 发生错误于 AudioOpenAL::pauseGameMusic(%d)\n"
+
+#: src/Audio.cpp:210
+#, c-format
+msgid "CDROM status = %d\n"
+msgstr "CDROM 狀态 = %d\n"
+
+#: src/Audio.cpp:298
+#, c-format
+msgid "Audio::setMusicIndex(%d)\n"
+msgstr "音频::setMusicIndex(%d)\n"
+
+#: src/Audio.cpp:315
+#, c-format
+msgid "track %d is data - trying next track...\n"
+msgstr "轨段 %d 是资料 - 尝试下一轨段…\n"
+
+#: src/AudioOpenAL.cpp:149
+#, c-format
+msgid "alAttenuationScale == 0. Kludge it.\n"
+msgstr "alAttenuationScale == 0. Kludge it。\n"
+
+#: src/AudioOpenAL.cpp:162
+#, c-format
+msgid "AudioOpenAL::Audio done\n"
+msgstr "AudioOpenAL::音频已完成\n"
+
+#: src/AudioOpenAL.cpp:170
+#, c-format
+msgid "stopping OpenAL..."
+msgstr "停止 OpenAL…"
+
+#: src/AudioOpenAL.cpp:182
+msgid "AudioOpenAL::~Audio()"
+msgstr "AudioOpenAL::~Audio()"
+
+#: src/AudioOpenAL.cpp:203
+#, c-format
+msgid "done.\n"
+msgstr "已完成。\n"
+
+#: src/AudioOpenAL.cpp:249
+#, c-format
+msgid ""
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+"!! ATTENTION !! - one or more errors were encountered during audio check.\n"
+"!!                Audio will be disabled.\n"
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+msgstr ""
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+"!! 注意 !! - 在音频检查期间遇到一个或更多错误。\n"
+"!!                音频將被停用。\n"
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+
+#: src/AudioOpenAL.cpp:269
+#, c-format
+msgid "AudioOpenAL::initSound() begin...\n"
+msgstr "AudioOpenAL::initSound() 开始…\n"
+
+#: src/AudioOpenAL.cpp:273
+#, c-format
+msgid ""
+"-OpenAL-----------------------------------------------------\n"
+"Vendor     : %s\n"
+"Renderer   : %s\n"
+"Version    : %s\n"
+msgstr ""
+"-OpenAL-----------------------------------------------------\n"
+"供应商    ：%s\n"
+"渲染    ：%s\n"
+"版本      ：%s\n"
+
+#: src/AudioOpenAL.cpp:279
+#: src/MainSDL.cpp:130
+#, c-format
+msgid "------------------------------------------------------------\n"
+msgstr "------------------------------------------------------------\n"
+
+#: src/AudioOpenAL.cpp:311
+#, c-format
+msgid "Audio.cpp - init %s"
+msgstr "Audio.cpp - 初始 %s"
+
+#: src/AudioOpenAL.cpp:324
+#, c-format
+msgid "Audio.cpp - init explosion %d"
+msgstr "Audio.cpp - 初始爆炸 %d"
+
+#: src/AudioOpenAL.cpp:337
+#, c-format
+msgid "Audio.cpp - init exploPop %d"
+msgstr "Audio.cpp - init exploPop %d"
+
+#: src/AudioOpenAL.cpp:350
+msgid "Audio.cpp - initSound complete."
+msgstr "Audio.cpp - initSound 完成。"
+
+#: src/AudioOpenAL.cpp:430
+#, c-format
+msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
+msgstr "AudioOpenAL::setMusicMode(SoundType 模式)\n"
+
+#: src/AudioOpenAL.cpp:465
+#, c-format
+msgid "AudioOpenAL::setSoundVolume(%f)\n"
+msgstr "AudioOpenAL::setSoundVolume(%f)\n"
+
+#: src/AudioOpenAL.cpp:508
+#, c-format
+msgid "Music volume = %f\n"
+msgstr "音乐音量 = %f\n"
+
+#: src/AudioOpenAL.cpp:524
+#, c-format
+msgid ""
+"\n"
+"ERROR! - sound enumerant index %d does not have valid filename!\n"
+msgstr ""
+"\n"
+"错误！- 声音无序索引 %d 沒有有效文件名！\n"
+
+#: src/AudioOpenAL.cpp:547
+#, c-format
+msgid "alutLoadWAVFile(\"%s\",...);\n"
+msgstr "alutLoadWAVFile(\"%s\",...);\n"
+
+#: src/AudioOpenAL.cpp:563
+#, c-format
+msgid "ERROR!! <%s> alGetError() = %s\n"
+msgstr "错误 !!<%s> alGetError() = %s\n"
+
+#: src/AudioOpenAL.cpp:568
+#, c-format
+msgid "ERROR!! <%s> alcGetError() = %s\n"
+msgstr "错误 !!<%s> alcGetError() = %s\n"
+
+#: src/AudioOpenAL.cpp:573
+#, c-format
+msgid "ERROR!! <%s> alutGetError() = %s\n"
+msgstr "错误 !!<%s> alutGetError() = %s\n"
+
+#: src/AudioOpenAL.cpp:732
+#, c-format
+msgid "ERROR: filename too long: \"%s\", line %d\n"
+msgstr "错误：文件名太长：\"%s\", 列 %d\n"
+
+#: src/AudioOpenAL.cpp:750
+#, c-format
+msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
+msgstr "警告：MP3 支持无法使用：\"%s\", 列 %d\n"
+
+#: src/AudioOpenAL.cpp:761
+#, c-format
+msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
+msgstr "警告：Ogg/Vorbis 支持无法使用：\"%s\", 列 %d\n"
+
+#: src/AudioOpenAL.cpp:765
+#, c-format
+msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
+msgstr "警告：文件类型无法识别：\"%s\":\"%s\", 列 %d\n"
+
+#: src/AudioOpenAL.cpp:778
+#, c-format
+msgid "music playlist:\n"
+msgstr "音乐播放清单：\n"
+
+#: src/AudioOpenAL.cpp:781
+#, c-format
+msgid " %2d : %s\n"
+msgstr " %2d：%s\n"
+
+#: src/AudioOpenAL.cpp:783
+#, c-format
+msgid "loaded %s\n"
+msgstr "已载入 %s\n"
+
+#: src/AudioOpenAL.cpp:808
+msgid "AudioOpenAL::setMusicIndex -- begin"
+msgstr "AudioOpenAL::setMusicIndex -- 开始"
+
+#: src/AudioOpenAL.cpp:821
+msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
+msgstr "AudioOpenAL::setMusicIndex -- 设置来源缓冲区为 0 之前"
+
+#: src/AudioOpenAL.cpp:824
+msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
+msgstr "AudioOpenAL::setMusicIndex -- 设置来源缓冲区为 0 之后"
+
+#: src/AudioOpenAL.cpp:859
+msgid "AudioOpenAL::setMusicIndex -- end"
+msgstr "AudioOpenAL::setMusicIndex -- 结束"
+
+#: src/AudioOpenAL.cpp:909
+#: src/AudioOpenAL.cpp:942
+#: src/AudioOpenAL.cpp:986
+#, c-format
+msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
+msgstr "警告：播放清单支持无法在 (AudioOpenAL.cpp) 中编译：%s\n"
+
+#: src/AudioOpenAL.cpp:959
+#, c-format
+msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
+msgstr "错误：无法在 AudioOpenAL::loadMP3 中配置记忆体\n"
+
+#: src/AudioOpenAL.cpp:965
+#, c-format
+msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
+msgstr "错误：无法在 AudioOpenAL::loadMP3 中开启「%s」\n"
+
+#: src/AudioOpenAL.cpp:973
+#, c-format
+msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
+msgstr "错误：alutLoadMP3() 在 AudioOpenAL::loadMP3 中失败\n"
+
+#: src/AudioOpenAL.cpp:1005
+#, c-format
+msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
+msgstr "错误：无法在 AudioOpenAL::loadVorbis 中配置记忆体\n"
+
+#: src/AudioOpenAL.cpp:1011
+#, c-format
+msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
+msgstr "错误：无法在 AudioOpenAL::loadVorbis 中开启「%s」\n"
+
+#: src/AudioOpenAL.cpp:1019
+#, c-format
+msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
+msgstr "错误：alutLoadVorbis() 在 AudioOpenAL::loadVorbis 中失败\n"
+
+#: src/AudioSDLMixer.cpp:65
+#, c-format
+msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
+msgstr "初始化音频 - AudioSDLMixer::initSound() 时发生错误\n"
+
+#: src/Config.cpp:114
+#, c-format
+msgid "WARNING: Config::init() has already been called.\n"
+msgstr "警告：Config::init() 已呼叫。\n"
+
+#: src/Config.cpp:243
+#, c-format
+msgid "WARNING: could not read config file (%s)\n"
+msgstr "警告：无法读取组态文件 (%s)\n"
+
+#: src/Config.cpp:302
+#, c-format
+msgid "wrote config file (%s)\n"
+msgstr "已写入组态文件 (%s)\n"
+
+#: src/Config.cpp:307
+#, c-format
+msgid "WARNING: could not write config file (%s)\n"
+msgstr "警告：无法写入组态文件 (%s)\n"
+
+#: src/EnemyAircraft.cpp:111
+#, c-format
+msgid "%d EnemyAircraft allocated\n"
+msgstr "%d EnemyAircraft 配置\n"
+
+#: src/EnemyAircraft_Straight.cpp:103
+#, c-format
+msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
+msgstr "EnemyAircraft_Straight %p…pos[1] = %g，vel[1] = %g\n"
+
+#: src/EnemyFleet.cpp:243
+#, c-format
+msgid "num enemies on screen = %d\n"
+msgstr "屏幕上敌人数量 = %d\n"
+
+#: src/Global.cpp:114
+#, c-format
+msgid "WARNING: Global::init() has already been called.\n"
+msgstr "警告：Global::init() 已呼叫。\n"
+
+#: src/Global.cpp:211
+#, c-format
+msgid "Starting up..."
+msgstr "开始启动…"
+
+#: src/Global.cpp:242
+#, c-format
+msgid "...startup complete.\n"
+msgstr "...启动完成。\n"
+
+#: src/Global.cpp:249
+#, c-format
+msgid "Shutting down...\n"
+msgstr "关闭…\n"
+
+#: src/Global.cpp:262
+#, c-format
+msgid "...shutdown complete.\n"
+msgstr "...关闭完成。\n"
+
+#: src/Global.cpp:269
+#, c-format
+msgid "deleteTextures()\n"
+msgstr "deleteTextures()\n"
+
+#: src/Global.cpp:289
+#, c-format
+msgid "Global::loadTextures()\n"
+msgstr "Global::loadTextures()\n"
+
+#: src/Global.cpp:352
+#, c-format
+msgid "Generating random sequences\n"
+msgstr "产生随机序列\n"
+
+#: src/HeroAmmo.cpp:167
+#, c-format
+msgid "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
+msgstr "HeroAmmo::addAmmo(%d，<%f %f %f> )\n"
+
+#: src/HeroAmmo.cpp:190
+#, c-format
+msgid "%p <--%p--> %p\n"
+msgstr "%p <--%p--> %p\n"
+
+#: src/HiScore.cpp:58
+#, c-format
+msgid "nobody"
+msgstr "沒有任何人"
+
+#: src/HiScore.cpp:83
+#, c-format
+msgid "WARNING: HiScore::init() has already been called.\n"
+msgstr "警告：HiScore::init() 已呼叫。\n"
+
+#: src/HiScore.cpp:241
+#, c-format
+msgid "WARNING: could not write score file (%s)\n"
+msgstr "警告：无法写入分数文件 (%s)\n"
+
+#: src/HiScore.cpp:328
+#, c-format
+msgid "WARNING: empty score file (%s)\n"
+msgstr "警告：空的分数文件 (%s)\n"
+
+#: src/HiScore.cpp:350
+#, c-format
+msgid "WARNING: could not read score file (%s)\n"
+msgstr "警告：无法读取分数文件 (%s)\n"
+
+#: src/HiScore.cpp:442
+#, c-format
+msgid "high scores:\n"
+msgstr "高分：\n"
+
+#: src/HiScore.cpp:448
+#, c-format
+msgid "%02d/%02d/%04d %16s %d\n"
+msgstr "%02d/%02d/%04d %16s %d\n"
+
+#: src/main.cpp:118
+#, c-format
+msgid ""
+"\n"
+"--------------------------------------------------\n"
+"Chromium B.S.U. options\n"
+"--------------------------------------------------\n"
+"   -f/--fullscreen     : run in fullscreen mode\n"
+"   -w/--window         : run in windowed mode\n"
+"   -v/--vidmode <mode> : mode 0 =  512 x  384\n"
+"                       :      1 =  640 x  480\n"
+"                       :      2 =  800 x  600\n"
+"                       :      3 = 1024 x  768\n"
+"                       :      4 = 1280 x  960\n"
+"  -na/--noaudio        : do not initialize audio\n"
+"  -nb/--noblend        : disable blending (OpenGL)\n"
+"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
+"--------------------------------------------------\n"
+"\n"
+msgstr ""
+"\n"
+"--------------------------------------------------\n"
+"Chromium B.S.U.选項\n"
+"--------------------------------------------------\n"
+"  -f/--fullscreen     ：在全屏幕模式中运行\n"
+"  -w/--window         ：在窗口模式中运行\n"
+"  -v/--vidmode <mode> ：模式 0 =  512 x  384\n"
+"                      ：     1 =  640 x  480\n"
+"                      ：     2 =  800 x  600\n"
+"                      ：     3 = 1024 x  768\n"
+"                      ：     4 = 1280 x  960\n"
+" -na /--noaudio       ：不初始化音频\n"
+" -nb /--noblend       ：停用混色 (OpenGL)\n"
+" -nt /--notexborder   ：不设置 tex 边框顏色 (OpenGL)\n"
+"--------------------------------------------------\n"
+"\n"
+
+#: src/main.cpp:230
+#, c-format
+msgid "!! ERROR !! - "
+msgstr "!! 错误 !! - "
+
+#: src/main.cpp:254
+#, c-format
+msgid "Extensions :"
+msgstr "延伸："
+
+#: src/MainGL.cpp:86
+#, c-format
+msgid "initGL()\n"
+msgstr "initGL()\n"
+
+#: src/MainGL.cpp:148
+#, c-format
+msgid "error loading font: %s\n"
+msgstr "载入字型时发生错误：%s\n"
+
+#: src/MainGL.cpp:153
+#, c-format
+msgid "error loading font\n"
+msgstr "载入字型时发生错误\n"
+
+#: src/MainGL.cpp:183
+#, c-format
+msgid "!!MainGL::drawGL() HUH?\n"
+msgstr "!!MainGL::drawGL() 呃？\n"
+
+#: src/MainGL.cpp:311
+#, c-format
+msgid ""
+"new high score!\n"
+"\n"
+"%d"
+msgstr ""
+"新高分！\n"
+"\n"
+"%d"
+
+#: src/MainGL.cpp:316
+#, c-format
+msgid ""
+"n o t   b a d !\n"
+"rank : %d\n"
+"\n"
+"%d"
+msgstr ""
+"不 错 噢！\n"
+"分级：%d\n"
+"\n"
+"%d"
+
+#: src/MainGL.cpp:321
+msgid "l o s e r"
+msgstr "失 败 者"
+
+#: src/MainGL.cpp:379
+#, c-format
+msgid ""
+"congratulations!\n"
+" \n"
+"l e v e l\n"
+" %d \n"
+"c o m p l e t e\n"
+" \n"
+msgstr ""
+"恭喜！\n"
+"\n"
+" 过\n"
+"%d\n"
+" 关\n"
+"\n"
+
+#: src/MainGLUT.cpp:77
+#, c-format
+msgid "MainGLUT::run()\n"
+msgstr "MainGLUT::run()\n"
+
+#: src/MainGLUT.cpp:93
+#: src/MainSDL.cpp:288
+#, c-format
+msgid "ERROR!!! OpenGL error: %s\n"
+msgstr "错误!!! OpenGL 错误：%s\n"
+
+#: src/MainGLUT.cpp:235
+#, c-format
+msgid "key = %d\n"
+msgstr "键 = %d\n"
+
+#: src/MainSDL.cpp:74
+#, c-format
+msgid "Couldn't initialize SDL: %s\n"
+msgstr "无法初始化 SDL：%s\n"
+
+#: src/MainSDL.cpp:77
+#, c-format
+msgid "SDL initialized.\n"
+msgstr "SDL 已初始化。\n"
+
+#: src/MainSDL.cpp:83
+#, c-format
+msgid "num joysticks = %d\n"
+msgstr "摇杆数量 = %d\n"
+
+#: src/MainSDL.cpp:85
+#, c-format
+msgid "   joystick 0 = %p\n"
+msgstr "   摇杆 0=%p\n"
+
+#: src/MainSDL.cpp:91
+#, c-format
+msgid "no joysticks found\n"
+msgstr "找不到任何摇杆\n"
+
+#: src/MainSDL.cpp:116
+#: src/MainSDL.cpp:349
+#, c-format
+msgid "Couldn't set video mode: %s\n"
+msgstr "无法设置视频模式：%s\n"
+
+#: src/MainSDL.cpp:124
+#, c-format
+msgid ""
+"-OpenGL-----------------------------------------------------\n"
+"Vendor     : %s\n"
+"Renderer   : %s\n"
+"Version    : %s\n"
+msgstr ""
+"-OpenGL-----------------------------------------------------\n"
+"供应商    ：%s\n"
+"渲染    ：%s\n"
+"版本      ：%s\n"
+
+#: src/MainSDL.cpp:217
+#, c-format
+msgid "init----> %3.2ffps gameSpeed = %g\n"
+msgstr "init----> %3.2ffps 游戏速度 = %g\n"
+
+#: src/MainSDL.cpp:224
+#, c-format
+msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
+msgstr "init----> %3.2ffps targetAdj = %g，tmp = %g\n"
+
+#: src/MainSDL.cpp:237
+#, c-format
+msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
+msgstr "adjust--> %3.2f targetAdj = %g -- game-> speedAdj = %g\n"
+
+#: src/MainSDL.cpp:259
+#, c-format
+msgid ""
+"%d speed adjustments required.\n"
+"NOTE: The game was not able to maintain a steady 50 frames per\n"
+"      second. You should consider reducing your screen resolution\n"
+"      or lowering the graphics detail setting.\n"
+"      -OR-\n"
+"      make sure that you aren't running any system monitoring\n"
+"      tools (like 'top', 'xosview', etc.) These kinds of tools\n"
+"      can make it difficult to maintain a steady frame rate.\n"
+msgstr ""
+"%d 需要调整速度\n"
+"注意：游戏无法保持每秒稳定 50 讯框。\n"
+"     您应该考虑减少您的屏幕解析度\n"
+"     或降低图形细节设置。\n"
+"     -或者-\n"
+"     确定您沒有正在执行任何系統监控\n"
+"     工具 (像是 'top'，'xosview'，etc.) 这类工具\n"
+"     有可能让它难以保持稳定的帧率。\n"
+
+#: src/MainSDL.cpp:271
+#, c-format
+msgid "exit.\n"
+msgstr "退出。\n"
+
+#: src/MainSDL.cpp:296
+#, c-format
+msgid "ERROR!!! SDL error '%s'\n"
+msgstr "错误!!! SDL 错误 '%s'\n"
+
+#: src/MainSDL.cpp:354
+#, c-format
+msgid "video mode set "
+msgstr "视频模式设置 "
+
+#: src/MainSDL.cpp:361
+#, c-format
+msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
+msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
+
+#: src/MainSDL_Event.cpp:40
+#, c-format
+msgid "%-5d SDL_ACTIVEEVENT  \n"
+msgstr "%-5d SDL_ACTIVEEVENT \n"
+
+#: src/MainSDL_Event.cpp:41
+#, c-format
+msgid "%-5d SDL_KEYDOWN  \n"
+msgstr "%-5d SDL_KEYDOWN  \n"
+
+#: src/MainSDL_Event.cpp:42
+#, c-format
+msgid "%-5d SDL_KEYUP  \n"
+msgstr "%-5d SDL_KEYUP  \n"
+
+#: src/MainSDL_Event.cpp:43
+#, c-format
+msgid "%-5d SDL_MOUSEMOTION  \n"
+msgstr "%-5d SDL_MOUSEMOTION  \n"
+
+#: src/MainSDL_Event.cpp:44
+#, c-format
+msgid "%-5d SDL_MOUSEBUTTONDOWN  \n"
+msgstr "%-5d SDL_MOUSEBUTTONDOWN  \n"
+
+#: src/MainSDL_Event.cpp:45
+#, c-format
+msgid "%-5d SDL_MOUSEBUTTONUP  \n"
+msgstr "%-5d SDL_MOUSEBUTTONUP  \n"
+
+#: src/MainSDL_Event.cpp:46
+#, c-format
+msgid "%-5d SDL_JOYBUTTONDOWN  \n"
+msgstr "%-5d SDL_JOYBUTTONDOWN  \n"
+
+#: src/MainSDL_Event.cpp:47
+#, c-format
+msgid "%-5d SDL_JOYBUTTONUP  \n"
+msgstr "%-5d SDL_JOYBUTTONUP  \n"
+
+#: src/MainSDL_Event.cpp:212
+#, c-format
+msgid "MainSDL::getEvent HUH?\n"
+msgstr "MainSDL::getEvent 呃？\n"
+
+#: src/MainSDL_Event.cpp:222
+#, c-format
+msgid ""
+"buffer = \"%s\n"
+"\""
+msgstr ""
+"缓冲区 =「%s\n"
+"」"
+
+#: src/MainSDL_Event.cpp:243
+#, c-format
+msgid "mouse active"
+msgstr "鼠标启用"
+
+#: src/MainSDL_Event.cpp:251
+#, c-format
+msgid "focus\n"
+msgstr "焦点\n"
+
+#: src/MainSDL_Event.cpp:403
+#, c-format
+msgid "key '%s' pressed\n"
+msgstr "键「%s」已按\n"
+
+#: src/MainSDL_Event.cpp:404
+#, c-format
+msgid "game->gameFrame = %d\n"
+msgstr "game->gameFrame = %d\n"
+
+#: src/MainSDL_Event.cpp:534
+#, c-format
+msgid "MainSDL::grabMouse(%d)\n"
+msgstr "MainSDL::grabMouse(%d)\n"
+
+#: src/MenuGL.cpp:43
+msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
+msgstr "  不 要 让 -任 何- 敌 人 从 您 身 旁 经 过！"
+
+#: src/MenuGL.cpp:44
+msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
+msgstr "  每 一 个 经 过 您 的 敌 人 都 会 减 少 您 的 生 命！"
+
+#: src/MenuGL.cpp:45
+msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
+msgstr "  允 许 能 源 器 经 过 以 得 到 高 额 点 数！"
+
+#: src/MenuGL.cpp:46
+msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
+msgstr "  在 敌 人 之 中 爆 炸 以 毁 灭 它 们！"
+
+#: src/MenuGL.cpp:47
+msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
+msgstr "  连 按 鼠 标 右 键 两 次 启 动 自 我 毁 灭！"
+
+#: src/MenuGL.cpp:48
+msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
+msgstr "  自 我 毁 灭 以 保 护 您 的 弹 药 库！"
+
+#: src/MenuGL.cpp:49
+msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
+msgstr "  从 http://chromium-bsu.sf.net/ 下 载 C h r o m i u m   B. S. U."
+
+#: src/MenuGL.cpp:70
+msgid "n e w    g a m e"
+msgstr "新 游 戏"
+
+#: src/MenuGL.cpp:71
+msgid "l e v e l"
+msgstr "等 级"
+
+#: src/MenuGL.cpp:72
+msgid "s k i l l"
+msgstr "技 巧"
+
+#: src/MenuGL.cpp:73
+msgid "g f x    d e t a i l"
+msgstr "显 示 细 节"
+
+#: src/MenuGL.cpp:74
+msgid "f u l l s c r e e n"
+msgstr "全 屏 幕"
+
+#: src/MenuGL.cpp:75
+msgid "s c r e e n    s i z e"
+msgstr "画 面 尺 寸"
+
+#: src/MenuGL.cpp:76
+msgid "s o u n d    f x    v o l u m e"
+msgstr "音 效 音 量"
+
+#: src/MenuGL.cpp:77
+msgid "m u s i c    v o l u m e"
+msgstr "音 乐 音 量"
+
+#: src/MenuGL.cpp:78
+msgid "m o v e m e n t   s p e e d"
+msgstr "鼠 标 速 度"
+
+#: src/MenuGL.cpp:79
+msgid "q u i t"
+msgstr "退 出"
+
+#: src/MenuGL.cpp:143
+#: src/MenuGL.cpp:418
+#, c-format
+msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
+msgstr "注意：使用「细体」文字以改善帧率…\n"
+
+#: src/MenuGL.cpp:147
+#, c-format
+msgid "MenuGL::createLists\n"
+msgstr "MenuGL::createLists\n"
+
+#: src/MenuGL.cpp:162
+msgid "fish in a barrel"
+msgstr "瓮中捉鳖"
+
+#: src/MenuGL.cpp:163
+msgid "wimp"
+msgstr "傻瓜"
+
+#: src/MenuGL.cpp:164
+msgid "easy"
+msgstr "容易"
+
+#: src/MenuGL.cpp:165
+msgid "normal"
+msgstr "一般"
+
+#: src/MenuGL.cpp:166
+msgid "experienced"
+msgstr "熟练"
+
+#: src/MenuGL.cpp:167
+msgid "fun"
+msgstr "娱乐"
+
+#: src/MenuGL.cpp:168
+msgid "insane"
+msgstr "狂暴"
+
+#: src/MenuGL.cpp:169
+msgid "impossible"
+msgstr "不可能"
+
+#: src/MenuGL.cpp:170
+msgid "-"
+msgstr "-"
+
+#: src/MenuGL.cpp:292
+#: src/MenuGL.cpp:321
+msgid "high scores"
+msgstr "高分"
+
+#: src/MenuGL.cpp:350
+msgid "the"
+msgstr " "
+
+#: src/MenuGL.cpp:354
+msgid "reptile"
+msgstr "爬蟲"
+
+#: src/MenuGL.cpp:358
+msgid "labour"
+msgstr "劳力"
+
+#: src/MenuGL.cpp:362
+msgid "project"
+msgstr "项目"
+
+#: src/MenuGL.cpp:423
+#, c-format
+msgid "ATTENTION: Reverting to 'thick' text...\n"
+msgstr "注意：还原成「粗体」文字…\n"
+
+#: src/MenuGL.cpp:474
+#, c-format
+msgid "low"
+msgstr "低"
+
+#: src/MenuGL.cpp:475
+#, c-format
+msgid "med"
+msgstr "中"
+
+#: src/MenuGL.cpp:476
+#, c-format
+msgid "high"
+msgstr "高"
+
+#: src/MenuGL.cpp:481
+#, c-format
+msgid "%dx%d"
+msgstr ""
+
+#: src/MenuGL.cpp:485
+#, c-format
+msgid "true"
+msgstr "真"
+
+#: src/MenuGL.cpp:486
+#, c-format
+msgid "false"
+msgstr "假"
+
+#: src/MenuGL.cpp:792
+#: src/MenuGL.cpp:865
+#: src/MenuGL.cpp:936
+#, c-format
+msgid "---- error setting full screen mode ----"
+msgstr "---- 设置全屏幕模式时发生错误 ----"
+
+#: src/MenuGL.cpp:794
+#, c-format
+msgid "---- error setting window mode ----"
+msgstr "---- 设置窗口模式时发生错误 ----"
+
+#: src/MenuGL.cpp:835
+#, c-format
+msgid "---- you must complete level %d before you can select level %d ----"
+msgstr "---- 在您可以选取等级 %2$d 之前，您必須完成等级 %1$d ----"
+
+#: src/MenuGL.cpp:851
+#: src/MenuGL.cpp:922
+#, c-format
+msgid "---- error setting screen size ----"
+msgstr "---- 设置屏幕大小时发生错误 ----"
+
+#: src/PowerUps.cpp:180
+#, c-format
+msgid "active power ups = %d\n"
+msgstr "作用中的动力提升 = %d\n"
+
+#: src/PowerUps.cpp:368
+#, c-format
+msgid "?? PowerUp::seal()"
+msgstr "?? PowerUp::seal()"
+
+#: src/ScreenItemAdd.cpp:107
+#, c-format
+msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
+msgstr "ScreenItemAdd::putScreenItems() 英雄??? 呃???\n"
+
+#: src/StatusDisplay.cpp:651
+#: src/StatusDisplay.cpp:655
+msgid "p a u s e d"
+msgstr "暂 停"
+
+#: src/StatusDisplay.cpp:675
+msgid "do not let -any- ships past you! each one costs you a life!"
+msgstr "不要让 *任何* 的船只从您旁边越过！每一个都会损耗您的生命！"
+
+#: src/StatusDisplay.cpp:686
+msgid "let super shields pass by for an extra life!"
+msgstr "让超级防护罩从旁越过以得到额外的生命！"
+
+#: src/TextFTGL.cpp:35
+#, c-format
+msgid "FTGL: error loading font: %s\n"
+msgstr "FTGL：载入字型时发生错误：%s\n"
+
+#: src/TextFTGL.cpp:38
+msgid "FTGL: error loading font"
+msgstr "FTGL：载入字型时发生错误"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the font
+#. name of a font that contains all the Unicode characters in use in
+#. your translation.
+#.
+#. TRANSLATORS: If using the GLC backend, this should be the font
+#. name of a font that contains all the Unicode characters in use in
+#. your translation. The GLC renderer will fall back on other fonts
+#. if some characters are not available though, so choose a font
+#. that your language looks good in.
+#.
+#: src/TextFTGL.cpp:105
+#: src/TextGLC.cpp:41
+msgid "Gothic Uralic"
+msgstr "Gothic Uralic"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Debian it should be the Debian path.
+#.
+#: src/TextFTGL.cpp:135
+msgid "/usr/share/fonts/truetype/uralic/gothub__.ttf"
+msgstr "/usr/share/fonts/truetype/uralic/gothub__.ttf"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Debian it should be the Debian path.
+#.
+#: src/TextFTGL.cpp:141
+msgid "/usr/share/fonts/truetype/uralic/gothu___.ttf"
+msgstr "/usr/share/fonts/truetype/uralic/gothu___.ttf"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Mandrake it should be the Mandrake path.
+#.
+#: src/TextFTGL.cpp:148
+msgid "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
+msgstr "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
+
+#. TRANSLATORS: If using the FTGL backend, this should be the path of a
+#. font that contains all the Unicode characters in use in	your translation.
+#. If the font is available in Mandrake it should be the Mandrake path.
+#.
+#: src/TextFTGL.cpp:154
+msgid "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
+msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
+
+#: src/TextGLC.cpp:30
+msgid "GLC: couldn't set context"
+msgstr "GLC：无法设置狀态组合"
+
