@@ -414,9 +414,9 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "AVERTISSEMENT : impossible d'écrire sur le fichier des scores (%s)\n"
 
 #: src/HiScore.cpp:328
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "AVERISSEMENT : impossible de lire de fichier des scores (%s)\n"
+msgstr "AVERTISSEMENT : fichier(%s) de score vide\n"
 
 #: src/HiScore.cpp:350
 #, c-format
@@ -799,9 +799,8 @@ msgid "m u s i c    v o l u m e"
 msgstr "v o l u m e    m u s i q u e"
 
 #: src/MenuGL.cpp:78
-#, fuzzy
 msgid "m o v e m e n t   s p e e d"
-msgstr "v i t e s s e   s o u r i s"
+msgstr "r a p i d i t é   d e   m o u v e m e n t"
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
@@ -896,7 +895,7 @@ msgstr "haut"
 #: src/MenuGL.cpp:481
 #, c-format
 msgid "%dx%d"
-msgstr ""
+msgstr "%dx%d"
 
 #: src/MenuGL.cpp:485
 #, c-format
