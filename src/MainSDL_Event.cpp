@@ -412,7 +412,11 @@ void MainSDL::keyMove()
 {
 	Global	*game = Global::getInstance();
 	if(game->gameMode == Global::Game){
+#if SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION >= 3
+		Uint8 *keystate = SDL_GetKeyboardState(NULL);
+#else
 		Uint8 *keystate = SDL_GetKeyState(NULL);
+#endif
 		if( keystate[SDLK_LEFT]  || keystate[SDLK_KP4] ) key_speed_x -= 2.0 + abs(key_speed_x)*0.4;
 		if( keystate[SDLK_RIGHT] || keystate[SDLK_KP6] ) key_speed_x += 2.0 + abs(key_speed_x)*0.4;
 		if( keystate[SDLK_UP]    || keystate[SDLK_KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
