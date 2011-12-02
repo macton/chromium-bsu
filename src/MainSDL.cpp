@@ -147,7 +147,6 @@ bool MainSDL::run()
 	Global	*game = Global::getInstance();
 	Config	*config = Config::instance();
 	float targetAdj		= 1.0;
-	Uint32 start_time	= 0; 
 	Uint32 now_time		= 0; 
 	Uint32 last_time	= 0;
 	key_speed_x  = key_speed_y = 0.0;
@@ -155,7 +154,6 @@ bool MainSDL::run()
 	int frames;
 
 	//-- enter main loop...
-	start_time = SDL_GetTicks();
 	frames = 0;
 	while( !done ) 
 	{

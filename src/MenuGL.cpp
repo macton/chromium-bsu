@@ -292,7 +292,7 @@ void MenuGL::drawGL()
 			game->text->Render(_("high scores"));
 			glTranslatef(-100.0, -30.0, 0.0);
 			char buf[16];
-			int i,len;
+			int i;
 			float trans;
 			time_t nowTime = time(NULL);
 			int l = config->intSkill();
@@ -317,7 +317,6 @@ void MenuGL::drawGL()
 					glColor4f(1.0, 1.0, 1.0, 0.2+0.2*r);
 //				glColor4f(0.5+r*0.5, 0.5, 0.25-r*0.25, 0.2+0.2*r);
 				sprintf(buf, "%d", (int)hiScore->getScore(config->intSkill(), i) );
-				len = strlen(buf);
 				trans = 80.0 + game->text->Advance(_("high scores")) - game->text->Advance(buf);
 				glTranslatef( trans, 0.0, 0.0 );
 				game->text->Render(buf);

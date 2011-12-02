@@ -694,7 +694,6 @@ void AudioOpenAL::loadMusicList()
 {
 	Config	*config = Config::instance();
 	int		i;
-	bool	ok = false;
 	int		lineCount = 0;
 	char	buffer[1024];
 	char	configFilename[256];
@@ -725,7 +724,6 @@ void AudioOpenAL::loadMusicList()
 			int tmp = strlen(buffer);
 			buffer[tmp-1] = '\0'; //-- get rid of new line
 			
-			ok = false;
 			lineCount++;
 			if(strlen(buffer) > 255)
 			{
