@@ -44,6 +44,7 @@
 #include "MainGLUT.h"
 
 #include "Config.h"
+#include "extern.h"
 #include "Global.h"
 #include "HiScore.h"
 

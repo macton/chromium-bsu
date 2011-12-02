@@ -10,6 +10,7 @@
 #include <chromium-bsu-config.h>
 #endif
 
+#include "textGeometry.h"
 #include "compatibility.h"
 
 #if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_OPENGL_GL_H)
