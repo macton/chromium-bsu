@@ -464,7 +464,7 @@ void MenuGL::drawIndicator()
 		case SkillLevel: 
 			level = config->gameSkillBase();
 			tmp = (int)((level+0.05)*10.0);
-			sprintf(buf, skillString(tmp));
+			sprintf(buf, "%s", skillString(tmp));
 			break;
 		case Graphics: 
 			level = config->gfxLevel()/2.0;
