@@ -85,7 +85,8 @@ void EnemyAircraft_Boss00::update()
 	}
 	if(!(age%5)) //-- side cannons
 	{
-		shootSwap = ++shootSwap%15;
+		shootSwap++;
+		shootSwap %= 15;
 		if(shootSwap < 6)
 		{
 			v[1] = -0.2;

@@ -90,7 +90,8 @@ void EnemyAircraft_Tank::update()
 			p[0] = pos[0] - 1.5;
 			game->enemyAmmo->addAmmo(0, p, v);
 		}
-		shootSwap = ++shootSwap%100;
+		shootSwap++;
+		shootSwap %= 100;
 	}
 
 	if(!((tmpInt = age/200)%2)) //-- omni shooters
