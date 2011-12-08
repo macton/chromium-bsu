@@ -187,7 +187,7 @@ void HeroAmmo::printList(int type)
 		thisAmmo = ammoRoot[type];
 		while(thisAmmo)
 		{
-			fprintf(stderr, _("%p <--%p--> %p\n"), thisAmmo->back, thisAmmo, thisAmmo->next);
+			fprintf(stderr, _("%p <--%p--> %p\n"), (void*)thisAmmo->back, (void*)thisAmmo, (void*)thisAmmo->next);
 			thisAmmo = thisAmmo->next;
 		}
 	}

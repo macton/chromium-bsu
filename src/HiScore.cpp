@@ -218,7 +218,7 @@ bool HiScore::saveFile()
 				time = gmtime(&hiScoreDate[i][j]);
 				if( time != NULL ){
 					fprintf(file, 
-					        "%d %d %lf %04d-%02d-%02d %02d:%02d:%02d %s\n",
+					        "%d %d %f %04d-%02d-%02d %02d:%02d:%02d %s\n",
 					        i, j, 
 					        hiScore[i][j],
 					        1900+time->tm_year,

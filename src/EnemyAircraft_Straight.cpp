@@ -95,7 +95,7 @@ void EnemyAircraft_Straight::move()
 	Config *config = Config::instance();
 
 	pos[1] += (game->speedAdj*(vel[1] * game->gameSkill));
-	if( config->debug() ) fprintf(stderr, _("EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"), this, pos[1], vel[1]);
+	if( config->debug() ) fprintf(stderr, _("EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"), (void*)this, pos[1], vel[1]);
 
 	if(pos[0] < -config->screenBoundX())
 		pos[0] = -config->screenBoundX();
