@@ -277,7 +277,7 @@ bool MainSDL::checkErrors()
 {
 	bool retVal = false;
 	GLenum	gl_error;
-	char*	sdl_error;
+	const char*	sdl_error;
 	
 	//-- Check for GL errors
 	gl_error = glGetError( );
