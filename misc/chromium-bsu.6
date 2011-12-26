@@ -114,7 +114,7 @@ Only works when using OpenAL.
 Enable/disable CDROM support. This causes the game to attempt to play any audio
 CD that might be available. This is disabled by default because the constant
 spinning up of the CD can be annoying and because CDs are less popular than
-MP3/OGG these days. Only works when compiled with SDL support.
+MP3/OGG these days. Only works when compiled with SDL 1.X support.
 .TP
 .B full_screen
 Enable/disable full-screen mode. This causes the game to fill the screen
@@ -228,7 +228,7 @@ A cache of number of CDROM devices present, not used.
 .TP
 .B cdromDevice
 The number of the CDROM device to use when use_cdrom is enabled. Zero-based.
-Defaults to first device (0).
+Defaults to first device (0). Only works when compiled with SDL 1.X support.
 .TP
 .B debug
 Enable/disable debug information. This causes the game to print debug

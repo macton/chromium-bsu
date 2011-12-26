@@ -66,8 +66,10 @@ MainSDL::MainSDL(int argc, char **argv)
 #ifdef NO_PARACHUTE
 	initOpts = initOpts|SDL_INIT_NOPARACHUTE;
 #endif
+#ifdef USE_SDL_CDROM
 	if(config->useCDROM())
 		initOpts = initOpts|SDL_INIT_CDROM;
+#endif // USE_SDL_CDROM
 		
 	if( SDL_Init( initOpts ) < 0 ) 
 	{

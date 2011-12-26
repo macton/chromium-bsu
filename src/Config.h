@@ -56,7 +56,9 @@ public:
 	bool	showFPS()			{	return  m_show_fps;		}
 	bool	trueColor()			{	return  m_true_color;	}
 	bool	usePlayList()		{	return  m_use_playList;	}
+#ifdef USE_SDL_CDROM
 	bool	useCDROM()			{	return  m_use_cdrom;		}
+#endif // USE_SDL_CDROM
 	bool	debug()			{	return  m_debug;		}
 	void	setFullScreen(bool s)		{	m_full_screen = s;	}
 	void	setBlend(bool s)			{	m_blend_enabled = s;}
@@ -67,13 +69,17 @@ public:
 	void	setShowFPS(bool s)			{	m_show_fps = s;		}
 	void	setTrueColor(bool s)		{	m_true_color = s;	}
 	void	setUsePlayList(bool s)		{	m_use_playList = s;	}
+#ifdef USE_SDL_CDROM
 	void	setUseCDROM(bool s)			{	m_use_cdrom = s;	}
+#endif // USE_SDL_CDROM
 	void	setDebug(bool s)			{	m_debug = s;	}
 	
+#ifdef USE_SDL_CDROM
 	int		CDROMDevice()			{   return m_cdromDevice;	}
 	int		CDROMCount()			{   return m_cdromCount;	}
 	void	setCDROMDevice(int i)	{	m_cdromDevice = i;		}
 	void	setCDROMCount(int c)	{	m_cdromCount  = c;		}
+#endif // USE_SDL_CDROM
 	
 	int 	gfxLevel()		{	return m_gfxLevel;	}
 	int 	maxLevel()		{	return m_maxLevel;	}
@@ -118,13 +124,17 @@ private:
 	bool	 m_show_fps;
 	bool	 m_true_color;
 	bool	 m_use_playList;
+#ifdef USE_SDL_CDROM
 	bool	 m_use_cdrom;
+#endif // USE_SDL_CDROM
 	bool	 m_debug;
 	
 	int 	 m_gfxLevel;
 	int 	 m_maxLevel;
+#ifdef USE_SDL_CDROM
 	int		 m_cdromDevice;
 	int		 m_cdromCount;
+#endif // USE_SDL_CDROM
 
 	float	 m_movementSpeed;
 	float	 m_gameSkillBase;

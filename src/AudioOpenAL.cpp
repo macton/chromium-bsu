@@ -59,25 +59,19 @@
 #include "define.h"
 #include "Global.h"
 
+#ifdef USE_SDL
+#ifdef USE_SDL_CDROM
+//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
+#ifdef __linux__
+#define CD_VOLUME 1
 #ifdef OLD_OPENAL
-#ifdef USE_SDL 
-	//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
-	#ifdef __linux__ 
-		#define CD_VOLUME 1
-//		#include <AL/alext.h>
-		#include <AL/alkludgetypes.h>
-	#endif //__linux__
-#endif //USE_SDL
+	#include <AL/alkludgetypes.h>
 #else
-#ifdef USE_SDL 
-	//try to use OpenAL alc[GS]etAudioChannel extensions in linux...
-	#ifdef __linux__ 
-		#define CD_VOLUME 1
-		#include <AL/alext.h>
-//		#include <AL/alexttypes.h>
-	#endif //__linux__
-#endif //USE_SDL
-#endif
+	#include <AL/alext.h>
+#endif // OLD_OPENAL
+#endif // __linux__
+#endif // USE_SDL_CDROM
+#endif // USE_SDL
 
 // Don't try to build the CD volume stuff if it isn't available
 #ifndef ALC_CHAN_CD_LOKI
@@ -156,7 +150,11 @@ AudioOpenAL::AudioOpenAL()
 		if(config->swapStereo())
 			audioScale[0] = -audioScale[0];
 		
+#ifdef USE_SDL_CDROM
 		if(config->usePlayList() && !cdrom)
+#else // !USE_SDL_CDROM
+		if(config->usePlayList())
+#endif // !USE_SDL_CDROM
 			loadMusicList();
 	}
 	if( config->debug() ) fprintf(stderr, _("AudioOpenAL::Audio done\n"));
@@ -169,6 +167,7 @@ AudioOpenAL::~AudioOpenAL()
 		Config	*config = Config::instance();
 		if( config->debug() ) fprintf(stderr, _("stopping OpenAL..."));
 	
+#ifdef USE_SDL_CDROM
 		#ifdef CD_VOLUME
 		if(cdrom && alcSetAudioChannel)
 		{ 
@@ -178,6 +177,7 @@ AudioOpenAL::~AudioOpenAL()
 
 		if(cdrom)
 			SDL_CDStop(cdrom);
+#endif // USE_SDL_CDROM
 
 		checkError(_("AudioOpenAL::~Audio()"));
 
@@ -408,11 +408,13 @@ void AudioOpenAL::pauseGameMusic(bool status)
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{
+#ifdef USE_SDL_CDROM
 		if(cdrom)
 		{
 			Audio::pauseGameMusic(status);
 		}
 		else
+#endif // USE_SDL_CDROM
 		{
 			if(status)
 				alSourcePause(source[MusicGame]);
@@ -436,7 +438,9 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 			default:
 			case MusicGame:
 				alSourceStop (source[MusicMenu]);
+#ifdef USE_SDL_CDROM
 				if(!cdrom)
+#endif // USE_SDL_CDROM
 				{
 					alSourcei    (source[MusicGame], AL_LOOPING, AL_TRUE);
 					if(!game->game_pause)
@@ -444,7 +448,9 @@ void AudioOpenAL::setMusicMode(SoundType mode)
 				}
 				break;
 			case MusicMenu:
+#ifdef USE_SDL_CDROM
 				if(!cdrom)
+#endif // USE_SDL_CDROM
 				{
 					alSourcePause(source[MusicGame]);
 				}
@@ -499,12 +505,14 @@ void AudioOpenAL::setMusicVolume(float vol)
 		musicVolume = vol;
 		alSourcef ( source[MusicGame], AL_GAIN, gain[MusicGame]*musicVolume);
 		alSourcef ( source[MusicMenu], AL_GAIN, gain[MusicGame]*musicVolume);
+#ifdef USE_SDL_CDROM
 #ifdef CD_VOLUME
 		if(cdrom && alcSetAudioChannel)
 		{
 			alcSetAudioChannel(ALC_CHAN_CD_LOKI, musicVolume);
 		}
 #endif
+#endif // USE_SDL_CDROM
 		if( config->debug() ) fprintf(stderr, _("Music volume = %f\n"), vol);
 	}
 }
@@ -796,7 +804,11 @@ void AudioOpenAL::setMusicIndex(int index)
 	if(musicMax)
 		musicIndex = index%musicMax;
 		
+#ifdef USE_SDL_CDROM
 	if(initialized && cdrom)
+#else
+	if(initialized)
+#endif // USE_SDL_CDROM
 	{
 		Audio::	setMusicIndex(index);		
 	}

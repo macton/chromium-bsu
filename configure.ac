@@ -178,6 +178,7 @@ fi
 
 if test "x$HAVE_SDL" = xyes -a "x$enable_sdl" != xno ; then
 	AC_DEFINE(USE_SDL, 1, [define to use SDL])
+	AC_DEFINE(USE_SDL_CDROM, 1, [define to use SDL CDROM support])
 	WINDOW_CFLAGS="$SDL_CFLAGS"
 	AC_SUBST(WINDOW_CFLAGS)
 	WINDOW_LIBS="$SDL_LIBS"

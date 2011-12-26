@@ -23,13 +23,13 @@
 #include <cmath>
 using namespace std;
 
-#if !defined(USE_SDL) && defined(SDL_CD_STUBS)
+#if !defined(USE_SDL_CDROM) && defined(SDL_CD_STUBS)
 void	SDL_CDPlayTracks(void*, int, int, int, int) {}
 void	SDL_CDPause(void*)	{}
 void	SDL_CDResume(void*)	{}
 void	SDL_CDStop(void*)	{}
 int		SDL_CDStatus(void*)	{ return 0; }
-#endif //USE_SDL
+#endif //USE_SDL_CDROM
 
 //====================================================================
 Audio::Audio()
@@ -46,22 +46,28 @@ Audio::Audio()
 	fileNames[MusicGame]	= "wav/music_game.wav";
 	fileNames[MusicMenu]	= "wav/music_menu.wav";
 	
+#ifdef USE_SDL_CDROM
 	cdrom = NULL;
+#endif // USE_SDL_CDROM
 	musicMax = 1;
 	musicIndex = 0;
 	
 	if(config->audioEnabled() == true)
 	{
+#ifdef USE_SDL_CDROM
 		initCDROM();
+#endif // USE_SDL_CDROM
 	}
 }
 
 Audio::~Audio()
 {
+#ifdef USE_SDL_CDROM
 	if(cdrom)
 	{
 		SDL_CDStop(cdrom);
 	}
+#endif // USE_SDL_CDROM
 }
 
 /**
@@ -96,12 +102,7 @@ void	Audio::initSound()
  * if GLUT is being used.
  */
 //----------------------------------------------------------
-#ifndef USE_SDL
-void	Audio::initCDROM()
-{
-	cdrom = 0;
-}
-#else // USE_SDL
+#ifdef USE_SDL_CDROM
 static const char *trackType(int t)
 {
 	static char buf[64];
@@ -172,7 +173,7 @@ void Audio::initCDROM()
 	else
 		cdrom = 0;
 }
-#endif // USE_SDL
+#endif // USE_SDL_CDROM
 
 /**
  * stop CD track
@@ -183,8 +184,10 @@ void	Audio::stopMusic()
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{
+#ifdef USE_SDL_CDROM
 		if(cdrom)
 			SDL_CDStop(cdrom);
+#endif // USE_SDL_CDROM
 	}
 }
 
@@ -197,6 +200,7 @@ void	Audio::pauseGameMusic(bool status)
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{
+#ifdef USE_SDL_CDROM
 		if(cdrom)
 		{
 			int cdromStatus = SDL_CDStatus(cdrom);
@@ -210,6 +214,7 @@ void	Audio::pauseGameMusic(bool status)
 				fprintf(stderr, _("CDROM status = %d\n"), cdromStatus);
 			}
 		}
+#endif // USE_SDL_CDROM
 	}
 }
 
@@ -219,6 +224,7 @@ void	Audio::pauseGameMusic(bool status)
 //----------------------------------------------------------
 void	Audio::setMusicMode(SoundType mode)
 {
+#ifdef USE_SDL_CDROM
 	Global	*game = Global::getInstance();
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
@@ -247,6 +253,7 @@ void	Audio::setMusicMode(SoundType mode)
 			}
 		}
 	}
+#endif // USE_SDL_CDROM
 }
 
 /**
@@ -256,6 +263,7 @@ void	Audio::setMusicMode(SoundType mode)
 void	Audio::setMusicVolume(float value)
 {
 #ifdef __linux__
+#ifdef USE_SDL_CDROM
 	Config	*config = Config::instance();
 	if (config->audioEnabled() && config->useCDROM())
 	{
@@ -275,6 +283,7 @@ void	Audio::setMusicVolume(float value)
 			fprintf(stderr, _("Could not set CD volume, amixer returned status %d\n"), status);
 		}
 	}
+#endif // USE_SDL_CDROM
 #endif // __linux__
 }
 
@@ -296,13 +305,14 @@ void	Audio::setMusicIndex(int index)
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{
-		bool	wasPlaying = false;
 		if(musicMax)
 			musicIndex = index%musicMax;
 		if( config->debug() ) fprintf(stderr, _("Audio::setMusicIndex(%d)\n"), musicIndex);
 		
+#ifdef USE_SDL_CDROM
 		if(cdrom)
 		{
+			bool wasPlaying = false;
 			int cdromStatus = SDL_CDStatus(cdrom);
 			if(cdromStatus == CD_PLAYING)
 				wasPlaying = true;
@@ -320,6 +330,7 @@ void	Audio::setMusicIndex(int index)
 				Audio::setMusicIndex(musicIndex+1);
 			}
 		}
+#endif // USE_SDL_CDROM
 	}
 #endif
 }

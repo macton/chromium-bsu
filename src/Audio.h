@@ -20,25 +20,12 @@
 class SoundInfo;
 class Global;
 
-#ifdef USE_SDL
+#ifdef USE_SDL_CDROM
 #include <SDL.h> // for CDROM
-#else
-#define SDL_CD void
 #endif
 
-#if !defined(USE_SDL) && !defined(SDL_CD_STUBS)
-	#define SDL_CD_STUBS
-	enum { CD_ERROR = -1, CD_TRAYEMPTY, CD_STOPPED, CD_PLAYING, CD_PAUSED };
-	void	SDL_CDPlayTracks(void*, int, int, int, int);
-	void	SDL_CDPause(void*);
-	void	SDL_CDResume(void*);
-	void	SDL_CDStop(void*);
-	int		SDL_CDStatus(void*);
-#endif //USE_SDL
-
-
 /**
- * Base class upon which all audio calls are made. If USE_SDL is defined, 
+ * Base class upon which all audio calls are made. If USE_SDL_CDROM is defined,
  * this class will do CD music playback, but does not do any sound effects.
  */
 //====================================================================
@@ -74,10 +61,14 @@ public:
 	
 protected:
 	virtual void	initSound();
+#ifdef USE_SDL_CDROM
 	virtual void	initCDROM();
+#endif // USE_SDL_CDROM
 
 	const char	*fileNames[NumSoundTypes];	/**< base filenames for sound effects */
+#ifdef USE_SDL_CDROM
 	SDL_CD	*cdrom; 					/**< pointer to CDROM struct. Is void* if not using SDL */
+#endif // USE_SDL_CDROM
 	char	musicFile[MAX_MUSIC][256];	/**< array of filenames for playlist */
 	int		musicMax;					/**< max number of user-defined songs (CD or playlist) */
 	int		musicIndex; 				/**< current track ( 0 < musicIndex < musicMax ) */

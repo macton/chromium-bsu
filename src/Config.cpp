@@ -69,11 +69,15 @@ Config::Config()
 	m_auto_speed	= false;
 	m_true_color	= false;
 	m_use_playList	= false;
+#ifdef USE_SDL_CDROM
 	m_use_cdrom		= false;
+#endif // USE_SDL_CDROM
 	m_debug		= false;
 	
+#ifdef USE_SDL_CDROM
 	m_cdromDevice	= 0;
 	m_cdromCount	= 1;
+#endif // USE_SDL_CDROM
 
 	m_maxLevel		= 1;
 	m_gfxLevel		= 2;
@@ -196,14 +200,18 @@ void Config::readValues(FILE* file)
 		if(strncmp(configStrings[i], "auto_spe", 8) == 0) { sscanf(configStrings[i], "auto_speed %d\n",   &tmp);	m_auto_speed  = (bool)tmp;  }
 		if(strncmp(configStrings[i], "show_fps", 8) == 0) { sscanf(configStrings[i], "show_fps %d\n",     &tmp);	m_show_fps    = (bool)tmp;  }
 		if(strncmp(configStrings[i], "use_play", 8) == 0) { sscanf(configStrings[i], "use_playList %d\n", &tmp);	m_use_playList= (bool)tmp;  }
+#ifdef USE_SDL_CDROM
 		if(strncmp(configStrings[i], "use_cdro", 8) == 0) { sscanf(configStrings[i], "use_cdrom %d\n",    &tmp);	m_use_cdrom   = (bool)tmp;  }
+#endif // USE_SDL_CDROM
 		if(strncmp(configStrings[i], "debug",    5) == 0) { sscanf(configStrings[i], "debug %d\n",        &tmp);	m_debug       = (bool)tmp;  }
 		if(strncmp(configStrings[i], "audioTyp", 8) == 0) { sscanf(configStrings[i], "audioType %d\n",    &tmp);	m_audioType = (AudioType)tmp; }
 		if(strncmp(configStrings[i], "textType", 8) == 0) { sscanf(configStrings[i], "textType %d\n",    &tmp);	m_textType = (TextType)tmp; }
 		if(strncmp(configStrings[i], "maxLevel", 8) == 0) { sscanf(configStrings[i], "maxLevel %d\n",      &m_maxLevel);  }
 		if(strncmp(configStrings[i], "viewGamm", 8) == 0) { sscanf(configStrings[i], "viewGamma %f\n",     &m_viewGamma); }
+#ifdef USE_SDL_CDROM
 		if(strncmp(configStrings[i], "cdromCou", 8) == 0) { sscanf(configStrings[i], "cdromCount %d\n",    &m_cdromCount); }
 		if(strncmp(configStrings[i], "cdromDev", 8) == 0) { sscanf(configStrings[i], "cdromDevice %d\n",   &m_cdromDevice); }
+#endif // USE_SDL_CDROM
 	}
 #ifdef HAVE_LOCALE_H
 	setlocale(LC_NUMERIC,locale);
@@ -274,7 +282,9 @@ bool Config::saveFile()
 		fprintf(file, "# Please read the documentation for more info\n");
 		fprintf(file, "# Only modifications to option values are preserved.\n");
 		fprintf(file, "use_playList %d\n",	(int)m_use_playList);
+#ifdef USE_SDL_CDROM
 		fprintf(file, "use_cdrom %d\n",		(int)m_use_cdrom);
+#endif // USE_SDL_CDROM
 		fprintf(file, "debug %d\n",		(int)m_debug);
 		fprintf(file, "full_screen %d\n", 	(int)m_full_screen);
 		fprintf(file, "true_color %d\n", 	(int)m_true_color);
@@ -292,8 +302,10 @@ bool Config::saveFile()
 		fprintf(file, "viewGamma %g\n",		m_viewGamma);
 		fprintf(file, "audioType %d\n",		(int)m_audioType);
 		fprintf(file, "textType %d\n",		(int)m_textType);
+#ifdef USE_SDL_CDROM
 		fprintf(file, "cdromCount %d\n",	m_cdromCount);
 		fprintf(file, "cdromDevice %d\n",	m_cdromDevice);
+#endif // USE_SDL_CDROM
 #ifdef HAVE_LOCALE_H
 		setlocale(LC_NUMERIC,locale);
 #endif
