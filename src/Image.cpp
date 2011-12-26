@@ -70,7 +70,10 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 	{
 		SDL_Surface* tmp;
 		SDL_PixelFormat rgba;
-		rgba.palette = NULL; rgba.colorkey = 0; rgba.alpha = 0;
+		rgba.palette = NULL;
+#if !(SDL_VERSION_ATLEAST(2,0,0))
+		rgba.colorkey = 0; rgba.alpha = 0;
+#endif
 		rgba.BitsPerPixel = 32; rgba.BytesPerPixel = 4;
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 		rgba.Rmask = 0xFF000000; rgba.Rshift = 0; rgba.Rloss = 0;
@@ -84,7 +87,11 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 		rgba.Amask = 0xFF000000; rgba.Ashift = 0; rgba.Aloss = 0;
 #endif
 
+#if SDL_VERSION_ATLEAST(2,0,0)
+		tmp = SDL_ConvertSurface(image, &rgba, SDL_SWSURFACE);
+#else
 		tmp = SDL_ConvertSurface(image, &rgba, SDL_SWSURFACE|SDL_SRCALPHA);
+#endif
 
 		if( tmp )
 		{
