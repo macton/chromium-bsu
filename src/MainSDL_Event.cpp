@@ -197,9 +197,15 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 				case 'K':
 					evK->type	= (Uint8)a;
 					evK->state	= (Uint8)b;
+#if SDL_VERSION_ATLEAST(2,0,0)
+					evK->keysym.scancode = (SDL_Scancode)c;
+					evK->keysym.sym		 = (SDL_Keycode)d;
+					evK->keysym.mod		 = (SDL_Keymod)e;
+#else
 					evK->keysym.scancode = (Uint8)c;
 					evK->keysym.sym		 = (SDLKey)d;
 					evK->keysym.mod		 = (SDLMod)e;
+#endif
 					evK->keysym.unicode	 = (Uint16)f;
 					retVal = &ev;	
 					break;
