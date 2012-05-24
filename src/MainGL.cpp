@@ -430,7 +430,6 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 			for(i = 0; i < 6; i++)
 			{
 				clr = ((float)i)/5.0;
-				clr = clr;
 				glColor4f(1.0, ca*ca*0.3, ca*0.3, aa*aa);
 				x_sin = 1.75*sin(i+game->frame*0.06);
 				y_sin = 0.75*sin(i+game->frame*0.09);
