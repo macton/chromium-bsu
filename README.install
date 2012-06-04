@@ -67,7 +67,7 @@ autoconf
 automake
 gettext
 pkg-config
-autoconf-archive
+autoconf-gl-macros or autoconf-archive before 20111221
 
 Pre-build step
 ------------------
