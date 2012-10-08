@@ -1,18 +1,22 @@
-# Swedish translation for Chromium BSU.
-# Daniel Nylander <po@danielnylander.se>, 2010.
+# Swedish translation for Chromium B.S.U.
+# This file is put in the public domain.
 #
+# Translators:
+# Daniel Nylander <po@danielnylander.se>, 2010, 2011.
+# Nille <nille.kungen@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2011-02-07 11:58+0800\n"
-"PO-Revision-Date: 2010-03-01 23:14+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"POT-Creation-Date: 2012-10-09 01:05+0800\n"
+"PO-Revision-Date: 2011-05-17 00:20+0000\n"
+"Last-Translator: Niklas Åkerström <nille.kungen@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Audio.cpp:110
 msgid "audio"
@@ -217,22 +221,22 @@ msgstr "FEL!! <%s> alcGetError() = %s\n"
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "FEL!! <%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:732
+#: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "FEL: filnamnet är för långt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:750
+#: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "VARNING: MP3-stöd inte tillgängligt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:761
+#: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "VARNING: Ogg/Vorbis-stöd inte tillgängligt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:765
+#: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "VARNING: filtypen känns inte igen: \"%s\": \"%s\", rad %d\n"
@@ -333,7 +337,7 @@ msgstr "VARNING: kunde inte skriva konfigurationsfil (%s)\n"
 msgid "%d EnemyAircraft allocated\n"
 msgstr "%d EnemyAircraft allokerat\n"
 
-#: src/EnemyAircraft_Straight.cpp:103
+#: src/EnemyAircraft_Straight.cpp:98
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 msgstr "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
@@ -428,7 +432,7 @@ msgstr "poänglista:\n"
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
 
-#: src/main.cpp:118
+#: src/main.cpp:119
 #, c-format
 msgid ""
 "\n"
@@ -465,12 +469,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:230
+#: src/main.cpp:231
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! FEL !! - "
 
-#: src/main.cpp:254
+#: src/main.cpp:255
 #, c-format
 msgid "Extensions :"
 msgstr "Tillägg :"
@@ -545,7 +549,7 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:93 src/MainSDL.cpp:288
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "FEL!!! OpenGL-fel: %s\n"
@@ -580,7 +584,7 @@ msgstr "   styrspak 0 = %p\n"
 msgid "no joysticks found\n"
 msgstr "inga styrspakar hittades\n"
 
-#: src/MainSDL.cpp:116 src/MainSDL.cpp:349
+#: src/MainSDL.cpp:116 src/MainSDL.cpp:347
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr "Kunde inte ställa in grafikläge: %s\n"
@@ -598,22 +602,22 @@ msgstr ""
 "Renderare  : %s\n"
 "Version    : %s\n"
 
-#: src/MainSDL.cpp:217
+#: src/MainSDL.cpp:215
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr "init----> %3.2ffps gameSpeed = %g\n"
 
-#: src/MainSDL.cpp:224
+#: src/MainSDL.cpp:222
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 
-#: src/MainSDL.cpp:237
+#: src/MainSDL.cpp:235
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 
-#: src/MainSDL.cpp:259
+#: src/MainSDL.cpp:257
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -626,22 +630,22 @@ msgid ""
 "      can make it difficult to maintain a steady frame rate.\n"
 msgstr ""
 
-#: src/MainSDL.cpp:271
+#: src/MainSDL.cpp:269
 #, c-format
 msgid "exit.\n"
 msgstr "avsluta.\n"
 
-#: src/MainSDL.cpp:296
+#: src/MainSDL.cpp:294
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "FEL!!! SDL-fel \"%s\"\n"
 
-#: src/MainSDL.cpp:354
+#: src/MainSDL.cpp:352
 #, c-format
 msgid "video mode set "
 msgstr "grafikläge inställt "
 
-#: src/MainSDL.cpp:361
+#: src/MainSDL.cpp:359
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr "(bpp=%d RGB=%d%d%d djup=%d)\n"
@@ -708,7 +712,7 @@ msgstr "mus är aktiv"
 #: src/MainSDL_Event.cpp:251
 #, c-format
 msgid "focus\n"
-msgstr ""
+msgstr "fokus\n"
 
 #: src/MainSDL_Event.cpp:403
 #, c-format
@@ -720,7 +724,7 @@ msgstr "tangent \"%s\" nedtryckt\n"
 msgid "game->gameFrame = %d\n"
 msgstr "game->gameFrame = %d\n"
 
-#: src/MainSDL_Event.cpp:534
+#: src/MainSDL_Event.cpp:538
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
@@ -793,7 +797,7 @@ msgstr "f ö r f l y t t n i n g s h a s t i g h e t"
 msgid "q u i t"
 msgstr "a v s l u t a"
 
-#: src/MenuGL.cpp:143 src/MenuGL.cpp:418
+#: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
 msgstr ""
@@ -805,7 +809,7 @@ msgstr "MenuGL::createLists\n"
 
 #: src/MenuGL.cpp:162
 msgid "fish in a barrel"
-msgstr ""
+msgstr "fisk i en tunna"
 
 #: src/MenuGL.cpp:163
 msgid "wimp"
@@ -839,77 +843,77 @@ msgstr "omöjligt"
 msgid "-"
 msgstr "-"
 
-#: src/MenuGL.cpp:292 src/MenuGL.cpp:321
+#: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
 msgstr "högsta poäng"
 
-#: src/MenuGL.cpp:350
+#: src/MenuGL.cpp:349
 msgid "the"
 msgstr ""
 
-#: src/MenuGL.cpp:354
+#: src/MenuGL.cpp:353
 msgid "reptile"
-msgstr ""
+msgstr "reptil"
 
-#: src/MenuGL.cpp:358
+#: src/MenuGL.cpp:357
 msgid "labour"
 msgstr ""
 
-#: src/MenuGL.cpp:362
+#: src/MenuGL.cpp:361
 msgid "project"
-msgstr ""
+msgstr "projekt"
 
-#: src/MenuGL.cpp:423
+#: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
 msgstr ""
 
-#: src/MenuGL.cpp:474
+#: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
 msgstr "låg"
 
-#: src/MenuGL.cpp:475
+#: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
 msgstr "med"
 
-#: src/MenuGL.cpp:476
+#: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
 msgstr "hög"
 
-#: src/MenuGL.cpp:481
+#: src/MenuGL.cpp:480
 #, c-format
 msgid "%dx%d"
 msgstr "%dx%d"
 
-#: src/MenuGL.cpp:485
+#: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
 msgstr "sant"
 
-#: src/MenuGL.cpp:486
+#: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
 msgstr "falskt"
 
-#: src/MenuGL.cpp:792 src/MenuGL.cpp:865 src/MenuGL.cpp:936
+#: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
 msgstr "---- fel vid inställning av helskärmsläge ----"
 
-#: src/MenuGL.cpp:794
+#: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
 msgstr "---- fel vid inställning av fönsterläge ----"
 
-#: src/MenuGL.cpp:835
+#: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- du måste klara av nivå %d innan du kan välja nivå %d ----"
 
-#: src/MenuGL.cpp:851 src/MenuGL.cpp:922
+#: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
 msgstr "---- fel vid inställning av skärmstorlek ----"

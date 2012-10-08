@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Russian translation for Chromium B.S.U.
 # This file is put in the public domain.
 #
 # Translators:
@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2011-06-20 13:00+0800\n"
+"POT-Creation-Date: 2012-10-09 01:05+0800\n"
 "PO-Revision-Date: 2011-08-16 12:04+0000\n"
-"Last-Translator: ZLv <z_lezhnin@mail2000.ru>\n"
+"Last-Translator: Евгений Лежнин <z_lezhnin@mail2000.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/Audio.cpp:110
 msgid "audio"
@@ -220,88 +220,88 @@ msgstr "ОШИБКА!! <%s> alcGetError() = %s\n"
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "ОШИБКА!! <%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:732
+#: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "ОШИБКА: слишком длинное имя файла: \"%s\", строка %d\n"
 
-#: src/AudioOpenAL.cpp:750
+#: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: отсутствует поддержка MP3: \"%s\", строка %d\n"
 
-#: src/AudioOpenAL.cpp:761
+#: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: отсутствует поддержка Ogg/Vorbis: \"%s\", строка %d\n"
 
-#: src/AudioOpenAL.cpp:765
+#: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: не могу распознать тип файла: \"%s\": \"%s\", строка %d\n"
 
-#: src/AudioOpenAL.cpp:780
+#: src/AudioOpenAL.cpp:778
 #, c-format
 msgid "music playlist:\n"
 msgstr "список воспроизведения:\n"
 
-#: src/AudioOpenAL.cpp:783
+#: src/AudioOpenAL.cpp:781
 #, c-format
 msgid " %2d : %s\n"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:785
+#: src/AudioOpenAL.cpp:783
 #, c-format
 msgid "loaded %s\n"
 msgstr "загружено %s\n"
 
-#: src/AudioOpenAL.cpp:810
+#: src/AudioOpenAL.cpp:808
 msgid "AudioOpenAL::setMusicIndex -- begin"
 msgstr "AudioOpenAL::setMusicIndex -- начало"
 
-#: src/AudioOpenAL.cpp:823
+#: src/AudioOpenAL.cpp:821
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
 msgstr "AudioOpenAL::setMusicIndex -- до установки буфера источника в 0"
 
-#: src/AudioOpenAL.cpp:826
+#: src/AudioOpenAL.cpp:824
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
 msgstr "AudioOpenAL::setMusicIndex -- после установки буфера источника в 0"
 
-#: src/AudioOpenAL.cpp:861
+#: src/AudioOpenAL.cpp:859
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr "AudioOpenAL::setMusicIndex -- конец"
 
-#: src/AudioOpenAL.cpp:911 src/AudioOpenAL.cpp:944 src/AudioOpenAL.cpp:988
+#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: нет поддержки списков воспроизведения, не скомпилировано (AudioOpenAL.cpp): %s\n"
 
-#: src/AudioOpenAL.cpp:961
+#: src/AudioOpenAL.cpp:959
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
 msgstr "ОШИБКА: невозможно выделить память в AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:967
+#: src/AudioOpenAL.cpp:965
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:975
+#: src/AudioOpenAL.cpp:973
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
 msgstr "ОШИБКА: alutLoadMP3() ошибка в AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:1007
+#: src/AudioOpenAL.cpp:1005
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: невозможно выделить память в AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1013
+#: src/AudioOpenAL.cpp:1011
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1021
+#: src/AudioOpenAL.cpp:1019
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: alutLoadVorbis() ошибка в AudioOpenAL::loadVorbis\n"
@@ -336,7 +336,7 @@ msgstr "ПРЕДУПРЕЖДЕНИЕ: невозможно записать фа
 msgid "%d EnemyAircraft allocated\n"
 msgstr "%d EnemyAircraft создан\n"
 
-#: src/EnemyAircraft_Straight.cpp:103
+#: src/EnemyAircraft_Straight.cpp:98
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 msgstr ""
@@ -431,7 +431,7 @@ msgstr "рекорды:\n"
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr ""
 
-#: src/main.cpp:118
+#: src/main.cpp:119
 #, c-format
 msgid ""
 "\n"
@@ -468,12 +468,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:230
+#: src/main.cpp:231
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! ОШИБКА !! - "
 
-#: src/main.cpp:254
+#: src/main.cpp:255
 #, c-format
 msgid "Extensions :"
 msgstr "Дополнения :"
@@ -548,7 +548,7 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr ""
 
-#: src/MainGLUT.cpp:93 src/MainSDL.cpp:288
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "ОШИБКА!!! Ошибка OpenGL: %s\n"
@@ -583,7 +583,7 @@ msgstr "   джойстик0 = %p\n"
 msgid "no joysticks found\n"
 msgstr "джойстики не найдены\n"
 
-#: src/MainSDL.cpp:116 src/MainSDL.cpp:349
+#: src/MainSDL.cpp:116 src/MainSDL.cpp:347
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr "Невозможно установить видео режим: %s\n"
@@ -601,22 +601,22 @@ msgstr ""
 "Рендерер      : %s\n"
 "Версия        : %s\n"
 
-#: src/MainSDL.cpp:217
+#: src/MainSDL.cpp:215
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:224
+#: src/MainSDL.cpp:222
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:237
+#: src/MainSDL.cpp:235
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr ""
 
-#: src/MainSDL.cpp:259
+#: src/MainSDL.cpp:257
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -637,22 +637,22 @@ msgstr ""
 "      (вроде \"top\", \"xosview\", и т.д.) Эти утилиты могут помешать\n"
 "      установке постоянного количества кадров в секунду.\n"
 
-#: src/MainSDL.cpp:271
+#: src/MainSDL.cpp:269
 #, c-format
 msgid "exit.\n"
 msgstr "выход.\n"
 
-#: src/MainSDL.cpp:296
+#: src/MainSDL.cpp:294
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "ОШИБКА!!! Ошибка SDL \"%s\"\n"
 
-#: src/MainSDL.cpp:354
+#: src/MainSDL.cpp:352
 #, c-format
 msgid "video mode set "
 msgstr "установка разрешения экрана"
 
-#: src/MainSDL.cpp:361
+#: src/MainSDL.cpp:359
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr ""
@@ -731,7 +731,7 @@ msgstr "клавиша \"%s\" нажата\n"
 msgid "game->gameFrame = %d\n"
 msgstr ""
 
-#: src/MainSDL_Event.cpp:534
+#: src/MainSDL_Event.cpp:538
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr ""
@@ -804,7 +804,7 @@ msgstr "с к о р о с т ь"
 msgid "q u i t"
 msgstr "в ы х о д"
 
-#: src/MenuGL.cpp:143 src/MenuGL.cpp:418
+#: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
 msgstr "ВНИМАНИЕ: используется разрежённый текст для увеличения количества кадров...\n"
@@ -850,77 +850,77 @@ msgstr "невозможно"
 msgid "-"
 msgstr ""
 
-#: src/MenuGL.cpp:292 src/MenuGL.cpp:321
+#: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
 msgstr "рекорды"
 
-#: src/MenuGL.cpp:350
+#: src/MenuGL.cpp:349
 msgid "the"
 msgstr ""
 
-#: src/MenuGL.cpp:354
+#: src/MenuGL.cpp:353
 msgid "reptile"
 msgstr ""
 
-#: src/MenuGL.cpp:358
+#: src/MenuGL.cpp:357
 msgid "labour"
 msgstr ""
 
-#: src/MenuGL.cpp:362
+#: src/MenuGL.cpp:361
 msgid "project"
 msgstr ""
 
-#: src/MenuGL.cpp:423
+#: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
 msgstr "ВНИМАНИЕ: Переход к разрежённому тексту...\n"
 
-#: src/MenuGL.cpp:474
+#: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
 msgstr "низко"
 
-#: src/MenuGL.cpp:475
+#: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
 msgstr "средне"
 
-#: src/MenuGL.cpp:476
+#: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
 msgstr "высоко"
 
-#: src/MenuGL.cpp:481
+#: src/MenuGL.cpp:480
 #, c-format
 msgid "%dx%d"
 msgstr ""
 
-#: src/MenuGL.cpp:485
+#: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
 msgstr "правда"
 
-#: src/MenuGL.cpp:486
+#: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
 msgstr "ложь"
 
-#: src/MenuGL.cpp:792 src/MenuGL.cpp:865 src/MenuGL.cpp:936
+#: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
 msgstr "---- ошибка входа в полноэкранный режим ----"
 
-#: src/MenuGL.cpp:794
+#: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
 msgstr "---- ошибка входа в оконный режим ----"
 
-#: src/MenuGL.cpp:835
+#: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- вы должны пройти уровень %d, чтобы выбрать уровень %d ----"
 
-#: src/MenuGL.cpp:851 src/MenuGL.cpp:922
+#: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
 msgstr "---- ошибка установки разрешения экрана ----"

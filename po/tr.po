@@ -1,49 +1,49 @@
-# German translation for Chromium B.S.U.
+# Turkish translation for Chromium B.S.U.
 # This file is put in the public domain.
 #
 # Translators:
-Evgeni Golov <sargentd@die-welt.net>, 2011
+# Murat Ikilik <>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
 "POT-Creation-Date: 2012-10-09 01:05+0800\n"
-"PO-Revision-Date: 2011-03-22 15:18+0000\n"
-"Last-Translator: Evgeni Golov <sargentd@die-welt.net>\n"
-"Language-Team: \n"
-"Language: de\n"
+"PO-Revision-Date: 2012-03-19 21:25+0000\n"
+"Last-Translator: Murat Ikilik <>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/Audio.cpp:110
 msgid "audio"
-msgstr "Audio"
+msgstr "Ses"
 
 #: src/Audio.cpp:111
 msgid "data"
-msgstr "Daten"
+msgstr "Bilgi"
 
 #: src/Audio.cpp:113
 #, c-format
 msgid "UNKNOWN(type=%d)"
-msgstr "UNBEKANNT(Typ=%d)"
+msgstr "Bilinmiyen(type=%d)"
 
 #: src/Audio.cpp:124
 #, c-format
 msgid "%d CDROM drive(s).\n"
-msgstr "%d CDROM Laufwerk(e).\n"
+msgstr ""
 
 #: src/Audio.cpp:135
 #, c-format
 msgid "Tracks: %d\n"
-msgstr "Tracks: %d\n"
+msgstr ""
 
 #: src/Audio.cpp:139
 #, c-format
 msgid "track %2d: %s\n"
-msgstr "Track %2d: %s\n"
+msgstr ""
 
 #: src/Audio.cpp:148
 #, c-format
@@ -52,9 +52,6 @@ msgid ""
 " Data track(s) only. CD audio not available.\n"
 "\n"
 msgstr ""
-"\n"
-" CD enthällt nur Daten-Tracks. CD Audio wird nicht verfügbar sein.\n"
-"\n"
 
 #: src/Audio.cpp:154
 #, c-format
@@ -62,8 +59,6 @@ msgid ""
 "\n"
 " use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
-"\n"
-" CDROM Nutzung (use_cdrom) aktiviert. Setze es auf '0' in der Konfigurationsdatei um es zu deaktivieren.\n"
 
 #: src/Audio.cpp:155
 #, c-format
@@ -71,57 +66,55 @@ msgid ""
 " Press the 'N' key to skip to next CD track during a game.\n"
 "\n"
 msgstr ""
-"Drücke 'N' um während des Spiels zum nächsten Titel der CD zu springen.\n"
-"\n"
 
 #: src/Audio.cpp:166
 #, c-format
 msgid "ERROR! Could not access CDROM device %d : %s\n"
-msgstr "FEHLER! Konnte nicht auf das CDROM Laufwerk zugreifen %d: %s\n"
+msgstr ""
 
 #: src/Audio.cpp:209
 #, c-format
 msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
-msgstr "CDROM Fehler in AudioOpenAL::pauseGameMusic(%d)\n"
+msgstr ""
 
 #: src/Audio.cpp:210
 #, c-format
 msgid "CDROM status = %d\n"
-msgstr "CDROM Status = %d\n"
+msgstr ""
 
 #: src/Audio.cpp:298
 #, c-format
 msgid "Audio::setMusicIndex(%d)\n"
-msgstr "Audio::setMusicIndex(%d)\n"
+msgstr ""
 
 #: src/Audio.cpp:315
 #, c-format
 msgid "track %d is data - trying next track...\n"
-msgstr "Track %d ist ein Daten-Track, versuche den nächsten...\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:149
 #, c-format
 msgid "alAttenuationScale == 0. Kludge it.\n"
-msgstr "alAttenuationScale == 0. Kludge it.\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:162
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr "AudioOpenAL::Audio done\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:170
 #, c-format
 msgid "stopping OpenAL..."
-msgstr "beende OpenAL..."
+msgstr ""
 
 #: src/AudioOpenAL.cpp:182
 msgid "AudioOpenAL::~Audio()"
-msgstr "AudioOpenAL::~Audio()"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:203
 #, c-format
 msgid "done.\n"
-msgstr "fertig.\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:249
 #, c-format
@@ -131,15 +124,11 @@ msgid ""
 "!!                Audio will be disabled.\n"
 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 msgstr ""
-"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-"!! ACHTUNG !! - Während des Audio-Checks wurden ein oder mehrere Fehler festgestellt.\n"
-"!!                Audio wird deaktiviert.\n"
-"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 
 #: src/AudioOpenAL.cpp:269
 #, c-format
 msgid "AudioOpenAL::initSound() begin...\n"
-msgstr "AudioOpenAL::initSound() begin...\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:273
 #, c-format
@@ -149,49 +138,45 @@ msgid ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 msgstr ""
-"-OpenAL-----------------------------------------------------\n"
-"Hersteller : %s\n"
-"Renderer   : %s\n"
-"Version    : %s\n"
 
 #: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:130
 #, c-format
 msgid "------------------------------------------------------------\n"
-msgstr "------------------------------------------------------------\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:311
 #, c-format
 msgid "Audio.cpp - init %s"
-msgstr "Audio.cpp - init %s"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:324
 #, c-format
 msgid "Audio.cpp - init explosion %d"
-msgstr "Audio.cpp - init explosion %d"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:337
 #, c-format
 msgid "Audio.cpp - init exploPop %d"
-msgstr "Audio.cpp - init exploPop %d"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:350
 msgid "Audio.cpp - initSound complete."
-msgstr "Audio.cpp - initSound fertig."
+msgstr ""
 
 #: src/AudioOpenAL.cpp:430
 #, c-format
 msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
-msgstr "AudioOpenAL::setMusicMode(SoundType mode)\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:465
 #, c-format
 msgid "AudioOpenAL::setSoundVolume(%f)\n"
-msgstr "AudioOpenAL::setSoundVolume(%f)\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:508
 #, c-format
 msgid "Music volume = %f\n"
-msgstr "Musik Lautstärke = %f\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:524
 #, c-format
@@ -199,239 +184,237 @@ msgid ""
 "\n"
 "ERROR! - sound enumerant index %d does not have valid filename!\n"
 msgstr ""
-"\n"
-"FEHLER! - Sound Zähler Index %d hat keinen gültigen Dateinamen!\n"
 
 #: src/AudioOpenAL.cpp:547
 #, c-format
 msgid "alutLoadWAVFile(\"%s\",...);\n"
-msgstr "alutLoadWAVFile(\"%s\",...);\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:563
 #, c-format
 msgid "ERROR!! <%s> alGetError() = %s\n"
-msgstr "FEHLER!! <%s> alGetError() = %s\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:568
 #, c-format
 msgid "ERROR!! <%s> alcGetError() = %s\n"
-msgstr "FEHLER!! <%s> alcGetError() = %s\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:573
 #, c-format
 msgid "ERROR!! <%s> alutGetError() = %s\n"
-msgstr "FEHLER!! <%s> alutGetError() = %s\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
-msgstr "FEHLER: Dateiname zu lang: \"%s\", Zeile %d\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
-msgstr "WARNUNG: MP3 Unterstützung nicht verfügbar: \"%s\", Zeile %d\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
-msgstr "WARNUNG: Ogg/Vorbis Unterstützung nicht verfügbar: \"%s\", Zeile %d\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
-msgstr "WARNUNG: Dateityp nicht erkannt: \"%s\": \"%s\", Zeile %d\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:778
 #, c-format
 msgid "music playlist:\n"
-msgstr "Musik Wiedergabeliste:\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:781
 #, c-format
 msgid " %2d : %s\n"
-msgstr " %2d : %s\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:783
 #, c-format
 msgid "loaded %s\n"
-msgstr "%s geladen\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:808
 msgid "AudioOpenAL::setMusicIndex -- begin"
-msgstr "AudioOpenAL::setMusicIndex -- begin"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:821
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
-msgstr "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:824
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
-msgstr "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:859
 msgid "AudioOpenAL::setMusicIndex -- end"
-msgstr "AudioOpenAL::setMusicIndex -- end"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
-msgstr "WARNUNG: Wiedergabelisten Unterstützung ist nicht einkompiliert (AudioOpenAL.cpp): %s\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:959
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
-msgstr "FEHLER: Konnte Speicher in AudioOpenAL::loadMP3 nicht reservieren\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:965
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
-msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadMP3\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:973
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
-msgstr "FEHLER: alutLoadMP3() fehlgeschlagen in AudioOpenAL::loadMP3\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:1005
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
-msgstr "FEHLER: Konnte Speicher in AudioOpenAL::loadVorbis nicht reservieren\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:1011
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
-msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadVorbis\n"
+msgstr ""
 
 #: src/AudioOpenAL.cpp:1019
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
-msgstr "FEHLER: alutLoadVorbis() fehlgeschlagen in AudioOpenAL::loadVorbis\n"
+msgstr ""
 
 #: src/AudioSDLMixer.cpp:65
 #, c-format
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
-msgstr "FEHLER bein Initializieren von Audio - AudioSDLMixer::initSound()\n"
+msgstr ""
 
 #: src/Config.cpp:114
 #, c-format
 msgid "WARNING: Config::init() has already been called.\n"
-msgstr "WARNUNG: Config::init() wurde bereits ausgeführt.\n"
+msgstr ""
 
 #: src/Config.cpp:243
 #, c-format
 msgid "WARNING: could not read config file (%s)\n"
-msgstr "WARNUNG: Konnte Konfigurationsdatei nicht lesen (%s)\n"
+msgstr ""
 
 #: src/Config.cpp:302
 #, c-format
 msgid "wrote config file (%s)\n"
-msgstr "Konfigurationsdatei geschrieben (%s)\n"
+msgstr ""
 
 #: src/Config.cpp:307
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
-msgstr "WARNUNG: Konnte Konfigurationsdatei nicht schreiben (%s)\n"
+msgstr ""
 
 #: src/EnemyAircraft.cpp:111
 #, c-format
 msgid "%d EnemyAircraft allocated\n"
-msgstr "%d EnemyAircraft reserviert\n"
+msgstr ""
 
 #: src/EnemyAircraft_Straight.cpp:98
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
-msgstr "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
+msgstr ""
 
 #: src/EnemyFleet.cpp:243
 #, c-format
 msgid "num enemies on screen = %d\n"
-msgstr "Anzahl Gegner auf dem Schirm = %d\n"
+msgstr ""
 
 #: src/Global.cpp:114
 #, c-format
 msgid "WARNING: Global::init() has already been called.\n"
-msgstr "WARNUNG: Global::init() wurde bereits ausgeführt.\n"
+msgstr ""
 
 #: src/Global.cpp:211
 #, c-format
 msgid "Starting up..."
-msgstr "Starte..."
+msgstr "Başlatılıyo"
 
 #: src/Global.cpp:242
 #, c-format
 msgid "...startup complete.\n"
-msgstr "...Start vollständig.\n"
+msgstr ""
 
 #: src/Global.cpp:249
 #, c-format
 msgid "Shutting down...\n"
-msgstr "Beende...\n"
+msgstr ""
 
 #: src/Global.cpp:262
 #, c-format
 msgid "...shutdown complete.\n"
-msgstr "...Beenden vollständig.\n"
+msgstr ""
 
 #: src/Global.cpp:269
 #, c-format
 msgid "deleteTextures()\n"
-msgstr "deleteTextures()\n"
+msgstr ""
 
 #: src/Global.cpp:289
 #, c-format
 msgid "Global::loadTextures()\n"
-msgstr "Global::loadTextures()\n"
+msgstr ""
 
 #: src/Global.cpp:352
 #, c-format
 msgid "Generating random sequences\n"
-msgstr "Generiere zufällige Sequenzen\n"
+msgstr ""
 
 #: src/HeroAmmo.cpp:167
 #, c-format
 msgid "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
-msgstr "HeroAmmo::addAmmo(%d, <%f %f %f> )\n"
+msgstr ""
 
 #: src/HeroAmmo.cpp:190
 #, c-format
 msgid "%p <--%p--> %p\n"
-msgstr "%p <--%p--> %p\n"
+msgstr ""
 
 #: src/HiScore.cpp:58
 #, c-format
 msgid "nobody"
-msgstr "Niemand"
+msgstr ""
 
 #: src/HiScore.cpp:83
 #, c-format
 msgid "WARNING: HiScore::init() has already been called.\n"
-msgstr "WARNUNG: HiScore::init() wurde bereits ausgeführt.\n"
+msgstr ""
 
 #: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht schreiben (%s)\n"
+msgstr ""
 
 #: src/HiScore.cpp:328
 #, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "WARNUNG: leere Punktzahldatei (%s)\n"
+msgstr ""
 
 #: src/HiScore.cpp:350
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
+msgstr ""
 
 #: src/HiScore.cpp:442
 #, c-format
 msgid "high scores:\n"
-msgstr "Bestenliste:\n"
+msgstr ""
 
 #: src/HiScore.cpp:448
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
-msgstr "%02d/%02d/%04d %16s %d\n"
+msgstr ""
 
 #: src/main.cpp:119
 #, c-format
@@ -453,52 +436,36 @@ msgid ""
 "--------------------------------------------------\n"
 "\n"
 msgstr ""
-"\n"
-"--------------------------------------------------\n"
-"Chromium B.S.U. Optionen\n"
-"--------------------------------------------------\n"
-"   -f/--fullscreen     : starte im Vollbild Modus\n"
-"   -w/--window         : starte im Fenster Modus\n"
-"   -v/--vidmode <Modus> : Modus 0 =  512 x  384\n"
-"                       :      1 =  640 x  480\n"
-"                       :      2 =  800 x  600\n"
-"                       :      3 = 1024 x  768\n"
-"                       :      4 = 1280 x  960\n"
-"  -na/--noaudio        : deaktiviere Sound\n"
-"  -nb/--noblend        : deaktiviere Blending (OpenGL)\n"
-"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
-"--------------------------------------------------\n"
-"\n"
 
 #: src/main.cpp:231
 #, c-format
 msgid "!! ERROR !! - "
-msgstr "!! FEHLER !! - "
+msgstr ""
 
 #: src/main.cpp:255
 #, c-format
 msgid "Extensions :"
-msgstr "Erweiterungen:"
+msgstr ""
 
 #: src/MainGL.cpp:86
 #, c-format
 msgid "initGL()\n"
-msgstr "initGL()\n"
+msgstr ""
 
 #: src/MainGL.cpp:148
 #, c-format
 msgid "error loading font: %s\n"
-msgstr "Fehler beim Laden der Schriftart: %s\n"
+msgstr ""
 
 #: src/MainGL.cpp:153
 #, c-format
 msgid "error loading font\n"
-msgstr "Fehler beim Laden der Schriftart\n"
+msgstr ""
 
 #: src/MainGL.cpp:183
 #, c-format
 msgid "!!MainGL::drawGL() HUH?\n"
-msgstr "!!MainGL::drawGL() BITTE?\n"
+msgstr ""
 
 #: src/MainGL.cpp:311
 #, c-format
@@ -507,9 +474,6 @@ msgid ""
 "\n"
 "%d"
 msgstr ""
-"Neue Höhstpunktzahl!\n"
-"\n"
-"%d"
 
 #: src/MainGL.cpp:316
 #, c-format
@@ -519,14 +483,10 @@ msgid ""
 "\n"
 "%d"
 msgstr ""
-"n i c h t   s c h l e c h t !\n"
-"Platz: %d\n"
-"\n"
-"%d"
 
 #: src/MainGL.cpp:321
 msgid "l o s e r"
-msgstr "V e r l i e r e r"
+msgstr ""
 
 #: src/MainGL.cpp:379
 #, c-format
@@ -538,57 +498,51 @@ msgid ""
 "c o m p l e t e\n"
 " \n"
 msgstr ""
-"Glückwunsch!\n"
-" \n"
-"L e v e l\n"
-" %d \n"
-"b e e n d e t\n"
-" \n"
 
 #: src/MainGLUT.cpp:77
 #, c-format
 msgid "MainGLUT::run()\n"
-msgstr "MainGLUT::run()\n"
+msgstr ""
 
 #: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
-msgstr "FEHLER!!! OpenGL Fehler: %s\n"
+msgstr ""
 
 #: src/MainGLUT.cpp:235
 #, c-format
 msgid "key = %d\n"
-msgstr "Taste = %d\n"
+msgstr ""
 
 #: src/MainSDL.cpp:74
 #, c-format
 msgid "Couldn't initialize SDL: %s\n"
-msgstr "Konnte SDL nicht initialisieren: %s\n"
+msgstr ""
 
 #: src/MainSDL.cpp:77
 #, c-format
 msgid "SDL initialized.\n"
-msgstr "SDL initialisiert.\n"
+msgstr ""
 
 #: src/MainSDL.cpp:83
 #, c-format
 msgid "num joysticks = %d\n"
-msgstr "Anzahl Joysticks = %d\n"
+msgstr ""
 
 #: src/MainSDL.cpp:85
 #, c-format
 msgid "   joystick 0 = %p\n"
-msgstr "   Joystick 0 = %p\n"
+msgstr ""
 
 #: src/MainSDL.cpp:91
 #, c-format
 msgid "no joysticks found\n"
-msgstr "Keine Joysticks gefunden\n"
+msgstr ""
 
 #: src/MainSDL.cpp:116 src/MainSDL.cpp:347
 #, c-format
 msgid "Couldn't set video mode: %s\n"
-msgstr "Konnte Video Modus nicht setzen: %s\n"
+msgstr ""
 
 #: src/MainSDL.cpp:124
 #, c-format
@@ -598,25 +552,21 @@ msgid ""
 "Renderer   : %s\n"
 "Version    : %s\n"
 msgstr ""
-"-OpenGL-----------------------------------------------------\n"
-"Hersteller : %s\n"
-"Renderer   : %s\n"
-"Version    : %s\n"
 
 #: src/MainSDL.cpp:215
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
-msgstr "init----> %3.2ffps gameSpeed = %g\n"
+msgstr ""
 
 #: src/MainSDL.cpp:222
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
-msgstr "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
+msgstr ""
 
 #: src/MainSDL.cpp:235
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
-msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
+msgstr ""
 
 #: src/MainSDL.cpp:257
 #, c-format
@@ -630,80 +580,71 @@ msgid ""
 "      tools (like 'top', 'xosview', etc.) These kinds of tools\n"
 "      can make it difficult to maintain a steady frame rate.\n"
 msgstr ""
-"%d Geschwindigkeitsanpassungen benötigt.\n"
-"BEACHTE:\n"
-"      Das Spiel konnte nicht dauerhaft 50 Frames pro Sekunde\n"
-"      anzeigen. Du solltest in Betracht ziehen die Auflösung\n"
-"      oder die Details zu verringern.\n"
-"      -ODER-\n"
-"      Vergewissere dich, dass bei dir keine System-Überwachungs\n"
-"      Programme (wie 'top', 'xosview', etc.) laufen. Solche\n"
-"      Programme verhindern oft eine stabile Frame Rate.\n"
 
 #: src/MainSDL.cpp:269
 #, c-format
 msgid "exit.\n"
-msgstr "beendet.\n"
+msgstr ""
 
 #: src/MainSDL.cpp:294
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
-msgstr "FEHLER!!! SDL Fehler '%s'\n"
+msgstr ""
 
 #: src/MainSDL.cpp:352
 #, c-format
 msgid "video mode set "
-msgstr "Video Modus gesetzt"
+msgstr ""
 
 #: src/MainSDL.cpp:359
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
-msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:40
 #, c-format
 msgid "%-5d SDL_ACTIVEEVENT  \n"
-msgstr "%-5d SDL_ACTIVEEVENT  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:41
 #, c-format
 msgid "%-5d SDL_KEYDOWN  \n"
-msgstr "%-5d SDL_KEYDOWN  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:42
 #, c-format
 msgid "%-5d SDL_KEYUP  \n"
-msgstr "%-5d SDL_KEYUP  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:43
 #, c-format
 msgid "%-5d SDL_MOUSEMOTION  \n"
-msgstr "%-5d SDL_MOUSEMOTION  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:44
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONDOWN  \n"
-msgstr "%-5d SDL_MOUSEBUTTONDOWN  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:45
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONUP  \n"
-msgstr "%-5d SDL_MOUSEBUTTONUP  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:46
 #, c-format
 msgid "%-5d SDL_JOYBUTTONDOWN  \n"
-msgstr "%-5d SDL_JOYBUTTONDOWN  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:47
 #, c-format
 msgid "%-5d SDL_JOYBUTTONUP  \n"
-msgstr "%-5d SDL_JOYBUTTONUP  \n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:212
 #, c-format
 msgid "MainSDL::getEvent HUH?\n"
-msgstr "MainSDL::getEvent BITTE?\n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:222
 #, c-format
@@ -711,258 +652,256 @@ msgid ""
 "buffer = \"%s\n"
 "\""
 msgstr ""
-"Buffer = \"%s\n"
-"\""
 
 #: src/MainSDL_Event.cpp:243
 #, c-format
 msgid "mouse active"
-msgstr "Maus aktiv"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:251
 #, c-format
 msgid "focus\n"
-msgstr "Fokus\n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:403
 #, c-format
 msgid "key '%s' pressed\n"
-msgstr "Taste '%s' gedrückt\n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:404
 #, c-format
 msgid "game->gameFrame = %d\n"
-msgstr "game->gameFrame = %d\n"
+msgstr ""
 
 #: src/MainSDL_Event.cpp:538
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
-msgstr "MainSDL::grabMouse(%d)\n"
+msgstr ""
 
 #: src/MenuGL.cpp:43
 msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
-msgstr "  e r l a u b e   e s  -k e i n e m-   G e g n e r   a n   d i r   v o r b e i  z u k o m m  e n !"
+msgstr ""
 
 #: src/MenuGL.cpp:44
 msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
-msgstr "  j e d e r   G e g n e r   d e r    a n   d i r   v o r b  e i k o m m t ,   k o s t e  t   d i c h   e i n   L e b e n !"
+msgstr ""
 
 #: src/MenuGL.cpp:45
 msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
-msgstr "  l a s s e   P o w e r - U  p s   v o r b e  i   f ü r   m e h r   P u n k t e !"
+msgstr ""
 
 #: src/MenuGL.cpp:46
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr "  s t o ß  e   m i t    G e g n e  r n   z u s a m m  e n ,   u m   s i e   z u   z e r s t ö r e n !"
+msgstr ""
 
 #: src/MenuGL.cpp:47
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
-msgstr "  d o p p e l   r e c h t s   K l i c k   f ü r   S e l b s t z e r s t ö r u n g !"
+msgstr ""
 
 #: src/MenuGL.cpp:48
 msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
-msgstr "  z e r s t ö r e   d i c h   s e l b s t   u m   d i e M u n i t i o n   z u   s i c h e r n !"
+msgstr ""
 
 #: src/MenuGL.cpp:49
 msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
-msgstr "  L a d e   d i e   n  e u s t e   V e r s  i o n   v o n   C h r  o m i u m   B . S. U .   a u f   http://chromium-bsu.sf.net/"
+msgstr ""
 
 #: src/MenuGL.cpp:70
 msgid "n e w    g a m e"
-msgstr "N e u e s   S p i e l"
+msgstr ""
 
 #: src/MenuGL.cpp:71
 msgid "l e v e l"
-msgstr "L e v e l"
+msgstr ""
 
 #: src/MenuGL.cpp:72
 msgid "s k i l l"
-msgstr "S t u f e"
+msgstr ""
 
 #: src/MenuGL.cpp:73
 msgid "g f x    d e t a i l"
-msgstr "G r a f i k   D e t a i l"
+msgstr ""
 
 #: src/MenuGL.cpp:74
 msgid "f u l l s c r e e n"
-msgstr "V o l l b i l d"
+msgstr ""
 
 #: src/MenuGL.cpp:75
 msgid "s c r e e n    s i z e"
-msgstr "B i l d s c h i r m   G r ö ß e"
+msgstr ""
 
 #: src/MenuGL.cpp:76
 msgid "s o u n d    f x    v o l u m e"
-msgstr "S o u n d   L a u t s t ä r k e"
+msgstr ""
 
 #: src/MenuGL.cpp:77
 msgid "m u s i c    v o l u m e"
-msgstr "M u s i k   L a u t s t ä r k e"
+msgstr ""
 
 #: src/MenuGL.cpp:78
 msgid "m o v e m e n t   s p e e d"
-msgstr "B e w e g u n g s   G e s c h w i n d i g k e i t"
+msgstr ""
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
-msgstr "B e e n d e n"
+msgstr ""
 
 #: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
-msgstr "ACHTUNG: Benutze 'dünne' Schrift um die Framerate zu verbessern...\n"
+msgstr ""
 
 #: src/MenuGL.cpp:147
 #, c-format
 msgid "MenuGL::createLists\n"
-msgstr "MenuGL::createLists\n"
+msgstr ""
 
 #: src/MenuGL.cpp:162
 msgid "fish in a barrel"
-msgstr "Fisch im Faß"
+msgstr ""
 
 #: src/MenuGL.cpp:163
 msgid "wimp"
-msgstr "Feigling"
+msgstr ""
 
 #: src/MenuGL.cpp:164
 msgid "easy"
-msgstr "leicht"
+msgstr ""
 
 #: src/MenuGL.cpp:165
 msgid "normal"
-msgstr "normal"
+msgstr ""
 
 #: src/MenuGL.cpp:166
 msgid "experienced"
-msgstr "erfahren"
+msgstr ""
 
 #: src/MenuGL.cpp:167
 msgid "fun"
-msgstr "Spaß"
+msgstr ""
 
 #: src/MenuGL.cpp:168
 msgid "insane"
-msgstr "wahnsinnig"
+msgstr ""
 
 #: src/MenuGL.cpp:169
 msgid "impossible"
-msgstr "unmöglich"
+msgstr ""
 
 #: src/MenuGL.cpp:170
 msgid "-"
-msgstr "-"
+msgstr ""
 
 #: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
-msgstr "Bestenliste"
+msgstr ""
 
 #: src/MenuGL.cpp:349
 msgid "the"
-msgstr "the"
+msgstr ""
 
 #: src/MenuGL.cpp:353
 msgid "reptile"
-msgstr "reptile"
+msgstr ""
 
 #: src/MenuGL.cpp:357
 msgid "labour"
-msgstr "labour"
+msgstr ""
 
 #: src/MenuGL.cpp:361
 msgid "project"
-msgstr "project"
+msgstr ""
 
 #: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
-msgstr "ACHTUNG: Kehre zurück zu 'dicker' Schrift...\n"
+msgstr ""
 
 #: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
-msgstr "niedrig"
+msgstr ""
 
 #: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
-msgstr "mittel"
+msgstr ""
 
 #: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
-msgstr "hoch"
+msgstr ""
 
 #: src/MenuGL.cpp:480
 #, c-format
 msgid "%dx%d"
-msgstr "%dx%d"
+msgstr ""
 
 #: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
-msgstr "wahr"
+msgstr ""
 
 #: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
-msgstr "falsch"
+msgstr ""
 
 #: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
-msgstr "---- Fehler bei Nutzung des Vollbildmodus ----"
+msgstr ""
 
 #: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
-msgstr "---- Fehler bei Nutzung des Fenstermodus ----"
+msgstr ""
 
 #: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr "---- du musst Level %d fertig haben um Level %d auszuwählen ----"
+msgstr ""
 
 #: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
-msgstr "---- Fehler beim setzen der Auflösung ----"
+msgstr ""
 
 #: src/PowerUps.cpp:180
 #, c-format
 msgid "active power ups = %d\n"
-msgstr "Aktive Power-Ups = %d\n"
+msgstr ""
 
 #: src/PowerUps.cpp:368
 #, c-format
 msgid "?? PowerUp::seal()"
-msgstr "?? PowerUp::seal()"
+msgstr ""
 
 #: src/ScreenItemAdd.cpp:107
 #, c-format
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
-msgstr "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
+msgstr ""
 
 #: src/StatusDisplay.cpp:651 src/StatusDisplay.cpp:655
 msgid "p a u s e d"
-msgstr "p a u s i e r t"
+msgstr ""
 
 #: src/StatusDisplay.cpp:675
 msgid "do not let -any- ships past you! each one costs you a life!"
-msgstr "Lass -keine- Schiffe an dir vorbei! Jedes kostet dich ein Leben!"
+msgstr ""
 
 #: src/StatusDisplay.cpp:686
 msgid "let super shields pass by for an extra life!"
-msgstr "Lasse Super Schutzschilde an dir vorbei, um ein extra Leben zu erhalten!"
+msgstr ""
 
 #: src/TextFTGL.cpp:35
 #, c-format
 msgid "FTGL: error loading font: %s\n"
-msgstr "FTGL: Fehler beim Laden der Schriftart: %s\n"
+msgstr ""
 
 #: src/TextFTGL.cpp:38
 msgid "FTGL: error loading font"
-msgstr "FTGL: Fehler beim Laden der Schriftart"
+msgstr ""
 
 #. TRANSLATORS: If using the FTGL backend, this should be the font
 #. name of a font that contains all the Unicode characters in use in
@@ -976,7 +915,7 @@ msgstr "FTGL: Fehler beim Laden der Schriftart"
 #.
 #: src/TextFTGL.cpp:105 src/TextGLC.cpp:41
 msgid "Gothic Uralic"
-msgstr "DejaVu Sans"
+msgstr ""
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -984,7 +923,7 @@ msgstr "DejaVu Sans"
 #.
 #: src/TextFTGL.cpp:135
 msgid "/usr/share/fonts/truetype/uralic/gothub__.ttf"
-msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf"
+msgstr ""
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -992,7 +931,7 @@ msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf"
 #.
 #: src/TextFTGL.cpp:141
 msgid "/usr/share/fonts/truetype/uralic/gothu___.ttf"
-msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf"
+msgstr ""
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1000,7 +939,7 @@ msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf"
 #.
 #: src/TextFTGL.cpp:148
 msgid "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
-msgstr "/usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf"
+msgstr ""
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1008,8 +947,8 @@ msgstr "/usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf"
 #.
 #: src/TextFTGL.cpp:154
 msgid "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
-msgstr "/usr/share/fonts/TTF/dejavu/DejaVuSans.ttf"
+msgstr ""
 
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
-msgstr "GLC: konnte den Kontext nicht setzen"
+msgstr ""

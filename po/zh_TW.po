@@ -1,15 +1,15 @@
 # Traditional Chinese translation of the Chromium BSU package.
 # This file is put in the public domain.
-# This file is distributed under the same license as the chromium-bsu package.
+#
+# Translators:
 # Emmanuel Trillaud <etrillaud@gmail.com>, 2010.
 # Wei-Lun Chao <chaoweilun@gmail.com>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: chromium-bsu \n"
+"Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2011-02-07 11:58+0800\n"
-"PO-Revision-Date: 2010-11-06 23:37+0800\n"
+"POT-Creation-Date: 2012-10-09 01:05+0800\n"
+"PO-Revision-Date: 2011-03-22 15:18+0000\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -223,22 +223,22 @@ msgstr "錯誤 !!<%s> alcGetError() = %s\n"
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "錯誤 !!<%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:732
+#: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "錯誤：檔名太長：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:750
+#: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "警告：MP3 支援無法使用：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:761
+#: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "警告：Ogg/Vorbis 支援無法使用：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:765
+#: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "警告：檔案類型無法辨識：\"%s\":\"%s\", 列 %d\n"
@@ -339,7 +339,7 @@ msgstr "警告：無法寫入組態檔案 (%s)\n"
 msgid "%d EnemyAircraft allocated\n"
 msgstr "%d EnemyAircraft 配置\n"
 
-#: src/EnemyAircraft_Straight.cpp:103
+#: src/EnemyAircraft_Straight.cpp:98
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 msgstr "EnemyAircraft_Straight %p…pos[1] = %g，vel[1] = %g\n"
@@ -434,7 +434,7 @@ msgstr "高分：\n"
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
 
-#: src/main.cpp:118
+#: src/main.cpp:119
 #, c-format
 msgid ""
 "\n"
@@ -471,12 +471,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:230
+#: src/main.cpp:231
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! 錯誤 !! - "
 
-#: src/main.cpp:254
+#: src/main.cpp:255
 #, c-format
 msgid "Extensions :"
 msgstr "延伸："
@@ -551,7 +551,7 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:93 src/MainSDL.cpp:288
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "錯誤!!! OpenGL 錯誤：%s\n"
@@ -586,7 +586,7 @@ msgstr "   搖桿 0=%p\n"
 msgid "no joysticks found\n"
 msgstr "找不到任何搖桿\n"
 
-#: src/MainSDL.cpp:116 src/MainSDL.cpp:349
+#: src/MainSDL.cpp:116 src/MainSDL.cpp:347
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr "無法設定視訊模式：%s\n"
@@ -604,22 +604,22 @@ msgstr ""
 "潤算器    ：%s\n"
 "版本      ：%s\n"
 
-#: src/MainSDL.cpp:217
+#: src/MainSDL.cpp:215
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr "init----> %3.2ffps 遊戲速度 = %g\n"
 
-#: src/MainSDL.cpp:224
+#: src/MainSDL.cpp:222
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr "init----> %3.2ffps targetAdj = %g，tmp = %g\n"
 
-#: src/MainSDL.cpp:237
+#: src/MainSDL.cpp:235
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game-> speedAdj = %g\n"
 
-#: src/MainSDL.cpp:259
+#: src/MainSDL.cpp:257
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -640,22 +640,22 @@ msgstr ""
 "     工具 (像是 'top'，'xosview'，etc.) 這類工具\n"
 "     有可能讓它難以保持穩定訊框率。\n"
 
-#: src/MainSDL.cpp:271
+#: src/MainSDL.cpp:269
 #, c-format
 msgid "exit.\n"
 msgstr "離開。\n"
 
-#: src/MainSDL.cpp:296
+#: src/MainSDL.cpp:294
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "錯誤!!! SDL 錯誤 '%s'\n"
 
-#: src/MainSDL.cpp:354
+#: src/MainSDL.cpp:352
 #, c-format
 msgid "video mode set "
 msgstr "視訊模式設定 "
 
-#: src/MainSDL.cpp:361
+#: src/MainSDL.cpp:359
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
@@ -734,7 +734,7 @@ msgstr "鍵「%s」已按\n"
 msgid "game->gameFrame = %d\n"
 msgstr "game->gameFrame = %d\n"
 
-#: src/MainSDL_Event.cpp:534
+#: src/MainSDL_Event.cpp:538
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
@@ -808,7 +808,7 @@ msgstr "滑 鼠 速 度"
 msgid "q u i t"
 msgstr "離 開"
 
-#: src/MenuGL.cpp:143 src/MenuGL.cpp:418
+#: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
 msgstr "注意：使用「細體」文字以改善訊框速率…\n"
@@ -854,77 +854,77 @@ msgstr "不可能"
 msgid "-"
 msgstr "-"
 
-#: src/MenuGL.cpp:292 src/MenuGL.cpp:321
+#: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
 msgstr "高分"
 
-#: src/MenuGL.cpp:350
+#: src/MenuGL.cpp:349
 msgid "the"
 msgstr " "
 
-#: src/MenuGL.cpp:354
+#: src/MenuGL.cpp:353
 msgid "reptile"
 msgstr "爬蟲"
 
-#: src/MenuGL.cpp:358
+#: src/MenuGL.cpp:357
 msgid "labour"
 msgstr "勞力"
 
-#: src/MenuGL.cpp:362
+#: src/MenuGL.cpp:361
 msgid "project"
 msgstr "專案"
 
-#: src/MenuGL.cpp:423
+#: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
 msgstr "注意：還原成「粗體」文字…\n"
 
-#: src/MenuGL.cpp:474
+#: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
 msgstr "低"
 
-#: src/MenuGL.cpp:475
+#: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
 msgstr "中"
 
-#: src/MenuGL.cpp:476
+#: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
 msgstr "高"
 
-#: src/MenuGL.cpp:481
+#: src/MenuGL.cpp:480
 #, c-format
 msgid "%dx%d"
 msgstr ""
 
-#: src/MenuGL.cpp:485
+#: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
 msgstr "真"
 
-#: src/MenuGL.cpp:486
+#: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
 msgstr "假"
 
-#: src/MenuGL.cpp:792 src/MenuGL.cpp:865 src/MenuGL.cpp:936
+#: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
 msgstr "---- 設定全螢幕模式時發生錯誤 ----"
 
-#: src/MenuGL.cpp:794
+#: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
 msgstr "---- 設定視窗模式時發生錯誤 ----"
 
-#: src/MenuGL.cpp:835
+#: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- 在您可以選取等級 %2$d 之前，您必須完成等級 %1$d ----"
 
-#: src/MenuGL.cpp:851 src/MenuGL.cpp:922
+#: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
 msgstr "---- 設定螢幕大小時發生錯誤 ----"

@@ -1,18 +1,19 @@
 # Traditional Chinese translation of the Chromium BSU package.
 # This file is put in the public domain.
-# This file is distributed under the same license as the chromium-bsu package.
+#
+# Translators:
 # Emmanuel Trillaud <etrillaud@gmail.com>, 2010.
 # Wei-Lun Chao <chaoweilun@gmail.com>, 2010.
 # Long Si-Tai-Zi <longsitaizi@gmail.com>,2011
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: chromium-bsu\n"
+"Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2011-02-10 19:48+0800\n"
-"PO-Revision-Date: 2011-03-07 14:36+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese (Simplified) <longsitaizi@gmail.com>\n"
+"POT-Creation-Date: 2012-10-09 01:05+0800\n"
+"PO-Revision-Date: 2011-10-31 04:04+0000\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,8 +157,7 @@ msgstr ""
 "渲染    ：%s\n"
 "版本      ：%s\n"
 
-#: src/AudioOpenAL.cpp:279
-#: src/MainSDL.cpp:130
+#: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:130
 #, c-format
 msgid "------------------------------------------------------------\n"
 msgstr "------------------------------------------------------------\n"
@@ -225,22 +225,22 @@ msgstr "错误 !!<%s> alcGetError() = %s\n"
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "错误 !!<%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:732
+#: src/AudioOpenAL.cpp:730
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "错误：文件名太长：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:750
+#: src/AudioOpenAL.cpp:748
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "警告：MP3 支持无法使用：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:761
+#: src/AudioOpenAL.cpp:759
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "警告：Ogg/Vorbis 支持无法使用：\"%s\", 列 %d\n"
 
-#: src/AudioOpenAL.cpp:765
+#: src/AudioOpenAL.cpp:763
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "警告：文件类型无法识别：\"%s\":\"%s\", 列 %d\n"
@@ -276,9 +276,7 @@ msgstr "AudioOpenAL::setMusicIndex -- 设置来源缓冲区为 0 之后"
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr "AudioOpenAL::setMusicIndex -- 结束"
 
-#: src/AudioOpenAL.cpp:909
-#: src/AudioOpenAL.cpp:942
-#: src/AudioOpenAL.cpp:986
+#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr "警告：播放清单支持无法在 (AudioOpenAL.cpp) 中编译：%s\n"
@@ -343,7 +341,7 @@ msgstr "警告：无法写入组态文件 (%s)\n"
 msgid "%d EnemyAircraft allocated\n"
 msgstr "%d EnemyAircraft 配置\n"
 
-#: src/EnemyAircraft_Straight.cpp:103
+#: src/EnemyAircraft_Straight.cpp:98
 #, c-format
 msgid "EnemyAircraft_Straight %p ... pos[1] = %g, vel[1] = %g\n"
 msgstr "EnemyAircraft_Straight %p…pos[1] = %g，vel[1] = %g\n"
@@ -438,7 +436,7 @@ msgstr "高分：\n"
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
 
-#: src/main.cpp:118
+#: src/main.cpp:119
 #, c-format
 msgid ""
 "\n"
@@ -475,12 +473,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:230
+#: src/main.cpp:231
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! 错误 !! - "
 
-#: src/main.cpp:254
+#: src/main.cpp:255
 #, c-format
 msgid "Extensions :"
 msgstr "延伸："
@@ -555,8 +553,7 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:93
-#: src/MainSDL.cpp:288
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "错误!!! OpenGL 错误：%s\n"
@@ -591,8 +588,7 @@ msgstr "   摇杆 0=%p\n"
 msgid "no joysticks found\n"
 msgstr "找不到任何摇杆\n"
 
-#: src/MainSDL.cpp:116
-#: src/MainSDL.cpp:349
+#: src/MainSDL.cpp:116 src/MainSDL.cpp:347
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr "无法设置视频模式：%s\n"
@@ -610,22 +606,22 @@ msgstr ""
 "渲染    ：%s\n"
 "版本      ：%s\n"
 
-#: src/MainSDL.cpp:217
+#: src/MainSDL.cpp:215
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr "init----> %3.2ffps 游戏速度 = %g\n"
 
-#: src/MainSDL.cpp:224
+#: src/MainSDL.cpp:222
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr "init----> %3.2ffps targetAdj = %g，tmp = %g\n"
 
-#: src/MainSDL.cpp:237
+#: src/MainSDL.cpp:235
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game-> speedAdj = %g\n"
 
-#: src/MainSDL.cpp:259
+#: src/MainSDL.cpp:257
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -646,22 +642,22 @@ msgstr ""
 "     工具 (像是 'top'，'xosview'，etc.) 这类工具\n"
 "     有可能让它难以保持稳定的帧率。\n"
 
-#: src/MainSDL.cpp:271
+#: src/MainSDL.cpp:269
 #, c-format
 msgid "exit.\n"
 msgstr "退出。\n"
 
-#: src/MainSDL.cpp:296
+#: src/MainSDL.cpp:294
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "错误!!! SDL 错误 '%s'\n"
 
-#: src/MainSDL.cpp:354
+#: src/MainSDL.cpp:352
 #, c-format
 msgid "video mode set "
 msgstr "视频模式设置 "
 
-#: src/MainSDL.cpp:361
+#: src/MainSDL.cpp:359
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr "(bpp=%d RGB=%d%d%d depth=%d)\n"
@@ -740,7 +736,7 @@ msgstr "键「%s」已按\n"
 msgid "game->gameFrame = %d\n"
 msgstr "game->gameFrame = %d\n"
 
-#: src/MainSDL_Event.cpp:534
+#: src/MainSDL_Event.cpp:538
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
@@ -813,8 +809,7 @@ msgstr "鼠 标 速 度"
 msgid "q u i t"
 msgstr "退 出"
 
-#: src/MenuGL.cpp:143
-#: src/MenuGL.cpp:418
+#: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
 msgstr "注意：使用「细体」文字以改善帧率…\n"
@@ -860,81 +855,77 @@ msgstr "不可能"
 msgid "-"
 msgstr "-"
 
-#: src/MenuGL.cpp:292
-#: src/MenuGL.cpp:321
+#: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
 msgstr "高分"
 
-#: src/MenuGL.cpp:350
+#: src/MenuGL.cpp:349
 msgid "the"
 msgstr " "
 
-#: src/MenuGL.cpp:354
+#: src/MenuGL.cpp:353
 msgid "reptile"
 msgstr "爬蟲"
 
-#: src/MenuGL.cpp:358
+#: src/MenuGL.cpp:357
 msgid "labour"
 msgstr "劳力"
 
-#: src/MenuGL.cpp:362
+#: src/MenuGL.cpp:361
 msgid "project"
 msgstr "项目"
 
-#: src/MenuGL.cpp:423
+#: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
 msgstr "注意：还原成「粗体」文字…\n"
 
-#: src/MenuGL.cpp:474
+#: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
 msgstr "低"
 
-#: src/MenuGL.cpp:475
+#: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
 msgstr "中"
 
-#: src/MenuGL.cpp:476
+#: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
 msgstr "高"
 
-#: src/MenuGL.cpp:481
+#: src/MenuGL.cpp:480
 #, c-format
 msgid "%dx%d"
 msgstr ""
 
-#: src/MenuGL.cpp:485
+#: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
 msgstr "真"
 
-#: src/MenuGL.cpp:486
+#: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
 msgstr "假"
 
-#: src/MenuGL.cpp:792
-#: src/MenuGL.cpp:865
-#: src/MenuGL.cpp:936
+#: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
 msgstr "---- 设置全屏幕模式时发生错误 ----"
 
-#: src/MenuGL.cpp:794
+#: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
 msgstr "---- 设置窗口模式时发生错误 ----"
 
-#: src/MenuGL.cpp:835
+#: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
 msgstr "---- 在您可以选取等级 %2$d 之前，您必須完成等级 %1$d ----"
 
-#: src/MenuGL.cpp:851
-#: src/MenuGL.cpp:922
+#: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
 msgstr "---- 设置屏幕大小时发生错误 ----"
@@ -954,8 +945,7 @@ msgstr "?? PowerUp::seal()"
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
 msgstr "ScreenItemAdd::putScreenItems() 英雄??? 呃???\n"
 
-#: src/StatusDisplay.cpp:651
-#: src/StatusDisplay.cpp:655
+#: src/StatusDisplay.cpp:651 src/StatusDisplay.cpp:655
 msgid "p a u s e d"
 msgstr "暂 停"
 
@@ -986,8 +976,7 @@ msgstr "FTGL：载入字型时发生错误"
 #. if some characters are not available though, so choose a font
 #. that your language looks good in.
 #.
-#: src/TextFTGL.cpp:105
-#: src/TextGLC.cpp:41
+#: src/TextFTGL.cpp:105 src/TextGLC.cpp:41
 msgid "Gothic Uralic"
 msgstr "Gothic Uralic"
 
@@ -1026,4 +1015,3 @@ msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
 msgstr "GLC：无法设置狀态组合"
-
