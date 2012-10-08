@@ -25,6 +25,11 @@ MAINTAINERCLEANFILES = \
 	po/quot.sed \
 	po/remove-potcdate.sin \
 	po/*.pot \
+	po/*.po~ \
+	m4/fcntl-o.m4 \
+	m4/intl.m4 \
+	m4/intldir.m4 \
+	m4/threadlib.m4 \
 	m4/acx_pthread.m4 \
 	m4/ax_check_gl.m4 \
 	m4/ax_check_glu.m4 \
