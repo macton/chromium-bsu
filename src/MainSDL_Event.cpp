@@ -422,9 +422,9 @@ void MainSDL::keyMove()
 		if( keystate[SDLK_UP]    || keystate[SDLK_KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
 		if( keystate[SDLK_DOWN]  || keystate[SDLK_KP2] ) key_speed_y += 2.0 + abs(key_speed_y)*0.4;
 		if( keystate[SDLK_KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP9] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP3] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP9] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP3] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[SDLK_KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
 		//float s = (1.0-game->speedAdj)+(game->speedAdj*0.7);
 		float s = 0.7;
 		key_speed_x *= s;
