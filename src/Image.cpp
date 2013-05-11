@@ -13,8 +13,8 @@
 
 #if IMAGE_SDL
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
+#include <SDL.h>
+#include <SDL_opengl.h>
 #include <SDL/SDL_image.h>
 
 #elif IMAGE_GLPNG

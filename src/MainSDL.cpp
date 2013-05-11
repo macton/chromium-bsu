@@ -18,7 +18,7 @@
 
 #include <cstdlib>
 #include <cmath>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #ifdef ENABLE_WINDOW_ICON
 #include <SDL/SDL_image.h>
