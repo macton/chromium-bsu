@@ -109,7 +109,7 @@ AC_ARG_ENABLE(glpng, AS_HELP_STRING([--disable-glpng], [do not use glpng]))
 AC_ARG_ENABLE(sdlimage, AS_HELP_STRING([--disable-sdlimage], [do not use SDL_image]))
 
 if test "x$enable_sdlimage" != xno ; then
-	AC_CHECK_LIB([SDL_image], [IMG_Load], [HAVE_SDLIMAGE=yes], [HAVE_SDLIMAGE=no])
+	PKG_CHECK_MODULES([SDLIMAGE], [SDL_image], [HAVE_SDLIMAGE=yes], [HAVE_SDLIMAGE=no])
 fi
 
 if test "x$enable_glpng" != xno ; then
@@ -230,7 +230,9 @@ if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x
 	AC_SUBST(IMAGE_LIBS)
 	IMAGE_TYPE=glpng
 	if test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
-		IMAGE_LIBS="$IMAGE_LIBS -lSDL_image"
+		IMAGE_CFLAGS="$IMAGE_CFLAGS $SDLIMAGE_CFLAGS"
+		AC_SUBST(IMAGE_CFLAGS)
+		IMAGE_LIBS="$IMAGE_LIBS $SDLIMAGE_LIBS"
 		AC_SUBST(IMAGE_LIBS)
 		AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
 		WINDOW_ICON=yes
@@ -241,9 +243,9 @@ if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x
 elif test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
 	AC_MSG_WARN([Using SDL_image to load images into textures, some rendering artifacts may be present])
 	AC_DEFINE(IMAGE_SDL, 1, [define to use SDL_image])
-	IMAGE_CFLAGS=""
+	IMAGE_CFLAGS="$SDLIMAGE_CFLAGS"
 	AC_SUBST(IMAGE_CFLAGS)
-	IMAGE_LIBS=-lSDL_image
+	IMAGE_LIBS="$SDLIMAGE_LIBS"
 	AC_SUBST(IMAGE_LIBS)
 	IMAGE_TYPE=SDL_image
 	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])

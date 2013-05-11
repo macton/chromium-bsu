@@ -21,7 +21,7 @@
 #include <SDL.h>
 
 #ifdef ENABLE_WINDOW_ICON
-#include <SDL/SDL_image.h>
+#include <SDL_image.h>
 #endif
 
 #include "compatibility.h"
