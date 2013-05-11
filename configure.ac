@@ -101,7 +101,7 @@ if test "x$enable_openal" != xno ; then
 fi
 
 if test "x$enable_sdlmixer" != xno ; then
-	AC_CHECK_LIB([SDL_mixer], [Mix_OpenAudio], [HAVE_SDLMIXER=yes], [HAVE_SDLMIXER=no])
+	PKG_CHECK_MODULES([SDLMIXER], [SDL_mixer], [HAVE_SDLMIXER=yes], [HAVE_SDLMIXER=no])
 fi
 
 # Need glpng or SDL_image so we can display PNG images using OpenGL
@@ -213,9 +213,9 @@ if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes -a "x$enable_openal" 
 	CFLAGS="${ac_save_CFLAGS}"
 elif test "x$HAVE_SDLMIXER" = xyes -a "x$enable_sdlmixer" != xno ; then
 	AC_DEFINE(AUDIO_SDLMIXER, 1, [define to use SDL Mixer])
-	AUDIO_CFLAGS=""
+	AUDIO_CFLAGS="$SDLMIXER_CFLAGS"
 	AC_SUBST(AUDIO_CFLAGS)
-	AUDIO_LIBS=-lSDL_mixer
+	AUDIO_LIBS="$SDLMIXER_LIBS"
 	AC_SUBST(AUDIO_LIBS)
 	AUDIO_TYPE="SDL mixer"
 else
