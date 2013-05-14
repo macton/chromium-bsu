@@ -269,7 +269,11 @@ void	Audio::setMusicVolume(float value)
 		string command = "amixer set CD ";
 		command += volume.str();
 		command += "% unmute";
-		system(command.c_str());
+		int status = system(command.c_str());
+		if( status == -1 || !(WIFEXITED(status) && WEXITSTATUS(status) == 0) )
+		{
+			fprintf(stderr, _("Could not set CD volume, amixer returned status %d\n"), status);
+		}
 	}
 #endif // __linux__
 }

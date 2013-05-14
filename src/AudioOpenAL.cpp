@@ -944,7 +944,7 @@ bool AudioOpenAL::loadMP3(const char *filename)
 #else//USE_PLAYLIST
 	FILE	*file;
 	struct	stat sbuf;
-	int		size;
+	size_t		size;
 	void	*data;
 	
 	if(stat(filename, &sbuf) == -1) 
@@ -966,7 +966,13 @@ bool AudioOpenAL::loadMP3(const char *filename)
 		free(data);
 		return false;
 	}	
-	fread(data, 1, size, file);
+	if( fread(data, 1, size, file) != size )
+	{
+		fprintf(stderr, _("ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"), filename);
+		fclose(file);
+		free(data);
+		return false;
+	}
 	fclose(file);
 	if( !(alutLoadMP3(buffer[MusicGame], data, size)) ) 
 	{
@@ -990,7 +996,7 @@ bool AudioOpenAL::loadVorbis(const char *filename)
 	{
 		FILE	*file;
 		struct	stat sbuf;
-		int		size;
+		size_t		size;
 		void	*data;
 		
 		if(stat(filename, &sbuf) == -1) 
@@ -1012,7 +1018,13 @@ bool AudioOpenAL::loadVorbis(const char *filename)
 			free(data);
 			return false;
 		}	
-		fread(data, 1, size, file);
+		if( fread(data, 1, size, file) != size )
+		{
+			fprintf(stderr, _("ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"), filename);
+			fclose(file);
+			free(data);
+			return false;
+                }
 		fclose(file);
 		if( !(alutLoadVorbis(buffer[MusicGame], data, size)) ) 
 		{

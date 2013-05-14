@@ -272,7 +272,8 @@ bool HiScore::readFile()
 				tzset();
 
 				// Discard the comment line
-				fscanf(file,"%*[^\n]");
+				if( fscanf(file,"%*[^\n]") == EOF )
+					fprintf(stderr, _("WARNING: error reading score file (%s)\n"), getFileName());
 
 				char name[100];
 				struct tm time;
@@ -314,9 +315,12 @@ bool HiScore::readFile()
 
 			} else {
 				// Nasty old memory dump format
-				fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-				fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-				fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+				if( fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
+				if( fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
+				if( fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
 				fclose(file);
 				// Resave the file in plain text format
 				saveFile();
@@ -335,9 +339,12 @@ bool HiScore::readFile()
 		file = fopen(fileName, "r");
 		if(file)
 		{
-			fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file);
-			fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file);
-			fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file);
+			if( fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
+			if( fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
+			if( fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
+				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
 			fclose(file);
 
 			// Try to save the new file and delete the old one if successful
