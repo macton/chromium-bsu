@@ -394,7 +394,6 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 {
 	int i, l, lines = 1;
 	float	aa, ca;
-	float	clr;
 	float	x_sin, y_sin, y, min_y;
 	float	width, height;
 	char	*walker,*newline;
@@ -429,7 +428,6 @@ void MainGL::drawTextGL(const char *string, float pulse, float scale)
 		{
 			for(i = 0; i < 6; i++)
 			{
-				clr = ((float)i)/5.0;
 				glColor4f(1.0, ca*ca*0.3, ca*0.3, aa*aa);
 				x_sin = 1.75*sin(i+game->frame*0.06);
 				y_sin = 0.75*sin(i+game->frame*0.09);
