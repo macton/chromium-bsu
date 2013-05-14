@@ -52,7 +52,6 @@ dist_png_DATA = \
 	heroShields.png \
 	heroSuper.png \
 	icon32.png \
-	icon64.png \
 	life.png \
 	menu_back.png \
 	menu_updown.png \

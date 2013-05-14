@@ -102,7 +102,7 @@ MainSDL::MainSDL(int argc, char **argv)
 	#define ICON "png/icon32.png"
 #else
 	// Elsewhere SDL can do any size icons
-	#define ICON "png/icon64.png"
+	#define ICON "png/hero.png"
 #endif
 	SDL_Surface *icon = IMG_Load(dataLoc(ICON));
 	if (icon) {
