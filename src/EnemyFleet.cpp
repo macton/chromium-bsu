@@ -290,7 +290,8 @@ void	EnemyFleet::update()
 		//               we know when they're hurting...
 		if((int)thisEnemy->type >= (int)EnemyBoss00)
 		{
-			float s[2] = { thisEnemy->size[0]*0.7, thisEnemy->size[1]*0.7 };
+			float size = thisEnemy->size[0]*0.7;
+			float s[2] = { size, size };
 			if( thisEnemy->damage > thisEnemy->baseDamage*0.7 )
 				if( !(game->gameFrame%18) )
 				{

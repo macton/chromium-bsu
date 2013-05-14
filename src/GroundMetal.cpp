@@ -135,7 +135,8 @@ void GroundMetal::drawGL()
 		
 		if(seg->pos[1] < -s2)
 		{
-			float p[3] = { 0.0, seg->pos[1]+s2+s2, 0.0};
+			float pos1 = seg->pos[1]+s2+s2;
+			float p[3] = { 0.0, pos1, 0.0};
 			float s[2] = { size, size };
 			seg->back->next = 0;
 			delete seg;

@@ -85,7 +85,8 @@ void GroundSea::drawGL()
 		{
 			seg->back->next = 0;
 			delete seg;
-			float p[3] = {0.0, size*2.0, 0.0};
+			float pos1 = size*2.0;
+			float p[3] = {0.0, pos1, 0.0};
 			float s[2] = { size, size };
 			tmp = new GroundSeaSegment(p, s, this);
 			rootSeg->next->back = tmp;

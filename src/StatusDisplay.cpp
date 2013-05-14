@@ -355,8 +355,10 @@ void StatusDisplay::drawGL(HeroAircraft	*hero)
 		if(config->gfxLevel() > 1 && (!game->game_pause) )
 		{
 			float p[3] = { 0.0, 0.0, hero->pos[2] };
-			float v[3] = { 0.01*SRAND, 0.0, 0.0 };
-			float c[4] = { 1.0, 1.0, 0.7, 1.0-sls*sls };
+			float v0   = 0.01*SRAND;
+			float v[3] = { v0, 0.0, 0.0 };
+			float c3   = 1.0-sls*sls;
+			float c[4] = { 1.0, 1.0, 0.7, c3 };
 			switch(game->gameFrame%2)
 			{
 				case 0:
