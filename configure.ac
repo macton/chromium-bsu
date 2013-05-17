@@ -224,34 +224,38 @@ fi
 
 if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x$HAVE_GLPNG_LIB" = xyes -a "x$enable_glpng" != no ; then
 	AC_DEFINE(IMAGE_GLPNG, 1, [define to use glpng])
-	IMAGE_CFLAGS=""
-	AC_SUBST(IMAGE_CFLAGS)
-	IMAGE_LIBS=-lglpng
-	AC_SUBST(IMAGE_LIBS)
 	IMAGE_TYPE=glpng
-	if test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
-		IMAGE_CFLAGS="$IMAGE_CFLAGS $SDLIMAGE_CFLAGS"
-		AC_SUBST(IMAGE_CFLAGS)
-		IMAGE_LIBS="$IMAGE_LIBS $SDLIMAGE_LIBS"
-		AC_SUBST(IMAGE_LIBS)
-		AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
-		WINDOW_ICON=yes
-	else
-		AC_MSG_WARN([SDL_image is not usable, window icon will not be set])
-		WINDOW_ICON=no
-	fi
+	IMAGE_GLPNG=yes
 elif test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
 	AC_MSG_WARN([Using SDL_image to load images into textures, some rendering artifacts may be present])
 	AC_DEFINE(IMAGE_SDL, 1, [define to use SDL_image])
-	IMAGE_CFLAGS="$SDLIMAGE_CFLAGS"
-	AC_SUBST(IMAGE_CFLAGS)
-	IMAGE_LIBS="$SDLIMAGE_LIBS"
-	AC_SUBST(IMAGE_LIBS)
 	IMAGE_TYPE=SDL_image
-	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
-	WINDOW_ICON=yes
+	IMAGE_SDLIMAGE=yes
 else
 	AC_MSG_ERROR([cannot find glpng or SDL_image (image loader)])
+fi
+
+if test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
+	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
+	WINDOW_ICON=yes
+	IMAGE_SDLIMAGE=yes
+else
+	AC_MSG_WARN([SDL_image is not usable, window icon will not be set])
+	WINDOW_ICON=no
+fi
+
+if test "x$IMAGE_GLPNG" = xyes ; then
+	IMAGE_CFLAGS="$IMAGE_CFLAGS"
+	AC_SUBST(IMAGE_CFLAGS)
+	IMAGE_LIBS="$IMAGE_LIBS -lglpng"
+	AC_SUBST(IMAGE_LIBS)
+fi
+
+if test "x$IMAGE_SDLIMAGE" = xyes ; then
+	IMAGE_CFLAGS="$IMAGE_CFLAGS $SDLIMAGE_CFLAGS"
+	AC_SUBST(IMAGE_CFLAGS)
+	IMAGE_LIBS="$IMAGE_LIBS $SDLIMAGE_LIBS"
+	AC_SUBST(IMAGE_LIBS)
 fi
 
 AC_CONFIG_FILES([
