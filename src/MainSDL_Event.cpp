@@ -546,7 +546,11 @@ void MainSDL::mouseMotion(SDL_Event *event)
 			if(xDiff || yDiff)
 			{
 				game->hero->moveEvent(xDiff, yDiff);
+#if SDL_VERSION_ATLEAST(2,0,0)
+				SDL_WarpMouseInWindow(window, xMid, yMid);
+#else
 				SDL_WarpMouse(xMid, yMid);
+#endif
 			}
 		}
 		xLast = xNow;
@@ -636,7 +640,11 @@ void MainSDL::grabMouse(bool status, bool warpmouse)
 		return;
 	xMid = config->screenW()/2;
 	yMid = config->screenH()/2;
+#if SDL_VERSION_ATLEAST(2,0,0)
+	SDL_WarpMouseInWindow(window, xMid, yMid);
+#else
 	SDL_WarpMouse(xMid, yMid);
+#endif
 	xLast = xMid;
 	yLast = yMid;
 }

@@ -49,6 +49,10 @@ private:
 	SDL_Event	*getEvent(FILE *infile);
 	
 private:
+#if SDL_VERSION_ATLEAST(2,0,0)
+	SDL_Window *window;
+	SDL_GLContext context;
+#endif
 	SDL_Joystick	*joystick;
 	int		fire;
 	bool	mouseToggle;

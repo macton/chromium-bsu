@@ -125,13 +125,19 @@ MainSDL::MainSDL(int argc, char **argv)
 #endif
 	SDL_Surface *icon = IMG_Load(dataLoc(ICON));
 	if (icon) {
+#if SDL_VERSION_ATLEAST(2,0,0)
+		SDL_SetWindowIcon(window, icon);
+#else
 		SDL_WM_SetIcon(icon, NULL);
+#endif
 		SDL_FreeSurface(icon);
 	}
 #endif
 
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 	//-- Set the window manager title bar
 	SDL_WM_SetCaption( "Chromium B.S.U.", "Chromium B.S.U." );
+#endif
 	
 	//-- Create game
 	game->createGame();
@@ -162,7 +168,11 @@ bool MainSDL::run()
 		//-- Draw our scene...
 		game->mainGL->drawGL();
 		
+#if SDL_VERSION_ATLEAST(2,0,0)
+		SDL_GL_SwapWindow(window);
+#else
 		SDL_GL_SwapBuffers( );
+#endif
 		
 		#ifdef CHECK_ERRORS
 		checkErrors();
@@ -306,10 +316,16 @@ bool MainSDL::setVideoMode()
 	Config	*config = Config::instance();
 	int w;
 	int h;
-	Uint32 video_flags;
+	Uint32 video_flags = 0;
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 	SDL_Surface *glSurface = 0;
+#endif
 	
 	//-- Set the flags we want to use for setting the video mode
+#if SDL_VERSION_ATLEAST(2,0,0)
+#define SDL_OPENGL SDL_WINDOW_OPENGL
+#define SDL_FULLSCREEN SDL_WINDOW_FULLSCREEN
+#endif
 	video_flags = SDL_OPENGL;
 	if(config->fullScreen())
 		video_flags |= SDL_FULLSCREEN;
@@ -318,18 +334,24 @@ bool MainSDL::setVideoMode()
 	h = config->screenH();
 	
 	int rs, gs, bs, ds;
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 	int bpp;
+#endif
 	if(config->trueColor())
 	{
 		//-- 24 bit color
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 		bpp = 24;
+#endif
 		rs = gs = bs = 8;
 		ds = 16;
 	}
 	else
 	{
 		//-- 16 bit color
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 		bpp = 16;
+#endif
 		rs = bs = 5;
 		gs = 6;
 		ds = 16;
@@ -342,6 +364,19 @@ bool MainSDL::setVideoMode()
 	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,	ds );
 	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 	
+#if SDL_VERSION_ATLEAST(2,0,0)
+	window = SDL_CreateWindow("Chromium B.S.U.", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, video_flags);
+	if (!window) {
+		fprintf(stderr, _("Couldn't create window: %s\n"), SDL_GetError());
+		return false;
+	}
+
+	context = SDL_GL_CreateContext(window);
+	if (!context) {
+		fprintf(stderr, _("Couldn't create context: %s\n"), SDL_GetError());
+		return false;
+	}
+#else
 	if ( (glSurface = SDL_SetVideoMode( w, h, bpp, video_flags )) == NULL ) 
 	{
 		fprintf(stderr, _("Couldn't set video mode: %s\n"), SDL_GetError());
@@ -351,12 +386,15 @@ bool MainSDL::setVideoMode()
 	{
 		if( config->debug() ) fprintf(stderr, _("video mode set "));
 	}
+#endif
 	
 	SDL_GL_GetAttribute( SDL_GL_RED_SIZE, 	&rs);
 	SDL_GL_GetAttribute( SDL_GL_GREEN_SIZE,	&gs);
 	SDL_GL_GetAttribute( SDL_GL_BLUE_SIZE,	&bs);
 	SDL_GL_GetAttribute( SDL_GL_DEPTH_SIZE,	&ds);
+#if !(SDL_VERSION_ATLEAST(2,0,0))
 	if( config->debug() ) fprintf(stderr, _("(bpp=%d RGB=%d%d%d depth=%d)\n"), glSurface->format->BitsPerPixel, rs, gs, bs, ds);
+#endif
 
 	if(game->mainGL)
 		game->mainGL->initGL();
