@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2012-10-09 01:05+0800\n"
+"POT-Creation-Date: 2013-05-25 13:13+0800\n"
 "PO-Revision-Date: 2011-03-22 15:18+0000\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -90,12 +90,17 @@ msgstr "CDROM 發生錯誤於 AudioOpenAL::pauseGameMusic(%d)\n"
 msgid "CDROM status = %d\n"
 msgstr "CDROM 狀態 = %d\n"
 
-#: src/Audio.cpp:298
+#: src/Audio.cpp:275
+#, c-format
+msgid "Could not set CD volume, amixer returned status %d\n"
+msgstr ""
+
+#: src/Audio.cpp:302
 #, c-format
 msgid "Audio::setMusicIndex(%d)\n"
 msgstr "音訊::setMusicIndex(%d)\n"
 
-#: src/Audio.cpp:315
+#: src/Audio.cpp:319
 #, c-format
 msgid "track %d is data - trying next track...\n"
 msgstr "軌段 %d 是資料 - 嘗試下一軌段…\n"
@@ -274,7 +279,7 @@ msgstr "AudioOpenAL::setMusicIndex -- 設定來源緩衝區為 0 之後"
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr "AudioOpenAL::setMusicIndex -- 結束"
 
-#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
+#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:992
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr "警告：播放清單支援無法在 (AudioOpenAL.cpp) 中編譯：%s\n"
@@ -289,22 +294,32 @@ msgstr "錯誤：無法在 AudioOpenAL::loadMP3 中配置記憶體\n"
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "錯誤：無法在 AudioOpenAL::loadMP3 中開啟「%s」\n"
 
-#: src/AudioOpenAL.cpp:973
+#: src/AudioOpenAL.cpp:971
+#, fuzzy, c-format
+msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"
+msgstr "錯誤：無法在 AudioOpenAL::loadMP3 中開啟「%s」\n"
+
+#: src/AudioOpenAL.cpp:979
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
 msgstr "錯誤：alutLoadMP3() 在 AudioOpenAL::loadMP3 中失敗\n"
 
-#: src/AudioOpenAL.cpp:1005
+#: src/AudioOpenAL.cpp:1011
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
 msgstr "錯誤：無法在 AudioOpenAL::loadVorbis 中配置記憶體\n"
 
-#: src/AudioOpenAL.cpp:1011
+#: src/AudioOpenAL.cpp:1017
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "錯誤：無法在 AudioOpenAL::loadVorbis 中開啟「%s」\n"
 
-#: src/AudioOpenAL.cpp:1019
+#: src/AudioOpenAL.cpp:1023
+#, fuzzy, c-format
+msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"
+msgstr "錯誤：無法在 AudioOpenAL::loadVorbis 中開啟「%s」\n"
+
+#: src/AudioOpenAL.cpp:1031
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
 msgstr "錯誤：alutLoadVorbis() 在 AudioOpenAL::loadVorbis 中失敗\n"
@@ -414,22 +429,33 @@ msgstr "警告：HiScore::init() 已呼叫。\n"
 msgid "WARNING: could not write score file (%s)\n"
 msgstr "警告：無法寫入分數檔案 (%s)\n"
 
-#: src/HiScore.cpp:328
+#: src/HiScore.cpp:276
+#, fuzzy, c-format
+msgid "WARNING: error reading score file (%s)\n"
+msgstr "警告：無法讀取分數檔案 (%s)\n"
+
+#: src/HiScore.cpp:319 src/HiScore.cpp:321 src/HiScore.cpp:323
+#: src/HiScore.cpp:343 src/HiScore.cpp:345 src/HiScore.cpp:347
+#, fuzzy, c-format
+msgid "WARNING: error reading old score file (%s)\n"
+msgstr "警告：無法讀取分數檔案 (%s)\n"
+
+#: src/HiScore.cpp:332
 #, c-format
 msgid "WARNING: empty score file (%s)\n"
 msgstr "警告：空的分數檔案 (%s)\n"
 
-#: src/HiScore.cpp:350
+#: src/HiScore.cpp:357
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
 msgstr "警告：無法讀取分數檔案 (%s)\n"
 
-#: src/HiScore.cpp:442
+#: src/HiScore.cpp:449
 #, c-format
 msgid "high scores:\n"
 msgstr "高分：\n"
 
-#: src/HiScore.cpp:448
+#: src/HiScore.cpp:455
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
@@ -944,15 +970,15 @@ msgstr "?? PowerUp::seal()"
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
 msgstr "ScreenItemAdd::putScreenItems() 英雄??? 呃???\n"
 
-#: src/StatusDisplay.cpp:651 src/StatusDisplay.cpp:655
+#: src/StatusDisplay.cpp:653 src/StatusDisplay.cpp:657
 msgid "p a u s e d"
 msgstr "暫 停"
 
-#: src/StatusDisplay.cpp:675
+#: src/StatusDisplay.cpp:677
 msgid "do not let -any- ships past you! each one costs you a life!"
 msgstr "不要讓 *任何* 的船隻從您旁邊越過！每一個都會耗損您的生命！"
 
-#: src/StatusDisplay.cpp:686
+#: src/StatusDisplay.cpp:688
 msgid "let super shields pass by for an extra life!"
 msgstr "讓超級防護罩從旁越過以得到額外的生命！"
 

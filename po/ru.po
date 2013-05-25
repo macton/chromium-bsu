@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2012-10-09 01:05+0800\n"
+"POT-Creation-Date: 2013-05-25 13:13+0800\n"
 "PO-Revision-Date: 2011-08-16 12:04+0000\n"
 "Last-Translator: Евгений Лежнин <z_lezhnin@mail2000.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,12 +89,17 @@ msgstr "Ошибка CD-привода в AudioOpenAL::pauseGameMusic(%d)\n"
 msgid "CDROM status = %d\n"
 msgstr "Статус CD-привода = %d\n"
 
-#: src/Audio.cpp:298
+#: src/Audio.cpp:275
+#, c-format
+msgid "Could not set CD volume, amixer returned status %d\n"
+msgstr ""
+
+#: src/Audio.cpp:302
 #, c-format
 msgid "Audio::setMusicIndex(%d)\n"
 msgstr ""
 
-#: src/Audio.cpp:315
+#: src/Audio.cpp:319
 #, c-format
 msgid "track %d is data - trying next track...\n"
 msgstr "дорожка %d не является композицией, попытка воспроизвести следующую дорожку...\n"
@@ -271,7 +276,7 @@ msgstr "AudioOpenAL::setMusicIndex -- после установки буфера
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr "AudioOpenAL::setMusicIndex -- конец"
 
-#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:986
+#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:992
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: нет поддержки списков воспроизведения, не скомпилировано (AudioOpenAL.cpp): %s\n"
@@ -286,22 +291,32 @@ msgstr "ОШИБКА: невозможно выделить память в Audi
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:973
+#: src/AudioOpenAL.cpp:971
+#, fuzzy, c-format
+msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"
+msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadMP3\n"
+
+#: src/AudioOpenAL.cpp:979
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
 msgstr "ОШИБКА: alutLoadMP3() ошибка в AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:1005
+#: src/AudioOpenAL.cpp:1011
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: невозможно выделить память в AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1011
+#: src/AudioOpenAL.cpp:1017
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1019
+#: src/AudioOpenAL.cpp:1023
+#, fuzzy, c-format
+msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"
+msgstr "ОШИБКА: не могу открыть \"%s\" в AudioOpenAL::loadVorbis\n"
+
+#: src/AudioOpenAL.cpp:1031
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
 msgstr "ОШИБКА: alutLoadVorbis() ошибка в AudioOpenAL::loadVorbis\n"
@@ -411,22 +426,33 @@ msgstr "ПРЕДУПРЕЖДЕНИЕ: HiScore::init() уже вызывалас�
 msgid "WARNING: could not write score file (%s)\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: не могу записать счёт (%s).\n"
 
-#: src/HiScore.cpp:328
+#: src/HiScore.cpp:276
+#, fuzzy, c-format
+msgid "WARNING: error reading score file (%s)\n"
+msgstr "ПРЕДУПРЕЖДЕНИЕ: не могу прочитать счёт (%s).\n"
+
+#: src/HiScore.cpp:319 src/HiScore.cpp:321 src/HiScore.cpp:323
+#: src/HiScore.cpp:343 src/HiScore.cpp:345 src/HiScore.cpp:347
+#, fuzzy, c-format
+msgid "WARNING: error reading old score file (%s)\n"
+msgstr "ПРЕДУПРЕЖДЕНИЕ: не могу прочитать счёт (%s).\n"
+
+#: src/HiScore.cpp:332
 #, c-format
 msgid "WARNING: empty score file (%s)\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: счёт пустой (%s).\n"
 
-#: src/HiScore.cpp:350
+#: src/HiScore.cpp:357
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: не могу прочитать счёт (%s).\n"
 
-#: src/HiScore.cpp:442
+#: src/HiScore.cpp:449
 #, c-format
 msgid "high scores:\n"
 msgstr "рекорды:\n"
 
-#: src/HiScore.cpp:448
+#: src/HiScore.cpp:455
 #, c-format
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr ""
@@ -940,15 +966,15 @@ msgstr ""
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
 msgstr ""
 
-#: src/StatusDisplay.cpp:651 src/StatusDisplay.cpp:655
+#: src/StatusDisplay.cpp:653 src/StatusDisplay.cpp:657
 msgid "p a u s e d"
 msgstr "п а у з а"
 
-#: src/StatusDisplay.cpp:675
+#: src/StatusDisplay.cpp:677
 msgid "do not let -any- ships past you! each one costs you a life!"
 msgstr "не позволяйте вражеским кораблям проходить через низ экрана, любой будет стоить вам жизни!"
 
-#: src/StatusDisplay.cpp:686
+#: src/StatusDisplay.cpp:688
 msgid "let super shields pass by for an extra life!"
 msgstr "упустите оранжевый пингвинний щит и получите ещё одну жизнь!"
 
