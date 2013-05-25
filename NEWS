@@ -1,3 +1,9 @@
+Chromium B.S.U. 0.9.15.1
+ - Fix diagonal keypad keys
+ - Add Russian, Simplified Chinese translations
+ - Translation updates
+ - Compile fixes
+
 Chromium B.S.U. 0.9.15
  - Fix some MacOS X portability issues
  - Fix mouse grabbing and pause issue
