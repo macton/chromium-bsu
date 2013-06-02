@@ -61,11 +61,30 @@ bool MainSDL::process(SDL_Event *event)
 			break;
 	}
 #endif
+	bool shown, mouse, input, gain = false;
 	switch(event->type) 
 	{
+#if SDL_VERSION_ATLEAST(2,0,0)
+	    case SDL_WINDOWEVENT:
+		switch (event->window.event) {
+			case SDL_WINDOWEVENT_RESTORED: shown = true; gain = true; break;
+			case SDL_WINDOWEVENT_MINIMIZED: shown = true; gain = false; break;
+			case SDL_WINDOWEVENT_ENTER: mouse = true; gain = true; break;
+			case SDL_WINDOWEVENT_LEAVE: mouse = true; gain = false; break;
+			case SDL_WINDOWEVENT_FOCUS_GAINED: input = true; gain = true; break;
+			case SDL_WINDOWEVENT_FOCUS_LOST: input = true; gain = false; break;
+		}
+		activation(shown, mouse, input, gain);
+		break;
+#else
 	    case SDL_ACTIVEEVENT:
-			activation(event);
+			shown = event->active.state & SDL_APPACTIVE ? true : false;
+			mouse = event->active.state & SDL_APPMOUSEFOCUS ? true : false;
+			input = event->active.state & SDL_APPINPUTFOCUS ? true : false;
+			gain = event->active.gain ? true : false;
+			activation(shown, mouse, input, gain);
 			break;
+#endif
 	    case SDL_KEYDOWN:
 			keyDown(event);
 			break;
@@ -104,7 +123,11 @@ void MainSDL::saveEvent(SDL_Event *event)
 	Global	*game = Global::getInstance();
 	if(game->eventFile && game->gameMode == Global::Game)
 	{
+#if SDL_VERSION_ATLEAST(2,0,0)
+		SDL_WindowEvent 		*evW = 0;
+#else
 		SDL_ActiveEvent 		*evA = 0;
+#endif
 		SDL_KeyboardEvent 		*evK = 0;
 		SDL_MouseMotionEvent 	*evM = 0;
 		SDL_MouseButtonEvent 	*evB = 0;
@@ -135,11 +158,19 @@ void MainSDL::saveEvent(SDL_Event *event)
 //				break;
 //			default:
 //				break;
+#if SDL_VERSION_ATLEAST(2,0,0)
+		case SDL_WINDOWEVENT:
+				evW = (SDL_WindowEvent*)event;
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "W",
+					evW->type, evW->windowID, evW->event, evW->data1, evW->data2, 0);
+				break;
+#else
 	    	case SDL_ACTIVEEVENT:
 				evA = (SDL_ActiveEvent*)event;
 				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "A",
 					evA->type, evA->gain, evA->state, 0, 0, 0);
 				break;
+#endif
 	    	case SDL_KEYDOWN:
 	    	case SDL_KEYUP:
 				evK = (SDL_KeyboardEvent*)event;
@@ -175,7 +206,11 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 	
 	if(infile)
 	{
+#if SDL_VERSION_ATLEAST(2,0,0)
+		SDL_WindowEvent 		*evW = (SDL_WindowEvent*)&ev;
+#else
 		SDL_ActiveEvent 		*evA = (SDL_ActiveEvent*)&ev;
+#endif
 		SDL_KeyboardEvent 		*evK = (SDL_KeyboardEvent*)&ev;
 		SDL_MouseMotionEvent 	*evM = (SDL_MouseMotionEvent*)&ev;
 		SDL_MouseButtonEvent 	*evB = (SDL_MouseButtonEvent*)&ev;
@@ -188,12 +223,23 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 		{
 			switch(t)
 			{
+#if SDL_VERSION_ATLEAST(2,0,0)
+				case 'W':
+					evW->type	= (Uint32)a;
+					evW->windowID	= (Uint32)b;
+					evW->event	= (Uint8)c;
+					evW->data1	= d;
+					evW->data2	= e;
+					retVal = &ev;
+					break;
+#else
 				case 'A':
 					evA->type	= (Uint8)a;
 					evA->gain	= (Uint8)b;
 					evA->state	= (Uint8)c;
 					retVal = &ev;
 					break;
+#endif
 				case 'K':
 					evK->type	= (Uint8)a;
 					evK->state	= (Uint8)b;
@@ -245,23 +291,23 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 }
 
 //----------------------------------------------------------
-void MainSDL::activation(SDL_Event *event)
+void MainSDL::activation(bool shown, bool mouse, bool input, bool gain)
 {
 	Global *game = Global::getInstance();
 	Config* config = Config::instance();
-	if( config->debug() ) fprintf(stderr, "app %s ", event->active.gain ? "gained" : "lost" );
-	bool grab_mouse = game->gameMode == Global::Game && !game->game_pause && event->active.gain ? true : false;
-	if ( event->active.state & SDL_APPACTIVE ) 
+	if( config->debug() ) fprintf(stderr, "app %s ", gain ? "gained" : "lost" );
+	bool grab_mouse = game->gameMode == Global::Game && !game->game_pause && gain ? true : false;
+	if ( shown )
 	{
 		grabMouse( grab_mouse, grab_mouse );
 		if( config->debug() ) fprintf(stderr, "app active " );
 	} 
-	else if ( event->active.state & SDL_APPMOUSEFOCUS ) 
+	else if ( mouse )
 	{
 		if( config->debug() ) fprintf(stderr, _("mouse active") );
 		SDL_GetMouseState(&xLast, &yLast);
 	} 
-	else if ( event->active.state & SDL_APPINPUTFOCUS ) 
+	else if ( input )
 	{
 		grabMouse( grab_mouse, grab_mouse );
 		if( config->debug() ) fprintf(stderr, "input active" );

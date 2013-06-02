@@ -34,7 +34,7 @@ public:
 	void keyMove();
 	
 private:
-	void activation(SDL_Event *event);
+	void activation(bool shown, bool mouse, bool input, bool gain);
 	void keyDown(SDL_Event *event);
 	void keyDownGame(SDL_Event *event);
 	void keyUp(SDL_Event *event);
