@@ -412,19 +412,45 @@ void MainSDL::keyMove()
 {
 	Global	*game = Global::getInstance();
 	if(game->gameMode == Global::Game){
-#if SDL_MAJOR_VERSION == 1 && SDL_MINOR_VERSION >= 3
+#if SDL_VERSION_ATLEAST(2,0,0)
 		Uint8 *keystate = SDL_GetKeyboardState(NULL);
+		#define LEFT SDL_SCANCODE_LEFT
+		#define RIGHT SDL_SCANCODE_RIGHT
+		#define UP SDL_SCANCODE_UP
+		#define DOWN SDL_SCANCODE_DOWN
+		#define KP1 SDL_SCANCODE_KP_1
+		#define KP2 SDL_SCANCODE_KP_2
+		#define KP3 SDL_SCANCODE_KP_3
+		#define KP4 SDL_SCANCODE_KP_4
+		#define KP5 SDL_SCANCODE_KP_5
+		#define KP6 SDL_SCANCODE_KP_6
+		#define KP7 SDL_SCANCODE_KP_7
+		#define KP8 SDL_SCANCODE_KP_8
+		#define KP9 SDL_SCANCODE_KP_9
 #else
 		Uint8 *keystate = SDL_GetKeyState(NULL);
+		#define LEFT SDLK_LEFT
+		#define RIGHT SDLK_RIGHT
+		#define UP SDLK_UP
+		#define DOWN SDLK_DOWN
+		#define KP1 SDLK_KP1
+		#define KP2 SDLK_KP2
+		#define KP3 SDLK_KP3
+		#define KP4 SDLK_KP4
+		#define KP5 SDLK_KP5
+		#define KP6 SDLK_KP6
+		#define KP7 SDLK_KP7
+		#define KP8 SDLK_KP8
+		#define KP9 SDLK_KP9
 #endif
-		if( keystate[SDLK_LEFT]  || keystate[SDLK_KP4] ) key_speed_x -= 2.0 + abs(key_speed_x)*0.4;
-		if( keystate[SDLK_RIGHT] || keystate[SDLK_KP6] ) key_speed_x += 2.0 + abs(key_speed_x)*0.4;
-		if( keystate[SDLK_UP]    || keystate[SDLK_KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
-		if( keystate[SDLK_DOWN]  || keystate[SDLK_KP2] ) key_speed_y += 2.0 + abs(key_speed_y)*0.4;
-		if( keystate[SDLK_KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP9] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP3] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[SDLK_KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[LEFT]  || keystate[KP4] ) key_speed_x -= 2.0 + abs(key_speed_x)*0.4;
+		if( keystate[RIGHT] || keystate[KP6] ) key_speed_x += 2.0 + abs(key_speed_x)*0.4;
+		if( keystate[UP]    || keystate[KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
+		if( keystate[DOWN]  || keystate[KP2] ) key_speed_y += 2.0 + abs(key_speed_y)*0.4;
+		if( keystate[KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[KP9] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[KP3] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
 		//float s = (1.0-game->speedAdj)+(game->speedAdj*0.7);
 		float s = 0.7;
 		key_speed_x *= s;
