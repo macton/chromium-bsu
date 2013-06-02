@@ -80,8 +80,13 @@ AC_ARG_WITH(font-name,
 	[FONT_NAME=""])
 
 # Need SDL or GLUT for windowing
+AC_ARG_ENABLE(sdl2, AS_HELP_STRING([--disable-sdl2], [do not use SDL2]))
 AC_ARG_ENABLE(sdl, AS_HELP_STRING([--disable-sdl], [do not use SDL]))
 AC_ARG_ENABLE(glut, AS_HELP_STRING([--disable-glut], [do not use GLUT]))
+
+if test "x$enable_sdl2" != xno ; then
+	PKG_CHECK_MODULES([SDL2], [sdl2], [HAVE_SDL2=yes], [HAVE_SDL2=no])
+fi
 
 if test "x$enable_sdl" != xno ; then
 	PKG_CHECK_MODULES([SDL], [sdl >= 1.1.6], [HAVE_SDL=yes], [HAVE_SDL=no])
@@ -93,11 +98,16 @@ fi
 
 # Need OpenAL or SDL Mixer for sound
 AC_ARG_ENABLE(openal, AS_HELP_STRING([--disable-openal], [do not use OpenAL]))
+AC_ARG_ENABLE(sdl2mixer, AS_HELP_STRING([--disable-sdl2mixer], [do not use SDL2_Mixer]))
 AC_ARG_ENABLE(sdlmixer, AS_HELP_STRING([--disable-sdlmixer], [do not use SDL_Mixer]))
 
 if test "x$enable_openal" != xno ; then
 	PKG_CHECK_MODULES([OPENAL], [openal], [HAVE_OPENAL=yes], [HAVE_OPENAL=no])
 	PKG_CHECK_MODULES([FREEALUT], [freealut], [HAVE_FREEALUT=yes], [HAVE_FREEALUT=no])
+fi
+
+if test "x$enable_sdl2mixer" != xno ; then
+	PKG_CHECK_MODULES([SDL2MIXER], [SDL2_mixer], [HAVE_SDL2MIXER=yes], [HAVE_SDL2MIXER=no])
 fi
 
 if test "x$enable_sdlmixer" != xno ; then
@@ -106,7 +116,12 @@ fi
 
 # Need glpng or SDL_image so we can display PNG images using OpenGL
 AC_ARG_ENABLE(glpng, AS_HELP_STRING([--disable-glpng], [do not use glpng]))
+AC_ARG_ENABLE(sdl2image, AS_HELP_STRING([--disable-sdl2image], [do not use SDL2_image]))
 AC_ARG_ENABLE(sdlimage, AS_HELP_STRING([--disable-sdlimage], [do not use SDL_image]))
+
+if test "x$enable_sdl2image" != xno ; then
+	PKG_CHECK_MODULES([SDL2IMAGE], [SDL2_image], [HAVE_SDL2IMAGE=yes], [HAVE_SDL2IMAGE=no])
+fi
 
 if test "x$enable_sdlimage" != xno ; then
 	PKG_CHECK_MODULES([SDLIMAGE], [SDL_image], [HAVE_SDLIMAGE=yes], [HAVE_SDLIMAGE=no])
@@ -176,7 +191,14 @@ if  test "x$TEXT_TYPE" = xFTGL -a "x$HAVE_FONTCONFIG" != xyes -a "x$FONT_PATH" =
 	AC_MSG_WARN([FTGL: no font path supplied and cannot find fontconfig, font searching will probably fail])
 fi
 
-if test "x$HAVE_SDL" = xyes -a "x$enable_sdl" != xno ; then
+if test "x$HAVE_SDL2" = xyes -a "x$enable_sdl2" != xno ; then
+	AC_DEFINE(USE_SDL, 1, [define to use SDL])
+	WINDOW_CFLAGS="$SDL2_CFLAGS"
+	AC_SUBST(WINDOW_CFLAGS)
+	WINDOW_LIBS="$SDL2_LIBS"
+	AC_SUBST(WINDOW_LIBS)
+	WINDOW_TYPE=SDL2
+elif test "x$HAVE_SDL" = xyes -a "x$enable_sdl" != xno ; then
 	AC_DEFINE(USE_SDL, 1, [define to use SDL])
 	AC_DEFINE(USE_SDL_CDROM, 1, [define to use SDL CDROM support])
 	WINDOW_CFLAGS="$SDL_CFLAGS"
@@ -212,6 +234,13 @@ if test "x$HAVE_OPENAL" = xyes -a "x$HAVE_FREEALUT" = xyes -a "x$enable_openal" 
 	AC_CHECK_HEADERS(AL/al.h AL/alc.h AL/alut.h)
 	CPPFLAGS="${ac_save_CPPFLAGS}"
 	CFLAGS="${ac_save_CFLAGS}"
+elif test "x$HAVE_SDL2MIXER" = xyes -a "x$enable_sdl2mixer" != xno ; then
+	AC_DEFINE(AUDIO_SDLMIXER, 1, [define to use SDL Mixer])
+	AUDIO_CFLAGS="$SDL2MIXER_CFLAGS"
+	AC_SUBST(AUDIO_CFLAGS)
+	AUDIO_LIBS="$SDL2MIXER_LIBS"
+	AC_SUBST(AUDIO_LIBS)
+	AUDIO_TYPE="SDL mixer"
 elif test "x$HAVE_SDLMIXER" = xyes -a "x$enable_sdlmixer" != xno ; then
 	AC_DEFINE(AUDIO_SDLMIXER, 1, [define to use SDL Mixer])
 	AUDIO_CFLAGS="$SDLMIXER_CFLAGS"
@@ -227,6 +256,11 @@ if test  \( "x$HAVE_GL_GLPNG_H" = xyes -o "x$HAVE_GLPNG_GLPNG_H" = xyes \) -a "x
 	AC_DEFINE(IMAGE_GLPNG, 1, [define to use glpng])
 	IMAGE_TYPE=glpng
 	IMAGE_GLPNG=yes
+elif test "x$WINDOW_TYPE" = xSDL2 -a "x$HAVE_SDL2IMAGE" = xyes -a "x$enable_sdl2image" != no ; then
+	AC_MSG_WARN([Using SDL2_image to load images into textures, some rendering artifacts may be present])
+	AC_DEFINE(IMAGE_SDL, 1, [define to use SDL_image])
+	IMAGE_TYPE=SDL2_image
+	IMAGE_SDL2IMAGE=yes
 elif test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
 	AC_MSG_WARN([Using SDL_image to load images into textures, some rendering artifacts may be present])
 	AC_DEFINE(IMAGE_SDL, 1, [define to use SDL_image])
@@ -236,7 +270,11 @@ else
 	AC_MSG_ERROR([cannot find glpng or SDL_image (image loader)])
 fi
 
-if test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
+if test "x$WINDOW_TYPE" = xSDL2 -a "x$HAVE_SDL2IMAGE" = xyes -a "x$enable_sdl2image" != no ; then
+	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
+	WINDOW_ICON=yes
+	IMAGE_SDL2IMAGE=yes
+elif test "x$WINDOW_TYPE" = xSDL -a "x$HAVE_SDLIMAGE" = xyes -a "x$enable_sdlimage" != no ; then
 	AC_DEFINE(ENABLE_WINDOW_ICON, 1, [define to enable the window icon (needs SDL_image)])
 	WINDOW_ICON=yes
 	IMAGE_SDLIMAGE=yes
@@ -249,6 +287,13 @@ if test "x$IMAGE_GLPNG" = xyes ; then
 	IMAGE_CFLAGS="$IMAGE_CFLAGS"
 	AC_SUBST(IMAGE_CFLAGS)
 	IMAGE_LIBS="$IMAGE_LIBS -lglpng"
+	AC_SUBST(IMAGE_LIBS)
+fi
+
+if test "x$IMAGE_SDL2IMAGE" = xyes ; then
+	IMAGE_CFLAGS="$IMAGE_CFLAGS $SDL2IMAGE_CFLAGS"
+	AC_SUBST(IMAGE_CFLAGS)
+	IMAGE_LIBS="$IMAGE_LIBS $SDL2IMAGE_LIBS"
 	AC_SUBST(IMAGE_LIBS)
 fi
 
