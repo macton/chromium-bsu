@@ -95,22 +95,6 @@ MainSDL::MainSDL(int argc, char **argv)
 	joystick = 0;
 #endif
 
-#ifdef ENABLE_WINDOW_ICON
-	//-- Set the window manager icon
-#ifdef _WIN32
-	// On Windows SDL can only do 32x32 icons
-	#define ICON "png/icon32.png"
-#else
-	// Elsewhere SDL can do any size icons
-	#define ICON "png/hero.png"
-#endif
-	SDL_Surface *icon = IMG_Load(dataLoc(ICON));
-	if (icon) {
-		SDL_WM_SetIcon(icon, NULL);
-		SDL_FreeSurface(icon);
-	}
-#endif
-
 	if( !setVideoMode() )
 	{
 		fprintf(stderr, _("Couldn't set video mode: %s\n"), SDL_GetError());
@@ -129,6 +113,22 @@ MainSDL::MainSDL(int argc, char **argv)
 		printExtensions(stderr,  (const char*)glGetString( GL_EXTENSIONS ));
 		fprintf(stderr, _("------------------------------------------------------------\n"));
 	}
+
+#ifdef ENABLE_WINDOW_ICON
+	//-- Set the window manager icon
+#ifdef _WIN32
+	// On Windows SDL can only do 32x32 icons
+	#define ICON "png/icon32.png"
+#else
+	// Elsewhere SDL can do any size icons
+	#define ICON "png/hero.png"
+#endif
+	SDL_Surface *icon = IMG_Load(dataLoc(ICON));
+	if (icon) {
+		SDL_WM_SetIcon(icon, NULL);
+		SDL_FreeSurface(icon);
+	}
+#endif
 
 	//-- Set the window manager title bar
 	SDL_WM_SetCaption( "Chromium B.S.U.", "Chromium B.S.U." );
