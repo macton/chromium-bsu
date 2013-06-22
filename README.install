@@ -67,7 +67,10 @@ autoconf
 automake
 gettext
 pkg-config
-autoconf-gl-macros or autoconf-archive before 20111221
+autoconf OpenGL macros provided by:
+  autoconf-archive < 20111221
+  autoconf-gl-macros
+  autoconf-archive >= 20130609
 
 Pre-build step
 ------------------
