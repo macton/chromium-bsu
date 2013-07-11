@@ -1001,7 +1001,7 @@ msgstr "FTGL: erreur au chargement des polices"
 #.
 #: src/TextFTGL.cpp:105 src/TextGLC.cpp:41
 msgid "Gothic Uralic"
-msgstr "Gothic Uralic"
+msgstr "DejaVu Sans"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1009,7 +1009,7 @@ msgstr "Gothic Uralic"
 #.
 #: src/TextFTGL.cpp:135
 msgid "/usr/share/fonts/truetype/uralic/gothub__.ttf"
-msgstr "/usr/share/fonts/truetype/uralic/gothub__.ttf"
+msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1017,7 +1017,7 @@ msgstr "/usr/share/fonts/truetype/uralic/gothub__.ttf"
 #.
 #: src/TextFTGL.cpp:141
 msgid "/usr/share/fonts/truetype/uralic/gothu___.ttf"
-msgstr "/usr/share/fonts/truetype/uralic/gothu___.ttf"
+msgstr "/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a bold
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1025,7 +1025,7 @@ msgstr "/usr/share/fonts/truetype/uralic/gothu___.ttf"
 #.
 #: src/TextFTGL.cpp:148
 msgid "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
-msgstr "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
+msgstr "/usr/share/fonts/TTF/dejavu/DejaVuSans-Bold.ttf"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the path of a
 #. font that contains all the Unicode characters in use in	your translation.
@@ -1033,7 +1033,7 @@ msgstr "/usr/share/fonts/TTF/uralic/GOTHUB__.TTF"
 #.
 #: src/TextFTGL.cpp:154
 msgid "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
-msgstr "/usr/share/fonts/TTF/uralic/GOTHU___.TTF"
+msgstr "/usr/share/fonts/TTF/dejavu/DejaVuSans.ttf"
 
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
