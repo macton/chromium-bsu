@@ -164,13 +164,19 @@ void MainSDL::saveEvent(SDL_Event *event)
 				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "W",
 					evW->type, evW->windowID, evW->event, evW->data1, evW->data2, 0);
 				break;
+	    	case SDL_KEYDOWN:
+	    	case SDL_KEYUP:
+				evK = (SDL_KeyboardEvent*)event;
+				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d\n", game->gameFrame, "K",
+					evK->type, evK->state, 
+					evK->keysym.scancode, evK->keysym.sym, evK->keysym.mod);
+				break;
 #else
 	    	case SDL_ACTIVEEVENT:
 				evA = (SDL_ActiveEvent*)event;
 				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "A",
 					evA->type, evA->gain, evA->state, 0, 0, 0);
 				break;
-#endif
 	    	case SDL_KEYDOWN:
 	    	case SDL_KEYUP:
 				evK = (SDL_KeyboardEvent*)event;
@@ -178,6 +184,7 @@ void MainSDL::saveEvent(SDL_Event *event)
 					evK->type, evK->state, 
 					evK->keysym.scancode, evK->keysym.sym, evK->keysym.mod, evK->keysym.unicode);
 				break;
+#endif
 	    	case SDL_MOUSEMOTION:
 				evM = (SDL_MouseMotionEvent*)event;
 				fprintf(game->eventFile, "%9d :%s: %5d %5d %5d %5d %5d %5d\n", game->gameFrame, "M",
@@ -251,8 +258,8 @@ SDL_Event *MainSDL::getEvent(FILE *infile)
 					evK->keysym.scancode = (Uint8)c;
 					evK->keysym.sym		 = (SDLKey)d;
 					evK->keysym.mod		 = (SDLMod)e;
-#endif
 					evK->keysym.unicode	 = (Uint16)f;
+#endif
 					retVal = &ev;	
 					break;
 				case 'M':
