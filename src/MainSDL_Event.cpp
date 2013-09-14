@@ -477,7 +477,7 @@ void MainSDL::keyMove()
 	Global	*game = Global::getInstance();
 	if(game->gameMode == Global::Game){
 #if SDL_VERSION_ATLEAST(2,0,0)
-		Uint8 *keystate = SDL_GetKeyboardState(NULL);
+		const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 		#define LEFT SDL_SCANCODE_LEFT
 		#define RIGHT SDL_SCANCODE_RIGHT
 		#define UP SDL_SCANCODE_UP
