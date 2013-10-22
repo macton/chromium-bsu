@@ -113,6 +113,11 @@ int main(int argc, char **argv)
 		{
 			config->setDebug(true);
 		}
+		else if( strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0)
+		{
+			printf("%s\n", PACKAGE_STRING);
+			exit(0);
+		}
 		else
 		{
 			fprintf(stderr, _(
@@ -130,6 +135,7 @@ int main(int argc, char **argv)
 				"  -na/--noaudio        : do not initialize audio\n"
 				"  -nb/--noblend        : disable blending (OpenGL)\n"
 				"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
+				"  -V/--version         : show version information\n"
 				"--------------------------------------------------\n\n"));
 			exit(0);
 		}
