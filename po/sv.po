@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2013-05-25 13:13+0800\n"
+"POT-Creation-Date: 2013-11-14 07:41+0800\n"
 "PO-Revision-Date: 2011-05-17 00:20+0000\n"
 "Last-Translator: Niklas Åkerström <nille.kungen@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -18,35 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Audio.cpp:110
+#: src/Audio.cpp:111
 msgid "audio"
 msgstr "ljud"
 
-#: src/Audio.cpp:111
+#: src/Audio.cpp:112
 msgid "data"
 msgstr "data"
 
-#: src/Audio.cpp:113
+#: src/Audio.cpp:114
 #, c-format
 msgid "UNKNOWN(type=%d)"
 msgstr "OKÄND(typ=%d)"
 
-#: src/Audio.cpp:124
+#: src/Audio.cpp:125
 #, c-format
 msgid "%d CDROM drive(s).\n"
 msgstr "%d CDROM-enhet(er).\n"
 
-#: src/Audio.cpp:135
+#: src/Audio.cpp:136
 #, c-format
 msgid "Tracks: %d\n"
 msgstr "Spår: %d\n"
 
-#: src/Audio.cpp:139
+#: src/Audio.cpp:140
 #, c-format
 msgid "track %2d: %s\n"
 msgstr "spår %2d: %s\n"
 
-#: src/Audio.cpp:148
+#: src/Audio.cpp:149
 #, c-format
 msgid ""
 "\n"
@@ -57,7 +57,7 @@ msgstr ""
 " Endast dataspår. CD-ljud ej tillgängligt. \n"
 "\n"
 
-#: src/Audio.cpp:154
+#: src/Audio.cpp:155
 #, c-format
 msgid ""
 "\n"
@@ -66,7 +66,7 @@ msgstr ""
 "\n"
 " use_cdrom aktiverat. Ställ in till \"0\" i konfigurationsfilen för att inaktivera.\n"
 
-#: src/Audio.cpp:155
+#: src/Audio.cpp:156
 #, c-format
 msgid ""
 " Press the 'N' key to skip to next CD track during a game.\n"
@@ -75,47 +75,47 @@ msgstr ""
 "Tryck 'N' för att skippa till nästa CD-spår under spelets gång. \n"
 "\n"
 
-#: src/Audio.cpp:166
+#: src/Audio.cpp:167
 #, c-format
 msgid "ERROR! Could not access CDROM device %d : %s\n"
 msgstr "FEL! Kunde inte komma åt CDROM-enheten %d : %s\n"
 
-#: src/Audio.cpp:209
+#: src/Audio.cpp:213
 #, c-format
 msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
 msgstr "CDROM-fel i AudioOpenAL::pauseGameMusic(%d)\n"
 
-#: src/Audio.cpp:210
+#: src/Audio.cpp:214
 #, c-format
 msgid "CDROM status = %d\n"
 msgstr "CDROM-status = %d\n"
 
-#: src/Audio.cpp:275
+#: src/Audio.cpp:283
 #, c-format
 msgid "Could not set CD volume, amixer returned status %d\n"
 msgstr ""
 
-#: src/Audio.cpp:302
+#: src/Audio.cpp:310
 #, c-format
 msgid "Audio::setMusicIndex(%d)\n"
 msgstr "Audio::setMusicIndex(%d)\n"
 
-#: src/Audio.cpp:319
+#: src/Audio.cpp:329
 #, c-format
 msgid "track %d is data - trying next track...\n"
 msgstr "Spår %d är data - testar nästa spår... \n"
 
-#: src/AudioOpenAL.cpp:149
+#: src/AudioOpenAL.cpp:143
 #, c-format
 msgid "alAttenuationScale == 0. Kludge it.\n"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:162
+#: src/AudioOpenAL.cpp:160
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
 msgstr "AudioOpenAL::Audio klar\n"
 
-#: src/AudioOpenAL.cpp:170
+#: src/AudioOpenAL.cpp:168
 #, c-format
 msgid "stopping OpenAL..."
 msgstr "Stoppar OpenAL..."
@@ -160,7 +160,7 @@ msgstr ""
 "Renderare  : %s\n"
 "Version    : %s\n"
 
-#: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:130
+#: src/AudioOpenAL.cpp:279 src/MainSDL.cpp:116
 #, c-format
 msgid "------------------------------------------------------------\n"
 msgstr "------------------------------------------------------------\n"
@@ -184,140 +184,140 @@ msgstr "Audio.cpp - init exploPop %d"
 msgid "Audio.cpp - initSound complete."
 msgstr "Audio.cpp - initSound färdig."
 
-#: src/AudioOpenAL.cpp:430
+#: src/AudioOpenAL.cpp:432
 #, c-format
 msgid "AudioOpenAL::setMusicMode(SoundType mode)\n"
 msgstr "AudioOpenAL::setMusicMode(SoundType-läge)\n"
 
-#: src/AudioOpenAL.cpp:465
+#: src/AudioOpenAL.cpp:471
 #, c-format
 msgid "AudioOpenAL::setSoundVolume(%f)\n"
 msgstr "AudioOpenAL::setSoundVolume(%f)\n"
 
-#: src/AudioOpenAL.cpp:508
+#: src/AudioOpenAL.cpp:516
 #, c-format
 msgid "Music volume = %f\n"
 msgstr "Musikvolym = %f\n"
 
-#: src/AudioOpenAL.cpp:524
+#: src/AudioOpenAL.cpp:532
 #, c-format
 msgid ""
 "\n"
 "ERROR! - sound enumerant index %d does not have valid filename!\n"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:547
+#: src/AudioOpenAL.cpp:555
 #, c-format
 msgid "alutLoadWAVFile(\"%s\",...);\n"
 msgstr "alutLoadWAVFile(\"%s\",...);\n"
 
-#: src/AudioOpenAL.cpp:563
+#: src/AudioOpenAL.cpp:571
 #, c-format
 msgid "ERROR!! <%s> alGetError() = %s\n"
 msgstr "FEL!! <%s> alGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:568
+#: src/AudioOpenAL.cpp:576
 #, c-format
 msgid "ERROR!! <%s> alcGetError() = %s\n"
 msgstr "FEL!! <%s> alcGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:573
+#: src/AudioOpenAL.cpp:581
 #, c-format
 msgid "ERROR!! <%s> alutGetError() = %s\n"
 msgstr "FEL!! <%s> alutGetError() = %s\n"
 
-#: src/AudioOpenAL.cpp:730
+#: src/AudioOpenAL.cpp:738
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
 msgstr "FEL: filnamnet är för långt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:748
+#: src/AudioOpenAL.cpp:756
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
 msgstr "VARNING: MP3-stöd inte tillgängligt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:759
+#: src/AudioOpenAL.cpp:767
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
 msgstr "VARNING: Ogg/Vorbis-stöd inte tillgängligt: \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:763
+#: src/AudioOpenAL.cpp:771
 #, c-format
 msgid "WARNING: file type not recognized: \"%s\": \"%s\", line %d\n"
 msgstr "VARNING: filtypen känns inte igen: \"%s\": \"%s\", rad %d\n"
 
-#: src/AudioOpenAL.cpp:778
+#: src/AudioOpenAL.cpp:786
 #, c-format
 msgid "music playlist:\n"
 msgstr "musikspellista:\n"
 
-#: src/AudioOpenAL.cpp:781
+#: src/AudioOpenAL.cpp:789
 #, c-format
 msgid " %2d : %s\n"
 msgstr " %2d : %s\n"
 
-#: src/AudioOpenAL.cpp:783
+#: src/AudioOpenAL.cpp:791
 #, c-format
 msgid "loaded %s\n"
 msgstr "läste in %s\n"
 
-#: src/AudioOpenAL.cpp:808
+#: src/AudioOpenAL.cpp:820
 msgid "AudioOpenAL::setMusicIndex -- begin"
 msgstr "AudioOpenAL::setMusicIndex -- start"
 
-#: src/AudioOpenAL.cpp:821
+#: src/AudioOpenAL.cpp:833
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:824
+#: src/AudioOpenAL.cpp:836
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
 msgstr ""
 
-#: src/AudioOpenAL.cpp:859
+#: src/AudioOpenAL.cpp:871
 msgid "AudioOpenAL::setMusicIndex -- end"
 msgstr "AudioOpenAL::setMusicIndex -- slut"
 
-#: src/AudioOpenAL.cpp:909 src/AudioOpenAL.cpp:942 src/AudioOpenAL.cpp:992
+#: src/AudioOpenAL.cpp:921 src/AudioOpenAL.cpp:954 src/AudioOpenAL.cpp:1004
 #, c-format
 msgid "WARNING: PlayList support not compiled in (AudioOpenAL.cpp): %s\n"
 msgstr "VARNING: Stöd för spellista har inte kompilerats in (AudioOpenAL.cpp): %s\n"
 
-#: src/AudioOpenAL.cpp:959
+#: src/AudioOpenAL.cpp:971
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
 msgstr "FEL: Kunde inte allokera minne i AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:965
+#: src/AudioOpenAL.cpp:977
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "FEL: Kunde inte öppna \"%s\" i AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:971
+#: src/AudioOpenAL.cpp:983
 #, fuzzy, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "FEL: Kunde inte öppna \"%s\" i AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:979
+#: src/AudioOpenAL.cpp:991
 #, c-format
 msgid "ERROR: alutLoadMP3() failed in AudioOpenAL::loadMP3\n"
 msgstr "FEL: alutLoadMP3() misslyckades i AudioOpenAL::loadMP3\n"
 
-#: src/AudioOpenAL.cpp:1011
+#: src/AudioOpenAL.cpp:1023
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadVorbis\n"
 msgstr "FEL: Kunde inte allokera minne i AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1017
+#: src/AudioOpenAL.cpp:1029
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "FEL: Kunde inte öppna \"%s\" i AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1023
+#: src/AudioOpenAL.cpp:1035
 #, fuzzy, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "FEL: Kunde inte öppna \"%s\" i AudioOpenAL::loadVorbis\n"
 
-#: src/AudioOpenAL.cpp:1031
+#: src/AudioOpenAL.cpp:1043
 #, c-format
 msgid "ERROR: alutLoadVorbis() failed in AudioOpenAL::loadVorbis\n"
 msgstr "FEL: alutLoadVorbis() misslyckades i AudioOpenAL::loadVorbis\n"
@@ -327,22 +327,22 @@ msgstr "FEL: alutLoadVorbis() misslyckades i AudioOpenAL::loadVorbis\n"
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
 msgstr "FEL: initierar ljud - AudioSDLMixer::initSound()\n"
 
-#: src/Config.cpp:114
+#: src/Config.cpp:118
 #, c-format
 msgid "WARNING: Config::init() has already been called.\n"
 msgstr "VARNING: Config::init() har redan anropats.\n"
 
-#: src/Config.cpp:243
+#: src/Config.cpp:251
 #, c-format
 msgid "WARNING: could not read config file (%s)\n"
 msgstr "VARNING: kunde inte läsa konfigurationsfilen (%s)\n"
 
-#: src/Config.cpp:302
+#: src/Config.cpp:314
 #, c-format
 msgid "wrote config file (%s)\n"
 msgstr "skrev konfigurationsfil (%s)\n"
 
-#: src/Config.cpp:307
+#: src/Config.cpp:319
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
 msgstr "VARNING: kunde inte skriva konfigurationsfil (%s)\n"
@@ -458,7 +458,7 @@ msgstr "poänglista:\n"
 msgid "%02d/%02d/%04d %16s %d\n"
 msgstr "%02d/%02d/%04d %16s %d\n"
 
-#: src/main.cpp:119
+#: src/main.cpp:124
 #, c-format
 msgid ""
 "\n"
@@ -497,12 +497,12 @@ msgstr ""
 "--------------------------------------------------\n"
 "\n"
 
-#: src/main.cpp:231
+#: src/main.cpp:237
 #, c-format
 msgid "!! ERROR !! - "
 msgstr "!! FEL !! - "
 
-#: src/main.cpp:255
+#: src/main.cpp:261
 #, c-format
 msgid "Extensions :"
 msgstr "Tillägg :"
@@ -577,7 +577,7 @@ msgstr ""
 msgid "MainGLUT::run()\n"
 msgstr "MainGLUT::run()\n"
 
-#: src/MainGLUT.cpp:93 src/MainSDL.cpp:286
+#: src/MainGLUT.cpp:93 src/MainSDL.cpp:298
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
 msgstr "FEL!!! OpenGL-fel: %s\n"
@@ -587,37 +587,37 @@ msgstr "FEL!!! OpenGL-fel: %s\n"
 msgid "key = %d\n"
 msgstr "tangent = %d\n"
 
-#: src/MainSDL.cpp:74
+#: src/MainSDL.cpp:76
 #, c-format
 msgid "Couldn't initialize SDL: %s\n"
 msgstr "Kunde inte initiera SDL: %s\n"
 
-#: src/MainSDL.cpp:77
+#: src/MainSDL.cpp:79
 #, c-format
 msgid "SDL initialized.\n"
 msgstr "SDL initierad.\n"
 
-#: src/MainSDL.cpp:83
+#: src/MainSDL.cpp:85
 #, c-format
 msgid "num joysticks = %d\n"
 msgstr "antal styrspakar = %d\n"
 
-#: src/MainSDL.cpp:85
+#: src/MainSDL.cpp:87
 #, c-format
 msgid "   joystick 0 = %p\n"
 msgstr "   styrspak 0 = %p\n"
 
-#: src/MainSDL.cpp:91
+#: src/MainSDL.cpp:93
 #, c-format
 msgid "no joysticks found\n"
 msgstr "inga styrspakar hittades\n"
 
-#: src/MainSDL.cpp:116 src/MainSDL.cpp:347
+#: src/MainSDL.cpp:102 src/MainSDL.cpp:384
 #, c-format
 msgid "Couldn't set video mode: %s\n"
 msgstr "Kunde inte ställa in grafikläge: %s\n"
 
-#: src/MainSDL.cpp:124
+#: src/MainSDL.cpp:110
 #, c-format
 msgid ""
 "-OpenGL-----------------------------------------------------\n"
@@ -630,22 +630,22 @@ msgstr ""
 "Renderare  : %s\n"
 "Version    : %s\n"
 
-#: src/MainSDL.cpp:215
+#: src/MainSDL.cpp:227
 #, c-format
 msgid "init----> %3.2ffps gameSpeed = %g\n"
 msgstr "init----> %3.2ffps gameSpeed = %g\n"
 
-#: src/MainSDL.cpp:222
+#: src/MainSDL.cpp:234
 #, c-format
 msgid "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 msgstr "init----> %3.2ffps targetAdj = %g, tmp = %g\n"
 
-#: src/MainSDL.cpp:235
+#: src/MainSDL.cpp:247
 #, c-format
 msgid "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 msgstr "adjust--> %3.2f targetAdj = %g -- game->speedAdj = %g\n"
 
-#: src/MainSDL.cpp:257
+#: src/MainSDL.cpp:269
 #, c-format
 msgid ""
 "%d speed adjustments required.\n"
@@ -658,72 +658,82 @@ msgid ""
 "      can make it difficult to maintain a steady frame rate.\n"
 msgstr ""
 
-#: src/MainSDL.cpp:269
+#: src/MainSDL.cpp:281
 #, c-format
 msgid "exit.\n"
 msgstr "avsluta.\n"
 
-#: src/MainSDL.cpp:294
+#: src/MainSDL.cpp:306
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
 msgstr "FEL!!! SDL-fel \"%s\"\n"
 
-#: src/MainSDL.cpp:352
+#: src/MainSDL.cpp:372
+#, fuzzy, c-format
+msgid "Couldn't create window: %s\n"
+msgstr "Kunde inte ställa in grafikläge: %s\n"
+
+#: src/MainSDL.cpp:378
+#, fuzzy, c-format
+msgid "Couldn't create context: %s\n"
+msgstr "GLC: kunde inte ställa in kontext"
+
+#: src/MainSDL.cpp:389
 #, c-format
 msgid "video mode set "
 msgstr "grafikläge inställt "
 
-#: src/MainSDL.cpp:359
+#: src/MainSDL.cpp:398
 #, c-format
 msgid "(bpp=%d RGB=%d%d%d depth=%d)\n"
 msgstr "(bpp=%d RGB=%d%d%d djup=%d)\n"
 
-#: src/MainSDL_Event.cpp:40
+#: src/MainSDL_Event.cpp:52
 #, c-format
 msgid "%-5d SDL_ACTIVEEVENT  \n"
 msgstr "%-5d SDL_ACTIVEEVENT  \n"
 
-#: src/MainSDL_Event.cpp:41
+#: src/MainSDL_Event.cpp:53
 #, c-format
 msgid "%-5d SDL_KEYDOWN  \n"
 msgstr "%-5d SDL_KEYDOWN  \n"
 
-#: src/MainSDL_Event.cpp:42
+#: src/MainSDL_Event.cpp:54
 #, c-format
 msgid "%-5d SDL_KEYUP  \n"
 msgstr "%-5d SDL_KEYUP  \n"
 
-#: src/MainSDL_Event.cpp:43
+#: src/MainSDL_Event.cpp:55
 #, c-format
 msgid "%-5d SDL_MOUSEMOTION  \n"
 msgstr "%-5d SDL_MOUSEMOTION  \n"
 
-#: src/MainSDL_Event.cpp:44
+#: src/MainSDL_Event.cpp:56
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONDOWN  \n"
 msgstr "%-5d SDL_MOUSEBUTTONDOWN  \n"
 
-#: src/MainSDL_Event.cpp:45
+#: src/MainSDL_Event.cpp:57
 #, c-format
 msgid "%-5d SDL_MOUSEBUTTONUP  \n"
 msgstr "%-5d SDL_MOUSEBUTTONUP  \n"
 
-#: src/MainSDL_Event.cpp:46
+#: src/MainSDL_Event.cpp:58
 #, c-format
 msgid "%-5d SDL_JOYBUTTONDOWN  \n"
 msgstr "%-5d SDL_JOYBUTTONDOWN  \n"
 
-#: src/MainSDL_Event.cpp:47
+#: src/MainSDL_Event.cpp:59
 #, c-format
 msgid "%-5d SDL_JOYBUTTONUP  \n"
 msgstr "%-5d SDL_JOYBUTTONUP  \n"
 
-#: src/MainSDL_Event.cpp:212
+#: src/MainSDL_Event.cpp:283
 #, c-format
 msgid "MainSDL::getEvent HUH?\n"
 msgstr "MainSDL::getEvent HUH?\n"
 
-#: src/MainSDL_Event.cpp:222
+#: src/MainSDL_Event.cpp:293
 #, c-format
 msgid ""
 "buffer = \"%s\n"
@@ -732,27 +742,27 @@ msgstr ""
 "buffert = \"%s\n"
 "\""
 
-#: src/MainSDL_Event.cpp:243
+#: src/MainSDL_Event.cpp:314
 #, c-format
 msgid "mouse active"
 msgstr "mus är aktiv"
 
-#: src/MainSDL_Event.cpp:251
+#: src/MainSDL_Event.cpp:322
 #, c-format
 msgid "focus\n"
 msgstr "fokus\n"
 
-#: src/MainSDL_Event.cpp:403
+#: src/MainSDL_Event.cpp:474
 #, c-format
 msgid "key '%s' pressed\n"
 msgstr "tangent \"%s\" nedtryckt\n"
 
-#: src/MainSDL_Event.cpp:404
+#: src/MainSDL_Event.cpp:475
 #, c-format
 msgid "game->gameFrame = %d\n"
 msgstr "game->gameFrame = %d\n"
 
-#: src/MainSDL_Event.cpp:538
+#: src/MainSDL_Event.cpp:639
 #, c-format
 msgid "MainSDL::grabMouse(%d)\n"
 msgstr "MainSDL::grabMouse(%d)\n"
