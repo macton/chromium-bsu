@@ -2,14 +2,16 @@
 # This file is put in the public domain.
 #
 # Translators:
+# Marco Mangiacavalli <Marco91>, 2013
+# Rossano Praderi <dshortway@gmail.com>, 2013
 # Valter Mura <valtermura@gmail.com>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
 "POT-Creation-Date: 2013-11-17 10:13+0800\n"
-"PO-Revision-Date: 2011-03-22 15:18+0000\n"
-"Last-Translator: Valter Mura <valtermura@gmail.com>\n"
+"PO-Revision-Date: 2013-11-17 02:20+0000\n"
+"Last-Translator: Rossano Praderi <dshortway@gmail.com>, 2013\n"
 "Language-Team: Italian <valtermura@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +94,7 @@ msgstr "Stato CDROM = %d\n"
 #: src/Audio.cpp:283
 #, c-format
 msgid "Could not set CD volume, amixer returned status %d\n"
-msgstr ""
+msgstr "Impossibile impostare il volume del CD, amixer ha restituito lo stato %d\n"
 
 #: src/Audio.cpp:310
 #, c-format
@@ -294,9 +296,9 @@ msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "ERRORE: impossibile aprire \"%s\" in AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:983
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"
-msgstr "ERRORE: impossibile aprire \"%s\" in AudioOpenAL::loadMP3\n"
+msgstr "ERRORE: Non si può leggere da \"%s\" nell'AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:991
 #, c-format
@@ -314,9 +316,9 @@ msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "ERRORE: impossibile aprire \"%s\" in AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1035
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"
-msgstr "ERRORE: impossibile aprire \"%s\" in AudioOpenAL::loadVorbis\n"
+msgstr "ERRORE: Non si può leggere da \"%s\" nell'AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1043
 #, c-format
@@ -429,15 +431,15 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "ATTENZIONE: impossibile scrivere il file del punteggio (%s)\n"
 
 #: src/HiScore.cpp:276
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: error reading score file (%s)\n"
-msgstr "ATTENZIONE: impossibile leggere il file del punteggio (%s)\n"
+msgstr "ATTENZIONE: errore nella lettura di un file di punteggio (%s)\n"
 
 #: src/HiScore.cpp:319 src/HiScore.cpp:321 src/HiScore.cpp:323
 #: src/HiScore.cpp:343 src/HiScore.cpp:345 src/HiScore.cpp:347
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: error reading old score file (%s)\n"
-msgstr "ATTENZIONE: impossibile leggere il file del punteggio (%s)\n"
+msgstr "ATTENZIONE: errore nella lettura di un file di punteggio vecchio (%s)\n"
 
 #: src/HiScore.cpp:332
 #, c-format
@@ -828,7 +830,7 @@ msgstr "v o l u m e   m u s i c a"
 
 #: src/MenuGL.cpp:78
 msgid "m o v e m e n t   s p e e d"
-msgstr ""
+msgstr "v e l o c i t à   d i   m o v i m e n t o"
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
@@ -894,7 +896,7 @@ msgstr "rettile"
 
 #: src/MenuGL.cpp:357
 msgid "labour"
-msgstr ""
+msgstr "lavoro"
 
 #: src/MenuGL.cpp:361
 msgid "project"
@@ -928,12 +930,12 @@ msgstr ""
 #: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
-msgstr ""
+msgstr "vero"
 
 #: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
-msgstr ""
+msgstr "falso"
 
 #: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
@@ -968,7 +970,7 @@ msgstr ""
 #: src/ScreenItemAdd.cpp:107
 #, c-format
 msgid "ScreenItemAdd::putScreenItems() Hero??? HUH???\n"
-msgstr ""
+msgstr "ScreenItemAdd::putScreenItems() Eroe??? HUH???\n"
 
 #: src/StatusDisplay.cpp:653 src/StatusDisplay.cpp:657
 msgid "p a u s e d"
