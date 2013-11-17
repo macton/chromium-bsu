@@ -93,7 +93,7 @@ msgstr "CDROM Status = %d\n"
 #: src/Audio.cpp:283
 #, c-format
 msgid "Could not set CD volume, amixer returned status %d\n"
-msgstr ""
+msgstr "Konnte CD Lautstärke nicht setzen, amixer gab den Status %d zurück\n"
 
 #: src/Audio.cpp:310
 #, c-format
@@ -295,9 +295,9 @@ msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
 msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:983
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadMP3\n"
-msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadMP3\n"
+msgstr "FEHLER: Konnte nicht von \"%s\" lesen in AudioOpenAL::loadMP3\n"
 
 #: src/AudioOpenAL.cpp:991
 #, c-format
@@ -315,9 +315,9 @@ msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
 msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1035
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: Could not read from \"%s\" in AudioOpenAL::loadVorbis\n"
-msgstr "FEHLER: Konnte \"%s\" nicht öffnen in AudioOpenAL::loadVorbis\n"
+msgstr "FEHLER: Konnte nicht von \"%s\" lesen in AudioOpenAL::loadVorbis\n"
 
 #: src/AudioOpenAL.cpp:1043
 #, c-format
@@ -430,15 +430,15 @@ msgid "WARNING: could not write score file (%s)\n"
 msgstr "WARNUNG: konnte Bestenlisten-Datei nicht schreiben (%s)\n"
 
 #: src/HiScore.cpp:276
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: error reading score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
+msgstr "WARNUNG: Fehler beim Lesen der Bestenlisten-Datei (%s)\n"
 
 #: src/HiScore.cpp:319 src/HiScore.cpp:321 src/HiScore.cpp:323
 #: src/HiScore.cpp:343 src/HiScore.cpp:345 src/HiScore.cpp:347
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: error reading old score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
+msgstr "WARNUNG: Fehler beim Lesen der veralteten Bestenlisten-Datei (%s)\n"
 
 #: src/HiScore.cpp:332
 #, c-format
@@ -492,10 +492,10 @@ msgstr ""
 "                       :      2 =  800 x  600\n"
 "                       :      3 = 1024 x  768\n"
 "                       :      4 = 1280 x  960\n"
-"  -na/--noaudio        : deaktiviere Sound\n"
+"  -na/--noaudio        : deaktiviere den Ton\n"
 "  -nb/--noblend        : deaktiviere Blending (OpenGL)\n"
-"  -nt/--notexborder    : do not set tex border color (OpenGL)\n"
-"  -V/--version         : show version information\n"
+"  -nt/--notexborder    : setze keine Textur-Kanten-Farbe (OpenGL)\n"
+"  -V/--version         : zeige Versionsinformationen\n"
 "--------------------------------------------------\n"
 "\n"
 
@@ -680,14 +680,14 @@ msgid "ERROR!!! SDL error '%s'\n"
 msgstr "FEHLER!!! SDL Fehler '%s'\n"
 
 #: src/MainSDL.cpp:372
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't create window: %s\n"
-msgstr "Konnte Video Modus nicht setzen: %s\n"
+msgstr "Konnte Fenster nicht erstellen: %s\n"
 
 #: src/MainSDL.cpp:378
-#, fuzzy, c-format
+#, c-format
 msgid "Couldn't create context: %s\n"
-msgstr "GLC: konnte den Kontext nicht setzen"
+msgstr "Konnte Kontext nicht erstellen: %s\n"
 
 #: src/MainSDL.cpp:389
 #, c-format
@@ -750,7 +750,7 @@ msgid ""
 "buffer = \"%s\n"
 "\""
 msgstr ""
-"Buffer = \"%s\n"
+"Puffer = \"%s\n"
 "\""
 
 #: src/MainSDL_Event.cpp:474
@@ -848,7 +848,7 @@ msgstr "MenuGL::createLists\n"
 
 #: src/MenuGL.cpp:162
 msgid "fish in a barrel"
-msgstr "ein Kinderspiel"
+msgstr "Kinderspiel"
 
 #: src/MenuGL.cpp:163
 msgid "wimp"
@@ -940,22 +940,22 @@ msgstr "aus"
 #: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
-msgstr "---- Fehler bei Nutzung des Vollbildmodus ----"
+msgstr "---- Fehler beim Wechsel in den Vollbildmodus ----"
 
 #: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
-msgstr "---- Fehler bei Nutzung des Fenstermodus ----"
+msgstr "---- Fehler beim Wechsel in den Fenstermodus ----"
 
 #: src/MenuGL.cpp:834
 #, c-format
 msgid "---- you must complete level %d before you can select level %d ----"
-msgstr "---- du musst Level %d fertig haben um Level %d auszuwählen ----"
+msgstr "---- du musst Level %d fertig haben, um Level %d auszuwählen ----"
 
 #: src/MenuGL.cpp:850 src/MenuGL.cpp:921
 #, c-format
 msgid "---- error setting screen size ----"
-msgstr "---- Fehler beim setzen der Auflösung ----"
+msgstr "---- Fehler beim Setzen der Auflösung ----"
 
 #: src/PowerUps.cpp:180
 #, c-format
@@ -978,11 +978,11 @@ msgstr "p a u s i e r t"
 
 #: src/StatusDisplay.cpp:677
 msgid "do not let -any- ships past you! each one costs you a life!"
-msgstr "Lass -keine- Schiffe an dir vorbei! Jedes kostet dich ein Leben!"
+msgstr "Lasse -keine- Raumschiffe durch! Jedes kostet dich ein Leben!"
 
 #: src/StatusDisplay.cpp:688
 msgid "let super shields pass by for an extra life!"
-msgstr "Lasse Super Schutzschilde an dir vorbei, um ein extra Leben zu erhalten!"
+msgstr "Lasse Super-Schilde durch, um ein extra Leben zu erhalten!"
 
 #: src/TextFTGL.cpp:35
 #, c-format
