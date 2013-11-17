@@ -3,13 +3,14 @@
 #
 # Translators:
 # Evgeni Golov <sargentd@die-welt.net>, 2011
+# Sebastian Riemer <sebastian.riemer@gmx.de>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
 "POT-Creation-Date: 2013-11-17 10:13+0800\n"
-"PO-Revision-Date: 2011-03-22 15:18+0000\n"
-"Last-Translator: Evgeni Golov <sargentd@die-welt.net>\n"
+"PO-Revision-Date: 2013-11-17 02:20+0000\n"
+"Last-Translator: Sebastian Riemer <sebastian.riemer@gmx.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +54,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" CD enthällt nur Daten-Tracks. CD Audio wird nicht verfügbar sein.\n"
+" CD enthält nur Daten-Tracks. CD Audio wird nicht verfügbar sein.\n"
 "\n"
 
 #: src/Audio.cpp:155
@@ -63,7 +64,7 @@ msgid ""
 " use_cdrom enabled. Set to '0' in the configuration file to disable.\n"
 msgstr ""
 "\n"
-" CDROM Nutzung (use_cdrom) aktiviert. Setze es auf '0' in der Konfigurationsdatei um es zu deaktivieren.\n"
+" CDROM Nutzung (use_cdrom) aktiviert. Zum Deaktivieren setze diese in der Konfigurationsdatei auf '0'.\n"
 
 #: src/Audio.cpp:156
 #, c-format
@@ -77,7 +78,7 @@ msgstr ""
 #: src/Audio.cpp:167
 #, c-format
 msgid "ERROR! Could not access CDROM device %d : %s\n"
-msgstr "FEHLER! Konnte nicht auf das CDROM Laufwerk zugreifen %d: %s\n"
+msgstr "FEHLER! Konnte nicht auf das CDROM Laufwerk %d zugreifen: %s\n"
 
 #: src/Audio.cpp:213
 #, c-format
@@ -107,12 +108,12 @@ msgstr "Track %d ist ein Daten-Track, versuche den nächsten...\n"
 #: src/AudioOpenAL.cpp:143
 #, c-format
 msgid "alAttenuationScale == 0. Kludge it.\n"
-msgstr "alAttenuationScale == 0. Kludge it.\n"
+msgstr "alAttenuationScale == 0. Löse es behelfsweise.\n"
 
 #: src/AudioOpenAL.cpp:160
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr "AudioOpenAL::Audio done\n"
+msgstr "AudioOpenAL::Audio fertig\n"
 
 #: src/AudioOpenAL.cpp:168
 #, c-format
@@ -144,7 +145,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:269
 #, c-format
 msgid "AudioOpenAL::initSound() begin...\n"
-msgstr "AudioOpenAL::initSound() begin...\n"
+msgstr "AudioOpenAL::initSound() Start...\n"
 
 #: src/AudioOpenAL.cpp:273
 #, c-format
@@ -167,17 +168,17 @@ msgstr "------------------------------------------------------------\n"
 #: src/AudioOpenAL.cpp:311
 #, c-format
 msgid "Audio.cpp - init %s"
-msgstr "Audio.cpp - init %s"
+msgstr "Audio.cpp - initialisiere %s"
 
 #: src/AudioOpenAL.cpp:324
 #, c-format
 msgid "Audio.cpp - init explosion %d"
-msgstr "Audio.cpp - init explosion %d"
+msgstr "Audio.cpp - initialisiere Explosion %d"
 
 #: src/AudioOpenAL.cpp:337
 #, c-format
 msgid "Audio.cpp - init exploPop %d"
-msgstr "Audio.cpp - init exploPop %d"
+msgstr "Audio.cpp - initialisiere exploPop %d"
 
 #: src/AudioOpenAL.cpp:350
 msgid "Audio.cpp - initSound complete."
@@ -205,7 +206,7 @@ msgid ""
 "ERROR! - sound enumerant index %d does not have valid filename!\n"
 msgstr ""
 "\n"
-"FEHLER! - Sound Zähler Index %d hat keinen gültigen Dateinamen!\n"
+"FEHLER! - Geräusch am Index %d hat keinen gültigen Dateinamen!\n"
 
 #: src/AudioOpenAL.cpp:555
 #, c-format
@@ -264,19 +265,19 @@ msgstr "%s geladen\n"
 
 #: src/AudioOpenAL.cpp:820
 msgid "AudioOpenAL::setMusicIndex -- begin"
-msgstr "AudioOpenAL::setMusicIndex -- begin"
+msgstr "AudioOpenAL::setMusicIndex -- Start"
 
 #: src/AudioOpenAL.cpp:833
 msgid "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
-msgstr "AudioOpenAL::setMusicIndex -- before setting source buffer to 0"
+msgstr "AudioOpenAL::setMusicIndex -- vor dem Setzen des Quellpuffers auf 0"
 
 #: src/AudioOpenAL.cpp:836
 msgid "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
-msgstr "AudioOpenAL::setMusicIndex -- after setting source buffer to 0"
+msgstr "AudioOpenAL::setMusicIndex -- nach dem Setzen des Quellpuffers auf 0"
 
 #: src/AudioOpenAL.cpp:871
 msgid "AudioOpenAL::setMusicIndex -- end"
-msgstr "AudioOpenAL::setMusicIndex -- end"
+msgstr "AudioOpenAL::setMusicIndex -- Ende"
 
 #: src/AudioOpenAL.cpp:921 src/AudioOpenAL.cpp:954 src/AudioOpenAL.cpp:1004
 #, c-format
@@ -326,7 +327,7 @@ msgstr "FEHLER: alutLoadVorbis() fehlgeschlagen in AudioOpenAL::loadVorbis\n"
 #: src/AudioSDLMixer.cpp:65
 #, c-format
 msgid "ERROR initializing audio - AudioSDLMixer::initSound()\n"
-msgstr "FEHLER bein Initializieren von Audio - AudioSDLMixer::initSound()\n"
+msgstr "FEHLER beim Initialisieren von Audio - AudioSDLMixer::initSound()\n"
 
 #: src/Config.cpp:118
 #, c-format
@@ -351,7 +352,7 @@ msgstr "WARNUNG: Konnte Konfigurationsdatei nicht schreiben (%s)\n"
 #: src/EnemyAircraft.cpp:111
 #, c-format
 msgid "%d EnemyAircraft allocated\n"
-msgstr "%d EnemyAircraft reserviert\n"
+msgstr "%d EnemyAircraft Objekte allokiert\n"
 
 #: src/EnemyAircraft_Straight.cpp:98
 #, c-format
@@ -376,7 +377,7 @@ msgstr "Starte..."
 #: src/Global.cpp:242
 #, c-format
 msgid "...startup complete.\n"
-msgstr "...Start vollständig.\n"
+msgstr "...Start abgeschlossen.\n"
 
 #: src/Global.cpp:249
 #, c-format
@@ -386,7 +387,7 @@ msgstr "Beende...\n"
 #: src/Global.cpp:262
 #, c-format
 msgid "...shutdown complete.\n"
-msgstr "...Beenden vollständig.\n"
+msgstr "...Beenden abgeschlossen.\n"
 
 #: src/Global.cpp:269
 #, c-format
@@ -426,7 +427,7 @@ msgstr "WARNUNG: HiScore::init() wurde bereits ausgeführt.\n"
 #: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht schreiben (%s)\n"
+msgstr "WARNUNG: konnte Bestenlisten-Datei nicht schreiben (%s)\n"
 
 #: src/HiScore.cpp:276
 #, fuzzy, c-format
@@ -442,12 +443,12 @@ msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
 #: src/HiScore.cpp:332
 #, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr "WARNUNG: leere Punktzahldatei (%s)\n"
+msgstr "WARNUNG: leere Bestenlisten-Datei (%s)\n"
 
 #: src/HiScore.cpp:357
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
-msgstr "WARNUNG: konnte Punktzahldatei nicht lesen (%s)\n"
+msgstr "WARNUNG: konnte Bestenlisten-Datei nicht lesen (%s)\n"
 
 #: src/HiScore.cpp:449
 #, c-format
@@ -535,7 +536,7 @@ msgid ""
 "\n"
 "%d"
 msgstr ""
-"Neue Höhstpunktzahl!\n"
+"Neuer Rekord!\n"
 "\n"
 "%d"
 
@@ -664,7 +665,7 @@ msgstr ""
 "      anzeigen. Du solltest in Betracht ziehen die Auflösung\n"
 "      oder die Details zu verringern.\n"
 "      -ODER-\n"
-"      Vergewissere dich, dass bei dir keine System-Überwachungs\n"
+"      Vergewissere dich, dass bei dir keine System-Überwachungs-\n"
 "      Programme (wie 'top', 'xosview', etc.) laufen. Solche\n"
 "      Programme verhindern oft eine stabile Frame Rate.\n"
 
@@ -769,31 +770,31 @@ msgstr "MainSDL::grabMouse(%d)\n"
 
 #: src/MenuGL.cpp:43
 msgid "  d o   n o t   a l l o w  -a n y-   e n e m i e s   g e t   p a s t   y o u !"
-msgstr "  e r l a u b e   e s  -k e i n e m-   G e g n e r   a n   d i r   v o r b e i  z u k o m m  e n !"
+msgstr "  L a s s e  -k e i n e n-  G e g n e r  a n  d i r  v o r b e i !"
 
 #: src/MenuGL.cpp:44
 msgid "  e v e r y   e n e m y   t h a t   g e t s   b y   c o s t s   y o u   a   l i f e !"
-msgstr "  j e d e r   G e g n e r   d e r    a n   d i r   v o r b  e i k o m m t ,   k o s t e  t   d i c h   e i n   L e b e n !"
+msgstr "  G e g n e r  k o m m t  d u r c h  -->  e i n  L e b e n  w e n i g e r !"
 
 #: src/MenuGL.cpp:45
 msgid "  a l l o w   p o w e r - u p s   t o   p a s s   b y   f o r   b i g   p o i n t s !"
-msgstr "  l a s s e   P o w e r - U  p s   v o r b e  i   f ü r   m e h r   P u n k t e !"
+msgstr "  L a s s e  P o w e r - U p s  v o r b e i  f ü r  m e h r  P u n k t e !"
 
 #: src/MenuGL.cpp:46
 msgid "  c r a s h   i n t o   e n e m i e s   t o   d e s t r o y   t h e m !"
-msgstr "  s t o ß  e   m i t    G e g n e  r n   z u s a m m  e n ,   u m   s i e   z u   z e r s t ö r e n !"
+msgstr "  R a m m e  G e g n e r ,  u m  s i e  z u  z e r s t ö r e n !"
 
 #: src/MenuGL.cpp:47
 msgid "  r i g h t   c l i c k   t w i c e   t o   s e l f - d e s t r u c t !"
-msgstr "  d o p p e l   r e c h t s   K l i c k   f ü r   S e l b s t z e r s t ö r u n g !"
+msgstr "  D o p p e l - R e c h t s - K l i c k  f ü r  S e l b s t z e r s t ö r u n g !"
 
 #: src/MenuGL.cpp:48
 msgid "  s e l f - d e s t r u c t   t o   p r e s e r v e   y o u r   a m m u n i t i o n !"
-msgstr "  z e r s t ö r e   d i c h   s e l b s t   u m   d i e M u n i t i o n   z u   s i c h e r n !"
+msgstr "  S e l b s t z e r s t ö r u n g  z u m  M u n i t i o n  s i c h e r n !"
 
 #: src/MenuGL.cpp:49
 msgid "  d o w n l o a d   C h r o m i u m   B. S. U.   a t   http://chromium-bsu.sf.net/"
-msgstr "  L a d e   d i e   n  e u s t e   V e r s  i o n   v o n   C h r  o m i u m   B . S. U .   a u f   http://chromium-bsu.sf.net/"
+msgstr "  L a d e  C h r o m i u m  B . S. U .  v o n  http://chromium-bsu.sf.net/"
 
 #: src/MenuGL.cpp:70
 msgid "n e w    g a m e"
@@ -829,7 +830,7 @@ msgstr "M u s i k   L a u t s t ä r k e"
 
 #: src/MenuGL.cpp:78
 msgid "m o v e m e n t   s p e e d"
-msgstr "B e w e g u n g s   G e s c h w i n d i g k e i t"
+msgstr "B e w e g u n g s   T e m p o"
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
@@ -847,7 +848,7 @@ msgstr "MenuGL::createLists\n"
 
 #: src/MenuGL.cpp:162
 msgid "fish in a barrel"
-msgstr "Fisch im Faß"
+msgstr "ein Kinderspiel"
 
 #: src/MenuGL.cpp:163
 msgid "wimp"
@@ -929,12 +930,12 @@ msgstr "%dx%d"
 #: src/MenuGL.cpp:484
 #, c-format
 msgid "true"
-msgstr "wahr"
+msgstr "an"
 
 #: src/MenuGL.cpp:485
 #, c-format
 msgid "false"
-msgstr "falsch"
+msgstr "aus"
 
 #: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
