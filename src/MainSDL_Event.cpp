@@ -311,7 +311,7 @@ void MainSDL::activation(bool shown, bool mouse, bool input, bool gain)
 	} 
 	else if ( mouse )
 	{
-		if( config->debug() ) fprintf(stderr, _("mouse active") );
+		if( config->debug() ) fprintf(stderr, "mouse active" );
 		SDL_GetMouseState(&xLast, &yLast);
 	} 
 	else if ( input )
@@ -319,7 +319,7 @@ void MainSDL::activation(bool shown, bool mouse, bool input, bool gain)
 		grabMouse( grab_mouse, grab_mouse );
 		if( config->debug() ) fprintf(stderr, "input active" );
 	}
-	if( config->debug() ) fprintf(stderr, _("focus\n") );
+	if( config->debug() ) fprintf(stderr, "focus\n" );
 }
 
 //----------------------------------------------------------

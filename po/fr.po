@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2013-11-14 07:41+0800\n"
+"POT-Creation-Date: 2013-11-17 10:13+0800\n"
 "PO-Revision-Date: 2011-09-24 15:47+0000\n"
 "Last-Translator: Emmanuel Trillaud <etrillaud@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/chromium-bsu/language/fr/)\n"
@@ -750,16 +750,6 @@ msgid ""
 msgstr ""
 "tampon = \"%s\n"
 "\""
-
-#: src/MainSDL_Event.cpp:314
-#, c-format
-msgid "mouse active"
-msgstr "souris activée"
-
-#: src/MainSDL_Event.cpp:322
-#, c-format
-msgid "focus\n"
-msgstr "focus\n"
 
 #: src/MainSDL_Event.cpp:474
 #, c-format

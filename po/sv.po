@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
-"POT-Creation-Date: 2013-11-14 07:41+0800\n"
+"POT-Creation-Date: 2013-11-17 10:13+0800\n"
 "PO-Revision-Date: 2011-05-17 00:20+0000\n"
 "Last-Translator: Niklas Åkerström <nille.kungen@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -741,16 +741,6 @@ msgid ""
 msgstr ""
 "buffert = \"%s\n"
 "\""
-
-#: src/MainSDL_Event.cpp:314
-#, c-format
-msgid "mouse active"
-msgstr "mus är aktiv"
-
-#: src/MainSDL_Event.cpp:322
-#, c-format
-msgid "focus\n"
-msgstr "fokus\n"
 
 #: src/MainSDL_Event.cpp:474
 #, c-format
