@@ -2,20 +2,21 @@
 # This file is put in the public domain.
 #
 # Translators:
+# Ahmet Sezgin Duran <marjinalist1@gmail.com>, 2013
 # Murat Ikilik <>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
 "Report-Msgid-Bugs-To: http://sf.net/projects/chromium-bsu/bugs\n"
 "POT-Creation-Date: 2013-11-17 10:13+0800\n"
-"PO-Revision-Date: 2012-03-19 21:25+0000\n"
-"Last-Translator: Murat Ikilik <>\n"
+"PO-Revision-Date: 2013-11-17 02:20+0000\n"
+"Last-Translator: Ahmet Sezgin Duran <marjinalist1@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/Audio.cpp:111
 msgid "audio"
@@ -33,7 +34,7 @@ msgstr "Bilinmiyen(type=%d)"
 #: src/Audio.cpp:125
 #, c-format
 msgid "%d CDROM drive(s).\n"
-msgstr ""
+msgstr "%d CDROM sürücüsü\n"
 
 #: src/Audio.cpp:136
 #, c-format
@@ -70,17 +71,17 @@ msgstr ""
 #: src/Audio.cpp:167
 #, c-format
 msgid "ERROR! Could not access CDROM device %d : %s\n"
-msgstr ""
+msgstr "HATA! %d : %s CDROM aygıtına erişilemedi.\n"
 
 #: src/Audio.cpp:213
 #, c-format
 msgid "CDROM error in AudioOpenAL::pauseGameMusic(%d)\n"
-msgstr ""
+msgstr "AudioOpenAL::pauseGameMusic(%d)'da CDROM hatası\n"
 
 #: src/Audio.cpp:214
 #, c-format
 msgid "CDROM status = %d\n"
-msgstr ""
+msgstr "CDROM durumu = %d\n"
 
 #: src/Audio.cpp:283
 #, c-format
@@ -105,21 +106,21 @@ msgstr ""
 #: src/AudioOpenAL.cpp:160
 #, c-format
 msgid "AudioOpenAL::Audio done\n"
-msgstr ""
+msgstr "AudioOpenAL::Audio tamamlandı\n"
 
 #: src/AudioOpenAL.cpp:168
 #, c-format
 msgid "stopping OpenAL..."
-msgstr ""
+msgstr "OpenAL durduruluyor..."
 
 #: src/AudioOpenAL.cpp:182
 msgid "AudioOpenAL::~Audio()"
-msgstr ""
+msgstr "AudioOpenAL::~Audio()"
 
 #: src/AudioOpenAL.cpp:203
 #, c-format
 msgid "done.\n"
-msgstr ""
+msgstr "tamamlandı.\n"
 
 #: src/AudioOpenAL.cpp:249
 #, c-format
@@ -129,6 +130,10 @@ msgid ""
 "!!                Audio will be disabled.\n"
 "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 msgstr ""
+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+" !! DİKKAT !! - ses denetimi sırasında bir ya da daha fazla hata oluştu.\n"
+" !!  Ses pasifleştirilecek.\n"
+" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
 
 #: src/AudioOpenAL.cpp:269
 #, c-format
@@ -198,32 +203,32 @@ msgstr ""
 #: src/AudioOpenAL.cpp:571
 #, c-format
 msgid "ERROR!! <%s> alGetError() = %s\n"
-msgstr ""
+msgstr "HATA!! <%s> alGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:576
 #, c-format
 msgid "ERROR!! <%s> alcGetError() = %s\n"
-msgstr ""
+msgstr "HATA!! <%s> alcGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:581
 #, c-format
 msgid "ERROR!! <%s> alutGetError() = %s\n"
-msgstr ""
+msgstr "HATA!! <%s> alutGetError() = %s\n"
 
 #: src/AudioOpenAL.cpp:738
 #, c-format
 msgid "ERROR: filename too long: \"%s\", line %d\n"
-msgstr ""
+msgstr "HATA: dosya ismi çok uzun: \"%s\", %d. satır\n"
 
 #: src/AudioOpenAL.cpp:756
 #, c-format
 msgid "WARNING: MP3 support not available: \"%s\", line %d\n"
-msgstr ""
+msgstr "UYARI: MP3 desteği mevcut değil: \"%s\", %d. satır\n"
 
 #: src/AudioOpenAL.cpp:767
 #, c-format
 msgid "WARNING: Ogg/Vorbis support not available: \"%s\", line %d\n"
-msgstr ""
+msgstr "UYARI: Ogg/Vorbis desteği mevcut değil: \"%s\", %d. satır\n"
 
 #: src/AudioOpenAL.cpp:771
 #, c-format
@@ -233,7 +238,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:786
 #, c-format
 msgid "music playlist:\n"
-msgstr ""
+msgstr "müzik çalma listesi:\n"
 
 #: src/AudioOpenAL.cpp:789
 #, c-format
@@ -243,7 +248,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:791
 #, c-format
 msgid "loaded %s\n"
-msgstr ""
+msgstr "%s yüklendi\n"
 
 #: src/AudioOpenAL.cpp:820
 msgid "AudioOpenAL::setMusicIndex -- begin"
@@ -259,7 +264,7 @@ msgstr ""
 
 #: src/AudioOpenAL.cpp:871
 msgid "AudioOpenAL::setMusicIndex -- end"
-msgstr ""
+msgstr "AudioOpenAL::setMusicIndex -- son"
 
 #: src/AudioOpenAL.cpp:921 src/AudioOpenAL.cpp:954 src/AudioOpenAL.cpp:1004
 #, c-format
@@ -269,12 +274,12 @@ msgstr ""
 #: src/AudioOpenAL.cpp:971
 #, c-format
 msgid "ERROR: Could not allocate memory in AudioOpenAL::loadMP3\n"
-msgstr ""
+msgstr "HATA: AudioOpenAL::loadMP3'da bellek ayırılamadı\n"
 
 #: src/AudioOpenAL.cpp:977
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadMP3\n"
-msgstr ""
+msgstr "HATA: AudioOpenAL::loadMP3'da \"%s\" açılamadı\n"
 
 #: src/AudioOpenAL.cpp:983
 #, c-format
@@ -294,7 +299,7 @@ msgstr ""
 #: src/AudioOpenAL.cpp:1029
 #, c-format
 msgid "ERROR: Could not open \"%s\" in AudioOpenAL::loadVorbis\n"
-msgstr ""
+msgstr "HATA: AudioOpenAL::loadVorbis'da \"%s\" açılamadı\n"
 
 #: src/AudioOpenAL.cpp:1035
 #, c-format
@@ -319,22 +324,22 @@ msgstr ""
 #: src/Config.cpp:251
 #, c-format
 msgid "WARNING: could not read config file (%s)\n"
-msgstr ""
+msgstr "UYARI: yapılandırma dosyası okunamadı (%s)\n"
 
 #: src/Config.cpp:314
 #, c-format
 msgid "wrote config file (%s)\n"
-msgstr ""
+msgstr "yapılandırma dosyası yazıldı (%s)\n"
 
 #: src/Config.cpp:319
 #, c-format
 msgid "WARNING: could not write config file (%s)\n"
-msgstr ""
+msgstr "UYARI: yapılandırma dosyası yazılamadı (%s)\n"
 
 #: src/EnemyAircraft.cpp:111
 #, c-format
 msgid "%d EnemyAircraft allocated\n"
-msgstr ""
+msgstr "%d EnemyAircraft ayrıldı\n"
 
 #: src/EnemyAircraft_Straight.cpp:98
 #, c-format
@@ -344,7 +349,7 @@ msgstr ""
 #: src/EnemyFleet.cpp:243
 #, c-format
 msgid "num enemies on screen = %d\n"
-msgstr ""
+msgstr "ekrandaki düşman sayısı = %d\n"
 
 #: src/Global.cpp:114
 #, c-format
@@ -359,7 +364,7 @@ msgstr "Başlatılıyo"
 #: src/Global.cpp:242
 #, c-format
 msgid "...startup complete.\n"
-msgstr ""
+msgstr "...başlangıç tamamlandı.\n"
 
 #: src/Global.cpp:249
 #, c-format
@@ -384,7 +389,7 @@ msgstr ""
 #: src/Global.cpp:352
 #, c-format
 msgid "Generating random sequences\n"
-msgstr ""
+msgstr "Rastgele sıralar oluşturuluyor\n"
 
 #: src/HeroAmmo.cpp:167
 #, c-format
@@ -399,7 +404,7 @@ msgstr ""
 #: src/HiScore.cpp:58
 #, c-format
 msgid "nobody"
-msgstr ""
+msgstr "hiç kimse"
 
 #: src/HiScore.cpp:83
 #, c-format
@@ -409,7 +414,7 @@ msgstr ""
 #: src/HiScore.cpp:241
 #, c-format
 msgid "WARNING: could not write score file (%s)\n"
-msgstr ""
+msgstr "UYARI: skor dosyası yazılamadı (%s)\n"
 
 #: src/HiScore.cpp:276
 #, c-format
@@ -425,17 +430,17 @@ msgstr ""
 #: src/HiScore.cpp:332
 #, c-format
 msgid "WARNING: empty score file (%s)\n"
-msgstr ""
+msgstr "UYARI: boş skor dosyası (%s)\n"
 
 #: src/HiScore.cpp:357
 #, c-format
 msgid "WARNING: could not read score file (%s)\n"
-msgstr ""
+msgstr "UYARI: skor dosyası okunamadı (%s)\n"
 
 #: src/HiScore.cpp:449
 #, c-format
 msgid "high scores:\n"
-msgstr ""
+msgstr "yüksek skorlar:\n"
 
 #: src/HiScore.cpp:455
 #, c-format
@@ -467,12 +472,12 @@ msgstr ""
 #: src/main.cpp:237
 #, c-format
 msgid "!! ERROR !! - "
-msgstr ""
+msgstr "!! HATA !! -"
 
 #: src/main.cpp:261
 #, c-format
 msgid "Extensions :"
-msgstr ""
+msgstr "Uzantılar :"
 
 #: src/MainGL.cpp:86
 #, c-format
@@ -482,17 +487,17 @@ msgstr ""
 #: src/MainGL.cpp:148
 #, c-format
 msgid "error loading font: %s\n"
-msgstr ""
+msgstr "yazı tipi yükleme hatası: %s\n"
 
 #: src/MainGL.cpp:153
 #, c-format
 msgid "error loading font\n"
-msgstr ""
+msgstr "yazı tipi yükleme hatası\n"
 
 #: src/MainGL.cpp:183
 #, c-format
 msgid "!!MainGL::drawGL() HUH?\n"
-msgstr ""
+msgstr "!!MainGL::drawGL() HA?\n"
 
 #: src/MainGL.cpp:311
 #, c-format
@@ -501,6 +506,9 @@ msgid ""
 "\n"
 "%d"
 msgstr ""
+"yeni yüksek skor!\n"
+" \n"
+" %d"
 
 #: src/MainGL.cpp:316
 #, c-format
@@ -525,6 +533,12 @@ msgid ""
 "c o m p l e t e\n"
 " \n"
 msgstr ""
+"tebrikler!\n"
+" \n"
+" s e v i y e\n"
+" %d \n"
+" t a m a m l a n d ı\n"
+" \n"
 
 #: src/MainGLUT.cpp:77
 #, c-format
@@ -534,22 +548,22 @@ msgstr ""
 #: src/MainGLUT.cpp:93 src/MainSDL.cpp:298
 #, c-format
 msgid "ERROR!!! OpenGL error: %s\n"
-msgstr ""
+msgstr "HATA!!! OpenGL hatası: %s\n"
 
 #: src/MainGLUT.cpp:235
 #, c-format
 msgid "key = %d\n"
-msgstr ""
+msgstr "tuş = %d\n"
 
 #: src/MainSDL.cpp:76
 #, c-format
 msgid "Couldn't initialize SDL: %s\n"
-msgstr ""
+msgstr "SDL başlatılamadı: %s\n"
 
 #: src/MainSDL.cpp:79
 #, c-format
 msgid "SDL initialized.\n"
-msgstr ""
+msgstr "SDL başlatıldı.\n"
 
 #: src/MainSDL.cpp:85
 #, c-format
@@ -569,7 +583,7 @@ msgstr ""
 #: src/MainSDL.cpp:102 src/MainSDL.cpp:384
 #, c-format
 msgid "Couldn't set video mode: %s\n"
-msgstr ""
+msgstr "Video modu ayarlanamadı: %s\n"
 
 #: src/MainSDL.cpp:110
 #, c-format
@@ -611,12 +625,12 @@ msgstr ""
 #: src/MainSDL.cpp:281
 #, c-format
 msgid "exit.\n"
-msgstr ""
+msgstr "çıkış.\n"
 
 #: src/MainSDL.cpp:306
 #, c-format
 msgid "ERROR!!! SDL error '%s'\n"
-msgstr ""
+msgstr "HATA!!! SDL hatası '%s'\n"
 
 #: src/MainSDL.cpp:372
 #, c-format
@@ -631,7 +645,7 @@ msgstr ""
 #: src/MainSDL.cpp:389
 #, c-format
 msgid "video mode set "
-msgstr ""
+msgstr "video modu ayarlandı"
 
 #: src/MainSDL.cpp:398
 #, c-format
@@ -681,7 +695,7 @@ msgstr ""
 #: src/MainSDL_Event.cpp:283
 #, c-format
 msgid "MainSDL::getEvent HUH?\n"
-msgstr ""
+msgstr "MainSDL::getEvent HA?\n"
 
 #: src/MainSDL_Event.cpp:293
 #, c-format
@@ -693,7 +707,7 @@ msgstr ""
 #: src/MainSDL_Event.cpp:474
 #, c-format
 msgid "key '%s' pressed\n"
-msgstr ""
+msgstr "'%s' tuşuna basıldı\n"
 
 #: src/MainSDL_Event.cpp:475
 #, c-format
@@ -735,11 +749,11 @@ msgstr ""
 
 #: src/MenuGL.cpp:70
 msgid "n e w    g a m e"
-msgstr ""
+msgstr "y e n i | o y u n"
 
 #: src/MenuGL.cpp:71
 msgid "l e v e l"
-msgstr ""
+msgstr "s e v i y e"
 
 #: src/MenuGL.cpp:72
 msgid "s k i l l"
@@ -751,11 +765,11 @@ msgstr ""
 
 #: src/MenuGL.cpp:74
 msgid "f u l l s c r e e n"
-msgstr ""
+msgstr "tam ekran"
 
 #: src/MenuGL.cpp:75
 msgid "s c r e e n    s i z e"
-msgstr ""
+msgstr "e k r a n  b ü y ü k l ü ğ ü"
 
 #: src/MenuGL.cpp:76
 msgid "s o u n d    f x    v o l u m e"
@@ -771,12 +785,12 @@ msgstr ""
 
 #: src/MenuGL.cpp:79
 msgid "q u i t"
-msgstr ""
+msgstr "çıkış"
 
 #: src/MenuGL.cpp:143 src/MenuGL.cpp:417
 #, c-format
 msgid "ATTENTION: Using 'thin' text to improve framerate...\n"
-msgstr ""
+msgstr "DİKKAT: Kare hızını iyileştirmek için 'ince' yazılar kullanılıyor...\n"
 
 #: src/MenuGL.cpp:147
 #, c-format
@@ -793,27 +807,27 @@ msgstr ""
 
 #: src/MenuGL.cpp:164
 msgid "easy"
-msgstr ""
+msgstr "kolay"
 
 #: src/MenuGL.cpp:165
 msgid "normal"
-msgstr ""
+msgstr "normal"
 
 #: src/MenuGL.cpp:166
 msgid "experienced"
-msgstr ""
+msgstr "deneyimli"
 
 #: src/MenuGL.cpp:167
 msgid "fun"
-msgstr ""
+msgstr "eğlenceli"
 
 #: src/MenuGL.cpp:168
 msgid "insane"
-msgstr ""
+msgstr "çılgın"
 
 #: src/MenuGL.cpp:169
 msgid "impossible"
-msgstr ""
+msgstr "imkansız"
 
 #: src/MenuGL.cpp:170
 msgid "-"
@@ -821,7 +835,7 @@ msgstr ""
 
 #: src/MenuGL.cpp:292 src/MenuGL.cpp:320
 msgid "high scores"
-msgstr ""
+msgstr "yüksek skorlar"
 
 #: src/MenuGL.cpp:349
 msgid "the"
@@ -842,22 +856,22 @@ msgstr ""
 #: src/MenuGL.cpp:422
 #, c-format
 msgid "ATTENTION: Reverting to 'thick' text...\n"
-msgstr ""
+msgstr "DİKKAT: \"kalın\" yazılara dönülüyor...\n"
 
 #: src/MenuGL.cpp:473
 #, c-format
 msgid "low"
-msgstr ""
+msgstr "düşük"
 
 #: src/MenuGL.cpp:474
 #, c-format
 msgid "med"
-msgstr ""
+msgstr "orta"
 
 #: src/MenuGL.cpp:475
 #, c-format
 msgid "high"
-msgstr ""
+msgstr "yüksek"
 
 #: src/MenuGL.cpp:480
 #, c-format
@@ -877,12 +891,12 @@ msgstr ""
 #: src/MenuGL.cpp:791 src/MenuGL.cpp:864 src/MenuGL.cpp:935
 #, c-format
 msgid "---- error setting full screen mode ----"
-msgstr ""
+msgstr "---- tam ekran ayarlama hatası ---"
 
 #: src/MenuGL.cpp:793
 #, c-format
 msgid "---- error setting window mode ----"
-msgstr ""
+msgstr "---- pencere modu ayarlama hatası ---"
 
 #: src/MenuGL.cpp:834
 #, c-format
@@ -911,7 +925,7 @@ msgstr ""
 
 #: src/StatusDisplay.cpp:653 src/StatusDisplay.cpp:657
 msgid "p a u s e d"
-msgstr ""
+msgstr "d u r a k l a t ı l d ı"
 
 #: src/StatusDisplay.cpp:677
 msgid "do not let -any- ships past you! each one costs you a life!"
@@ -924,11 +938,11 @@ msgstr ""
 #: src/TextFTGL.cpp:35
 #, c-format
 msgid "FTGL: error loading font: %s\n"
-msgstr ""
+msgstr "FTGL: yazı tipi yükleme hatası: %s\n"
 
 #: src/TextFTGL.cpp:38
 msgid "FTGL: error loading font"
-msgstr ""
+msgstr "FTGL: yazı tipi yükleme hatası"
 
 #. TRANSLATORS: If using the FTGL backend, this should be the font
 #. name of a font that contains all the Unicode characters in use in
@@ -978,4 +992,4 @@ msgstr ""
 
 #: src/TextGLC.cpp:30
 msgid "GLC: couldn't set context"
-msgstr ""
+msgstr "GLC: içerik ayarlanamadı"
