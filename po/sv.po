@@ -2,8 +2,8 @@
 # This file is put in the public domain.
 #
 # Translators:
-# Daniel Nylander <po@danielnylander.se>, 2010, 2011.
-# Nille <nille.kungen@gmail.com>, 2011.
+# Daniel Nylander <po@danielnylander.se>, 2010-2011
+# Niklas Åkerström <nille.kungen@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"

@@ -2,8 +2,8 @@
 # This file is put in the public domain.
 #
 # Translators:
-# Alwyn Malachi Berkeley <malachix@malachix.com>, 2009.
-# Jordi Ferré Nos <jordiferren@gmail.com>, 2010, 2011.
+# Alwyn Malachi Berkeley <malachix@malachix.com>, 2009
+# Jordi Ferré Nos <jordiferren@gmail.com>, 2010-2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"

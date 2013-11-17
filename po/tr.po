@@ -2,7 +2,7 @@
 # This file is put in the public domain.
 #
 # Translators:
-# Murat Ikilik <>, 2012.
+# Murat Ikilik <>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"

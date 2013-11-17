@@ -2,8 +2,8 @@
 # This file is put in the public domain.
 #
 # Translators:
-# Emmanuel Trillaud <etrillaud@gmail.com>, 2010.
-# Wei-Lun Chao <chaoweilun@gmail.com>, 2010.
+# Emmanuel Trillaud <etrillaud@gmail.com>, 2010
+# Wei-Lun Chao <chaoweilun@gmail.com>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"

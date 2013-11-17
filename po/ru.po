@@ -2,7 +2,7 @@
 # This file is put in the public domain.
 #
 # Translators:
-# Евгений Лежнин <z_lezhnin@mail2000.ru>, 2011.
+# Евгений Лежнин <z_lezhnin@mail2000.ru>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Chromium B.S.U.\n"
