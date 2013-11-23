@@ -6,7 +6,6 @@ autom4te.cache
 compile
 depcomp
 install-sh
-config.*
 configure
 chromium-bsu
 chromium-bsu-*/
