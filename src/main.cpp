@@ -189,61 +189,51 @@ const char* alterPathForPlatform(char* filename)
 #endif
 	return filename;
 }
+//----------------------------------------------------------
+static const char* probeDataPath()
+{
+  char probe_path[512];
+
+  // Locate data directory on windows by probing paths upwards for "data".
+  GetModuleFileNameA(NULL, probe_path, sizeof probe_path);
+
+  bool searching = true;
+
+  while (searching)
+  {
+    if (char* backslash = strrchr(probe_path, '\\'))
+    {
+      *backslash = '\0';
+
+      static char data_dir_candidate[512];
+      sprintf(data_dir_candidate, "%s\\data", probe_path);
+      if (INVALID_FILE_ATTRIBUTES != GetFileAttributes(data_dir_candidate))
+      {
+        return data_dir_candidate;
+      }
+    }
+    else
+      break;
+  }
+
+  return "";
+}
 
 //----------------------------------------------------------
 const char* dataLoc(const char* filename, bool doCheck)
 {
+  static const char* dir = NULL;
+
+  if (!dir)
+  {
+    dir = probeDataPath();
+  }
+
 	static char buffer[256];
-	struct	stat sbuf;
 
-	if(getenv("CHROMIUM_BSU_DATA") != NULL && ((strlen(getenv("CHROMIUM_BSU_DATA"))+strlen(filename)) < 254) )
-	{
-		sprintf(buffer, "%s/%s", getenv("CHROMIUM_BSU_DATA"), filename);
-		if(stat(buffer, &sbuf) == 0) return buffer;
-	}
-
-	if(getenv("HOME") != NULL && ((strlen(getenv("HOME"))+strlen(filename)) < 239) )
-	{
-		sprintf(buffer, "%s/."PACKAGE"-data/%s", getenv("HOME"), filename);
-		if(stat(buffer, &sbuf) == 0) return buffer;
-	}
-
-#ifdef PKGDATADIR
-	if( ((strlen(PKGDATADIR)+strlen(filename)) < 254) )
-	{
-		sprintf(buffer, "%s/%s", PKGDATADIR, filename);
-		if(stat(buffer, &sbuf) == 0) return buffer;
-	}
-#endif
-
-#ifdef macintosh
-	#define DATADIR "::data"
-#else
-	#define DATADIR "../data"
-#endif
-
-	if( (strlen(DATADIR)+strlen(filename)) < 254)
-	{
-		sprintf(buffer, "%s/%s", DATADIR, filename);
-	}
-
-	alterPathForPlatform(buffer);
-
-#ifndef _WIN32 // WIN32 users don't get error checks...
-	if(doCheck)
-	{
-		if(stat(buffer, &sbuf) == -1) 
-		{
-			fprintf(stderr, _("!! ERROR !! - "));
-			perror(buffer);
-		}
-	}
-#endif
-
-#ifdef CHECK_ERRORS
-//	fprintf(stderr, "dataLoc(\"%s\")\n", buffer);
-#endif
-	return buffer;
+  _snprintf(buffer, sizeof buffer, "%s/%s", dir, filename);
+  buffer[(sizeof buffer) - 1] = 0;
+  return buffer;
 }
 
 //----------------------------------------------------------
