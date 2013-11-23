@@ -1,10 +1,36 @@
+local common = {
+  Env = {
+    CPPDEFS = {
+      "HAVE_CONFIG_H",
+      "_CRT_SECURE_NO_WARNINGS",
+    },
+    CPPPATH = {
+      ".",
+      "../chromium-bsu-3pp/sdl/include",
+      "../chromium-bsu-3pp/sdl_image/include",
+    },
+    LIBPATH = {
+      "../chromium-bsu-3pp/sdl/lib/x64",
+      "../chromium-bsu-3pp/sdl_image/lib/x64",
+    },
+    CXXOPTS = {
+      "/EHsc",    -- exceptions
+      "/wd4127",  -- conditional expression is constant
+      "/W4",
+      "/WX",
+      { "/O2"; Config = "*-*-release" },
+    },
+  },
+}
 
 Build {
 
   Units = function()
     local chromium = Program {
       Name = "chromium",
+      Libs = { "SDL" },
       Sources = {
+        'chromium-bsu-config.h',
         'src/Ammo.cpp', 'src/Ammo.h', 'src/Audio.cpp', 'src/Audio.h',
         'src/AudioOpenAL.cpp', 'src/AudioOpenAL.h', 'src/AudioSDLMixer.cpp',
         'src/AudioSDLMixer.h', 'src/compatibility.h', 'src/Config.cpp',
@@ -43,7 +69,12 @@ Build {
   end,
 
   Configs = {
-    Config { Name = "win64-vs2012", Tools = { { "msvc-vs2012"; TargetArch = "x64" } }, DefaultOnHost = "windows" },
+    Config {
+      Name = "win64-vs2012",
+      Tools = { { "msvc-vs2012"; TargetArch = "x64" } },
+      Inherit = common,
+      DefaultOnHost = "windows",
+    },
   },
 
 }

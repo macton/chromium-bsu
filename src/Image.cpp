@@ -16,6 +16,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <stdio.h>
 
 #if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_OPENGL_GLU_H)
 #include <OpenGL/glu.h>

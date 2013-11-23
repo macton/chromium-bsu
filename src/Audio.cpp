@@ -197,6 +197,8 @@ void	Audio::stopMusic()
 //----------------------------------------------------------
 void	Audio::pauseGameMusic(bool status)
 {
+  (void) status;
+
 	Config	*config = Config::instance();
 	if(config->audioEnabled() == true)
 	{

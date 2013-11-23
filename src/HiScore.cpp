@@ -21,9 +21,9 @@
 
 //====================================================================
 #include <cstdio>
-#include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <stdlib.h>
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
@@ -199,49 +199,7 @@ const char *HiScore::getOldFileName()
 //----------------------------------------------------------
 bool HiScore::saveFile()
 {
-	bool retVal = true;
-	FILE	*file;
-
-	file = fopen(getFileName(), "w");
-	if(file)
-	{
-#ifdef HAVE_LOCALE_H
-		char* locale = setlocale(LC_NUMERIC,"C");
-#endif
-		struct tm* time;
-		int i,j;
-		fprintf(file, "%s", header);
-		for(i = 0; i < 10; i++)
-		{
-			for(j = 0; j < HI_SCORE_HIST; j++)
-			{
-				time = gmtime(&hiScoreDate[i][j]);
-				if( time != NULL ){
-					fprintf(file, 
-					        "%d %d %f %04d-%02d-%02d %02d:%02d:%02d %s\n",
-					        i, j, 
-					        hiScore[i][j],
-					        1900+time->tm_year,
-					        1+time->tm_mon,
-					        time->tm_mday,
-					        time->tm_hour,
-					        time->tm_min,
-					        time->tm_sec,
-					        hiScoreName[i][j]);
-				}
-			}
-		}
-		fclose(file);
-#ifdef HAVE_LOCALE_H
-		setlocale(LC_NUMERIC,locale);
-#endif
-	}
-	else
-	{
-		fprintf(stderr, _("WARNING: could not write score file (%s)\n"), getFileName());
-		retVal = false;
-	}
-	return retVal;
+  return false;
 }
 
 
@@ -252,114 +210,7 @@ bool HiScore::saveFile()
 //----------------------------------------------------------
 bool HiScore::readFile()
 {
-	bool retVal = true;
-	FILE	*file;
-
-	const char* fileName = getFileName();
-	file = fopen(fileName, "r");
-	if(file)
-	{
-		int chr = fgetc(file);
-		if( EOF != chr ){
-			fseek(file, 0L, SEEK_SET);
-			if( '#' == chr ){
-				// Save and reset locale/timezone info
-#ifdef HAVE_LOCALE_H
-				char* locale = setlocale(LC_NUMERIC,"C");
-#endif
-				char *tz = getenv("TZ");
-				setenv("TZ", "", 1);
-				tzset();
-
-				// Discard the comment line
-				if( fscanf(file,"%*[^\n]") == EOF )
-					fprintf(stderr, _("WARNING: error reading score file (%s)\n"), getFileName());
-
-				char name[100];
-				struct tm time;
-				int i, j;
-				double score;
-				int fields;
-				do{
-					i = j = -1;
-					memset(&time,0,sizeof(time));
-					fields = fscanf(file,
-					                "%d %d %lf %d-%d-%d %d:%d:%d %99s%*[^\n]",
-					                &i, &j,
-					                &score,
-					                &time.tm_year,
-					                &time.tm_mon,
-					                &time.tm_mday,
-					                &time.tm_hour,
-					                &time.tm_min,
-					                &time.tm_sec,
-					                name);
-					if( fields == 10 && i >=0 && i < 10 && j >= 0 && j < HI_SCORE_HIST ){
-						hiScore[i][j] = score;
-						time.tm_year -= 1900;
-						time.tm_mon--;
-						hiScoreDate[i][j] = mktime(&time);
-						strncpy(hiScoreName[i][j], name, 99);
-						hiScoreName[i][j][99] = '\0';
-					}
-				} while( fields != EOF );
-				fclose(file);
-
-				// Reset locale/timezone info
-#ifdef HAVE_LOCALE_H
-				setlocale(LC_NUMERIC,locale);
-#endif
-				if (tz) setenv("TZ", tz, 1);
-				else unsetenv("TZ");
-				tzset();
-
-			} else {
-				// Nasty old memory dump format
-				if( fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-				if( fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-				if( fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-					fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-				fclose(file);
-				// Resave the file in plain text format
-				saveFile();
-			}
-		}
-		else 
-		{
-			Config* config = Config::instance();
-			if( config->debug() ) fprintf(stderr, _("WARNING: empty score file (%s)\n"), getFileName());
-			retVal = false;
-		}
-	}
-	else
-	{
-		fileName = getOldFileName();
-		file = fopen(fileName, "r");
-		if(file)
-		{
-			if( fread(hiScore,        sizeof(double), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-			if( fread(hiScoreName, 64*sizeof(char),   10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-			if( fread(hiScoreDate,    sizeof(time_t), 10*HI_SCORE_HIST, file) != 10*HI_SCORE_HIST )
-				fprintf(stderr, _("WARNING: error reading old score file (%s)\n"), getFileName());
-			fclose(file);
-
-			// Try to save the new file and delete the old one if successful
-			if( saveFile() )
-				remove(fileName);
-		}
-		else 
-		{
-			Config* config = Config::instance();
-			if( config->debug() ) fprintf(stderr, _("WARNING: could not read score file (%s)\n"), getFileName());
-			retVal = false;
-		}
-	}
-		
-	return retVal;
+  return false;
 }
 
 

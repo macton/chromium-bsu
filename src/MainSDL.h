@@ -10,6 +10,7 @@
 
 #ifdef USE_SDL
 #include <SDL.h>
+#include <stdio.h>
 
 #include "MainToolkit.h"
 

@@ -19,6 +19,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <math.h>
 
 #include "Config.h"
 
@@ -514,14 +515,14 @@ void MainSDL::keyMove()
 		#define KP8 SDLK_KP8
 		#define KP9 SDLK_KP9
 #endif
-		if( keystate[LEFT]  || keystate[KP4] ) key_speed_x -= 2.0 + abs(key_speed_x)*0.4;
-		if( keystate[RIGHT] || keystate[KP6] ) key_speed_x += 2.0 + abs(key_speed_x)*0.4;
-		if( keystate[UP]    || keystate[KP8] ) key_speed_y -= 2.0 + abs(key_speed_y)*0.4;
-		if( keystate[DOWN]  || keystate[KP2] ) key_speed_y += 2.0 + abs(key_speed_y)*0.4;
-		if( keystate[KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[KP9] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[KP3] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
-		if( keystate[KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + abs(key_speed_y)*0.4; }
+		if( keystate[LEFT]  || keystate[KP4] ) key_speed_x -= 2.0 + fabsf(key_speed_x)*0.4;
+		if( keystate[RIGHT] || keystate[KP6] ) key_speed_x += 2.0 + fabsf(key_speed_x)*0.4;
+		if( keystate[UP]    || keystate[KP8] ) key_speed_y -= 2.0 + fabsf(key_speed_y)*0.4;
+		if( keystate[DOWN]  || keystate[KP2] ) key_speed_y += 2.0 + fabsf(key_speed_y)*0.4;
+		if( keystate[KP7] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + fabsf(key_speed_y)*0.4; }
+		if( keystate[KP9] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y -= 2.0 + fabsf(key_speed_y)*0.4; }
+		if( keystate[KP3] ){ key_speed_x += 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + fabsf(key_speed_y)*0.4; }
+		if( keystate[KP1] ){ key_speed_x -= 2.0 + abs(key_speed_x)*0.4; key_speed_y += 2.0 + fabsf(key_speed_y)*0.4; }
 		//float s = (1.0-game->speedAdj)+(game->speedAdj*0.7);
 		float s = 0.7;
 		key_speed_x *= s;
