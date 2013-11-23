@@ -9,7 +9,6 @@ install-sh
 config.*
 configure
 chromium-bsu
-chromium-bsu-config.h*
 chromium-bsu-*/
 chromium-bsu-*.tar.gz
 Makefile
