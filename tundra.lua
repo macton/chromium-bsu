@@ -11,12 +11,6 @@ local common = {
       ".",
       "3pp/zlib",
       "3pp/freetype2/include",
-      "../chromium-bsu-3pp/sdl/include",
-      "../chromium-bsu-3pp/sdl_image/include",
-    },
-    LIBPATH = {
-      "../chromium-bsu-3pp/sdl/lib/x64",
-      "../chromium-bsu-3pp/sdl_image/lib/x64",
     },
     CXXOPTS = {
       "/EHsc",    -- exceptions
@@ -28,6 +22,7 @@ local common = {
       "/WX",
       { "/O2"; Config = "*-*-release" },
     },
+    GENERATE_PDB = "1",
   },
 }
 
@@ -185,13 +180,17 @@ Build {
       },
     }
 
+    local sdl = SharedLibrary {
+      Name = "sdl",
+    }
+
     local chromium = Program {
       Env = {
         PROGOPTS = { "/SUBSYSTEM:WINDOWS" },
       },
       Name = "chromium",
-      Depends = { "ftgl" },
-      Libs = { "SDL2.lib", "SDL2main.lib", "opengl32.lib", "glu32.lib" },
+      Depends = { "ftgl", "sdl" },
+      Libs = { "opengl32.lib", "glu32.lib" },
       Sources = {
         'chromium-bsu-config.h',
         'src/Ammo.cpp', 'src/Ammo.h', 'src/Audio.cpp', 'src/Audio.h',

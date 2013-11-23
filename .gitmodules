@@ -7,3 +7,6 @@
 [submodule "3pp/ftgl"]
 	path = 3pp/ftgl
 	url = git://github.com/deplinenoise/ftgl.git
+[submodule "3pp/sdl"]
+	path = 3pp/sdl
+	url = git://github.com/spurious/SDL-mirror.git
