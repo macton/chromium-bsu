@@ -1,11 +1,13 @@
 local common = {
   Env = {
     CPPDEFS = {
+      "ZLIB_DLL",
       "HAVE_CONFIG_H",
       "_CRT_SECURE_NO_WARNINGS",
     },
     CPPPATH = {
       ".",
+      "3pp/zlib",
       "../chromium-bsu-3pp/sdl/include",
       "../chromium-bsu-3pp/sdl_image/include",
     },
@@ -26,6 +28,46 @@ local common = {
 Build {
 
   Units = function()
+    local zlib = SharedLibrary {
+      Name = "zlib",
+      SourceDir = "3pp/zlib/",
+      Sources = {
+        "adler32.c", "crc32.c", "crc32.h", "deflate.c", "deflate.h",
+        "gzclose.c", "gzguts.h", "gzlib.c", "gzread.c", "gzwrite.c",
+        "infback.c", "inffast.c", "inffast.h", "inffixed.h", "inflate.c",
+        "inflate.h", "inftrees.c", "inftrees.h", "trees.c", "trees.h",
+        "zconf.h", "zlib.h", "zutil.c", "zutil.h",
+      },
+    }
+
+    local freetype2 = SharedLibrary {
+      Name = "freetype2",
+      Defines = {
+        "FT2_BUILD_LIBRARY",
+        "FT2_INCLUDE=3pp/freetype2/include",
+        'FT_CONFIG_MODULES_H=\\"3pp/freetype2-custom/ftmodule.h\\"',
+        'FT_CONFIG_CONFIG_H=\\"3pp/freetype2-custom/ftconfig.h\\"',
+      },
+      Includes = { "3pp/freetype2/include", },
+      SourceDir = "3pp/freetype2/src/",
+      Sources = {
+        "base/ftsystem.c",
+        "base/ftinit.c",
+        "base/ftdebug.c",
+        "base/ftbase.c",
+        "base/ftbbox.c",
+        "base/ftglyph.c",
+        "base/ftbitmap.c",   -- optional, see <ftbitmap.h>
+        "truetype/truetype.c", -- TrueType font driver
+        "raster/raster.c",   -- monochrome rasterizer
+        "smooth/smooth.c",   -- anti-aliasing rasterizer
+        "autofit/autofit.c", -- auto hinting module
+        "sfnt/sfnt.c",       -- SFNT files support
+        "psnames/psnames.c", -- PostScript glyph names support
+        "gzip/ftgzip.c",     -- support for compressed fonts (.gz)
+      },
+    }
+
     local chromium = Program {
       Name = "chromium",
       Libs = { "SDL" },

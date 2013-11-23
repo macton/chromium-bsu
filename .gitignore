@@ -27,3 +27,4 @@ po/Makevars.template
 po/Rules-quot
 .tundra2.*
 t2-output
+*.swp
