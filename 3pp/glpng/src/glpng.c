@@ -20,16 +20,20 @@
  * 3. This notice must not be removed or altered from any source distribution.
  */
 
+
+#include <setjmp.h>
+#include <png.h>
+
 #ifdef _WIN32 /* Stupid Windows needs to include windows.h before gl.h */
 	#undef FAR
 	#include <windows.h>
 #endif
 
+
 #include <GL/glpng.h>
 #include <GL/gl.h>
 #include <stdlib.h>
 #include <math.h>
-#include "png/png.h"
 
 /* Used to decide if GL/gl.h supports the paletted extension */
 #ifdef GL_COLOR_INDEX1_EXT
@@ -276,7 +280,7 @@ int APIENTRY pngLoadRawF(FILE *fp, pngRawInfo *pinfo) {
 	endinfo = png_create_info_struct(png);
 
 	// DH: added following lines
-	if (setjmp(png->jmpbuf))
+	if (setjmp(png_jmpbuf(png)))
 	{
 		png_destroy_read_struct(&png, &info, &endinfo);
 		return 0;
@@ -380,7 +384,7 @@ int APIENTRY pngLoadF(FILE *fp, int mipmap, int trans, pngInfo *pinfo) {
 	endinfo = png_create_info_struct(png);
 
 	// DH: added following lines
-	if (setjmp(png->jmpbuf))
+	if (setjmp(png_jmpbuf(png)))
 	{
 		png_destroy_read_struct(&png, &info, &endinfo);
 		return 0;
@@ -559,7 +563,7 @@ int APIENTRY pngLoadF(FILE *fp, int mipmap, int trans, pngInfo *pinfo) {
 			#define ALPHA *q
 
 			switch (trans) {
-				case PNG_CALLBACK:
+				case PNG_CALLBACK_F:
 					FORSTART
 						ALPHA = AlphaCallback((unsigned char) r, (unsigned char) g, (unsigned char) b);
 					FOREND

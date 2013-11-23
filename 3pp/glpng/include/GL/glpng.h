@@ -29,12 +29,11 @@
 extern "C" {
 #endif
 
-#ifdef _MSC_VER
-	#ifdef _DEBUG
-		#pragma comment (lib, "glpngd.lib")
-	#else
-		#pragma comment (lib, "glpng.lib")
-	#endif
+  /* I'm hacking this shit in */
+#if defined(BUILDING_GLPNG)
+#define GLPNG_API __declspec(dllexport)
+#else
+#define GLPNG_API __declspec(dllimport)
 #endif
 
 /* XXX This is from Win32's <windef.h> */
@@ -57,7 +56,7 @@ extern "C" {
 #define PNG_SIMPLEMIPMAP PNG_SIMPLEMIPMAPS
 
 /* Transparency parameters */
-#define PNG_CALLBACK  -3 /* Call the callback function to generate alpha   */
+#define PNG_CALLBACK_F -3 /* Call the callback function to generate alpha   */
 #define PNG_ALPHA     -2 /* Use alpha channel in PNG file, if there is one */
 #define PNG_SOLID     -1 /* No transparency                                */
 #define PNG_STENCIL    0 /* Sets alpha to 0 for r=g=b=0, 1 otherwise       */
@@ -88,19 +87,19 @@ typedef struct {
 	unsigned char *Palette;
 } pngRawInfo;
 
-extern int APIENTRY pngLoadRaw(const char *filename, pngRawInfo *rawinfo);
-extern int APIENTRY pngLoadRawF(FILE *file, pngRawInfo *rawinfo);
+extern GLPNG_API int APIENTRY pngLoadRaw(const char *filename, pngRawInfo *rawinfo);
+extern GLPNG_API int APIENTRY pngLoadRawF(FILE *file, pngRawInfo *rawinfo);
 
-extern int APIENTRY pngLoad(const char *filename, int mipmap, int trans, pngInfo *info);
-extern int APIENTRY pngLoadF(FILE *file, int mipmap, int trans, pngInfo *info);
+extern GLPNG_API int APIENTRY pngLoad(const char *filename, int mipmap, int trans, pngInfo *info);
+extern GLPNG_API int APIENTRY pngLoadF(FILE *file, int mipmap, int trans, pngInfo *info);
 
-extern unsigned int APIENTRY pngBind(const char *filename, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter);
-extern unsigned int APIENTRY pngBindF(FILE *file, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter);
+extern GLPNG_API unsigned int APIENTRY pngBind(const char *filename, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter);
+extern GLPNG_API unsigned int APIENTRY pngBindF(FILE *file, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter);
 
-extern void APIENTRY pngSetStencil(unsigned char red, unsigned char green, unsigned char blue);
-extern void APIENTRY pngSetAlphaCallback(unsigned char (*callback)(unsigned char red, unsigned char green, unsigned char blue));
-extern void APIENTRY pngSetViewingGamma(double viewingGamma);
-extern void APIENTRY pngSetStandardOrientation(int standardorientation);
+extern GLPNG_API void APIENTRY pngSetStencil(unsigned char red, unsigned char green, unsigned char blue);
+extern GLPNG_API void APIENTRY pngSetAlphaCallback(unsigned char (*callback)(unsigned char red, unsigned char green, unsigned char blue));
+extern GLPNG_API void APIENTRY pngSetViewingGamma(double viewingGamma);
+extern GLPNG_API void APIENTRY pngSetStandardOrientation(int standardorientation);
 
 #ifdef __cplusplus
 }

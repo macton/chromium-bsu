@@ -2,10 +2,10 @@ local common = {
   Env = {
     CPPDEFS = {
       "ZLIB_DLL",
-      "HAVE_CONFIG_H",
       "_CRT_SECURE_NO_WARNINGS",
       "FT2_INCLUDE=3pp/freetype2/include",
       'FT_CONFIG_CONFIG_H=\\"3pp/freetype2-custom/ftconfig.h\\"',
+      "WIN32",
     },
     CPPPATH = {
       ".",
@@ -13,6 +13,8 @@ local common = {
       "3pp/freetype2/include",
       "3pp/sdl/include",
       "3pp/glpng/include",
+      "3pp/png-custom",
+      "3pp/libpng",
     },
     CCOPTS = {
       "/wd4127",  -- conditional expression is constant
@@ -50,23 +52,19 @@ Build {
       },
     }
 
-    local png = SharedLibrary {
-      Name = "png",
-      Depends = "zlib",
+    local libpng = SharedLibrary {
+      Name = "libpng",
+      Depends = { "zlib" },
       Defines = {
+        "_USRDLL",
         "PNG_BUILD_DLL",
-        "PNG_NO_CONFIG_H",
       },
       Propagate = {
         Defines = {
           "PNG_USE_DLL",
         },
       },
-      Includes = {
-        "3pp/png-custom",
-        "3pp/png",
-      },
-      SourceDir = "3pp/png/",
+      SourceDir = "3pp/libpng/",
       Sources = {
         "png.c", "png.h", "pngconf.h", "pngdebug.h", "pngerror.c", "pngget.c",
         "pnginfo.h", "pngmem.c", "pngpread.c", "pngpriv.h", "pngread.c",
@@ -448,19 +446,22 @@ Build {
 
     local glpng = SharedLibrary {
       Name = "glpng",
-      Depends = { zlib },
+      Defines = { "BUILDING_GLPNG" },
+      Depends = { zlib, libpng },
+      Libs = { "kernel32.lib", "opengl32.lib" },
       Sources = { "3pp/glpng/src/glpng.c" },
     }
 
     local chromium = Program {
-      Env = {
-        PROGOPTS = { "/SUBSYSTEM:WINDOWS" },
+      Defines = {
+        "HAVE_CONFIG_H",
       },
       Env = {
+        PROGOPTS = { "/SUBSYSTEM:WINDOWS" },
         CXXOPTS = { "/W4", "/WX" },
       },
       Name = "chromium",
-      Depends = { "ftgl", "sdl" },
+      Depends = { "ftgl", "sdl", "glpng" },
       Libs = { "opengl32.lib", "glu32.lib" },
       Sources = {
         'chromium-bsu-config.h',

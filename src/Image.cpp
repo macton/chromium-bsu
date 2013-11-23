@@ -26,6 +26,8 @@
 
 #elif IMAGE_GLPNG
 
+#include <windows.h>
+
 #if defined(HAVE_APPLE_OPENGL_FRAMEWORK) || defined(HAVE_OPENGL_GL_H)
 #include <OpenGL/gl.h>
 #else

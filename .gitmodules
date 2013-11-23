@@ -10,3 +10,7 @@
 [submodule "3pp/sdl"]
 	path = 3pp/sdl
 	url = git://github.com/spurious/SDL-mirror.git
+[submodule "3pp/libpng"]
+	path = 3pp/libpng
+	url = git://git.code.sf.net/p/libpng/code
+	branch = libpng15

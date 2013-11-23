@@ -15,16 +15,6 @@
 /* Derived from: scripts/pnglibconf.dfa */
 #ifndef PNGLCONF_H
 #define PNGLCONF_H
-
-#define PNG_USER_PRIVATEBUILD 1
-
-#if defined(BUILDING_PNG)
-#define PNGAPI __declspec(dllexport)
-#else
-#define PNGAPI __declspec(dllimport)
-#endif
-
-
 /* options */
 #define PNG_16BIT_SUPPORTED
 #define PNG_ALIGNED_MEMORY_SUPPORTED
