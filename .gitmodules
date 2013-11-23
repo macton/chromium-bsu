@@ -4,3 +4,6 @@
 [submodule "3pp/zlib"]
 	path = 3pp/zlib
 	url = git://github.com/madler/zlib
+[submodule "3pp/ftgl"]
+	path = 3pp/ftgl
+	url = git://github.com/deplinenoise/ftgl.git
