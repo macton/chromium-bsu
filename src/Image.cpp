@@ -113,7 +113,7 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 							p = (Uint8 *)tmp->pixels + y*tmp->pitch + x*bpp;
 							// a = r+g+b (clipped to 0xFF)
 							a = p[0]+p[1]+p[2];
-							if (a > 0xFF) p[3] = 0xFF; else p[3] = a;
+							if (a > 0xFF) p[3] = 0xFF; else p[3] = (Uint8) a;
 						}
 					}
 					break;
@@ -123,7 +123,7 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 							p = (Uint8 *)tmp->pixels + y*tmp->pitch + x*bpp;
 							// a = (r+g+b)/2 (clipped to 0xFF)
 							a = p[0]+p[1]+p[2];
-							if (a > 0x1FE) p[3] = 0xFF; else p[3] = a/2;
+							if (a > 0x1FE) p[3] = 0xFF; else p[3] = (Uint8) (a/2);
 						}
 					}
 					break;
@@ -133,7 +133,7 @@ GLuint Image::load(const char *filename, ImageMipMap mipmap, ImageBlend trans, G
 							p = (Uint8 *)tmp->pixels + y*tmp->pitch + x*bpp;
 							// a = (r+g+b)/3
 							a = p[0]+p[1]+p[2];
-							p[3] = a/3;
+							p[3] = (Uint8) (a/3);
 						}
 					}
 					break;

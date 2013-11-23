@@ -21,6 +21,9 @@ local common = {
     CXXOPTS = {
       "/EHsc",    -- exceptions
       "/wd4127",  -- conditional expression is constant
+      "/wd4100", -- Unreferenced formal
+      "/wd4189", -- Unused variable
+      "/wd4996", -- The POSIX name for this item is deprecated Instead, use the ISO C++ conformant name: _strdup. See online help for details.
       "/W4",
       "/WX",
       { "/O2"; Config = "*-*-release" },
@@ -75,9 +78,7 @@ Build {
       Libs = { "opengl32.lib", "glu32.lib" },
       Env = {
         CXXOPTS = {
-          "/wd4996", -- The POSIX name for this item is deprecated Instead, use the ISO C++ conformant name: _strdup. See online help for details.
           "/wd4512", -- Assignment operator could not be generated
-          "/wd4100", -- Unreferenced formal
           "/wd4244", -- Integer truncation
         },
       },
@@ -88,6 +89,11 @@ Build {
       Includes = {
         "3pp/ftgl/src",
         "3pp/ftgl-custom",
+      },
+      Propagate = {
+        Includes = {
+          "3pp/ftgl/src",
+        },
       },
       SourceDir = "3pp/ftgl/src/",
       Sources = {
@@ -180,8 +186,12 @@ Build {
     }
 
     local chromium = Program {
+      Env = {
+        PROGOPTS = { "/SUBSYSTEM:WINDOWS" },
+      },
       Name = "chromium",
-      Libs = { "SDL" },
+      Depends = { "ftgl" },
+      Libs = { "SDL2.lib", "SDL2main.lib", "opengl32.lib", "glu32.lib" },
       Sources = {
         'chromium-bsu-config.h',
         'src/Ammo.cpp', 'src/Ammo.h', 'src/Audio.cpp', 'src/Audio.h',
@@ -209,7 +219,7 @@ Build {
         'src/main.h', 'src/MainGL.cpp', 'src/MainGL.h', 'src/MainGLUT.cpp',
         'src/MainGLUT.h', 'src/MainSDL.cpp', 'src/MainSDL.h',
         'src/MainSDL_Event.cpp', 'src/MainToolkit.cpp', 'src/MainToolkit.h',
-        'src/Makefile.am', 'src/MenuGL.cpp', 'src/MenuGL.h',
+        'src/MenuGL.cpp', 'src/MenuGL.h',
         'src/PowerUps.cpp', 'src/PowerUps.h', 'src/ScreenItem.cpp',
         'src/ScreenItem.h', 'src/ScreenItemAdd.cpp', 'src/ScreenItemAdd.h',
         'src/StatusDisplay.cpp', 'src/StatusDisplay.h', 'src/Text.cpp',

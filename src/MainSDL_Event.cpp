@@ -62,7 +62,7 @@ bool MainSDL::process(SDL_Event *event)
 			break;
 	}
 #endif
-	bool shown, mouse, input, gain = false;
+	bool shown = false, mouse = false, input = false, gain = false;
 	switch(event->type) 
 	{
 #if SDL_VERSION_ATLEAST(2,0,0)

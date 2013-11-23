@@ -252,7 +252,7 @@ void printExtensions(FILE *fstream, const char* extstr_in)
 	char	*extstr;
 	char	*walker;
 	char	*space;
-	int		len = strlen(extstr_in);
+	int		len = (int) strlen(extstr_in);
 	int		cnt = 0;
 	extstr = new char[len+1];
 	strcpy(extstr, extstr_in);

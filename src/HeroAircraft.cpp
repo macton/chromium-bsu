@@ -510,7 +510,7 @@ void HeroAircraft::checkForCollisions(EnemyFleet *fleet)
 	EnemyAircraft *enemy;
 	
 	fleet->toFirst();
-	while( (enemy = fleet->getShip()) )
+	while( NULL != (enemy = fleet->getShip()) )
 	{
 		diffX = pos[0]-enemy->pos[0];
 		diffY = pos[1]-enemy->pos[1];
