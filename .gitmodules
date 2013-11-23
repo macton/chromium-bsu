@@ -1,0 +1,3 @@
+[submodule "3pp/freetype2"]
+	path = 3pp/freetype2
+	url = git://git.savannah.gnu.org/freetype/freetype2.git
