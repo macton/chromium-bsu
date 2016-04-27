@@ -121,7 +121,9 @@ drawExplo(ExploType type, float age)
       //   eys = y-scale (half rect height)
       //   tmp = RGB
       //   clr = Alpha
-      printf("%0.6f %0.6f %0.6f %0.6f\n",exs,eys,tmp,clr);
+
+      // #note (26 Apr 16) exs and eys always the same. So really only 3 channels
+      printf("%0.6f %0.6f %0.6f\n",exs,tmp,clr);
     }
     
     // thisExplo = thisExplo->next; //ADVANCE
@@ -239,26 +241,37 @@ init( void )
   exploPause[Glitter][1]    = 0;
 }
 
+void
+dump_channels( ExploType type )
+{
+  // Q Why are all of these floats,... really?
+  float lifetime = exploStay[type];
+  float age      = 1.0f; // #note Since zero is ignored, life implicitly starts at 1.0
+  while (age < lifetime)
+  {
+    drawExplo(type, age);
+    age += 1.0f;
+  }
+  printf("\n");
+}
+
 
 int
 main( void )
 {
   init();
 
-  // Type under test:
-  ExploType test_type = EnemyDestroyed;
-  // ExploType test_type = EnemyDamage;
-  // ExploType test_type = HeroDestroyed;
-  // ExploType test_type = HeroDamage;
+  printf("# EnemyDestroyed\n");
+  dump_channels( EnemyDestroyed );
 
-  // Q Why are all of these floats,... really?
-  float lifetime = exploStay[test_type];
-  float age      = 1.0f; // #note Since zero is ignored, life implicitly starts at 1.0
-  while (age < lifetime)
-  {
-    drawExplo(test_type, age);
-    age += 1.0f;
-  }
+  printf("# EnemyDamage\n");
+  dump_channels( EnemyDamage );
+
+  printf("# HeroDestroyed\n");
+  dump_channels( HeroDestroyed );
+
+  printf("# HeroDamage\n");
+  dump_channels( HeroDamage );
 
   return 0;
 }
