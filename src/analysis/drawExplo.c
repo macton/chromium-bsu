@@ -255,6 +255,83 @@ dump_channels( ExploType type )
   printf("\n");
 }
 
+void
+dump_channels_lerp( void )
+{
+  enum 
+  {
+    kScaleStart,
+    kRgbStart,
+    kAlphaStart,
+    kScaleEnd,
+    kRgbEnd,
+    kAlphaEnd,
+    kConfigCount
+  };
+
+  const char* type_names[] = 
+  {
+    "EnemyDestroyed",
+    "EnemyDamage",
+    "HeroDestroyed",
+    "HeroDamage",
+  };
+
+  const float type_setup[] = 
+  {
+    // # EnemyDestroyed
+    0.031500f, 1.083333f, 1.166667f,
+    0.913500f, 0.616667f, 0.233333f,
+    // # EnemyDamage
+    0.035000f, 1.075000f, 1.150000f,
+    0.665000f, 0.625000f, 0.250000f,
+    // # HeroDestroyed
+    0.042000f, 1.080000f, 1.160000f,
+    1.008000f, 0.620000f, 0.240000f,
+    // # HeroDamage 24
+    0.030800f, 1.080000f, 1.160000f,
+    0.739200f, 0.620000f, 0.240000f,
+  };
+
+  const int type_step_count[] =
+  {
+    29, // # EnemyDestroyed 
+    19, // # EnemyDamage
+    24, // # HeroDestroyed
+    24, // # HeroDamage
+  };
+
+  const int type_count = 4;
+
+  for (int type_ndx=0;type_ndx<type_count;type_ndx++)
+  {
+    const int    step_count     = type_step_count[ type_ndx ];
+    const float  inv_step_count = 1.0f / (float)(step_count-1);
+    const float* type_config    = type_setup + (kConfigCount*type_ndx);
+
+    const float scale_start     = type_config[ kScaleStart ];
+    const float scale_end       = type_config[ kScaleEnd ];
+    const float scale_step      = (scale_end-scale_start)*inv_step_count;
+    const float rgb_start       = type_config[ kRgbStart ];
+    const float rgb_end         = type_config[ kRgbEnd ];
+    const float rgb_step        = (rgb_end-rgb_start)*inv_step_count; 
+    const float alpha_start     = type_config[ kAlphaStart ];
+    const float alpha_end       = type_config[ kAlphaEnd ];
+    const float alpha_step      = (alpha_end-alpha_start)*inv_step_count;
+
+    printf("# %s\n", type_names[ type_ndx ] );
+    for (float t=0.0f;t<(float)step_count;t+=1.0f)
+    {
+      float scale = scale_start + (t * scale_step);
+      float rgb   = rgb_start   + (t * rgb_step);
+      float alpha = alpha_start + (t * alpha_step);
+
+      printf("%0.6f %0.6f %0.6f\n",scale,rgb,alpha);
+    }
+    printf("\n");
+  }
+}
+
 
 int
 main( void )
@@ -272,6 +349,8 @@ main( void )
 
   printf("# HeroDamage\n");
   dump_channels( HeroDamage );
+
+  dump_channels_lerp();
 
   return 0;
 }
